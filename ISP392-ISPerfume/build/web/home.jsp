@@ -86,6 +86,8 @@
                                     <li><a href="contact-us.html">Blog</a></li>                                 
                                     <li><a href="404.html">404</a></li>
                                     <li><a href="contact-us.html">Contact</a></li>
+                                    <li><a href="STAFF_BlogManagement.jsp">STAFF</a></li>
+                                    <li><a href="MGR_Dashboard.jsp">MANAGER</a></li>
 
                                 </ul>
                             </div>

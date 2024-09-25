@@ -196,6 +196,7 @@
     border-radius: 40px;
 }
 
+
 .content .navbar .dropdown-toggle::after {
     margin-left: 6px;
     vertical-align: middle;
@@ -274,4 +275,10 @@
 .testimonial-carousel .owl-dot.active {
     background: var(--dark);
     border-color: var(--primary);
+}
+
+/*Css dashmin*/
+.sidebar-toggler{
+    color: #FE980F;
+    
 }
