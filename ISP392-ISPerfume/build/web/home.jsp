@@ -4,6 +4,8 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -79,6 +81,7 @@
                                         <ul role="menu" class="sub-menu">
                                             <li><a href="shop.html">Men</a></li>
                                             <li><a href="product-details.html">Women</a></li> 
+                                            <li><a href="product-details.html">Unisex</a></li> 
                                             <li><a href="checkout.html">Best seller</a></li> 
 
                                         </ul>
@@ -96,6 +99,7 @@
                             <form action="MainController" method="POST">
                                 <div class="search_box pull-right">
                                     <input type="text" placeholder="Search" value="${search}"/>
+                                    <input type="submit" name="action" value="Search" class="btn btn-danger m-2 get">
                                 </div>
                             </form>
 
@@ -116,11 +120,10 @@
                                 <li data-target="#slider-carousel" data-slide-to="1"></li>
                                 <li data-target="#slider-carousel" data-slide-to="2"></li>
                             </ol>
-
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
+                                        <h1><span>IS</span>-PERFUME</h1>
                                         <h2>Free E-Commerce Template</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                         <button type="button" class="btn btn-default get">Get it now</button>
@@ -132,7 +135,7 @@
                                 </div>
                                 <div class="item">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
+                                        <h1><span>IS</span>-PERFUME</h1>
                                         <h2>100% Responsive Design</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                         <button type="button" class="btn btn-default get">Get it now</button>
@@ -145,7 +148,7 @@
 
                                 <div class="item">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
+                                        <h1><span>IS</span>-PERFUME</h1>
                                         <h2>Free Ecommerce Template</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                         <button type="button" class="btn btn-default get">Get it now</button>
@@ -267,7 +270,6 @@
                         <div class="features_items"><!--features_items-->
                             <h2 class="title text-center">Features Items</h2>
 
-
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
@@ -275,13 +277,13 @@
                                             <img src="images/home/product1.jpg" alt="" />
                                             <h2>$56</h2>
                                             <p>Easy Polo Black Edition</p>
-                                            <a href="#" class="btn btn-default add-to-cart">View product detail</a>
+                                            <a href="product_detail.jsp" class="btn btn-default add-to-cart">View product detail</a>
                                         </div>
                                         <div class="product-overlay">
                                             <div class="overlay-content">
                                                 <h2>$56</h2>
                                                 <p>Easy Polo Black Edition</p>
-                                                <a href="#" class="btn btn-default add-to-cart"></i>View product detal</a>
+                                                <a href="product_detail.jsp" class="btn btn-default add-to-cart"></i>View product detal</a>
                                             </div>
                                         </div>
                                     </div>
@@ -682,12 +684,12 @@
                 </div>
             </div>
         </section>
-    <c:import url="components/footer.jsp" />
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/price-range.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-</body>
+       
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <script src="js/price-range.js"></script>
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : MGR_ProductManagement
-    Created on : Sep 25, 2024, 3:04:54 PM
+    Document   : MGR_CreateBrand
+    Created on : Sep 26, 2024, 12:31:38 PM
     Author     : User
 --%>
 
@@ -69,7 +69,7 @@
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MGR_ProductManagement.jsp" class="dropdown-item active">Product Management</a>
-                                 <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
+                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
                                 <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
                             </div>
                         </div>
@@ -188,80 +188,84 @@
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
-<!--                        <div class="col-md-6 text-center">-->
-                            <!-- Recent Sales Start -->
-                            <div class="container-fluid pt-4 px-4">
-                                <div class="bg-light text-center rounded p-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-0">Product Management</h6>
-                                        <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create new product</a>
+                        <div class="col-sm-12 col-xl-6">
+                            <div class="bg-light rounded h-100 p-4">
+                                <h6 class="mb-4">Create Form</h6>
+                                <form>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="table-responsive">
-                                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                            <thead>
-                                                <tr class="text-dark">
-                                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Invoice</th>
-                                                    <th scope="col">Customer</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!--                                    <fieldset class="row mb-3">
+                                                                            <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                                                                            <div class="col-sm-10">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="radio" name="gridRadios"
+                                                                                           id="gridRadios1" value="option1" checked>
+                                                                                    <label class="form-check-label" for="gridRadios1">
+                                                                                        First radio
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="radio" name="gridRadios"
+                                                                                           id="gridRadios2" value="option2">
+                                                                                    <label class="form-check-label" for="gridRadios2">
+                                                                                        Second radio
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>-->
+                                    <!--                                    <div class="row mb-3">
+                                                                            <legend class="col-form-label col-sm-2 pt-0">Checkbox</legend>
+                                                                            <div class="col-sm-10">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                                                                    <label class="form-check-label" for="gridCheck1">
+                                                                                        Check me out
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <select class="form-select mb-3" aria-label="Default select example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Default file input example</label>
+                                        <input class="form-control" type="file" id="formFile">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">CREATE</button>
+                                </form>
                             </div>
-                            <!-- Recent Sales End -->
-                        <!--</div>-->
+                        </div>
                     </div>
                 </div>
                 <!-- Blank End -->
