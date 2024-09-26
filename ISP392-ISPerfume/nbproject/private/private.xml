@@ -3,26 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/index.html</file>
-            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_BrandManagement.jsp</file>
-            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/home.jsp</file>
-=======
-=======
->>>>>>> Stashed changes
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/dashmin/css/bootstrap.min.css</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_CreateProduct.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/home.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/product_detail.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/index.html</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/css/bootstrap.min.css</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/css/main.css</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/css/font-awesome.min.css</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_CreatePromotion.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_ProductManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_Dashboard.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/dashmin/css/style.css</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_PromotionManagement.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_Dashboard.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_BrandManagement.jsp</file>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
