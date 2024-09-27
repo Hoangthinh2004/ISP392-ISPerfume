@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cart
-    Created on : Sep 26, 2024, 3:39:52 PM
+    Document   : blog
+    Created on : Sep 27, 2024, 9:03:58 PM
     Author     : User
 --%>
 
@@ -91,12 +91,14 @@
                 <div class="col-lg-4 col-6 text-left">
                     <form action="">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for products">
-                            <div class="input-group-append">
-                                <span class="input-group-text bg-transparent text-primary">
-                                    <a href="MainController"><i class="fa fa-search"></i></a>
-                                </span>
-                            </div>
+                            <form action="MainController" method="POST">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
+                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
                     </form>
                 </div>
@@ -153,14 +155,14 @@
                                 <a href="home.jsp" class="nav-item nav-link ">Home</a>
                                 <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
                                 <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
-                                <div class="nav-item dropdown active">
+                                <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="cart.jsp" class="dropdown-item ">Shopping Cart</a>
+                                        <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
                                         <a href="checkout.jsp" class="dropdown-item">Checkout</a>
                                     </div>
                                 </div>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                <a href="blog.jsp" class="nav-item nav-link active">Blog</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
                                 <a href="cart.jsp" class="btn px-0 ml-3">
@@ -175,15 +177,13 @@
         </div>
         <!-- Navbar End -->
 
-
         <!-- Breadcrumb Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
                         <a class="breadcrumb-item text-dark" href="#">Home</a>
-                        <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                        <span class="breadcrumb-item active">Shopping Cart</span>
+                        <span class="breadcrumb-item active">Blog</span>
                     </nav>
                 </div>
             </div>
@@ -191,163 +191,94 @@
         <!-- Breadcrumb End -->
 
 
-        <!-- Cart Start -->
-        <div class="container-fluid">
-            <div class="row px-xl-5">
-                <div class="col-lg-8 table-responsive mb-5">
-                    <table class="table table-light table-borderless table-hover text-center mb-0">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Products</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody class="align-middle">
-                            <tr>
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-4.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-5.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-lg-4">
-                    <form class="mb-30" action="">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary">Apply Coupon</button>
+        <!-- Blog Start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <div class="blog-post-area">
+                        <h2 class="title text-center">Latest From our Blog</h2>
+                        <div class="single-blog-post">
+                            <h3>Girls Pink T Shirt arrived in store</h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><i class="fa fa-user"></i> Mac Doe</li>
+                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+                                </ul>
+                                <span>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </span>
                             </div>
+                            <a href="">
+                                <img src="img/blog/blog-one.jpg" alt="">
+                            </a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <a  class="btn btn-primary" href="">Read More</a>
                         </div>
-                    </form>
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
-                    <div class="bg-light p-30 mb-5">
-                        <div class="border-bottom pb-2">
-                            <div class="d-flex justify-content-between mb-3">
-                                <h6>Subtotal</h6>
-                                <h6>$150</h6>
+                        <div class="single-blog-post">
+                            <h3>Girls Pink T Shirt arrived in store</h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><i class="fa fa-user"></i> Mac Doe</li>
+                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+                                </ul>
+                                <span>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </span>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
-                                <h6 class="font-weight-medium">$10</h6>
-                            </div>
+                            <a href="">
+                                <img src="img/blog/blog-two.jpg" alt="">
+                            </a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <a  class="btn btn-primary" href="">Read More</a>
                         </div>
-                        <div class="pt-2">
-                            <div class="d-flex justify-content-between mt-2">
-                                <h5>Total</h5>
-                                <h5>$160</h5>
+                        <div class="single-blog-post">
+                            <h3>Girls Pink T Shirt arrived in store</h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><i class="fa fa-user"></i> Mac Doe</li>
+                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+                                </ul>
+                                <span>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </span>
                             </div>
-                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                            <a href="">
+                                <img src="img/blog/blog-three.jpg" alt="">
+                            </a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <a  class="btn btn-primary" href="">Read More</a>
+                        </div>
+                        <div class="pagination-area">
+                            <ul class="pagination">
+                                <li><a href="" class="active">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">3</a></li>
+                                <li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-        <!-- Cart End -->
 
+       
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
