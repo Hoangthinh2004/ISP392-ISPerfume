@@ -86,19 +86,21 @@
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                 <div class="col-lg-4">
                     <a href="home.jsp" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                        <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
                     <form action="">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for products">
-                            <div class="input-group-append">
-                                <span class="input-group-text bg-transparent text-primary">
-                                    <a href="MainController"><i class="fa fa-search"></i></a>
-                                </span>
-                            </div>
+                            <form action="MainController" method="POST">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
+                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
                     </form>
                 </div>
@@ -124,18 +126,14 @@
                             <div class="nav-item dropdown dropright">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
                                 <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                    <a href="" class="dropdown-item">Men's Dresses</a>
+                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
                                     <a href="" class="dropdown-item">Women's Dresses</a>
                                     <a href="" class="dropdown-item">Baby's Dresses</a>
+                                    <input type="submit" name="action" value="men">
                                 </div>
                             </div>
                             <a href="" class="nav-item nav-link">Shirts</a>
                             <a href="" class="nav-item nav-link">Jeans</a>
-                            <a href="" class="nav-item nav-link">Swimwear</a>
-                            <a href="" class="nav-item nav-link">Sleepwear</a>
-                            <a href="" class="nav-item nav-link">Sportswear</a>
-                            <a href="" class="nav-item nav-link">Jumpsuits</a>
-                            <a href="" class="nav-item nav-link">Blazers</a>
                             <a href="" class="nav-item nav-link">Jackets</a>
                             <a href="" class="nav-item nav-link">Shoes</a>
                         </div>
@@ -154,15 +152,15 @@
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="home.jsp" class="nav-item nav-link active">Home</a>
                                 <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
-                                <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
+                                <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                         <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
-                                        <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                        <a href="checkout.jsp" class="dropdown-item">Checkout</a>
                                     </div>
                                 </div>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
                                 <a href="cart.jsp" class="btn px-0 ml-3">
@@ -332,111 +330,7 @@
                             </div>
                         </div>
                     </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-4.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-3.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-2.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-1.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-2.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-1.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-4.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-3.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                </div>            
             </div>
         </div>
         <!-- Categories End -->
