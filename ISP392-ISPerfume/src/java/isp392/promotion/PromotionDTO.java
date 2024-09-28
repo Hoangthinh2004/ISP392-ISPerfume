@@ -10,5 +10,12 @@ package isp392.promotion;
  * @author ThinhHoang
  */
 public class PromotionDTO {
-    
+    private int promotionID;
+    private String name;
+    private String description;
+    //Start Date
+    //End Date
+    private float discountPercent;
+    private int condition;
+    private boolean status;
 }
