@@ -50,7 +50,7 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Sign in</button>
+                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
                                 <button class="dropdown-item" type="button">Sign up</button>
                             </div>
                         </div>
@@ -122,16 +122,7 @@
                         <i class="fa fa-angle-down text-dark"></i>
                     </a>
                     <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                        <div class="navbar-nav w-100">
-                            <div class="nav-item dropdown dropright">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
-                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                    <a href="" class="dropdown-item">Baby's Dresses</a>
-                                    <input type="submit" name="action" value="men">
-                                </div>
-                            </div>
+                        <div class="navbar-nav w-100">                         
                             <a href="" class="nav-item nav-link">Shirts</a>
                             <a href="" class="nav-item nav-link">Jeans</a>
                             <a href="" class="nav-item nav-link">Jackets</a>
@@ -161,6 +152,7 @@
                                     </div>
                                 </div>
                                 <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
                                 <a href="cart.jsp" class="btn px-0 ml-3">
@@ -283,10 +275,10 @@
                     <a class="text-decoration-none" href="">
                         <div class="cat-item d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-1.jpg" alt="">
+                                <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-joy-eau-de-parfum-intense_076e33df565e4d3fa29d5a283135bbf9_master.jpg" alt="">
                             </div>
                             <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
+                                <h6>Men</h6>
                                 <small class="text-body">100 Products</small>
                             </div>
                         </div>
@@ -296,10 +288,10 @@
                     <a class="text-decoration-none" href="">
                         <div class="cat-item img-zoom d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-2.jpg" alt="">
+                                <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-homme-intense-1_3b6dc09e545441e4bd989b178c98f55e_master.jpg" alt="">
                             </div>
                             <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
+                                <h6>Womem</h6>
                                 <small class="text-body">100 Products</small>
                             </div>
                         </div>
@@ -309,10 +301,10 @@
                     <a class="text-decoration-none" href="">
                         <div class="cat-item img-zoom d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-3.jpg" alt="">
+                                <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-sauvage-parfum-100ml_0de23f02911c4f05aea3b72a852aa4ea_master.jpg" alt="">
                             </div>
                             <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
+                                <h6>Unisex</h6>
                                 <small class="text-body">100 Products</small>
                             </div>
                         </div>
@@ -322,10 +314,10 @@
                     <a class="text-decoration-none" href="">
                         <div class="cat-item img-zoom d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="img/cat-4.jpg" alt="">
+                                <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dylan-est_dba403106c6a416fadfd35ee6b9ecddc_master.jpg" alt="">
                             </div>
                             <div class="flex-fill pl-3">
-                                <h6>Category Name</h6>
+                                <h6>Brands</h6>
                                 <small class="text-body">100 Products</small>
                             </div>
                         </div>
@@ -343,7 +335,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+                            <img class="img-fluid w-100" src="https://product.hstatic.net/1000340570/product/dylan-purple_9fe4738641aa45099e429c114509f738_master.jpg" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -370,7 +362,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
+                            <img class="img-fluid w-100" src="https://product.hstatic.net/1000340570/product/eros-parfum_d26736e0b6ca446186d6325fcd25a42c_master.jpg" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -397,7 +389,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-3.jpg" alt="">
+                            <img class="img-fluid w-100" src="https://product.hstatic.net/1000340570/product/chanel-bleu-de-chanel-eau-de-parfum-100ml_d94a8cd0feb743b59a4e612a651b7390_master.jpg" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -424,7 +416,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/product-4.jpg" alt="">
+                            <img class="img-fluid w-100" src="https://product.hstatic.net/1000340570/product/gabrielle-chanel-eau-de-parfum_1c7241feeae94052b04faf749acd3733_master.jpg" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>

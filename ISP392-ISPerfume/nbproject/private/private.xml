@@ -4,13 +4,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/cart.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/utils/DBUtils.java</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/signin.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/css/style.min.css</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/home.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/shopping.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/checkout.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/css/style.css</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/signup.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/orderStatus.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/dashmin/css/style.css</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/productDetail.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/blog.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/checkout.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_CreateBrand.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_Dashboard.jsp</file>
         </group>
     </open-files>
 </project-private>
