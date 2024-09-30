@@ -32,7 +32,7 @@ public class ProductDTO {
         this.name = name;
         this.description = description;
         this.image = image;
-        this.status = this.status;
+        this.status = status;
     }
 
     public int getProductID() {
@@ -75,7 +75,7 @@ public class ProductDTO {
         this.image = image;
     }
 
-    public int isStatus() {
+    public int getStatus() {
         return status;
     }
 

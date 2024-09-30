@@ -248,14 +248,7 @@
                                                             <input type="hidden" value="${pro.image}" name="existingImage">
                                                         </td>
                                                         <td>
-                                                            <c:choose>
-                                                                <c:when test="${pro.status == true}">
-                                                                    AVAILABLE
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    UNAVAILABLE
-                                                                </c:otherwise>
-                                                            </c:choose>
+                                                            ${pro.status}
                                                         </td>
                                                         <td>
                                                             <input type="hidden" name="productID" value="${pro.productID}">
@@ -312,20 +305,20 @@
 
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
-<!--        <script>
-            window.onload = function () {
-                const searchInput = document.querySelector('input[name="search"]');
-                const form = searchInput.form;
-                if (!sessionStorage.getItem('isSubmitted')) {
-                    const hiddenAction = document.createElement('input');
-                    hiddenAction.type = 'hidden';
-                    hiddenAction.name = 'action';
-                    hiddenAction.value = 'Search';
-                    form.appendChild(hiddenAction);
-                    form.submit();
-                    sessionStorage.setItem('isSubmitted', 'true');
-                }
-            };
-        </script>-->
+        <!--        <script>
+                    window.onload = function () {
+                        const searchInput = document.querySelector('input[name="search"]');
+                        const form = searchInput.form;
+                        if (!sessionStorage.getItem('isSubmitted')) {
+                            const hiddenAction = document.createElement('input');
+                            hiddenAction.type = 'hidden';
+                            hiddenAction.name = 'action';
+                            hiddenAction.value = 'Search';
+                            form.appendChild(hiddenAction);
+                            form.submit();
+                            sessionStorage.setItem('isSubmitted', 'true');
+                        }
+                    };
+                </script>-->
     </body>
 </html>
