@@ -21,5 +21,10 @@
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CategoryController.java</file>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/home.jsp</file>
         </group>
+        <group>
+            <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_ProductManagement.jsp</file>
+            <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/ShowAllProductManager.java</file>
+            <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDAO.java</file>
+        </group>
     </open-files>
 </project-private>
