@@ -49,8 +49,8 @@ public class CategoryController extends HttpServlet {
             }
             
             session.setAttribute("LIST_PRODUCT_BY_CATEGORY", listProduct);
-            request.setAttribute("HIGHEST_PRICE", highestPrice);
-            request.setAttribute("LOWEST_PRICE", lowestPrice);
+            session.setAttribute("HIGHEST_PRICE", highestPrice);
+            session.setAttribute("LOWEST_PRICE", lowestPrice);
             url = SUCCESS;
             
         } catch (Exception e) {

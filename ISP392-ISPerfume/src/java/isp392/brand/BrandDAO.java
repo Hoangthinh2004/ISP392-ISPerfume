@@ -20,7 +20,9 @@ import java.util.List;
 public class BrandDAO {
     
     private static final String GET_LIST_BRAND = "SELECT * FROM Brands WHERE Status = 1";
-    private static final String BRAND_LIST = "SELECT BrandID, BrandName, Image, Status FROM Brands";
+    private static final String BRAND_LIST_BY_CATEGORY = "SELECT C.CategoryName, B.BrandName, B.BrandID FROM Categories C "
+                                                        +"INNER JOIN Categories_Brands CB on C.CategoryID = CB.CategoryID "
+                                                        +"INNER JOIN Brands B on CB.BrandID = B.BrandID";
 
 
     public List<BrandDTO> getListBrand() throws ClassNotFoundException, SQLException {
@@ -56,7 +58,7 @@ public class BrandDAO {
         try {
             conn = DBUtils.getConnection();
             if(conn!=null){
-                ptm = conn.prepareStatement(BRAND_LIST);
+                ptm = conn.prepareStatement(BRAND_LIST_BY_CATEGORY);
                 rs = ptm.executeQuery();
                 while(rs.next()){
                     int brandID = rs.getInt("BrandID");
