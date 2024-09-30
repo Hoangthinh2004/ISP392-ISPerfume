@@ -26,12 +26,12 @@ public class MainController extends HttpServlet {
     private static final String FILTER_BY_BRAND = "FilterByBrand";
     private static final String FILTER_BY_BRAND_CONTROLLER = "BrandFilterController";
     
-    private static final String SEARCH_PRODUCT = "";
-    private static final String SEARCH_PRODUCT_CONTROLLER = "SearchProduct";
     private static final String SHOW_ALL_PRODUCT_MANAGER = "Search";
     private static final String SHOW_ALL_PRODUCT_MANAGER_CONTROLLER = "ShowAllProductManager";
+    
     private static final String UPDATE_PRODUCT_MANAGER = "Update";
     private static final String UPDATE_PRODUCT_MANAGER_CONTROLLER = "UpdateProductManager";
+    
     private static final String CREATE_PRODUCT_MANAGER = "Create";
     private static final String CREATE_PRODUCT_MANAGER_CONTROLLER = "CreateProductManager";
     
@@ -42,9 +42,7 @@ public class MainController extends HttpServlet {
         String url = HOME_PAGE;
         try {
             String action = request.getParameter("action");
-            if (SEARCH_PRODUCT.equals(action)) {
-                url = SEARCH_PRODUCT_CONTROLLER;
-            }else if(SHOW_ALL_PRODUCT_MANAGER.equals(action)){
+            if(SHOW_ALL_PRODUCT_MANAGER.equals(action)){
                 url = SHOW_ALL_PRODUCT_MANAGER_CONTROLLER;
             }else if(UPDATE_PRODUCT_MANAGER.equals(action)){
                 url = UPDATE_PRODUCT_MANAGER_CONTROLLER;

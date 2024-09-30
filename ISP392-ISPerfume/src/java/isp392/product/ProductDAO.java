@@ -54,7 +54,7 @@ public class ProductDAO {
                     String proName = rs.getString("ProName");
                     String descrip = rs.getString("Description");
                     String image = rs.getString("Image");
-                    boolean status = rs.getBoolean("Status");
+                    int status = rs.getInt("Status");
                     ProductDTO newPro = new ProductDTO(productID, brandID, proName, descrip, image, status);
                     listProduct.add(newPro);
                 }

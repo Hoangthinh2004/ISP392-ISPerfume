@@ -312,7 +312,7 @@
 
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
-        <script>
+<!--        <script>
             window.onload = function () {
                 const searchInput = document.querySelector('input[name="search"]');
                 const form = searchInput.form;
@@ -326,6 +326,6 @@
                     sessionStorage.setItem('isSubmitted', 'true');
                 }
             };
-        </script>
+        </script>-->
     </body>
 </html>

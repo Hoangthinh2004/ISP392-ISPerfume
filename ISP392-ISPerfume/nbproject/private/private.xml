@@ -2,7 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
         <group>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/cart.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/signin.jsp</file>
@@ -24,6 +23,16 @@
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDAO.java</file>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/utils/DBUtils.java</file>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/home.jsp</file>
+        </group>
+        <group>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/shopping.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_ProductManagement.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/MainController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CreateProductManager.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/UpdateProductManager.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/brand/BrandDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDTO.java</file>
         </group>
     </open-files>
 </project-private>

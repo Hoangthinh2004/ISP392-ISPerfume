@@ -20,6 +20,8 @@ import java.util.List;
 public class BrandDAO {
     
     private static final String GET_LIST_BRAND = "SELECT * FROM Brands WHERE Status = 1";
+    private static final String BRAND_LIST = "SELECT BrandID, BrandName, Image, Status FROM Brands";
+
 
     public List<BrandDTO> getListBrand() throws ClassNotFoundException, SQLException {
         List<BrandDTO> listBrand = new ArrayList<>();
@@ -45,11 +47,8 @@ public class BrandDAO {
         }
         return listBrand;
     }
-    
-
-    private static final String BRAND_LIST = "SELECT BrandID, BrandName, Image, Status FROM Brands";
-
-    public List<BrandDTO> getListBrand() throws SQLException, ClassNotFoundException {
+   
+    public List<BrandDTO> getListBrandManager() throws SQLException, ClassNotFoundException {
         List<BrandDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;

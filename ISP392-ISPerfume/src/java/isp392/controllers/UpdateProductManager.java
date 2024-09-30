@@ -44,7 +44,8 @@ public class UpdateProductManager extends HttpServlet {
 //                    .toFile(outputFile);
 //
 //            filePart.write(path + File.separator + fileName);
-            boolean status = Boolean.parseBoolean(request.getParameter("status"));
+            //boolean status = Boolean.parseBoolean(request.getParameter("status"));
+            int status = Integer.parseInt(request.getParameter("status"));
             ProductDTO pro = new ProductDTO(productID, brandID, productName, description, existingImage, status);
             boolean checkUpdate = dao.updateProduct(pro);
             if (checkUpdate) {

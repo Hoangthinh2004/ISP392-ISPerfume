@@ -45,7 +45,7 @@ public class ShowAllProductManager extends HttpServlet {
             ProductDAO dao = new ProductDAO();
             BrandDAO daoBrand = new BrandDAO();
             List<ProductDTO> list = dao.getListProduct(search);
-            List<BrandDTO> listBrand = daoBrand.getListBrand();
+            List<BrandDTO> listBrand = daoBrand.getListBrandManager();
             if(list.size()>0){
                 request.setAttribute("SHOW_ALL_PRODUCT_MANAGER", list);
                 HttpSession ses = request.getSession();
@@ -57,7 +57,7 @@ public class ShowAllProductManager extends HttpServlet {
         } catch (Exception e) {
             log("Error at ShowAllProductManager: "+e.toString());
         }finally{
-            request.getRequestDispatcher(SUCCESS).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
