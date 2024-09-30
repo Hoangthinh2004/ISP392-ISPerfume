@@ -53,11 +53,10 @@ public class ShowAllProductManager extends HttpServlet {
                 request.setAttribute("SEARCH", search);
                 url = SUCCESS;
             }
-            
         } catch (Exception e) {
             log("Error at ShowAllProductManager: "+e.toString());
         }finally{
-            request.getRequestDispatcher(SUCCESS).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
