@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -183,86 +184,38 @@
                     </div>
                 </nav>
                 <!-- Navbar End -->
-
-
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
                                 <h6 class="mb-4">Create Form</h6>
-                                <form>
-                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                <form action="CreateProductManager" method="post" enctype="multipart/form-data">
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" name="productName" required="" class="form-control" placeholder="${requestScope.ERROR.productName}">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <label  class="col-sm-2 col-form-label">Decription</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" name="description" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <label for="brandImage"  class="col-sm-2 col-form-label">Image</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="file" name="brandImage" class="form-control" required="">
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-<!--                                    <fieldset class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                       id="gridRadios1" value="option1" checked>
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    First radio
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios"
-                                                       id="gridRadios2" value="option2">
-                                                <label class="form-check-label" for="gridRadios2">
-                                                    Second radio
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </fieldset>-->
-<!--                                    <div class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">Checkbox</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                                <label class="form-check-label" for="gridCheck1">
-                                                    Check me out
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>-->
-                                    <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <select class="form-select mb-3" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    Brand <select name="brandID" class="form-select mb-3" aria-label="Default select example" required="">
+                                        <c:forEach var="brand" items="${sessionScope.LIST_BRAND_MANAGER}">
+                                            <option value="${brand.brandID}">${brand.name}</option>
+                                        </c:forEach>
                                     </select>
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label">Default file input example</label>
-                                        <input class="form-control" type="file" id="formFile">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">CREATE</button>
+                                    <button type="submit"class="btn btn-primary">CREATE</button>
+                                    <input type="hidden" name="search" value="${requestScope.SEARCH}">
                                 </form>
                             </div>
                         </div>

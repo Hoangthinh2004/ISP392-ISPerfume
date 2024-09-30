@@ -4,6 +4,9 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.List"%>
+<%@page import="isp392.product.ProductDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -69,7 +72,7 @@
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MGR_ProductManagement.jsp" class="dropdown-item active">Product Management</a>
-                                 <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
+                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
                                 <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
                             </div>
                         </div>
@@ -188,86 +191,92 @@
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
-<!--                        <div class="col-md-6 text-center">-->
-                            <!-- Recent Sales Start -->
-                            <div class="container-fluid pt-4 px-4">
-                                <div class="bg-light text-center rounded p-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-0">Product Management</h6>
-                                        <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create new product</a>
-                                    </div>
-                                    <div class="table-responsive">
+                        <!--                        <div class="col-md-6 text-center">-->
+                        <!-- Recent Sales Start -->
+                        <div class="container-fluid pt-4 px-4">
+                            <div class="bg-light text-center rounded p-4">
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <h6 class="mb-0">Product Management</h6>
+                                    <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create new product</a>
+                                    <form action="MainController" method="GET">
+                                        <input type="text" name="search" placeholder="Search..." value="${requestScope.SEARCH}">
+                                        <input type="submit" class="btn btn-primary" name="action" value="Search" > 
+                                    </form>
+                                </div>
+                                <div class="table-responsive">
+                                    <c:if test="${requestScope.SHOW_ALL_PRODUCT_MANAGER!=null}">
                                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                                             <thead>
                                                 <tr class="text-dark">
-                                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Invoice</th>
-                                                    <th scope="col">Customer</th>
-                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">ProductID</th>
+                                                    <th scope="col">Brand</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Descrption</th>
+                                                    <th scope="col">Image</th>
                                                     <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input class="form-check-input" type="checkbox"></td>
-                                                    <td>01 Jan 2045</td>
-                                                    <td>INV-0123</td>
-                                                    <td>Jhon Doe</td>
-                                                    <td>$123</td>
-                                                    <td>Paid</td>
-                                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                                </tr>
+                                                <c:forEach var="pro" varStatus="counter" items="${requestScope.SHOW_ALL_PRODUCT_MANAGER}">
+                                                    <tr>
+                                                        <td>
+                                                            ${pro.productID}
+                                                        </td>
+                                                        <td>
+                                                            <form action="MainController" method="GET">
+
+                                                                <select name="brandID">
+                                                                    <c:forEach var="brand" items="${sessionScope.LIST_BRAND_MANAGER}">
+                                                                        <option value="${brand.brandID}"
+                                                                                <c:if test="${brand.brandID == pro.brandID}">
+                                                                                    SELECTED
+                                                                                </c:if>
+                                                                                >
+                                                                            ${brand.name}
+                                                                        </option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="productName" value="${pro.name}">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="description" value="${pro.description}">
+                                                        </td>
+                                                        <td>
+                                                            <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                                            <input type="hidden" value="${pro.image}" name="existingImage">
+                                                        </td>
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${pro.status == true}">
+                                                                    AVAILABLE
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    UNAVAILABLE
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" name="productID" value="${pro.productID}">
+                                                            <input type="hidden" name="search" value="${requestScope.SEARCH}">
+                                                            <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </c:if>
                                 </div>
                             </div>
-                            <!-- Recent Sales End -->
+                        </div>
+                        <!-- Recent Sales End -->
                         <!--</div>-->
                     </div>
                 </div>
                 <!-- Blank End -->
-
-
-                <!-- Footer Start -->
+                <!--                Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
@@ -275,7 +284,7 @@
                                 &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                                /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
                                 Designed By <a href="https://htmlcodex.com">HTML Codex</a>
                             </div>
                         </div>
@@ -303,5 +312,20 @@
 
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
+        <script>
+            window.onload = function () {
+                const searchInput = document.querySelector('input[name="search"]');
+                const form = searchInput.form;
+                if (!sessionStorage.getItem('isSubmitted')) {
+                    const hiddenAction = document.createElement('input');
+                    hiddenAction.type = 'hidden';
+                    hiddenAction.name = 'action';
+                    hiddenAction.value = 'Search';
+                    form.appendChild(hiddenAction);
+                    form.submit();
+                    sessionStorage.setItem('isSubmitted', 'true');
+                }
+            };
+        </script>
     </body>
 </html>
