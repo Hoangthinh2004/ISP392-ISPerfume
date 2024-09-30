@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SearchProduct extends HttpServlet {
     
-    private static final String ERROR = "404.html";
-    private static final String SUCCESS = "home.jsp";
+    private static final String ERROR = "home.jsp";
+    private static final String SUCCESS = "shopping.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

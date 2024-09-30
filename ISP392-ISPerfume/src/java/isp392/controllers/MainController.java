@@ -18,7 +18,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MainController extends HttpServlet {
 
-    private static final String HOME_PAGE = "home.jsp";
+    private static final String HOME_PAGE = "HomeController";
+    
+    private static final String NAVIGATE_CATEGORY = "Category";
+    private static final String NAVIGATE_CATEGORY_HOME_CONTROLLER = "CategoryController";
+    
+    private static final String FILTER_BY_BRAND = "FilterByBrand";
+    private static final String FILTER_BY_BRAND_CONTROLLER = "BrandFilterController";
     
     private static final String SEARCH_PRODUCT = "";
     private static final String SEARCH_PRODUCT_CONTROLLER = "SearchProduct";
@@ -44,6 +50,10 @@ public class MainController extends HttpServlet {
                 url = UPDATE_PRODUCT_MANAGER_CONTROLLER;
             }else if(CREATE_PRODUCT_MANAGER.equals(action)){
                 url = CREATE_PRODUCT_MANAGER_CONTROLLER;
+            } else if (NAVIGATE_CATEGORY.equals(action)) {
+                url = NAVIGATE_CATEGORY_HOME_CONTROLLER;
+            } else if (FILTER_BY_BRAND.equals(action)) {
+                url = FILTER_BY_BRAND_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

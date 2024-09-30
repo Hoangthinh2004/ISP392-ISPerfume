@@ -48,7 +48,7 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Sign in</button>
+                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
                                 <button class="dropdown-item" type="button">Sign up</button>
                             </div>
                         </div>
@@ -84,19 +84,21 @@
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                 <div class="col-lg-4">
                     <a href="home.jsp" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                        <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
                     <form action="">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for products">
-                            <div class="input-group-append">
-                                <span class="input-group-text bg-transparent text-primary">
-                                    <a href="MainController"><i class="fa fa-search"></i></a>
-                                </span>
-                            </div>
+                            <form action="MainController" method="POST">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
+                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
                     </form>
                 </div>
@@ -118,22 +120,9 @@
                         <i class="fa fa-angle-down text-dark"></i>
                     </a>
                     <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                        <div class="navbar-nav w-100">
-                            <div class="nav-item dropdown dropright">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                    <a href="" class="dropdown-item">Men's Dresses</a>
-                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                    <a href="" class="dropdown-item">Baby's Dresses</a>
-                                </div>
-                            </div>
+                        <div class="navbar-nav w-100">                         
                             <a href="" class="nav-item nav-link">Shirts</a>
                             <a href="" class="nav-item nav-link">Jeans</a>
-                            <a href="" class="nav-item nav-link">Swimwear</a>
-                            <a href="" class="nav-item nav-link">Sleepwear</a>
-                            <a href="" class="nav-item nav-link">Sportswear</a>
-                            <a href="" class="nav-item nav-link">Jumpsuits</a>
-                            <a href="" class="nav-item nav-link">Blazers</a>
                             <a href="" class="nav-item nav-link">Jackets</a>
                             <a href="" class="nav-item nav-link">Shoes</a>
                         </div>
@@ -153,14 +142,15 @@
                                 <a href="home.jsp" class="nav-item nav-link ">Home</a>
                                 <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
                                 <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
-                                <div class="nav-item dropdown active">
+                                <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="cart.jsp" class="dropdown-item ">Shopping Cart</a>
+                                        <a href="cart.jsp" class="dropdown-item active">Shopping Cart</a>
                                         <a href="checkout.jsp" class="dropdown-item">Checkout</a>
                                     </div>
                                 </div>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
                                 <a href="cart.jsp" class="btn px-0 ml-3">
@@ -183,7 +173,7 @@
                     <nav class="breadcrumb bg-light mb-30">
                         <a class="breadcrumb-item text-dark" href="#">Home</a>
                         <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                        <span class="breadcrumb-item active">Shopping Cart</span>
+                        <span class="breadcrumb-item">Shopping Cart</span>
                     </nav>
                 </div>
             </div>
