@@ -16,6 +16,13 @@
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/checkout.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_CreateBrand.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_Dashboard.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/shopping.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/BrandFilterController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/HomeController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/MainController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/utils/DBUtils.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/home.jsp</file>
         </group>
     </open-files>
 </project-private>

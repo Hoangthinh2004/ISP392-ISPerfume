@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author ThinhHoang
  */
 public class DBUtils {
-    private static final String DB_NAME="";
+    private static final String DB_NAME="ISPerfume";
     private static final String PASSWORD="12345";
     private static final String USER_NAME="SA";
     public static Connection getConnection() throws ClassNotFoundException, SQLException {

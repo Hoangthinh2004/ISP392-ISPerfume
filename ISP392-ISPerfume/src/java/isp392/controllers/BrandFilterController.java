@@ -5,41 +5,45 @@
  */
 package isp392.controllers;
 
+import isp392.brand.BrandDAO;
+import isp392.brand.BrandDTO;
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ThinhHoang
  */
-public class SearchProduct extends HttpServlet {
-    
-    private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "shopping.jsp";
+public class BrandFilterController extends HttpServlet {
+
+    private static final String ERROR="shopping.jsp";
+    private static final String SUCCESS="shopping.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String search = request.getParameter("");
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> listProduct = dao.getListProduct(search);
-            if (listProduct.size() > 0) {
-                request.setAttribute("LIST_PRODUCT", listProduct);
-                url = SUCCESS;
-            }
+            String brandID = request.getParameter("brandID");
+            String categoryID = request.getParameter("Category");
+            HttpSession session = request.getSession();
+            ProductDAO productDAO = new ProductDAO();
+            List<ProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
+            session.setAttribute("LIST_PRODUCT_BY_BRAND", listProduct);
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at SearchProduct: " + e.toString());
+            log("Error at BrandFilterController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+          
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

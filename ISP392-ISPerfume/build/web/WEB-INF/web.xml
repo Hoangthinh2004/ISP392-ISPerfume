@@ -8,6 +8,18 @@
         <servlet-name>SearchProduct</servlet-name>
         <servlet-class>isp392.controllers.SearchProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>isp392.controllers.HomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategoryController</servlet-name>
+        <servlet-class>isp392.controllers.CategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BrandFilterController</servlet-name>
+        <servlet-class>isp392.controllers.BrandFilterController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -15,6 +27,18 @@
     <servlet-mapping>
         <servlet-name>SearchProduct</servlet-name>
         <url-pattern>/SearchProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/HomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryController</servlet-name>
+        <url-pattern>/CategoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BrandFilterController</servlet-name>
+        <url-pattern>/BrandFilterController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

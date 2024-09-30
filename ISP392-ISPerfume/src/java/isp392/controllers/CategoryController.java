@@ -7,36 +7,54 @@ package isp392.controllers;
 
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
+import isp392.product.ProductDetailDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ThinhHoang
  */
-public class SearchProduct extends HttpServlet {
-    
-    private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "shopping.jsp";
+public class CategoryController extends HttpServlet {
+
+    private static final String ERROR ="home.jsp";
+    private static final String SUCCESS ="shopping.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url=ERROR;
         try {
-            String search = request.getParameter("");
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> listProduct = dao.getListProduct(search);
-            if (listProduct.size() > 0) {
-                request.setAttribute("LIST_PRODUCT", listProduct);
-                url = SUCCESS;
+            HttpSession session = request.getSession();
+            String category = request.getParameter("Category");
+            ProductDAO productDAO = new ProductDAO();           
+            List<ProductDTO> listProduct = productDAO.getListProductByCategory(category);
+            
+            List<ProductDetailDTO> highestPrice = new ArrayList<>();
+            List<ProductDetailDTO> lowestPrice = new ArrayList<>();
+            
+            for (ProductDTO product : listProduct) {
+                String productID = String.valueOf(product.getProductID());
+            
+            List<ProductDetailDTO> highestPriceForProduct = productDAO.getHightestPrice(productID);
+            List<ProductDetailDTO> lowestPriceForProduct = productDAO.getLowestPrice(productID);
+            
+            highestPrice.addAll(highestPriceForProduct);
+            lowestPrice.addAll(lowestPriceForProduct);        
             }
+            
+            session.setAttribute("LIST_PRODUCT_BY_CATEGORY", listProduct);
+            request.setAttribute("HIGHEST_PRICE", highestPrice);
+            request.setAttribute("LOWEST_PRICE", lowestPrice);
+            url = SUCCESS;
+            
         } catch (Exception e) {
-            log("Error at SearchProduct: " + e.toString());
+            log("Error at CategoryController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

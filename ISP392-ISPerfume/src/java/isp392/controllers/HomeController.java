@@ -5,38 +5,44 @@
  */
 package isp392.controllers;
 
-import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
+import isp392.brand.BrandDAO;
+import isp392.brand.BrandDTO;
+import isp392.category.CategoryDAO;
+import isp392.category.CategoryDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ThinhHoang
  */
-public class SearchProduct extends HttpServlet {
+public class HomeController extends HttpServlet {
     
     private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "shopping.jsp";
+    private static final String HOME = "home.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String search = request.getParameter("");
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> listProduct = dao.getListProduct(search);
-            if (listProduct.size() > 0) {
-                request.setAttribute("LIST_PRODUCT", listProduct);
-                url = SUCCESS;
-            }
+            HttpSession session = request.getSession();
+            CategoryDAO categoryDAO = new CategoryDAO();
+            BrandDAO brandDAO = new BrandDAO();
+            
+            List<CategoryDTO> listCategory = categoryDAO.getListCategory();
+            List<BrandDTO> listBrand = brandDAO.getListBrand();
+            
+            session.setAttribute("LIST_CATEGORY", listCategory);
+            session.setAttribute("LIST_BRAND", listBrand);
+            
+            url = HOME;
         } catch (Exception e) {
-            log("Error at SearchProduct: " + e.toString());
+            log("Error at HomeController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

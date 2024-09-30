@@ -15,7 +15,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private String image;
-    private boolean status;
+    private int status;
 
     public ProductDTO() {
         this.productID = 0;
@@ -23,16 +23,16 @@ public class ProductDTO {
         this.name = "";
         this.description = "";
         this.image = "";
-        this.status=true;
+        this.status=0;
     }
 
-    public ProductDTO(int productID, int brandID, String name, String description, String image, boolean status) {
+    public ProductDTO(int productID, int brandID, String name, String description, String image, int status) {
         this.productID = productID;
         this.brandID = brandID;
         this.name = name;
         this.description = description;
         this.image = image;
-        this.status = status;
+        this.status = this.status;
     }
 
     public int getProductID() {
@@ -75,11 +75,11 @@ public class ProductDTO {
         this.image = image;
     }
 
-    public boolean isStatus() {
+    public int isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     
