@@ -329,9 +329,10 @@
                                         </div>
                                     </div>
                                     <div class="text-center py-4">
-                                        <a class="h6 text-decoration-none text-truncate" href="">${Product.name}</a>
+                                        <h4>${Product.brandName}</h4>
+                                        <a class="h6 text-decoration-none text-truncate" href="">${Product.productName} ${Product.sizeName}</a>
                                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                                <h5><fmt:formatNumber type="number" value="${price.price}"/> - <fmt:formatNumber type="number" value="${price.price}"/> VND</h5> 
+                                                <h5><fmt:formatNumber type="number" value="${Product.price}"/> VND</h5> 
                                             </div>
                                         <div class="d-flex align-items-center justify-content-center mb-1">
                                             <small class="fa fa-star text-primary mr-1"></small>

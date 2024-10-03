@@ -4,8 +4,6 @@ import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
