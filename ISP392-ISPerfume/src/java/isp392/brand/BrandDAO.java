@@ -60,7 +60,7 @@ public class BrandDAO {
         try {
             conn = DBUtils.getConnection();
             if(conn!=null){
-                ptm = conn.prepareStatement(BRAND_LIST_BY_CATEGORY);
+                ptm = conn.prepareStatement(GET_LIST_BRAND);
                 rs = ptm.executeQuery();
                 while(rs.next()){
                     int brandID = rs.getInt("BrandID");
