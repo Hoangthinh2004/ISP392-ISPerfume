@@ -5,57 +5,36 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
 import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author duyhc
  */
-@WebServlet(name = "ShowAllProductManager", urlPatterns = {"/ShowAllProductManager"})
-public class ShowAllProductManager extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String SUCCESS = "MGR_ProductManagement.jsp";
-    private static final String ERROR = "MGR_ProductManagement.jsp"; 
+@WebServlet(name = "DeleteProductManager", urlPatterns = {"/DeleteProductManager"})
+public class DeleteProductManager extends HttpServlet {
+    private static final String ERROR = "ShowAllProductManager";
+    private static final String SUCCESS = "ShowAllProductManager";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        ProductDAO dao = new ProductDAO();
         try {
-            String search = request.getParameter("search");
-            ProductDAO dao = new ProductDAO();
-            BrandDAO daoBrand = new BrandDAO();
-            List<ProductDTO> list = dao.getListProduct(search);
-            List<BrandDTO> listBrand = daoBrand.getListBrand();
-            if(list.size()>0){
-                request.setAttribute("SHOW_ALL_PRODUCT_MANAGER", list);
-                HttpSession ses = request.getSession();
-                ses.setAttribute("LIST_BRAND_MANAGER", listBrand);
-                request.setAttribute("SEARCH", search);
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            boolean check = dao.deleteProductManager(productID);
+            if(check){
                 url = SUCCESS;
             }
-            
         } catch (Exception e) {
-            log("Error at ShowAllProductManager: "+e.toString());
+            log("Error at DeleteProductManager: "+e.toString());
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }

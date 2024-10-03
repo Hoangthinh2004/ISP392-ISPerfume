@@ -7,9 +7,10 @@ package isp392.controllers;
 
 import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
-import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
+import isp392.category.CategoryDAO;
+import isp392.category.CategoryDTO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,41 +23,30 @@ import javax.servlet.http.HttpSession;
  *
  * @author duyhc
  */
-@WebServlet(name = "ShowAllProductManager", urlPatterns = {"/ShowAllProductManager"})
-public class ShowAllProductManager extends HttpServlet {
+@WebServlet(name = "GetBrandCategoriesManager", urlPatterns = {"/GetBrandCategoriesManager"})
+public class GetBrandCategoriesManager extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private static final String ERROR = "MGR_ProductManagement.jsp";
     private static final String SUCCESS = "MGR_ProductManagement.jsp";
-    private static final String ERROR = "MGR_ProductManagement.jsp"; 
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        BrandDAO BrandDAO = new BrandDAO();
+        CategoryDAO CateDAO = new CategoryDAO();
         try {
-            String search = request.getParameter("search");
-            ProductDAO dao = new ProductDAO();
-            BrandDAO daoBrand = new BrandDAO();
-            List<ProductDTO> list = dao.getListProduct(search);
-            List<BrandDTO> listBrand = daoBrand.getListBrand();
-            if(list.size()>0){
-                request.setAttribute("SHOW_ALL_PRODUCT_MANAGER", list);
+            List<BrandDTO> Brandlist = BrandDAO.getListBrand();
+            List<CategoryDTO> CateList = CateDAO.getListCategory();
+            if (Brandlist != null || CateList!=null) {
                 HttpSession ses = request.getSession();
-                ses.setAttribute("LIST_BRAND_MANAGER", listBrand);
-                request.setAttribute("SEARCH", search);
+                ses.setAttribute("BRAND_LIST_MANAGER", Brandlist);
+                ses.setAttribute("CATEGORY_LIST_MANAGER", CateList);
                 url = SUCCESS;
             }
-            
-        } catch (Exception e) {
-            log("Error at ShowAllProductManager: "+e.toString());
-        }finally{
+        } catch (ClassNotFoundException | SQLException e) {
+            log("Error at GetBrandControllerManager: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

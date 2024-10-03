@@ -51,7 +51,7 @@ public class CreateProductManager extends HttpServlet {
             String name = request.getParameter("productName");
             int brandID = Integer.parseInt(request.getParameter("brandID"));
             String description = request.getParameter("description");
-            boolean status = true;
+            int status = 1;
             if (dao.checkDuplicateByName(name)) {
                 proErr.setProductName("THIS PRODUCT'S NAME ALREADY EXISTED");
                 validation = false;

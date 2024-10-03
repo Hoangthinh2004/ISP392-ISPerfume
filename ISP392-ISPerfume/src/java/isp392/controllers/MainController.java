@@ -35,6 +35,12 @@ public class MainController extends HttpServlet {
     private static final String CREATE_PRODUCT_MANAGER = "Create";
     private static final String CREATE_PRODUCT_MANAGER_CONTROLLER = "CreateProductManager";
     
+    private static final String DELETE_PRODUCT_MANAGER = "Delete Product";
+    private static final String DELETE_PRODUCT_MANAGER_CONTROLLER = "DeleteProductManager";
+    
+    private static final String PRODUCT_PAGE = "Manage_Product_Page";
+    private static final String PRODUCT_PAGE_VIEW = "GetBrandCategoriesManager";
+    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,6 +58,10 @@ public class MainController extends HttpServlet {
                 url = NAVIGATE_CATEGORY_HOME_CONTROLLER;
             } else if (FILTER_BY_BRAND.equals(action)) {
                 url = FILTER_BY_BRAND_CONTROLLER;
+            }else if(DELETE_PRODUCT_MANAGER.equals(action)){
+                url = DELETE_PRODUCT_MANAGER_CONTROLLER;
+            }else if(PRODUCT_PAGE.equals(action)){
+                url = PRODUCT_PAGE_VIEW;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -71,7 +71,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MGR_ProductManagement.jsp" class="dropdown-item active">Product Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item active">Product Management</a>
                                 <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
                                 <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
                             </div>
@@ -205,6 +205,7 @@
                                 </div>
                                 <div class="table-responsive">
                                     <c:if test="${requestScope.SHOW_ALL_PRODUCT_MANAGER!=null}">
+
                                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                                             <thead>
                                                 <tr class="text-dark">
@@ -223,10 +224,9 @@
                                                             ${pro.productID}
                                                         </td>
                                                         <td>
-                                                            <form action="MainController" method="GET">
-
+                                                            <form action="MainController" method="get" enctype="multipart/form-data">
                                                                 <select name="brandID">
-                                                                    <c:forEach var="brand" items="${sessionScope.LIST_BRAND_MANAGER}">
+                                                                    <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
                                                                         <option value="${brand.brandID}"
                                                                                 <c:if test="${brand.brandID == pro.brandID}">
                                                                                     SELECTED
@@ -248,14 +248,20 @@
                                                             <input type="hidden" value="${pro.image}" name="existingImage">
                                                         </td>
                                                         <td>
-                                                            ${pro.status}
+                                                            <c:if test="${pro.status==1}">
+                                                                AVAILABLE
+                                                            </c:if>
                                                         </td>
                                                         <td>
+                                                            <input type="hidden" name="status" value="${pro.status}" >
                                                             <input type="hidden" name="productID" value="${pro.productID}">
                                                             <input type="hidden" name="search" value="${requestScope.SEARCH}">
                                                             <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
-                                                            </form>
                                                         </td>
+                                                        <td>
+                                                            <input type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">
+                                                        </td>
+                                                        </form>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -305,20 +311,20 @@
 
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
-        <!--        <script>
-                    window.onload = function () {
-                        const searchInput = document.querySelector('input[name="search"]');
-                        const form = searchInput.form;
-                        if (!sessionStorage.getItem('isSubmitted')) {
-                            const hiddenAction = document.createElement('input');
-                            hiddenAction.type = 'hidden';
-                            hiddenAction.name = 'action';
-                            hiddenAction.value = 'Search';
-                            form.appendChild(hiddenAction);
-                            form.submit();
-                            sessionStorage.setItem('isSubmitted', 'true');
-                        }
-                    };
-                </script>-->
+<!--        <script>
+            window.onload = function () {
+                const searchInput = document.querySelector('input[name="search"]');
+                const form = searchInput.form;
+                if (!sessionStorage.getItem('isSubmitted')) {
+                    const hiddenAction = document.createElement('input');
+                    hiddenAction.type = 'hidden';
+                    hiddenAction.name = 'action';
+                    hiddenAction.value = 'Search';
+                    form.appendChild(hiddenAction);
+                    form.submit();
+                    sessionStorage.setItem('isSubmitted', 'true');
+                }
+            };
+        </script>-->
     </body>
 </html>

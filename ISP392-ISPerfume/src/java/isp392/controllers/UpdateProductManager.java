@@ -2,12 +2,17 @@ package isp392.controllers;
 
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import net.coobird.thumbnailator.Thumbnails;
 
 @WebServlet(name = "UpdateProductManager", urlPatterns = {"/UpdateProductManager"})
 public class UpdateProductManager extends HttpServlet {
@@ -44,8 +49,10 @@ public class UpdateProductManager extends HttpServlet {
 //                    .toFile(outputFile);
 //
 //            filePart.write(path + File.separator + fileName);
-            //boolean status = Boolean.parseBoolean(request.getParameter("status"));
-            int status = Integer.parseInt(request.getParameter("status"));
+            int status=Integer.parseInt(request.getParameter("status"));
+//            if(imagePath.isEmpty()){
+//                imagePath = existingImage;
+//            }
             ProductDTO pro = new ProductDTO(productID, brandID, productName, description, existingImage, status);
             boolean checkUpdate = dao.updateProduct(pro);
             if (checkUpdate) {

@@ -32,11 +32,11 @@ public class ProductDAO {
                                                         + "INNER JOIN Product_Category pc on p.ProductID = pc.ProductID " 
                                                         + "WHERE p.Status = 1 AND pc.CategoryID = ? AND p.BrandID = ?";
 
-    private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, BrandID, ProName, Description, Image, Status FROM Products WHERE ProName LIKE ?";
+    private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, BrandID, ProName, Description, Image, Status FROM Products WHERE ProName LIKE ? AND Status = 1";
     private static final String UPDATE_PRODUCT_MANAGER = "UPDATE Products SET BrandID = ?, ProName = ?, Description = ?, Image = ? WHERE ProductID = ?";
     private static final String INSERT_PRODUCT_MANAGER = "INSERT INTO Products(BrandID, Description, Image, ProName, Status) VALUES(?,?,?,?,?)";
     private static final String CHECK_DUPLICATE_PRODUCT_BY_NAME = "SELECT ProductID FROM Products WHERE ProName LIKE ?";
-
+    private static final String DELETE_PRODUCT_MANAGER = "UPDATE Products SET Status = 0 WHERE ProductID = ? ";
     public List<ProductDTO> getListProduct(String search) throws ClassNotFoundException, SQLException {
         List<ProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
@@ -87,7 +87,7 @@ public class ProductDAO {
                 ptm.setString(3, pro.getDescription());
                 ptm.setString(4, pro.getImage());
                 ptm.setInt(5, pro.getProductID());
-                check = ptm.executeUpdate() > 0 ? true : false;
+                check = ptm.executeUpdate() > 0;
             }
         } finally {
             if (ptm != null) {
@@ -100,7 +100,7 @@ public class ProductDAO {
         return check;
     }
 
-    public boolean addProduct(String name, int brandID, String description, String imagePath, boolean status) throws SQLException, ClassNotFoundException {
+    public boolean addProduct(String name, int brandID, String description, String imagePath, int status) throws SQLException, ClassNotFoundException {
 //        INSERT INTO Products(BrandID, Description, Image, ProName, Status) VALUES(?,?,?,?,?)
         boolean check = false;
         Connection conn = null;
@@ -113,7 +113,7 @@ public class ProductDAO {
                 ptm.setString(2, description);
                 ptm.setString(3, imagePath);
                 ptm.setString(4, name);
-                ptm.setBoolean(5, status);
+                ptm.setInt(5, status);
                 check = ptm.executeUpdate() > 0;
             }
         } finally {
@@ -257,6 +257,24 @@ public class ProductDAO {
             if(conn!=null) conn.close();
         }
         return listProductByBrand;
+    }
+
+    public boolean deleteProductManager(int productID) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn!=null){
+                ptm = conn.prepareStatement(DELETE_PRODUCT_MANAGER);
+                ptm.setInt(1, productID);
+                check = ptm.executeUpdate()>0;
+            }
+        } finally{
+            if(ptm!=null) ptm.close();
+            if(conn!=null) conn.close();
+        }
+        return check;
     }
     
 }
