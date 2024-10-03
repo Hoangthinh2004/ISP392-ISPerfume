@@ -6,10 +6,8 @@
 package isp392.controllers;
 
 import isp392.product.ProductDAO;
-import isp392.product.ProductDetailDTO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
