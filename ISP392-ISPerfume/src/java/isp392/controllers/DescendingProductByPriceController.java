@@ -6,10 +6,8 @@
 package isp392.controllers;
 
 import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -22,35 +20,43 @@ import javax.servlet.http.HttpSession;
  *
  * @author ThinhHoang
  */
-public class BrandFilterController extends HttpServlet {
+public class DescendingProductByPriceController extends HttpServlet {
 
-    private static final String ERROR="shopping.jsp";
-    private static final String SUCCESS="shopping.jsp";
+    private static final String ERROR = "shopping.jsp";
+    private static final String SUCCESS = "shopping.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
-        try {          
-            int brandID = Integer.parseInt(request.getParameter("brandID"));
-            int categoryID = Integer.parseInt(request.getParameter("Category"));
-            
+        try {
             HttpSession session = request.getSession();
-            Map<String, Integer> ids = new HashMap<>();
-            ids.put("brandID", brandID);
-            ids.put("categoryID", categoryID);
-            session.setAttribute("CURRENT_IDS", ids); //Store brandID & categoryID into attribute for DescendingProductByPrice Controller
-            
-            ProductDAO productDAO = new ProductDAO();
-            List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
-            request.setAttribute("LIST_PRODUCT", listProduct);
-            session.setAttribute("LIST_PRODUCT_REFERENCE", listProduct);
-            url = SUCCESS;
+            ProductDAO productDAO = new ProductDAO();            
+            if (session.getAttribute("CURRENT_IDS") == null) {
+                int categoryID = (Integer) session.getAttribute("CURRENT_CATEGORY");
+                List<ViewProductDTO> descendingListProduct = productDAO.DescendingListProductByPrice(categoryID);
+                if (descendingListProduct.size() > 0) {
+                    request.setAttribute("LIST_PRODUCT", descendingListProduct);
+                    session.removeAttribute("CURRENT_CATEGORY");
+                }
+                url = SUCCESS;
+            } else {
+                Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+                if (ids != null) {
+                    int brandID = ids.get("brandID");
+                    int categoryID = ids.get("categoryID");
+                    List<ViewProductDTO> DescendingListChildProductByPrice = productDAO.DescendingListChildProductByPrice(categoryID, brandID);
+                    if (DescendingListChildProductByPrice.size() > 0) {
+                        request.setAttribute("LIST_PRODUCT", DescendingListChildProductByPrice);
+                        session.removeAttribute("CURRENT_IDS");
+                    }
+                    url = SUCCESS;
+                }               
+            }       
         } catch (Exception e) {
-            log("Error at BrandFilterController: " + e.toString());
+            log("Error at DescendingProductByPriceController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-          
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,6 +72,7 @@ public class BrandFilterController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**
@@ -80,6 +87,7 @@ public class BrandFilterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**

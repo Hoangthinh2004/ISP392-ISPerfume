@@ -35,11 +35,13 @@ public class BrandDAO {
             if (conn!=null) {
                 ptm = conn.prepareStatement(GET_LIST_BRAND);
                 rs = ptm.executeQuery();
-                while (rs.next()) {                    
+                while (rs.next()) {     
+                    int managerID = rs.getInt("ManagerID");
                     int brandID = rs.getInt("BrandID");
                     String brandName = rs.getString("BrandName");
                     String image = rs.getString("Image");
-                    listBrand.add(new BrandDTO(brandID, brandName, image, true));
+                    String description = rs.getString("Description");
+                    listBrand.add(new BrandDTO(brandID, managerID, brandName, description, image, true));
                 }
             }
         } finally {
@@ -62,10 +64,12 @@ public class BrandDAO {
                 rs = ptm.executeQuery();
                 while(rs.next()){
                     int brandID = rs.getInt("BrandID");
+                    int managerID = rs.getInt("ManagerID");
                     String brandName = rs.getString("BrandName");
                     String image = rs.getString("Image");
+                    String description = rs.getString("Description");
                     boolean status = rs.getBoolean("Status");
-                    BrandDTO newBrand = new BrandDTO(brandID, brandName, image, status);
+                    BrandDTO newBrand = new BrandDTO(brandID, managerID, brandName, description, image, status);
                     list.add(newBrand);
                 }
             }
@@ -76,4 +80,5 @@ public class BrandDAO {
         }
         return list;
     }
+
 }

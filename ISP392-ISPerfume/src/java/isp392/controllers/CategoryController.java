@@ -6,8 +6,8 @@
 package isp392.controllers;
 
 import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
 import isp392.product.ProductDetailDTO;
+import isp392.product.ViewProductDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,27 +30,16 @@ public class CategoryController extends HttpServlet {
             throws ServletException, IOException {
         String url=ERROR;
         try {
+            int category = Integer.parseInt(request.getParameter("Category"));
+            
             HttpSession session = request.getSession();
-            String category = request.getParameter("Category");
+            session.setAttribute("CURRENT_CATEGORY", category); //Store categoryID into attribute for DescendingProductByPrice Controller
+            
             ProductDAO productDAO = new ProductDAO();           
-            List<ProductDTO> listProduct = productDAO.getListProductByCategory(category);
-            
-            List<ProductDetailDTO> highestPrice = new ArrayList<>();
-            List<ProductDetailDTO> lowestPrice = new ArrayList<>();
-            
-            for (ProductDTO product : listProduct) {
-                String productID = String.valueOf(product.getProductID());
-            
-            List<ProductDetailDTO> highestPriceForProduct = productDAO.getHightestPrice(productID);
-            List<ProductDetailDTO> lowestPriceForProduct = productDAO.getLowestPrice(productID);
-            
-            highestPrice.addAll(highestPriceForProduct);
-            lowestPrice.addAll(lowestPriceForProduct);        
-            }
-            
-            session.setAttribute("LIST_PRODUCT_BY_CATEGORY", listProduct);
-            session.setAttribute("HIGHEST_PRICE", highestPrice);
-            session.setAttribute("LOWEST_PRICE", lowestPrice);
+            List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(category);
+                       
+            request.setAttribute("LIST_PRODUCT", listProduct);
+            session.setAttribute("LIST_PRODUCT_REFERENCE", listProduct);
             url = SUCCESS;
             
         } catch (Exception e) {
