@@ -275,3 +275,32 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+/* CSS cho sidebar-toggler */
+.sidebar-toggler i {
+    color: #000; /* Màu mặc định của icon */
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
+/* Khi hover vào link chứa icon */
+.sidebar-toggler:hover i {
+    color: #FE980F; /* Màu sẽ chuyển thành màu đỏ khi hover */
+}
+
+.btn.btn-primary {
+    background-color: white ; /* Màu nền mặc định */
+    color: black; /* Màu chữ mặc định */
+    border: 1px solid #F3F6F9 ;  //Đường viền mặc định 
+    
+}
+
+.btn.btn-primary:hover {
+    background-color: white; /* Màu nền khi hover */
+    color: #FE980F; /* Màu chữ khi hover */
+    border: 1px solid white;  Đường viền khi hover 
+    transform: scale(1.05); /* Phóng to nhẹ nút khi hover */
+}
+.form-control:focus {
+    outline: none; 
+    border-color: #FE980F; /* Viền màu xanh khi nhấp vào */
+    box-shadow: 0 0 5px #FE980F; /* Tạo hiệu ứng đổ bóng màu xanh */
+}

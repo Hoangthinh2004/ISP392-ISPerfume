@@ -38,6 +38,7 @@
 
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
+
     </head>
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
@@ -105,8 +106,14 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
+                    <form class="d-none d-md-flex ms-4" action="MainController" method="post">
                         <input class="form-control border-0" type="search" placeholder="Search">
+
+                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
@@ -195,13 +202,14 @@
                         <!-- Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
                             <div class="bg-light text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div class="d-flex align-items-center justify-content-between mb-4">   
                                     <h6 class="mb-0">Product Management</h6>
-                                    <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create new product</a>
-                                    <form action="MainController" method="GET">
-                                        <input type="text" name="search" placeholder="Search..." value="${requestScope.SEARCH}">
-                                        <input type="submit" class="btn btn-primary" name="action" value="Search" > 
-                                    </form>
+                                    <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create product</a>
+<!--                                    <button class="btn btn-primary">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                                        </svg>
+                                    </button>-->
                                 </div>
                                 <div class="table-responsive">
                                     <c:if test="${requestScope.SHOW_ALL_PRODUCT_MANAGER!=null}">
@@ -283,7 +291,6 @@
                                 &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
                                 Designed By <a href="https://htmlcodex.com">HTML Codex</a>
                             </div>
                         </div>

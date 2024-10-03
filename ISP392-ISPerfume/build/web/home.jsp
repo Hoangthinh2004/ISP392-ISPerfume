@@ -32,6 +32,25 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            /* Ẩn menu thả xuống mặc định */
+            .dropdown-menu {
+                display: none;
+                position: absolute;
+                right: 0;
+            }
+
+            /* Khi hover vào nút My Account hoặc menu nhóm, hiển thị menu */
+            .btn-group:hover .dropdown-menu {
+                display: block;
+            }
+
+            /* Đảm bảo menu không hiển thị lỗi khi di chuột */
+            .btn-group {
+                position: relative;
+            }
+
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -48,28 +67,21 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                            <button type="button" class="btn btn-sm btn-light no-caret" data-toggle="dropdown">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                </svg>
+                            </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <button class="dropdown-item" type="button">Sign up</button>
+                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
+                                    </svg>
+                                </a>
+                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>
                             </div>
                         </div>
-                        <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">EUR</button>
-                                <button class="dropdown-item" type="button">GBP</button>
-                                <button class="dropdown-item" type="button">CAD</button>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">FR</button>
-                                <button class="dropdown-item" type="button">AR</button>
-                                <button class="dropdown-item" type="button">RU</button>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -142,37 +154,59 @@
                             <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
                             <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
                         </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="home.jsp" class="nav-item nav-link active">Home</a>
-                                <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
-                                <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                    <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
-                                        <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                        <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                            <div class="navbar-nav w-100">
+                                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
+                                    <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
+                                </c:forEach>
+                                <!--                            <div class="nav-item dropdown dropright">
+                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
+                                                                    <a href="" class="dropdown-item">Women's Dresses</a>
+                                                                    <a href="" class="dropdown-item">Baby's Dresses</a>
+                                                                </div>
+                                                            </div>-->
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-9">
+                        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                            <a href="" class="text-decoration-none d-block d-lg-none">
+                                <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
+                                <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                            </a>
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                <div class="navbar-nav mr-auto py-0">
+                                    <a href="home.jsp" class="nav-item nav-link active">Home</a>
+                                    <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
+                                    <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                            <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
+                                            <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                                        </div>
                                     </div>
+                                    <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                    <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>
-                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
+                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
+                                    <a href="cart.jsp" class="btn px-0 ml-3">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                <a href="cart.jsp" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
         </form>
-        
+
         <!-- Navbar End -->
 
 
