@@ -127,12 +127,10 @@
                             <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                 <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
                             </c:forEach>
-<!--                            <div class="nav-item dropdown dropright">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
+<!--                            <div class="nav-item dropdown dropright"> 
+                                <a href="MainController?action=ViewAllBrand" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand <i class="fa fa-angle-right float-right mt-1"></i></a>
                                 <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
-                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                    <a href="" class="dropdown-item">Baby's Dresses</a>
+                                    <a type="submit" name="action" value="NavigateBrand" class="dropdown-item">name</a>
                                 </div>
                             </div>-->
                         </div>
@@ -281,58 +279,21 @@
         <div class="container-fluid pt-5">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Categories</span></h2>
             <div class="row px-xl-5 pb-3">
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-joy-eau-de-parfum-intense_076e33df565e4d3fa29d5a283135bbf9_master.jpg" alt="">
+                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
+                    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                        <a class="text-decoration-none" href="MainController?action=Category&Category=${Category.categoryID}">
+                            <div class="cat-item d-flex align-items-center mb-4">
+                                <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                                    <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-joy-eau-de-parfum-intense_076e33df565e4d3fa29d5a283135bbf9_master.jpg" alt="">
+                                </div>
+                                <div class="flex-fill pl-3">
+                                    <h6>${Category.name}</h6>
+                                    <small class="text-body">100 Products</small>
+                                </div>
                             </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Men</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-homme-intense-1_3b6dc09e545441e4bd989b178c98f55e_master.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Womem</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-sauvage-parfum-100ml_0de23f02911c4f05aea3b72a852aa4ea_master.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Unisex</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="">
-                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dylan-est_dba403106c6a416fadfd35ee6b9ecddc_master.jpg" alt="">
-                            </div>
-                            <div class="flex-fill pl-3">
-                                <h6>Brands</h6>
-                                <small class="text-body">100 Products</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>            
+                        </a>
+                    </div>
+                </c:forEach>
             </div>
         </div>
         <!-- Categories End -->

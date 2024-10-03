@@ -13,6 +13,7 @@ import java.sql.Date;
  */
 public class ProductDetailDTO {
     private int productID;
+    private int sizeID;
     private int price;
     private int stockQuantity;
     private int numberOfPurchasing;
@@ -21,9 +22,11 @@ public class ProductDetailDTO {
     private int releaseDate;
     private String fragranceFamilies;
     private String image;
+    private int status;
 
     public ProductDetailDTO() {
         this.productID = 0;
+        this.sizeID = 0;
         this.price = 0;
         this.stockQuantity = 0;
         this.numberOfPurchasing = 0;
@@ -32,10 +35,12 @@ public class ProductDetailDTO {
         this.releaseDate = 0;
         this.fragranceFamilies = "";
         this.image = "";
+        this.status = 0;
     }
 
-    public ProductDetailDTO(int productID, int price, int stockQuantity, int numberOfPurchasing, Date importDate, String country, int releaseDate, String fragranceFamilies, String image) {
+    public ProductDetailDTO(int productID, int sizeID, int price, int stockQuantity, int numberOfPurchasing, Date importDate, String country, int releaseDate, String fragranceFamilies, String image, int status) {
         this.productID = productID;
+        this.sizeID = sizeID;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.numberOfPurchasing = numberOfPurchasing;
@@ -44,6 +49,7 @@ public class ProductDetailDTO {
         this.releaseDate = releaseDate;
         this.fragranceFamilies = fragranceFamilies;
         this.image = image;
+        this.status = status;
     }
 
     public int getProductID() {
@@ -52,6 +58,14 @@ public class ProductDetailDTO {
 
     public void setProductID(int productID) {
         this.productID = productID;
+    }
+
+    public int getSizeID() {
+        return sizeID;
+    }
+
+    public void setSizeID(int sizeID) {
+        this.sizeID = sizeID;
     }
 
     public int getPrice() {
@@ -117,6 +131,17 @@ public class ProductDetailDTO {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+
+    
     
     
 }

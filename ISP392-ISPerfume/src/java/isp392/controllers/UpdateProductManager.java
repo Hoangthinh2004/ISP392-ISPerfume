@@ -34,6 +34,7 @@ public class UpdateProductManager extends HttpServlet {
             String productName = request.getParameter("productName");
             String description = request.getParameter("description");
             String existingImage = request.getParameter("existingImage");
+            int managerID = 4;
 //            Part filePart = request.getPart("file");
 //            String imagePath = "";
 //            String path = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
@@ -54,6 +55,9 @@ public class UpdateProductManager extends HttpServlet {
 //                imagePath = existingImage;
 //            }
             ProductDTO pro = new ProductDTO(productID, brandID, productName, description, existingImage, status);
+            //boolean status = Boolean.parseBoolean(request.getParameter("status"));
+            int status = Integer.parseInt(request.getParameter("status"));
+            ProductDTO pro = new ProductDTO(productID, managerID, brandID, productName, description, existingImage, status);
             boolean checkUpdate = dao.updateProduct(pro);
             if (checkUpdate) {
                 url = SUCCESS;

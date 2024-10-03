@@ -11,20 +11,26 @@ package isp392.brand;
  */
 public class BrandDTO {
     private int brandID;
+    private int managerID;
     private String name;
+    private String description;
     private String image;
     private boolean status;
 
     public BrandDTO() {
         this.brandID = 0;
+        this.managerID = 0;
         this.name = "";
+        this.description = "";
         this.image = "";
         this.status = true;
     }
 
-    public BrandDTO(int brandID, String name, String image, boolean status) {
+    public BrandDTO(int brandID, int managerID, String name, String description, String image, boolean status) {
         this.brandID = brandID;
+        this.managerID = managerID;
         this.name = name;
+        this.description = description;
         this.image = image;
         this.status = status;
     }
@@ -37,12 +43,28 @@ public class BrandDTO {
         this.brandID = brandID;
     }
 
+    public int getManagerID() {
+        return managerID;
+    }
+
+    public void setManagerID(int managerID) {
+        this.managerID = managerID;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImage() {
@@ -60,6 +82,5 @@ public class BrandDTO {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
     
 }

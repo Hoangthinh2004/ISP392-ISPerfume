@@ -20,6 +20,14 @@
         <servlet-name>BrandFilterController</servlet-name>
         <servlet-class>isp392.controllers.BrandFilterController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DescendingProductByPriceController</servlet-name>
+        <servlet-class>isp392.controllers.DescendingProductByPriceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AscendingProductByPriceController</servlet-name>
+        <servlet-class>isp392.controllers.AscendingProductByPriceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>BrandFilterController</servlet-name>
         <url-pattern>/BrandFilterController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DescendingProductByPriceController</servlet-name>
+        <url-pattern>/DescendingProductByPriceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AscendingProductByPriceController</servlet-name>
+        <url-pattern>/AscendingProductByPriceController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
