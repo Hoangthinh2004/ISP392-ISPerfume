@@ -2,12 +2,17 @@ package isp392.controllers;
 
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import net.coobird.thumbnailator.Thumbnails;
 
 @WebServlet(name = "UpdateProductManager", urlPatterns = {"/UpdateProductManager"})
 public class UpdateProductManager extends HttpServlet {
@@ -29,24 +34,9 @@ public class UpdateProductManager extends HttpServlet {
             String productName = request.getParameter("productName");
             String description = request.getParameter("description");
             String existingImage = request.getParameter("existingImage");
-//            Part filePart = request.getPart("file");
-//            String imagePath = "";
-//            String path = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
-//            File uploadDir = new File(path);
-//            if (!uploadDir.exists()) {
-//                uploadDir.mkdirs();
-//            }
-//            String fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-//            imagePath = UPLOAD_DIRECTORY + File.separator + fileName;
-//            File outputFile = new File(path + File.separator + fileName);
-//            Thumbnails.of(filePart.getInputStream())
-//                    .size(IMAGE_WIDTH, IMAGE_HEIGHT)
-//                    .toFile(outputFile);
-//
-//            filePart.write(path + File.separator + fileName);
-            //boolean status = Boolean.parseBoolean(request.getParameter("status"));
-            int status = Integer.parseInt(request.getParameter("status"));
-            ProductDTO pro = new ProductDTO(productID, brandID, productName, description, existingImage, status);
+            int managerID = 4;
+            int status=Integer.parseInt(request.getParameter("status"));
+            ProductDTO pro = new ProductDTO(productID, managerID, brandID, productName, description, existingImage, status);
             boolean checkUpdate = dao.updateProduct(pro);
             if (checkUpdate) {
                 url = SUCCESS;

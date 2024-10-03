@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class CategoryDAO {
     
-    private static final String GET_LIST_CATEGORY = "SELECT * FROM Categories";
+    private static final String GET_LIST_CATEGORY = "SELECT C.CategoryID, C.CategoryName FROM Categories C";
 
     public List<CategoryDTO> getListCategory() throws ClassNotFoundException, SQLException {
         List<CategoryDTO> listCategory = new ArrayList<>();

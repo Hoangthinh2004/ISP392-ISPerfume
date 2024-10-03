@@ -5,13 +5,13 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
+import isp392.product.ViewProductDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,13 +30,20 @@ public class BrandFilterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
-        try {
-            String brandID = request.getParameter("brandID");
-            String categoryID = request.getParameter("Category");
+        try {          
+            int brandID = Integer.parseInt(request.getParameter("brandID"));
+            int categoryID = Integer.parseInt(request.getParameter("Category"));
+            
             HttpSession session = request.getSession();
+            Map<String, Integer> ids = new HashMap<>();
+            ids.put("brandID", brandID);
+            ids.put("categoryID", categoryID);
+            session.setAttribute("CURRENT_IDS", ids); //Store brandID & categoryID into attribute for DescendingProductByPrice Controller
+            
             ProductDAO productDAO = new ProductDAO();
-            List<ProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
-            session.setAttribute("LIST_PRODUCT_BY_BRAND", listProduct);
+            List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
+            request.setAttribute("LIST_PRODUCT", listProduct);
+            session.setAttribute("LIST_PRODUCT_REFERENCE", listProduct);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at BrandFilterController: " + e.toString());

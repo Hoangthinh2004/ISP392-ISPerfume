@@ -11,6 +11,7 @@ package isp392.product;
  */
 public class ProductDTO {
     private int productID;
+    private int managerID;
     private int brandID;
     private String name;
     private String description;
@@ -19,15 +20,17 @@ public class ProductDTO {
 
     public ProductDTO() {
         this.productID = 0;
+        this.managerID = 0;
         this.brandID = 0;
         this.name = "";
         this.description = "";
         this.image = "";
-        this.status=0;
+        this.status = 0;
     }
 
-    public ProductDTO(int productID, int brandID, String name, String description, String image, int status) {
+    public ProductDTO(int productID, int managerID, int brandID, String name, String description, String image, int status) {
         this.productID = productID;
+        this.managerID = managerID;
         this.brandID = brandID;
         this.name = name;
         this.description = description;
@@ -41,6 +44,14 @@ public class ProductDTO {
 
     public void setProductID(int productID) {
         this.productID = productID;
+    }
+
+    public int getManagerID() {
+        return managerID;
+    }
+
+    public void setManagerID(int managerID) {
+        this.managerID = managerID;
     }
 
     public int getBrandID() {
@@ -82,6 +93,8 @@ public class ProductDTO {
     public void setStatus(int status) {
         this.status = status;
     }
+    
+    
     
     
 }

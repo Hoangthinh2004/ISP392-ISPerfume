@@ -69,7 +69,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MGR_ProductManagement.jsp" class="dropdown-item ">Product Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Product Management</a>
                                 <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
                                 <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
                             </div>

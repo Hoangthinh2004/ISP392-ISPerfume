@@ -5,14 +5,12 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
 import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
+import isp392.product.ViewProductDTO;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,43 +18,43 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author duyhc
+ * @author ThinhHoang
  */
-@WebServlet(name = "ShowAllProductManager", urlPatterns = {"/ShowAllProductManager"})
-public class ShowAllProductManager extends HttpServlet {
+public class DescendingProductByPriceController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String SUCCESS = "MGR_ProductManagement.jsp";
-    private static final String ERROR = "MGR_ProductManagement.jsp"; 
+    private static final String ERROR = "shopping.jsp";
+    private static final String SUCCESS = "shopping.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String search = request.getParameter("search");
-            ProductDAO dao = new ProductDAO();
-            BrandDAO daoBrand = new BrandDAO();
-            List<ProductDTO> list = dao.getListProduct(search);
-            List<BrandDTO> listBrand = daoBrand.getListBrand();
-            if(list.size()>0){
-                request.setAttribute("SHOW_ALL_PRODUCT_MANAGER", list);
-                HttpSession ses = request.getSession();
-                ses.setAttribute("LIST_BRAND_MANAGER", listBrand);
-                request.setAttribute("SEARCH", search);
+            HttpSession session = request.getSession();
+            ProductDAO productDAO = new ProductDAO();            
+            if (session.getAttribute("CURRENT_IDS") == null) {
+                int categoryID = (Integer) session.getAttribute("CURRENT_CATEGORY");
+                List<ViewProductDTO> descendingListProduct = productDAO.DescendingListProductByPrice(categoryID);
+                if (descendingListProduct.size() > 0) {
+                    request.setAttribute("LIST_PRODUCT", descendingListProduct);
+                    session.removeAttribute("CURRENT_CATEGORY");
+                }
                 url = SUCCESS;
-            }
-            
+            } else {
+                Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+                if (ids != null) {
+                    int brandID = ids.get("brandID");
+                    int categoryID = ids.get("categoryID");
+                    List<ViewProductDTO> DescendingListChildProductByPrice = productDAO.DescendingListChildProductByPrice(categoryID, brandID);
+                    if (DescendingListChildProductByPrice.size() > 0) {
+                        request.setAttribute("LIST_PRODUCT", DescendingListChildProductByPrice);
+                        session.removeAttribute("CURRENT_IDS");
+                    }
+                    url = SUCCESS;
+                }               
+            }       
         } catch (Exception e) {
-            log("Error at ShowAllProductManager: "+e.toString());
-        }finally{
+            log("Error at DescendingProductByPriceController: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
@@ -74,6 +72,7 @@ public class ShowAllProductManager extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**
@@ -88,6 +87,7 @@ public class ShowAllProductManager extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**

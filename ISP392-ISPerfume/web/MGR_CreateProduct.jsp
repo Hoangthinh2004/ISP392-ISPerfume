@@ -210,8 +210,15 @@
                                         </div>
                                     </div>
                                     Brand <select name="brandID" class="form-select mb-3" aria-label="Default select example" required="">
-                                        <c:forEach var="brand" items="${sessionScope.LIST_BRAND_MANAGER}">
+                                        <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
                                             <option value="${brand.brandID}">${brand.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                    Category <select name="categoryID" class="form-select mb-3" aria-label="Default select example" required="">
+                                        <c:forEach var="cate" items="${sessionScope.CATEGORY_LIST_MANAGER}">
+                                            <c:if test="${cate.categoryID!=4}">
+                                                <option value="${cate.categoryID}">${cate.name}</option>
+                                            </c:if>
                                         </c:forEach>
                                     </select>
                                     <button type="submit"class="btn btn-primary">CREATE</button>

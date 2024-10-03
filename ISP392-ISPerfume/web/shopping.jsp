@@ -114,7 +114,7 @@
                         <div class="navbar-nav w-100">
                             <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                 <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
-                            </c:forEach>
+                            </c:forEach>                                
                         </div>
                     </nav>
                 </div>
@@ -177,8 +177,8 @@
             <div class="row px-xl-5">
                 <!-- Shop Sidebar Start -->
                 <div class="col-lg-3 col-md-4">
-                    <!-- Price Start -->
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Category</span></h5>
+                    <!-- Filter By Brand Start -->
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter By Category</span></h5>
                     <div class="panel-group category-products" id="accordian"><!--category-productsr-->
                         <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                             <div class="panel panel-default">
@@ -202,7 +202,32 @@
                             </div>
                         </c:forEach>
                     </div><!--/category-products-->
-                    <!-- Price End -->
+                    <!-- Filter By Brand Start -->
+                    
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter By Category</span></h5>
+                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                        <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordian" href="#${Category.name}">
+                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                            ${Category.name}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <c:forEach var="Brand" items="${sessionScope.LIST_BRAND}">
+                                    <div id="${Category.name}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="MainController?action=FilterByBrand&brandID=${Brand.brandID}&Category=${Category.categoryID}">${Brand.name}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:forEach>
+                    </div>
 
                     <!-- Color Start -->
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
@@ -259,8 +284,8 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">Latest</a>
-                                            <a class="dropdown-item" href="#">Popularity</a>
+                                            <a class="dropdown-item" href="MainController?action=DescendingSortByPrice">Descending Price</a>
+                                            <a class="dropdown-item" href="MainController?action=AscendingSortByPrice">Ascending price</a>
                                             <a class="dropdown-item" href="#">Best Rating</a>
                                         </div>
                                     </div>
@@ -275,7 +300,8 @@
                                 </div>
                             </div>
                         </div>
-                        <c:forEach var="Product" items="${sessionScope.LIST_PRODUCT_BY_CATEGORY}">
+                                            
+                        <c:forEach var="Product" items="${requestScope.LIST_PRODUCT}">
                             <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                 <div class="product-item bg-light mb-4">
                                     <div class="product-img position-relative overflow-hidden">
@@ -289,9 +315,9 @@
                                     </div>
                                     <div class="text-center py-4">
                                         <a class="h6 text-decoration-none text-truncate" href="">${Product.name}</a>
-                                        <div class="d-flex align-items-center justify-content-center mt-2">
-                                            <h5><fmt:formatNumber type="number" value="${LOWEST_PRICE[0].price}"/> - <fmt:formatNumber type="number" value="${HIGHEST_PRICE[0].price}"/> VND</h5> 
-                                        </div>
+                                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                                <h5><fmt:formatNumber type="number" value="${price.price}"/> - <fmt:formatNumber type="number" value="${price.price}"/> VND</h5> 
+                                            </div>
                                         <div class="d-flex align-items-center justify-content-center mb-1">
                                             <small class="fa fa-star text-primary mr-1"></small>
                                             <small class="fa fa-star text-primary mr-1"></small>

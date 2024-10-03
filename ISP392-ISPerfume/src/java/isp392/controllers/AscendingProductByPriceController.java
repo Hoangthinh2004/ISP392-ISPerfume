@@ -5,25 +5,18 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
-import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author duyhc
+ * @author ThinhHoang
  */
-@WebServlet(name = "ShowAllProductManager", urlPatterns = {"/ShowAllProductManager"})
-public class ShowAllProductManager extends HttpServlet {
+public class AscendingProductByPriceController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,30 +27,20 @@ public class ShowAllProductManager extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String SUCCESS = "MGR_ProductManagement.jsp";
-    private static final String ERROR = "MGR_ProductManagement.jsp"; 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-            String search = request.getParameter("search");
-            ProductDAO dao = new ProductDAO();
-            BrandDAO daoBrand = new BrandDAO();
-            List<ProductDTO> list = dao.getListProduct(search);
-            List<BrandDTO> listBrand = daoBrand.getListBrand();
-            if(list.size()>0){
-                request.setAttribute("SHOW_ALL_PRODUCT_MANAGER", list);
-                HttpSession ses = request.getSession();
-                ses.setAttribute("LIST_BRAND_MANAGER", listBrand);
-                request.setAttribute("SEARCH", search);
-                url = SUCCESS;
-            }
-            
-        } catch (Exception e) {
-            log("Error at ShowAllProductManager: "+e.toString());
-        }finally{
-            request.getRequestDispatcher(url).forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AscendingProductByPriceController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AscendingProductByPriceController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

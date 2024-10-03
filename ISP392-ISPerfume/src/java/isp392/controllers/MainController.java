@@ -21,7 +21,7 @@ public class MainController extends HttpServlet {
     private static final String HOME_PAGE = "HomeController";
     
     private static final String NAVIGATE_CATEGORY = "Category";
-    private static final String NAVIGATE_CATEGORY_HOME_CONTROLLER = "CategoryController";
+    private static final String NAVIGATE_CATEGORY_CONTROLLER = "CategoryController";
     
     private static final String FILTER_BY_BRAND = "FilterByBrand";
     private static final String FILTER_BY_BRAND_CONTROLLER = "BrandFilterController";
@@ -34,6 +34,18 @@ public class MainController extends HttpServlet {
     
     private static final String CREATE_PRODUCT_MANAGER = "Create";
     private static final String CREATE_PRODUCT_MANAGER_CONTROLLER = "CreateProductManager";
+    
+    private static final String DELETE_PRODUCT_MANAGER = "Delete Product";
+    private static final String DELETE_PRODUCT_MANAGER_CONTROLLER = "DeleteProductManager";
+    private static final String DESCENDING_SORT_BY_PRICE = "DescendingSortByPrice";
+    private static final String DESCENDING_SORT_BY_PRICE_CONTROLLER = "DescendingProductByPriceController";
+    
+    private static final String PRODUCT_PAGE = "Manage_Product_Page";
+    private static final String PRODUCT_PAGE_VIEW = "GetBrandCategoriesManager";
+    
+    
+    private static final String ASCENDING_SORT_BY_PRICE = "AscendingSortByPrice";
+    private static final String ASCENDING_SORT_BY_PRICE_CONTROLLER = "AscendingProductByPriceController";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -49,9 +61,17 @@ public class MainController extends HttpServlet {
             }else if(CREATE_PRODUCT_MANAGER.equals(action)){
                 url = CREATE_PRODUCT_MANAGER_CONTROLLER;
             } else if (NAVIGATE_CATEGORY.equals(action)) {
-                url = NAVIGATE_CATEGORY_HOME_CONTROLLER;
+                url = NAVIGATE_CATEGORY_CONTROLLER;
             } else if (FILTER_BY_BRAND.equals(action)) {
                 url = FILTER_BY_BRAND_CONTROLLER;
+            }else if(DELETE_PRODUCT_MANAGER.equals(action)){
+                url = DELETE_PRODUCT_MANAGER_CONTROLLER;
+            }else if(PRODUCT_PAGE.equals(action)){
+                url = PRODUCT_PAGE_VIEW;
+            } else if (DESCENDING_SORT_BY_PRICE.equals(action)) {
+                url = DESCENDING_SORT_BY_PRICE_CONTROLLER;
+            } else if (ASCENDING_SORT_BY_PRICE.equals(action)) {
+                url = ASCENDING_SORT_BY_PRICE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
