@@ -30,7 +30,7 @@ public class ProductDAO {
                                                         + "INNER JOIN Product_Category pc on p.ProductID = pc.ProductID " 
                                                         + "WHERE p.Status = 1 AND pc.CategoryID = ? AND p.BrandID = ?";
 
-    private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, BrandID, ProName, Description, Image, Status FROM Products WHERE ProName LIKE ? AND Status = 1";
+    private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, ManagerID ,BrandID, ProName, Description, Image, Status FROM Products WHERE ProName LIKE ? AND Status = 1";
     private static final String UPDATE_PRODUCT_MANAGER = "UPDATE Products SET BrandID = ?, ProName = ?, Description = ?, Image = ? WHERE ProductID = ?";
     private static final String INSERT_PRODUCT_MANAGER = "INSERT INTO Products(BrandID, Description, Image, ProName, Status) VALUES(?,?,?,?,?)";
     private static final String CHECK_DUPLICATE_PRODUCT_BY_NAME = "SELECT ProductID FROM Products WHERE ProName LIKE ?";
@@ -68,6 +68,7 @@ public class ProductDAO {
                     String image = rs.getString("Image");
                     int status = rs.getInt("Status");
                     ProductDTO newPro = new ProductDTO(productID, managerID, brandID, proName, descrip, image, status);
+                    listProduct.add(newPro);
                 }
             }
         } finally {

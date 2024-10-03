@@ -238,10 +238,10 @@
                                                                 </select>
                                                         </td>
                                                         <td>
-                                                            <input type="text" name="productName" value="${pro.name}">
+                                                            <input class="form-control border-0" type="text" name="productName" value="${pro.name}">
                                                         </td>
                                                         <td>
-                                                            <input type="text" name="description" value="${pro.description}">
+                                                            <input class="form-control border-0" type="text" name="description" value="${pro.description}">
                                                         </td>
                                                         <td>
                                                             <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px;">
