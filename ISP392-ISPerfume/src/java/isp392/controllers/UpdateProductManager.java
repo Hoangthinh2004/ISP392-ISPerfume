@@ -35,28 +35,7 @@ public class UpdateProductManager extends HttpServlet {
             String description = request.getParameter("description");
             String existingImage = request.getParameter("existingImage");
             int managerID = 4;
-//            Part filePart = request.getPart("file");
-//            String imagePath = "";
-//            String path = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
-//            File uploadDir = new File(path);
-//            if (!uploadDir.exists()) {
-//                uploadDir.mkdirs();
-//            }
-//            String fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-//            imagePath = UPLOAD_DIRECTORY + File.separator + fileName;
-//            File outputFile = new File(path + File.separator + fileName);
-//            Thumbnails.of(filePart.getInputStream())
-//                    .size(IMAGE_WIDTH, IMAGE_HEIGHT)
-//                    .toFile(outputFile);
-//
-//            filePart.write(path + File.separator + fileName);
             int status=Integer.parseInt(request.getParameter("status"));
-//            if(imagePath.isEmpty()){
-//                imagePath = existingImage;
-//            }
-            ProductDTO pro = new ProductDTO(productID, brandID, productName, description, existingImage, status);
-            //boolean status = Boolean.parseBoolean(request.getParameter("status"));
-            int status = Integer.parseInt(request.getParameter("status"));
             ProductDTO pro = new ProductDTO(productID, managerID, brandID, productName, description, existingImage, status);
             boolean checkUpdate = dao.updateProduct(pro);
             if (checkUpdate) {

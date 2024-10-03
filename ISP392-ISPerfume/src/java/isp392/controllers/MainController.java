@@ -23,8 +23,8 @@ public class MainController extends HttpServlet {
     private static final String NAVIGATE_CATEGORY = "Category";
     private static final String NAVIGATE_CATEGORY_CONTROLLER = "CategoryController";
     
-    private static final String NAVIGATE_BRAND = "ViewAllBrand";
-    private static final String NAVIGATE_BRAND_CONTROLLER = "BrandController";
+    private static final String FILTER_BY_BRAND = "FilterByBrand";
+    private static final String FILTER_BY_BRAND_CONTROLLER = "BrandFilterController";
     
     private static final String SHOW_ALL_PRODUCT_MANAGER = "Search";
     private static final String SHOW_ALL_PRODUCT_MANAGER_CONTROLLER = "ShowAllProductManager";
@@ -61,16 +61,13 @@ public class MainController extends HttpServlet {
             }else if(CREATE_PRODUCT_MANAGER.equals(action)){
                 url = CREATE_PRODUCT_MANAGER_CONTROLLER;
             } else if (NAVIGATE_CATEGORY.equals(action)) {
-                url = NAVIGATE_CATEGORY_HOME_CONTROLLER;
+                url = NAVIGATE_CATEGORY_CONTROLLER;
             } else if (FILTER_BY_BRAND.equals(action)) {
                 url = FILTER_BY_BRAND_CONTROLLER;
             }else if(DELETE_PRODUCT_MANAGER.equals(action)){
                 url = DELETE_PRODUCT_MANAGER_CONTROLLER;
             }else if(PRODUCT_PAGE.equals(action)){
                 url = PRODUCT_PAGE_VIEW;
-                url = NAVIGATE_CATEGORY_CONTROLLER;
-            } else if (NAVIGATE_BRAND.equals(action)) {
-                url = NAVIGATE_BRAND_CONTROLLER;
             } else if (DESCENDING_SORT_BY_PRICE.equals(action)) {
                 url = DESCENDING_SORT_BY_PRICE_CONTROLLER;
             } else if (ASCENDING_SORT_BY_PRICE.equals(action)) {
