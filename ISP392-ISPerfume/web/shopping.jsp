@@ -55,25 +55,10 @@
                             <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <button class="dropdown-item" type="button">Sign up</button>
+                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
                             </div>
-                        </div>
-                        <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">EUR</button>
-                                <button class="dropdown-item" type="button">GBP</button>
-                                <button class="dropdown-item" type="button">CAD</button>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">FR</button>
-                                <button class="dropdown-item" type="button">AR</button>
-                                <button class="dropdown-item" type="button">RU</button>
-                            </div>
-                        </div>
+                        </div>                                            
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -171,7 +156,7 @@
         <!-- Navbar End -->
 
 
-       
+
         <!-- Breadcrumb Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
@@ -201,13 +186,13 @@
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordian" href="#${Category.name}">
                                             <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                            ${Category.name}
+                                                ${Category.name}
                                         </a>
                                     </h4>
                                 </div>
                                 <c:forEach var="Brand" items="${sessionScope.LIST_BRAND}">
                                     <div id="${Category.name}" class="panel-collapse collapse">
-                                        <div class="panel-body">
+                                        <div class="panel-body" style="padding: 10px 0px 0px 50px;">
                                             <ul>
                                                 <li><a href="MainController?action=FilterByBrand&brandID=${Brand.brandID}&Category=${Category.categoryID}">${Brand.name}</a></li>
                                             </ul>

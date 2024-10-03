@@ -49,25 +49,10 @@
                             <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <button class="dropdown-item" type="button">Sign up</button>
+                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
                             </div>
-                        </div>
-                        <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">EUR</button>
-                                <button class="dropdown-item" type="button">GBP</button>
-                                <button class="dropdown-item" type="button">CAD</button>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">FR</button>
-                                <button class="dropdown-item" type="button">AR</button>
-                                <button class="dropdown-item" type="button">RU</button>
-                            </div>
-                        </div>
+                        </div>                                            
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -112,57 +97,66 @@
 
 
         <!-- Navbar Start -->
-        <div class="container-fluid bg-dark mb-30">
-            <div class="row px-xl-5">
-                <div class="col-lg-3 d-none d-lg-block">
-                    <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                        <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
-                        <i class="fa fa-angle-down text-dark"></i>
-                    </a>
-                    <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                        <div class="navbar-nav w-100">                         
-                            <a href="" class="nav-item nav-link">Shirts</a>
-                            <a href="" class="nav-item nav-link">Jeans</a>
-                            <a href="" class="nav-item nav-link">Jackets</a>
-                            <a href="" class="nav-item nav-link">Shoes</a>
-                        </div>
-                    </nav>
-                </div>
-                <div class="col-lg-9">
-                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                        <a href="" class="text-decoration-none d-block d-lg-none">
-                            <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+        <form action="MainController">
+            <div class="container-fluid bg-dark mb-30">
+                <div class="row px-xl-5">
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+                            <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Category</h6>
+                            <i class="fa fa-angle-down text-dark"></i>
                         </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="home.jsp" class="nav-item nav-link ">Home</a>
-                                <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
-                                <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                    <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="cart.jsp" class="dropdown-item active">Shopping Cart</a>
-                                        <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                        <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                            <div class="navbar-nav w-100">
+                                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
+                                    <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
+                                </c:forEach>
+                                <!--                            <div class="nav-item dropdown dropright">
+                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
+                                                                    <a href="" class="dropdown-item">Women's Dresses</a>
+                                                                    <a href="" class="dropdown-item">Baby's Dresses</a>
+                                                                </div>
+                                                            </div>-->
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-9">
+                        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                            <a href="" class="text-decoration-none d-block d-lg-none">
+                                <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
+                                <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                            </a>
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                <div class="navbar-nav mr-auto py-0">
+                                    <a href="home.jsp" class="nav-item nav-link active">Home</a>
+                                    <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
+                                    <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                            <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
+                                            <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                                        </div>
                                     </div>
+                                    <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                    <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>
-                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
+                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
+                                    <a href="cart.jsp" class="btn px-0 ml-3">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                <a href="cart.jsp" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
         <!-- Navbar End -->
 
 
@@ -197,16 +191,20 @@
                         </thead>
                         <tbody class="align-middle">
                             <tr>
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
+                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
+                                    Product
+                                    Name</td>
+                                <td class="align-middle price">$12</td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
+                                            <button class="btn btn-sm btn-primary btn-minus">
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
+                                        <input type="text" readonly=""
+                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
+                                               value="1">
                                         <div class="input-group-btn">
                                             <button class="btn btn-sm btn-primary btn-plus">
                                                 <i class="fa fa-plus"></i>
@@ -214,20 +212,25 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle total">$12</td>
+                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
+                                            class="fa fa-times"></i></button></td>
                             </tr>
                             <tr>
-                                <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
+                                <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;">
+                                    Product
+                                    Name</td>
+                                <td class="align-middle price">$40</td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
+                                            <button class="btn btn-sm btn-primary btn-minus">
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
+                                        <input type="text" readonly=""
+                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
+                                               value="1">
                                         <div class="input-group-btn">
                                             <button class="btn btn-sm btn-primary btn-plus">
                                                 <i class="fa fa-plus"></i>
@@ -235,20 +238,25 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle total">$40</td>
+                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
+                                            class="fa fa-times"></i></button></td>
                             </tr>
                             <tr>
-                                <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
+                                <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;">
+                                    Product
+                                    Name</td>
+                                <td class="align-middle price">$30</td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
+                                            <button class="btn btn-sm btn-primary btn-minus">
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
+                                        <input type="text"
+                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
+                                               value="1">
                                         <div class="input-group-btn">
                                             <button class="btn btn-sm btn-primary btn-plus">
                                                 <i class="fa fa-plus"></i>
@@ -256,69 +264,21 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-4.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-5.jpg" alt="" style="width: 50px;"> Product Name</td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus" >
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">$150</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle total">$30</td>
+                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
+                                            class="fa fa-times"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="col-lg-4">
-                    <form class="mb-30" action="">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary">Apply Coupon</button>
-                            </div>
-                        </div>
-                    </form>
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
+                            Summary</span></h5>
                     <div class="bg-light p-30 mb-5">
                         <div class="border-bottom pb-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h6>Subtotal</h6>
-                                <h6>$150</h6>
+                                <h6 id="subtotal" >$150</h6> 
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Shipping</h6>
@@ -328,9 +288,10 @@
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5>$160</h5>
+                                <h5 id="total-cart">$160</h5> 
                             </div>
-                            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                            <button  type="submit" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
+                                Checkout</button>
                         </div>
                     </div>
                 </div>
@@ -426,6 +387,90 @@
         <script src="mail/contact.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <!--<script src="js/main.js"></script>-->
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const shippingCost = 10; // Giá vận chuyển cố định
+                let subtotalElement = document.getElementById('subtotal');
+                let totalCartElement = document.getElementById('total-cart');
+
+                console.log(subtotalElement);  // Kiểm tra phần tử subtotal
+                console.log(totalCartElement);
+                // Hàm tính tổng giỏ hàng và cập nhật subtotal, total
+                function updateCartTotals() {
+                    let subtotal = 0;
+                    // Duyệt qua tất cả các hàng sản phẩm để tính tổng
+                    document.querySelectorAll('tr').forEach(function (row) {
+                        const totalElement = row.querySelector('.total');
+                        if (totalElement) {
+                            // Chuyển đổi chuỗi '$xxx' thành số
+                            let total = parseFloat(totalElement.innerText.replace('$', '')) || 0;
+                            subtotal += total; // Cộng dồn vào subtotal
+                        }
+                    });
+
+                    // Kiểm tra và cập nhật Subtotal
+
+                    if (subtotalElement) {
+                        subtotalElement.innerText = `$${subtotal.toFixed()}`; // Cập nhật giá trị hiển thị với 2 chữ số thập phân
+                    }
+
+                    // Kiểm tra và cập nhật Total (Subtotal + Shipping)
+
+                    if (totalCartElement) {
+                        let total = subtotal + shippingCost;
+                        totalCartElement.innerText = `$${total.toFixed(0)}`; // Cập nhật giá trị hiển thị với 2 chữ số thập phân
+                    }
+                }
+
+                // Event delegation cho nút tăng/giảm số lượng và xóa
+                document.body.addEventListener('click', function (e) {
+                    if (e.target.closest('.btn-plus') || e.target.closest('.btn-minus')) {
+                        e.preventDefault(); // Ngăn form bị gửi đi
+
+                        const row = e.target.closest('tr');
+                        const quantityInput = row.querySelector('.quantity-input');
+                        const priceElement = row.querySelector('.price');
+                        const totalElement = row.querySelector('.total');
+                        let price = parseFloat(priceElement.innerText.replace('$', '')) || 0;
+                        let quantity = parseInt(quantityInput.value);
+                        // Tăng/giảm số lượng
+                        if (e.target.closest('.btn-plus')) {
+                            quantity++;
+                        } else if (e.target.closest('.btn-minus') && quantity > 1) {
+                            quantity--;
+                        }
+
+                        quantityInput.value = quantity; // Cập nhật số lượng
+                        let total = price * quantity; // Tính toán tổng tiền của sản phẩm
+                        totalElement.innerText = `$${total.toFixed()}`; // Cập nhật lại total với định dạng 2 chữ số thập phân
+
+                        // Thêm log để kiểm tra phần tử trước khi tính toán
+                        console.log(subtotalElement);  // Kiểm tra phần tử subtotal
+                        console.log(totalCartElement); // Kiểm tra phần tử total cart
+                        console.log(totalElement); // Kiểm tra phần tử total cart
+
+                        // Cập nhật lại tổng số tiền của giỏ hàng
+                        updateCartTotals();
+                    }
+
+                    // Xử lý xóa sản phẩm
+                    if (e.target.closest('.btn-danger')) {
+                        e.preventDefault(); // Ngăn form bị gửi đi
+
+                        const row = e.target.closest('tr');
+                        if (row) {
+                            row.remove(); // Xóa dòng sản phẩm
+                        }
+
+                        updateCartTotals(); // Cập nhật lại tổng số tiền
+                    }
+                });
+
+                // Gọi hàm updateCartTotals khi tải trang để cập nhật subtotal và total-cart ngay từ đầu
+                updateCartTotals();
+            });
+        </script>
     </body>
 </html>

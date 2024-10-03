@@ -35,18 +35,7 @@
 
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
-        <style>
-            /* CSS cho sidebar-toggler */
-            .sidebar-toggler i {
-                color: #000; /* Màu mặc định của icon */
-                transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
-            }
-
-            /* Khi hover vào link chứa icon */
-            .sidebar-toggler:hover i {
-                color: #FE980F; /* Màu sẽ chuyển thành màu đỏ khi hover */
-            }
-        </style>
+        
     </head>
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
