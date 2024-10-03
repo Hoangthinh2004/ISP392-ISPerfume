@@ -19,18 +19,18 @@ import java.util.List;
  */
 public class ProductDAO {
     private static final String LIST_PRODUCT = "SELECT FROM WHERE";
-    private static final String LIST_PRODUCT_BY_CATEGORY = "SELECT P.ProductID, B.BrandName, S.Name , P.Image, PD.Price, P.ProName FROM Products P "
-                                                         + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-                                                         + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-                                                         + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-                                                         + "WHERE P.Status = 1 AND PC.CategoryID = ?";
-    private static final String LIST_PRODUCT_BY_BRAND = "SELECT p.ProductID,p.Image, p.ProName FROM Products p "
-                                                      + "WHERE p.Status = 1 ";
+    private static final String LIST_PRODUCT_BY_CATEGORY = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
+                                                        +  "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+                                                        +  "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+                                                        +  "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+                                                        +  "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+                                                        +  "WHERE P.Status = 1 AND PC.CategoryID = ?";
     private static final String FILTER_PRODUCT_BY_BRAND = "SELECT p.ProductID,p.Image, p.ProName, p.BrandID FROM Products p " 
                                                         + "INNER JOIN Product_Category pc on p.ProductID = pc.ProductID " 
                                                         + "WHERE p.Status = 1 AND pc.CategoryID = ? AND p.BrandID = ?";
 
     private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, ManagerID ,BrandID, ProName, Description, Image, Status FROM Products WHERE ProName LIKE ? AND Status = 1";
+    private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, BrandID, ManagerID, ProName, Description, Image, Status FROM Products WHERE ProName LIKE ? AND Status = 1";
     private static final String UPDATE_PRODUCT_MANAGER = "UPDATE Products SET BrandID = ?, ProName = ?, Description = ?, Image = ? WHERE ProductID = ?";
     private static final String INSERT_PRODUCT_MANAGER = "INSERT INTO Products(BrandID, Description, Image, ProName, Status) VALUES(?,?,?,?,?)";
     private static final String CHECK_DUPLICATE_PRODUCT_BY_NAME = "SELECT ProductID FROM Products WHERE ProName LIKE ?";
