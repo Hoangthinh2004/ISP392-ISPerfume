@@ -9,6 +9,8 @@ import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
 import isp392.category.CategoryDAO;
 import isp392.category.CategoryDTO;
+import isp392.size.SizeDAO;
+import isp392.size.SizeDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -33,10 +35,13 @@ public class HomeController extends HttpServlet {
             HttpSession session = request.getSession();
             CategoryDAO categoryDAO = new CategoryDAO();
             BrandDAO brandDAO = new BrandDAO();
+            SizeDAO sizeDAO = new SizeDAO();
             
             List<CategoryDTO> listCategory = categoryDAO.getListCategory();
             List<BrandDTO> listBrand = brandDAO.getListBrand();
+            List<SizeDTO> listSize = sizeDAO.getListSize();
             
+            session.setAttribute("LIST_SIZE", listSize);
             session.setAttribute("LIST_CATEGORY", listCategory);
             session.setAttribute("LIST_BRAND", listBrand);
             

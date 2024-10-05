@@ -91,16 +91,14 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
-                    <form action="">
+                    <form action="MainController">
                         <div class="input-group">
-                            <form action="MainController" method="POST">
-                                <input type="text" class="form-control" placeholder="Search for products" name="search">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search" value="${param.search}">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                        <button name="action" value="SeacrhProduct" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
-                            </form>
                         </div>
                     </form>
                 </div>
@@ -284,7 +282,7 @@
                         <a class="text-decoration-none" href="MainController?action=Category&Category=${Category.categoryID}">
                             <div class="cat-item d-flex align-items-center mb-4">
                                 <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                    <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-joy-eau-de-parfum-intense_076e33df565e4d3fa29d5a283135bbf9_master.jpg" alt="">
+                                    <img class="img-fluid" src="${Category.image}" alt="">
                                 </div>
                                 <div class="flex-fill pl-3">
                                     <h6>${Category.name}</h6>

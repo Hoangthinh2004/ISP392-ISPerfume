@@ -5,10 +5,6 @@
         <servlet-class>isp392.controllers.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchProduct</servlet-name>
-        <servlet-class>isp392.controllers.SearchProduct</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>isp392.controllers.HomeController</servlet-class>
     </servlet>
@@ -28,13 +24,17 @@
         <servlet-name>AscendingProductByPriceController</servlet-name>
         <servlet-class>isp392.controllers.AscendingProductByPriceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SizeFilterController</servlet-name>
+        <servlet-class>isp392.controllers.SizeFilterController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductController</servlet-name>
+        <servlet-class>isp392.controllers.SearchProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchProduct</servlet-name>
-        <url-pattern>/SearchProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -55,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>AscendingProductByPriceController</servlet-name>
         <url-pattern>/AscendingProductByPriceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SizeFilterController</servlet-name>
+        <url-pattern>/SizeFilterController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductController</servlet-name>
+        <url-pattern>/SearchProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
