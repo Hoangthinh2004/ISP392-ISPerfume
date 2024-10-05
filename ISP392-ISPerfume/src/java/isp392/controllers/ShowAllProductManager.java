@@ -44,7 +44,7 @@ public class ShowAllProductManager extends HttpServlet {
             String search = request.getParameter("search");
             ProductDAO dao = new ProductDAO();
             BrandDAO daoBrand = new BrandDAO();
-            List<ProductDTO> list = dao.getListProduct(search);
+            List<ProductDTO> list = dao.getListProductManager(search);
             List<BrandDTO> listBrand = daoBrand.getListBrand();
             if(list.size()>0){
                 request.setAttribute("SHOW_ALL_PRODUCT_MANAGER", list);

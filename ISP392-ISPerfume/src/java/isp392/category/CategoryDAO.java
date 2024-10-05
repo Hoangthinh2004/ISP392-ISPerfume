@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class CategoryDAO {
     
-    private static final String GET_LIST_CATEGORY = "SELECT C.CategoryID, C.CategoryName FROM Categories C";
+    private static final String GET_LIST_CATEGORY = "SELECT C.CategoryID, C.CategoryName, C.image FROM Categories C";
 
     public List<CategoryDTO> getListCategory() throws ClassNotFoundException, SQLException {
         List<CategoryDTO> listCategory = new ArrayList<>();
@@ -34,7 +34,8 @@ public class CategoryDAO {
                 while (rs.next()) {                    
                     int categoryID = rs.getInt("CategoryID");
                     String categoryName = rs.getString("CategoryName");
-                    listCategory.add(new CategoryDTO(categoryID, categoryName));
+                    String image = rs.getString("image");
+                    listCategory.add(new CategoryDTO(categoryID, categoryName, image));
                 }
             }
         } finally {

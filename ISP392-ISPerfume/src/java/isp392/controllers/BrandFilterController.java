@@ -30,20 +30,24 @@ public class BrandFilterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
-        try {          
+        try {
             int brandID = Integer.parseInt(request.getParameter("brandID"));
-            int categoryID = Integer.parseInt(request.getParameter("Category"));
-            
-            HttpSession session = request.getSession();
-            Map<String, Integer> ids = new HashMap<>();
-            ids.put("brandID", brandID);
-            ids.put("categoryID", categoryID);
-            session.setAttribute("CURRENT_IDS", ids); //Store brandID & categoryID into attribute for DescendingProductByPrice Controller
             
             ProductDAO productDAO = new ProductDAO();
-            List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
-            request.setAttribute("LIST_PRODUCT", listProduct);
-            session.setAttribute("LIST_PRODUCT_REFERENCE", listProduct);
+            HttpSession session = request.getSession();
+            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+            int categoryID = ids.get("categoryID");
+            ids.put("brandID", brandID);
+            if (ids.containsKey("sizeID")) {               
+                int sizeID = ids.get("sizeID");           
+                List<ViewProductDTO> listProduct = productDAO.filterProductByChildBrand(categoryID, brandID, sizeID);
+                request.setAttribute("LIST_PRODUCT", listProduct);
+                //session.removeAttribute("CURRENT_IDS");
+            } else {
+                List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
+                request.setAttribute("LIST_PRODUCT", listProduct);
+            }            
+            //session.setAttribute("CURRENT_IDS", ids); //Store sizeID & categoryID into attribute for DescendingProductByPrice Controller          
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at BrandFilterController: " + e.toString());

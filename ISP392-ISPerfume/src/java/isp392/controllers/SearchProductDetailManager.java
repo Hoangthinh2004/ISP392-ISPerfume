@@ -5,39 +5,41 @@
  */
 package isp392.controllers;
 
-import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
+import isp392.product.ProductDetailDAO;
+import isp392.product.ProductDetailDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ThinhHoang
+ * @author duyhc
  */
-public class SearchProduct extends HttpServlet {
+@WebServlet(name = "SearchProductDetailManager", urlPatterns = {"/SearchProductDetailManager"})
+public class SearchProductDetailManager extends HttpServlet {
     
-    private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "shopping.jsp";
+    private static final String ERROR = "MGR_ProductDetailManagement.jsp";
+    private static final String SUCCESS = "MGR_ProductDetailManagement.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        ProductDetailDAO dao = new ProductDetailDAO();
         try {
-            String search = request.getParameter("");
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> listProduct = dao.getListProduct(search);
-            if (listProduct.size() > 0) {
-                request.setAttribute("LIST_PRODUCT", listProduct);
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            List<ProductDetailDTO> list = dao.getListProductDetail(productID);
+            if(list.size()>0){
+                request.setAttribute("LIST_PRODUCT_DETAIL_MANAGER", list);
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at SearchProduct: " + e.toString());
-        } finally {
+            log("Error at SearchProductDetailManager: "+e.toString());
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

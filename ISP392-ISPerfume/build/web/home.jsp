@@ -93,16 +93,14 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
-                    <form action="">
+                    <form action="MainController">
                         <div class="input-group">
-                            <form action="MainController" method="POST">
-                                <input type="text" class="form-control" placeholder="Search for products" name="search">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search" value="${param.search}">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                        <button name="action" value="SeacrhProduct" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
-                            </form>
                         </div>
                     </form>
                 </div>
@@ -129,10 +127,12 @@
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
                                 </c:forEach>
-                                <!--                            <div class="nav-item dropdown dropright"> 
-                                                                <a href="MainController?action=ViewAllBrand" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                <!--                            <div class="nav-item dropdown dropright">
+                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
                                                                 <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                                                    <a type="submit" name="action" value="NavigateBrand" class="dropdown-item">name</a>
+                                                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
+                                                                    <a href="" class="dropdown-item">Women's Dresses</a>
+                                                                    <a href="" class="dropdown-item">Baby's Dresses</a>
                                                                 </div>
                                                             </div>-->
                             </div>
@@ -159,22 +159,23 @@
                                             <a href="checkout.jsp" class="dropdown-item">Checkout</a>
                                         </div>
                                     </div>
-                                    <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>
-                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                    <a href="cart.jsp" class="btn px-0 ml-3">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                    </a>
-                                </div>
+                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                             </div>
-                        </nav>
-                    </div>
+                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
+                                <a href="cart.jsp" class="btn px-0 ml-3">
+                                    <i class="fas fa-shopping-cart text-primary"></i>
+                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </div>
+        </div>
         </form>
-
+        
         <!-- Navbar End -->
 
 
@@ -286,7 +287,7 @@
                         <a class="text-decoration-none" href="MainController?action=Category&Category=${Category.categoryID}">
                             <div class="cat-item d-flex align-items-center mb-4">
                                 <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                                    <img class="img-fluid" src="https://product.hstatic.net/1000340570/product/dior-joy-eau-de-parfum-intense_076e33df565e4d3fa29d5a283135bbf9_master.jpg" alt="">
+                                    <img class="img-fluid" src="${Category.image}" alt="">
                                 </div>
                                 <div class="flex-fill pl-3">
                                     <h6>${Category.name}</h6>

@@ -178,95 +178,26 @@
                 <!-- Shop Sidebar Start -->
                 <div class="col-lg-3 col-md-4">
                     <!-- Filter By Brand Start -->
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter By Category</span></h5>
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter By Brand</span></h5>
                     <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                        <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#${Category.name}">
-                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                                ${Category.name}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <c:forEach var="Brand" items="${sessionScope.LIST_BRAND}">
-                                    <div id="${Category.name}" class="panel-collapse collapse">
-                                        <div class="panel-body" style="padding: 10px 0px 0px 50px;">
-                                            <ul>
-                                                <li><a href="MainController?action=FilterByBrand&brandID=${Brand.brandID}&Category=${Category.categoryID}">${Brand.name}</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                        </c:forEach>
-                    </div><!--/category-products-->
-                    <!-- Filter By Brand Start -->
-                    
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter By Category</span></h5>
-                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                        <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#${Category.name}">
-                                            <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                            ${Category.name}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <c:forEach var="Brand" items="${sessionScope.LIST_BRAND}">
-                                    <div id="${Category.name}" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul>
-                                                <li><a href="MainController?action=FilterByBrand&brandID=${Brand.brandID}&Category=${Category.categoryID}">${Brand.name}</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </c:forEach>
+                        <c:forEach var="brand" items="${sessionScope.LIST_BRAND}">
+                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                                <a href="MainController?action=FilterByBrand&brandID=${brand.brandID}">${brand.name}</a>
                             </div>
                         </c:forEach>
                     </div>
+                    <!--/category-products-->
 
-                    <!-- Color Start -->
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
+                    <!-- Filter By Size Start -->
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
                     <div class="bg-light p-4 mb-30">
-                        <form>
+                        <c:forEach var="size" items="${sessionScope.LIST_SIZE}">
                             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" checked id="color-all">
-                                <label class="custom-control-label" for="price-all">All Color</label>
-                                <span class="badge border font-weight-normal">1000</span>
+                                <a href="MainController?action=FilterBySize&sizeID=${size.sizeID}">${size.name}</a>
                             </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-1">
-                                <label class="custom-control-label" for="color-1">Black</label>
-                                <span class="badge border font-weight-normal">150</span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-2">
-                                <label class="custom-control-label" for="color-2">White</label>
-                                <span class="badge border font-weight-normal">295</span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-3">
-                                <label class="custom-control-label" for="color-3">Red</label>
-                                <span class="badge border font-weight-normal">246</span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-4">
-                                <label class="custom-control-label" for="color-4">Blue</label>
-                                <span class="badge border font-weight-normal">145</span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                <input type="checkbox" class="custom-control-input" id="color-5">
-                                <label class="custom-control-label" for="color-5">Green</label>
-                                <span class="badge border font-weight-normal">168</span>
-                            </div>
-                        </form>
+                        </c:forEach>
                     </div>
-                    <!-- Color End -->
-
+                    <!-- Filter By Size End -->
                 </div>
                 <!-- Shop Sidebar End -->
 
@@ -300,7 +231,7 @@
                                 </div>
                             </div>
                         </div>
-                                            
+
                         <c:forEach var="Product" items="${requestScope.LIST_PRODUCT}">
                             <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                 <div class="product-item bg-light mb-4">
@@ -316,9 +247,9 @@
                                     <div class="text-center py-4">
                                         <h4>${Product.brandName}</h4>
                                         <a class="h6 text-decoration-none text-truncate" href="">${Product.productName} ${Product.sizeName}</a>
-                                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                                <h5><fmt:formatNumber type="number" value="${Product.price}"/> VND</h5> 
-                                            </div>
+                                        <div class="d-flex align-items-center justify-content-center mt-2">
+                                            <h5><fmt:formatNumber type="number" value="${Product.price}"/> VND</h5> 
+                                        </div>
                                         <div class="d-flex align-items-center justify-content-center mb-1">
                                             <small class="fa fa-star text-primary mr-1"></small>
                                             <small class="fa fa-star text-primary mr-1"></small>

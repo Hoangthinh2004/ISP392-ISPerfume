@@ -7,6 +7,7 @@ package isp392.controllers;
 
 import isp392.product.ProductDAO;
 import isp392.product.ProductError;
+import isp392.product_category.ProductCategoryDAO;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -36,13 +37,14 @@ public class CreateProductManager extends HttpServlet {
     private static final String UPLOAD_DIRECTORY = "img";
     private static final String ERROR = "MGR_CreateProduct.jsp";
     private static final String SUCCESS = "MGR_ProductManagement.jsp";
-    private static final int IMAGE_WIDTH = 500; 
+    private static final int IMAGE_WIDTH = 500;
     private static final int IMAGE_HEIGHT = 500;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO dao = new ProductDAO();
+        ProductCategoryDAO proCateDao = new ProductCategoryDAO();
         ProductError proErr = new ProductError();
         String url = ERROR;
         boolean validation = true;
@@ -51,13 +53,11 @@ public class CreateProductManager extends HttpServlet {
             String name = request.getParameter("productName");
             int brandID = Integer.parseInt(request.getParameter("brandID"));
             String description = request.getParameter("description");
+            int categoryID = Integer.parseInt(request.getParameter("categoryID"));
+            int managerID = 4;
             int status = 1;
             if (dao.checkDuplicateByName(name)) {
                 proErr.setProductName("THIS PRODUCT'S NAME ALREADY EXISTED");
-                validation = false;
-            }
-            if (filePart == null || filePart.getSize() == 0) {
-                proErr.setError("PRODUCT'S IMAGE IS REQUIRED");
                 validation = false;
             }
             if (validation) {
@@ -77,9 +77,12 @@ public class CreateProductManager extends HttpServlet {
                         .toFile(outputFile);
 
                 filePart.write(path + File.separator + fileName);
-                boolean check = dao.addProduct(name, brandID, description, imagePath, status);
-                if (check) {
-                    url = SUCCESS;
+                int check = dao.addProduct(name, brandID, managerID, description, imagePath, status);
+                if (check != -1) {
+                    boolean checkAddProCate = proCateDao.addProCate(check, categoryID);
+                    if (checkAddProCate) {
+                        url = SUCCESS;
+                    }
                 }
             } else {
                 request.setAttribute("ERROR", proErr);
