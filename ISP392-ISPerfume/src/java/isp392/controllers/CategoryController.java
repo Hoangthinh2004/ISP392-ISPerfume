@@ -8,7 +8,9 @@ package isp392.controllers;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,13 +30,16 @@ public class CategoryController extends HttpServlet {
             throws ServletException, IOException {
         String url=ERROR;
         try {
-            int category = Integer.parseInt(request.getParameter("Category"));
+            int categoryID = Integer.parseInt(request.getParameter("Category"));
             
             HttpSession session = request.getSession();
-            session.setAttribute("CURRENT_CATEGORY", category); //Store categoryID into attribute for DescendingProductByPrice Controller
+            Map<String, Integer> ids = new HashMap<>();
+            ids.put("categoryID", categoryID);
+            session.setAttribute("CURRENT_IDS", ids);
+            session.setAttribute("CURRENT_CATEGORY", categoryID); //Store categoryID into attribute for DescendingProductByPrice Controller
             
             ProductDAO productDAO = new ProductDAO();           
-            List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(category);
+            List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
                        
             request.setAttribute("LIST_PRODUCT", listProduct);
             session.setAttribute("LIST_PRODUCT_REFERENCE", listProduct);

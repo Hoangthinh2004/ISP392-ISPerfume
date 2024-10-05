@@ -37,19 +37,25 @@ public class MainController extends HttpServlet {
     
     private static final String DELETE_PRODUCT_MANAGER = "Delete Product";
     private static final String DELETE_PRODUCT_MANAGER_CONTROLLER = "DeleteProductManager";
+    
     private static final String DESCENDING_SORT_BY_PRICE = "DescendingSortByPrice";
     private static final String DESCENDING_SORT_BY_PRICE_CONTROLLER = "DescendingProductByPriceController";
     
     private static final String PRODUCT_PAGE = "Manage_Product_Page";
     private static final String PRODUCT_PAGE_VIEW = "GetBrandCategoriesManager";
-    
-    
+      
     private static final String ASCENDING_SORT_BY_PRICE = "AscendingSortByPrice";
     private static final String ASCENDING_SORT_BY_PRICE_CONTROLLER = "AscendingProductByPriceController";
     
     private static final String PRODUCT_DETAIL_PAGE = "ProductDetailPage";
     private static final String PRODUCT_DETAIL_PAGE_VIEW = "SearchProductDetailManager";
         
+    private static final String FILTER_BY_SIZE = "FilterBySize";
+    private static final String FILTER_BY_SIZE_CONTROLLER = "SizeFilterController";
+    
+    private static final String SEARCH_PRODUCT = "SeacrhProduct";
+    private static final String SEARCH_PRODUCT_CONTROLLER = "SearchProductController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -76,6 +82,10 @@ public class MainController extends HttpServlet {
                 url = ASCENDING_SORT_BY_PRICE_CONTROLLER;
             } else if(PRODUCT_DETAIL_PAGE.equals(action)){
                 url = PRODUCT_DETAIL_PAGE_VIEW;
+            } else if (FILTER_BY_SIZE.equals(action)) {
+                url = FILTER_BY_SIZE_CONTROLLER;
+            } else if (SEARCH_PRODUCT.equals(action)) {
+                url = SEARCH_PRODUCT_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -11,6 +11,13 @@
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CreateProductManager.java</file>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/category/CategoryDAO.java</file>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/BrandFilterController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/shopping.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/HomeController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/MainController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CategoryController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/SizeFilterController.java</file>
         </group>
         <group>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/brand/BrandDAO.java</file>
@@ -26,6 +33,15 @@
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CreateProductManager.java</file>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_CreateBrand.jsp</file>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_Dashboard.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/BrandFilterController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/shopping.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/HomeController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/MainController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/size/SizeDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CategoryController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/SizeFilterController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/DescendingProductByPriceController.java</file>
         </group>
         <group>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/brand/BrandDAO.java</file>
@@ -44,6 +60,13 @@
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CreateProductManager.java</file>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_CreateBrand.jsp</file>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/web/MGR_Dashboard.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/BrandFilterController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/web/shopping.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/HomeController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/MainController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CategoryController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/SizeFilterController.java</file>
         </group>
         <group>
             <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDetailDAO.java</file>
