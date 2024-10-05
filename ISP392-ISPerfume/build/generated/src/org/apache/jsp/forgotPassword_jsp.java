@@ -1,0 +1,276 @@
+package org.apache.jsp;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.jsp.*;
+
+public final class forgotPassword_jsp extends org.apache.jasper.runtime.HttpJspBase
+    implements org.apache.jasper.runtime.JspSourceDependent {
+
+  private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
+
+  private static java.util.List<String> _jspx_dependants;
+
+  private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
+
+  public java.util.List<String> getDependants() {
+    return _jspx_dependants;
+  }
+
+  public void _jspService(HttpServletRequest request, HttpServletResponse response)
+        throws java.io.IOException, ServletException {
+
+    PageContext pageContext = null;
+    HttpSession session = null;
+    ServletContext application = null;
+    ServletConfig config = null;
+    JspWriter out = null;
+    Object page = this;
+    JspWriter _jspx_out = null;
+    PageContext _jspx_page_context = null;
+
+    try {
+      response.setContentType("text/html;charset=UTF-8");
+      pageContext = _jspxFactory.getPageContext(this, request, response,
+      			null, true, 8192, true);
+      _jspx_page_context = pageContext;
+      application = pageContext.getServletContext();
+      config = pageContext.getServletConfig();
+      session = pageContext.getSession();
+      out = pageContext.getOut();
+      _jspx_out = out;
+      _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
+
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<html>\n");
+      out.write("    <head>\n");
+      out.write("        <meta charset=\"utf-8\">\n");
+      out.write("        <title>MultiShop - Online Shop Website Template</title>\n");
+      out.write("        <meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">\n");
+      out.write("        <meta content=\"Free HTML Templates\" name=\"keywords\">\n");
+      out.write("        <meta content=\"Free HTML Templates\" name=\"description\">\n");
+      out.write("\n");
+      out.write("        <!-- Favicon -->\n");
+      out.write("        <link href=\"img/favicon.ico\" rel=\"icon\">\n");
+      out.write("\n");
+      out.write("        <!-- Google Web Fonts -->\n");
+      out.write("        <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\">\n");
+      out.write("        <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap\" rel=\"stylesheet\">  \n");
+      out.write("\n");
+      out.write("        <!-- Font Awesome -->\n");
+      out.write("        <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css\" rel=\"stylesheet\">\n");
+      out.write("\n");
+      out.write("        <!-- Libraries Stylesheet -->\n");
+      out.write("        <link href=\"lib/animate/animate.min.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"lib/owlcarousel/assets/owl.carousel.min.css\" rel=\"stylesheet\">\n");
+      out.write("\n");
+      out.write("        <!-- Customized Bootstrap Stylesheet -->\n");
+      out.write("        <link href=\"css/style.css\" rel=\"stylesheet\">\n");
+      out.write("    </head>\n");
+      out.write("    <body>\n");
+      out.write("        <!-- Topbar Start -->\n");
+      out.write("        <div class=\"container-fluid\">\n");
+      out.write("            <div class=\"row bg-secondary py-1 px-xl-5\">\n");
+      out.write("                <div class=\"col-lg-6 d-none d-lg-block\">\n");
+      out.write("                    <div class=\"d-inline-flex align-items-center h-100\">\n");
+      out.write("                        <a class=\"text-body mr-3\" href=\"MGR_Dashboard.jsp\">MANAGER</a>\n");
+      out.write("                        <a class=\"text-body mr-3\" href=\"AD_AccountManagement.jsp\">ADMIN</a>\n");
+      out.write("                        <a class=\"text-body mr-3\" href=\"\">Help</a>\n");
+      out.write("                        <a class=\"text-body mr-3\" href=\"\">FAQs</a>\n");
+      out.write("                    </div>\n");
+      out.write("                </div>\n");
+      out.write("                <div class=\"col-lg-6 text-center text-lg-right\">\n");
+      out.write("                    <div class=\"d-inline-flex align-items-center\">\n");
+      out.write("                        <div class=\"btn-group\">\n");
+      out.write("                            <button type=\"button\" class=\"btn btn-sm btn-light dropdown-toggle\" data-toggle=\"dropdown\">My Account</button>\n");
+      out.write("                            <div class=\"dropdown-menu dropdown-menu-right\">\n");
+      out.write("                                <a class=\"dropdown-item btn\" type=\"button\" href=\"signin.jsp\">Sign in</a>\n");
+      out.write("                                <button class=\"dropdown-item\" type=\"button\">Sign up</button>\n");
+      out.write("                            </div>\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"btn-group mx-2\">\n");
+      out.write("                            <button type=\"button\" class=\"btn btn-sm btn-light dropdown-toggle\" data-toggle=\"dropdown\">USD</button>\n");
+      out.write("                            <div class=\"dropdown-menu dropdown-menu-right\">\n");
+      out.write("                                <button class=\"dropdown-item\" type=\"button\">EUR</button>\n");
+      out.write("                                <button class=\"dropdown-item\" type=\"button\">GBP</button>\n");
+      out.write("                                <button class=\"dropdown-item\" type=\"button\">CAD</button>\n");
+      out.write("                            </div>\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"btn-group\">\n");
+      out.write("                            <button type=\"button\" class=\"btn btn-sm btn-light dropdown-toggle\" data-toggle=\"dropdown\">EN</button>\n");
+      out.write("                            <div class=\"dropdown-menu dropdown-menu-right\">\n");
+      out.write("                                <button class=\"dropdown-item\" type=\"button\">FR</button>\n");
+      out.write("                                <button class=\"dropdown-item\" type=\"button\">AR</button>\n");
+      out.write("                                <button class=\"dropdown-item\" type=\"button\">RU</button>\n");
+      out.write("                            </div>\n");
+      out.write("                        </div>\n");
+      out.write("                    </div>\n");
+      out.write("                    <div class=\"d-inline-flex align-items-center d-block d-lg-none\">\n");
+      out.write("                        <a href=\"\" class=\"btn px-0 ml-2\">\n");
+      out.write("                            <i class=\"fas fa-heart text-dark\"></i>\n");
+      out.write("                            <span class=\"badge text-dark border border-dark rounded-circle\" style=\"padding-bottom: 2px;\">0</span>\n");
+      out.write("                        </a>\n");
+      out.write("                        <a href=\"\" class=\"btn px-0 ml-2\">\n");
+      out.write("                            <i class=\"fas fa-shopping-cart text-dark\"></i>\n");
+      out.write("                            <span class=\"badge text-dark border border-dark rounded-circle\" style=\"padding-bottom: 2px;\">0</span>\n");
+      out.write("                        </a>\n");
+      out.write("                    </div>\n");
+      out.write("                </div>\n");
+      out.write("            </div>\n");
+      out.write("            <div class=\"row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex\">\n");
+      out.write("                <div class=\"col-lg-4\">\n");
+      out.write("                    <a href=\"home.jsp\" class=\"text-decoration-none\">\n");
+      out.write("                        <span class=\"h1 text-uppercase text-primary bg-dark px-2\">IS</span>\n");
+      out.write("                        <span class=\"h1 text-uppercase text-dark bg-primary px-2 ml-n1\">Perfume</span>\n");
+      out.write("                    </a>\n");
+      out.write("                </div>\n");
+      out.write("                <div class=\"col-lg-4 col-6 text-left\">\n");
+      out.write("                    <form action=\"\">\n");
+      out.write("                        <div class=\"input-group\">\n");
+      out.write("                            <form action=\"MainController\" method=\"POST\">\n");
+      out.write("                                <input type=\"text\" class=\"form-control\" placeholder=\"Search for products\" name=\"search\">\n");
+      out.write("                                <div class=\"input-group-append\">\n");
+      out.write("                                    <span class=\"input-group-text bg-transparent text-primary\" style=\"padding-bottom: 5px \">                                 \n");
+      out.write("                                        <button name=\"action\" value=\"Seacrh\" type=\"submit\" class=\"btn btn-block\" style=\"padding: 0\"><i class=\"fa fa-search\"></i></button>\n");
+      out.write("                                    </span>\n");
+      out.write("                                </div>\n");
+      out.write("                            </form>\n");
+      out.write("                        </div>\n");
+      out.write("                    </form>\n");
+      out.write("                </div>\n");
+      out.write("                <div class=\"col-lg-4 col-6 text-right\">\n");
+      out.write("                    <p class=\"m-0\">Customer Service</p>\n");
+      out.write("                    <h5 class=\"m-0\">+012 345 6789</h5>\n");
+      out.write("                </div>\n");
+      out.write("            </div>\n");
+      out.write("        </div>\n");
+      out.write("        <!-- Topbar End -->\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("        <!-- Navbar Start -->\n");
+      out.write("        <form action=\"MainController\">\n");
+      out.write("            <div class=\"container-fluid bg-dark mb-30\">\n");
+      out.write("                <div class=\"row px-xl-5\">\n");
+      out.write("                    <div class=\"col-lg-3 d-none d-lg-block\">\n");
+      out.write("                        <a class=\"btn d-flex align-items-center justify-content-between bg-primary w-100\" data-toggle=\"collapse\" href=\"#navbar-vertical\" style=\"height: 65px; padding: 0 30px;\">\n");
+      out.write("                            <h6 class=\"text-dark m-0\"><i class=\"fa fa-bars mr-2\"></i>Category</h6>\n");
+      out.write("                            <i class=\"fa fa-angle-down text-dark\"></i>\n");
+      out.write("                        </a>\n");
+      out.write("                        <nav class=\"collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light\" id=\"navbar-vertical\" style=\"width: calc(100% - 30px); z-index: 999;\">\n");
+      out.write("                            <div class=\"navbar-nav w-100\">\n");
+      out.write("                                <c:forEach var=\"Category\" items=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.LIST_CATEGORY}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
+      out.write("                                    <a href=\"MainController?action=Category&Category=");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${Category.categoryID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\" class=\"nav-item nav-link\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${Category.name}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</a>\n");
+      out.write("                                </c:forEach>\n");
+      out.write("                                <!--                            <div class=\"nav-item dropdown dropright\"> \n");
+      out.write("                                                                <a href=\"MainController?action=ViewAllBrand\" class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\">Brand <i class=\"fa fa-angle-right float-right mt-1\"></i></a>\n");
+      out.write("                                                                <div class=\"dropdown-menu position-absolute rounded-0 border-0 m-0\">\n");
+      out.write("                                                                    <a type=\"submit\" name=\"action\" value=\"NavigateBrand\" class=\"dropdown-item\">name</a>\n");
+      out.write("                                                                </div>\n");
+      out.write("                                                            </div>-->\n");
+      out.write("                            </div>\n");
+      out.write("                        </nav>\n");
+      out.write("                    </div>\n");
+      out.write("                    <div class=\"col-lg-9\">\n");
+      out.write("                        <nav class=\"navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0\">\n");
+      out.write("                            <a href=\"\" class=\"text-decoration-none d-block d-lg-none\">\n");
+      out.write("                                <span class=\"h1 text-uppercase text-dark bg-light px-2\">Multi</span>\n");
+      out.write("                                <span class=\"h1 text-uppercase text-light bg-primary px-2 ml-n1\">Shop</span>\n");
+      out.write("                            </a>\n");
+      out.write("                            <button type=\"button\" class=\"navbar-toggler\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\">\n");
+      out.write("                                <span class=\"navbar-toggler-icon\"></span>\n");
+      out.write("                            </button>\n");
+      out.write("                            <div class=\"collapse navbar-collapse justify-content-between\" id=\"navbarCollapse\">\n");
+      out.write("                                <div class=\"navbar-nav mr-auto py-0\">\n");
+      out.write("                                    <a href=\"home.jsp\" class=\"nav-item nav-link\">Home</a>\n");
+      out.write("                                    <a href=\"shopping.jsp\" class=\"nav-item nav-link\">Shop</a>\n");
+      out.write("                                    <a href=\"productDetail.jsp\" class=\"nav-item nav-link\">Shop Detail</a>\n");
+      out.write("                                    <div class=\"nav-item dropdown\">\n");
+      out.write("                                        <a href=\"#\" class=\"nav-link dropdown-toggle\" data-toggle=\"dropdown\">Pages <i class=\"fa fa-angle-down mt-1\"></i></a>\n");
+      out.write("                                        <div class=\"dropdown-menu bg-primary rounded-0 border-0 m-0\">\n");
+      out.write("                                            <a href=\"cart.jsp\" class=\"dropdown-item\">Shopping Cart</a>\n");
+      out.write("                                            <a href=\"checkout.jsp\" class=\"dropdown-item\">Checkout</a>\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <a href=\"blog.jsp\" class=\"nav-item nav-link\">Blog</a>\n");
+      out.write("                                    <a href=\"orderStatus.jsp\" class=\"nav-item nav-link\">Order Status</a>\n");
+      out.write("                                </div>\n");
+      out.write("                                <div class=\"navbar-nav ml-auto py-0 d-none d-lg-block\">                            \n");
+      out.write("                                    <a href=\"cart.jsp\" class=\"btn px-0 ml-3\">\n");
+      out.write("                                        <i class=\"fas fa-shopping-cart text-primary\"></i>\n");
+      out.write("                                        <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">0</span>\n");
+      out.write("                                    </a>\n");
+      out.write("                                </div>\n");
+      out.write("                            </div>\n");
+      out.write("                        </nav>\n");
+      out.write("                    </div>\n");
+      out.write("                </div>\n");
+      out.write("            </div>\n");
+      out.write("        </form>\n");
+      out.write("\n");
+      out.write("        <!-- Navbar End -->\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("        <!--Sigin in form Start-->\n");
+      out.write("        <div class=\"container-fluid\">\n");
+      out.write("            <h2 class=\"section-title position-relative text-uppercase mx-xl-5 mb-4\"><span class=\"bg-secondary pr-3\">Sign\n");
+      out.write("                    In</span></h2>\n");
+      out.write("            <div class=\"row px-xl-5\">\n");
+      out.write("\n");
+      out.write("                <div class=\"col-lg-12 mb-5\">\n");
+      out.write("                    <div class=\"row h-100 align-items-center justify-content-center\">\n");
+      out.write("                        <div class=\"col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4\">\n");
+      out.write("                            <div class=\"bg-light rounded p-4 p-sm-5 my-4 mx-3\" style=\"padding-bottom: 15px !important; width: 455px;\">\n");
+      out.write("                                <div class=\"d-flex align-items-center justify-content-between mb-3\">\n");
+      out.write("                                    <h3 class=\"text-primary\"></i>Forgot Password</h3>\n");
+      out.write("                                </div>\n");
+      out.write("                                <div class=\"form-floating mb-3\">\n");
+      out.write("                                    <label for=\"floatingInput\">Email</label>\n");
+      out.write("                                    <input type=\"email\" class=\"form-control\" id=\"floatingInput\"\n");
+      out.write("                                           placeholder=\"Enter your email\">\n");
+      out.write("                                </div>\n");
+      out.write("                                <button type=\"submit\" class=\"btn btn-primary py-3 w-100 mb-4\">Sign In</button>\n");
+      out.write("                                <p class=\"text-center mb-0\">Don't have an Account? <a href=\"\">Sign Up</a></p>\n");
+      out.write("                                <div class=\"d-flex align-items-center justify-content-between mb-4\" style=\"margin: 28px 0 0 32px;\">\n");
+      out.write("                                    <button class=\"button-signin text-center\" style=\"width: 310px; padding-left: 68px; \">\n");
+      out.write("                                        <svg xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid\" viewBox=\"0 0 256 262\" class=\"svg\">\n");
+      out.write("                                        <path fill=\"#4285F4\" d=\"M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027\" class=\"blue\"></path>\n");
+      out.write("                                        <path fill=\"#34A853\" d=\"M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1\" class=\"green\"></path>\n");
+      out.write("                                        <path fill=\"#FBBC05\" d=\"M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782\" class=\"yellow\"></path>\n");
+      out.write("                                        <path fill=\"#EB4335\" d=\"M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251\" class=\"red\"></path>\n");
+      out.write("                                        </svg>\n");
+      out.write("                                        <span class=\"text\">Sign in with Google</span>\n");
+      out.write("                                    </button>\n");
+      out.write("                                </div>\n");
+      out.write("                            </div>\n");
+      out.write("\n");
+      out.write("                        </div>\n");
+      out.write("                    </div>\n");
+      out.write("                </div>\n");
+      out.write("\n");
+      out.write("            </div>\n");
+      out.write("        </div>\n");
+      out.write("        <!--Sigin in form End-->\n");
+      out.write("    </body>\n");
+      out.write("</html>\n");
+    } catch (Throwable t) {
+      if (!(t instanceof SkipPageException)){
+        out = _jspx_out;
+        if (out != null && out.getBufferSize() != 0)
+          out.clearBuffer();
+        if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);
+        else throw new ServletException(t);
+      }
+    } finally {
+      _jspxFactory.releasePageContext(_jspx_page_context);
+    }
+  }
+}
