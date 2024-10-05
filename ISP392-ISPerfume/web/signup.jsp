@@ -30,225 +30,7 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <style>
-            /* From Uiverse.io by csozidev */ 
-            /* Fancy Google hover button made by: csozi | Website: www.csozi.hu*/
-
-            .button-signin {
-                padding: 10px;
-                font-weight: bold;
-                display: flex;
-                position: relative;
-                overflow: hidden;
-                border-radius: 35px;
-                align-items: center;
-                border: solid black 2px;
-                outline: none;
-            }
-
-            .svg {
-                height: 25px;
-                margin-right: 10px;
-            }
-
-            .button-signin .text {
-                z-index: 10;
-                font-size: 14px;
-            }
-
-            .button-signin:hover .text {
-                animation: text forwards 0.3s;
-                /*color: white;*/
-            }
-
-            @keyframes text {
-                from {
-                    color: black;
-                }
-
-                to {
-                    color: white;
-                }
-            }
-
-            .svg {
-                z-index: 6;
-            }
-
-            .button-signin:hover::before {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 9%;
-                transform: translate(-50%, -50%);
-                width: 0;
-                height: 0;
-                opacity: 0;
-                border-radius: 300px;
-                animation: wave1 2.5s ease-in-out forwards;
-            }
-
-            .button-signin:hover::after {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 9%;
-                transform: translate(-50%, -50%);
-                width: 0;
-                height: 0;
-                opacity: 0;
-                border-radius: 300px;
-                animation: wave2 2.5s ease-in-out forwards;
-            }
-
-            @keyframes wave1 {
-                0% {
-                    z-index: 1;
-                    background: #EB4335;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                1% {
-                    z-index: 1;
-                    background: #EB4335;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                25% {
-                    z-index: 1;
-                    background: #EB4335;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                26% {
-                    z-index: 3;
-                    background: #34A853;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                50% {
-                    z-index: 3;
-                    background: #34A853;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                70% {
-                    z-index: 3;
-                    background: #34A853;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                100% {
-                    z-index: 3;
-                    background: #34A853;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-            }
-
-            @keyframes wave2 {
-                0% {
-                    z-index: 2;
-                    background: #FBBC05;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                11% {
-                    z-index: 2;
-                    background: #FBBC05;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                35% {
-                    z-index: 2;
-                    background: #FBBC05;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                39% {
-                    z-index: 2;
-                    background: #FBBC05;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                40% {
-                    z-index: 4;
-                    background: #4285F4;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                64% {
-                    z-index: 4;
-                    background: #4285F4;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                100% {
-                    z-index: 4;
-                    background: #4285F4;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-            }
-
-            .button-signin:hover .red {
-                animation: disappear 0.1s forwards;
-                animation-delay: 0.1s;
-            }
-
-            .button-signin:hover .yellow {
-                animation: disappear 0.1s forwards;
-                animation-delay: 0.3s;
-            }
-
-            .button-signin:hover .green {
-                animation: disappear 0.1s forwards;
-                animation-delay: 0.7s;
-            }
-
-            .button-signin:hover .blue {
-                animation: disappear 0.1s forwards;
-                animation-delay: 1.1s;
-            }
-
-            @keyframes disappear {
-                from {
-                    filter: brightness(1);
-                }
-
-                to {
-                    filter: brightness(100);
-                }
-            }
-        </style>
+        
     </head>
     <body>
         <!-- Topbar Start -->
@@ -373,7 +155,7 @@
         <!--Sigin in form Start-->
         <div class="container-fluid">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sign
-                    In</span></h2>
+                    Up</span></h2>
             <div class="row px-xl-5">
 
                 <div class="col-lg-12 mb-5">
@@ -384,32 +166,29 @@
                                     <a href="index.html" class="">
                                         <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                                     </a>
-                                    <h3>Sign In</h3>
+                                    <h3>Sign Up</h3>
                                 </div>
                                 <div class="form-floating mb-3">
+                                     <label for="floatingInput">Username</label>
                                     <input type="email" class="form-control" id="floatingInput"
                                            placeholder="Enter username">
-                                    <label for="floatingInput">Username</label>
+                                   
                                 </div>
                                 <div class="form-floating mb-3">
+                                     <label for="floatingInput">Username</label>
                                     <input type="email" class="form-control" id="floatingInput"
                                            placeholder="Enter username">
-                                    <label for="floatingInput">Username</label>
+                                  
                                 </div>
                                 <div class="form-floating mb-4">
+                                     <label for="floatingPassword">Password</label>
                                     <input type="password" class="form-control" id="floatingPassword"
                                            placeholder="Password">
-                                    <label for="floatingPassword">Password</label>
+                                   
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div>
-                                    <a href="">Forgot Password</a>
-                                </div>
-                                <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                                <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
+                               
+                                <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Register</button>
+                                <p class="text-center mb-0">Do you already have an account ? <a href="signin.jsp">Sign In</a></p>
                                 <div class="d-flex align-items-center justify-content-between mb-4" style="margin: 28px 0 0 32px;">
                                     <button class="button-signin text-center" style="width: 310px; padding-left: 68px; ">
                                         <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" class="svg">
@@ -418,7 +197,7 @@
                                         <path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" class="yellow"></path>
                                         <path fill="#EB4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" class="red"></path>
                                         </svg>
-                                        <span class="text">Sign in with Google</span>
+                                        <span class="text">Sign up with Google</span>
                                     </button>
                                 </div>
                             </div>
