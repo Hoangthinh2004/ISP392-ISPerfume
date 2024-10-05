@@ -5,14 +5,12 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
 import isp392.product.ProductDAO;
-import isp392.product.ProductDTO;
+import isp392.product.ViewProductDTO;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,43 +18,38 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author duyhc
+ * @author ThinhHoang
  */
-@WebServlet(name = "ShowAllProductManager", urlPatterns = {"/ShowAllProductManager"})
-public class ShowAllProductManager extends HttpServlet {
+public class SizeFilterController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String SUCCESS = "MGR_ProductManagement.jsp";
-    private static final String ERROR = "MGR_ProductManagement.jsp"; 
+    private static final String ERROR="shopping.jsp";
+    private static final String SUCCESS="shopping.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String search = request.getParameter("search");
-            ProductDAO dao = new ProductDAO();
-            BrandDAO daoBrand = new BrandDAO();
-            List<ProductDTO> list = dao.getListProductManager(search);
-            List<BrandDTO> listBrand = daoBrand.getListBrand();
-            if(list.size()>0){
-                request.setAttribute("SHOW_ALL_PRODUCT_MANAGER", list);
-                HttpSession ses = request.getSession();
-                ses.setAttribute("LIST_BRAND_MANAGER", listBrand);
-                request.setAttribute("SEARCH", search);
-                url = SUCCESS;
-            }
+            HttpSession session = request.getSession();
+            int sizeID = Integer.parseInt(request.getParameter("sizeID"));
             
+            ProductDAO productDAO = new ProductDAO();
+            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+            int categoryID = ids.get("categoryID");
+            ids.put("sizeID", sizeID);
+            if (ids.containsKey("brandID")) {               
+                int brandID = ids.get("brandID");           
+                List<ViewProductDTO> listProduct = productDAO.filterProductByChildSize(categoryID, brandID, sizeID);
+                request.setAttribute("LIST_PRODUCT", listProduct);
+                //session.removeAttribute("CURRENT_IDS");
+            } else {
+                List<ViewProductDTO> listProduct = productDAO.filterProductBySize(sizeID, categoryID);
+                request.setAttribute("LIST_PRODUCT", listProduct);
+            }            
+            //session.setAttribute("CURRENT_IDS", ids); //Store sizeID & categoryID into attribute for DescendingProductByPrice Controller          
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at ShowAllProductManager: "+e.toString());
-        }finally{
+            log("Error at BrandFilterController: " + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

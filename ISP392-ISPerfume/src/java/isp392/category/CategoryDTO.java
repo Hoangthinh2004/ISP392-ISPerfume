@@ -12,15 +12,18 @@ package isp392.category;
 public class CategoryDTO {
     private int categoryID;
     private String name;
+    private String image;
 
     public CategoryDTO() {
         this.categoryID = 0;
         this.name = "";
+        this.image = "";
     }
 
-    public CategoryDTO(int categoryID, String name) {
+    public CategoryDTO(int categoryID, String name, String image) {
         this.categoryID = categoryID;
         this.name = name;
+        this.image = image;
     }
 
     public int getCategoryID() {
@@ -38,6 +41,15 @@ public class CategoryDTO {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     
     
 }

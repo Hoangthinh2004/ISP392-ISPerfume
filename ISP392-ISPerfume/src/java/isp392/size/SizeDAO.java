@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package isp392.category;
+package isp392.size;
 
 import isp392.utils.DBUtils;
 import java.sql.Connection;
@@ -17,25 +17,24 @@ import java.util.List;
  *
  * @author ThinhHoang
  */
-public class CategoryDAO {
+public class SizeDAO {
     
-    private static final String GET_LIST_CATEGORY = "SELECT C.CategoryID, C.CategoryName, C.image FROM Categories C";
-
-    public List<CategoryDTO> getListCategory() throws ClassNotFoundException, SQLException {
-        List<CategoryDTO> listCategory = new ArrayList<>();
+    private final String GET_LIST_SIZE = "SELECT S.Name, S.SizeID FROM Size S ";
+    
+    public List<SizeDTO> getListSize() throws ClassNotFoundException, SQLException {
+        List<SizeDTO> listSize = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(GET_LIST_CATEGORY);
+                ptm = conn.prepareStatement(GET_LIST_SIZE);
                 rs = ptm.executeQuery();
                 while (rs.next()) {                    
-                    int categoryID = rs.getInt("CategoryID");
-                    String categoryName = rs.getString("CategoryName");
-                    String image = rs.getString("image");
-                    listCategory.add(new CategoryDTO(categoryID, categoryName, image));
+                    int sizeID = rs.getInt("SizeID");
+                    String name = rs.getString("Name");
+                    listSize.add(new SizeDTO(sizeID, name));
                 }
             }
         } finally {
@@ -43,7 +42,7 @@ public class CategoryDAO {
             if(ptm!=null) ptm.close();
             if(conn!=null) conn.close();
         }
-        return listCategory;
+        return listSize;
     }
     
 }
