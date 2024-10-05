@@ -106,10 +106,9 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4" action="MainController" method="post">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-
-                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;">
+                    <form class="d-none d-md-flex ms-4" action="MainController" method="get">
+                        <input class="form-control border-0" type="search" placeholder="Search" name="search">
+                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="Search product" name="action">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -205,11 +204,11 @@
                                 <div class="d-flex align-items-center justify-content-between mb-4">   
                                     <h6 class="mb-0">Product Management</h6>
                                     <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create product</a>
-<!--                                    <button class="btn btn-primary">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                        </svg>
-                                    </button>-->
+                                    <!--                                    <button class="btn btn-primary">
+                                                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                                                                            </svg>
+                                                                        </button>-->
                                 </div>
                                 <div class="table-responsive">
                                     <c:if test="${requestScope.SHOW_ALL_PRODUCT_MANAGER!=null}">
@@ -265,9 +264,8 @@
                                                             <input type="hidden" name="productID" value="${pro.productID}">
                                                             <input type="hidden" name="search" value="${requestScope.SEARCH}">
                                                             <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
-                                                        </td>
-                                                        <td>
                                                             <input type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">
+                                                            <button type="submit" name="action" value="ProductDetailPage" class="btn btn-sm btn-primary">Detail</button>
                                                         </td>
                                                         </form>
                                                     </tr>
@@ -318,20 +316,20 @@
 
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
-<!--        <script>
-            window.onload = function () {
-                const searchInput = document.querySelector('input[name="search"]');
-                const form = searchInput.form;
-                if (!sessionStorage.getItem('isSubmitted')) {
-                    const hiddenAction = document.createElement('input');
-                    hiddenAction.type = 'hidden';
-                    hiddenAction.name = 'action';
-                    hiddenAction.value = 'Search';
-                    form.appendChild(hiddenAction);
-                    form.submit();
-                    sessionStorage.setItem('isSubmitted', 'true');
-                }
-            };
-        </script>-->
+        <!--        <script>
+                    window.onload = function () {
+                        const searchInput = document.querySelector('input[name="search"]');
+                        const form = searchInput.form;
+                        if (!sessionStorage.getItem('isSubmitted')) {
+                            const hiddenAction = document.createElement('input');
+                            hiddenAction.type = 'hidden';
+                            hiddenAction.name = 'action';
+                            hiddenAction.value = 'Search';
+                            form.appendChild(hiddenAction);
+                            form.submit();
+                            sessionStorage.setItem('isSubmitted', 'true');
+                        }
+                    };
+                </script>-->
     </body>
 </html>

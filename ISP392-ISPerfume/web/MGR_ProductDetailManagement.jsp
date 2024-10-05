@@ -1,5 +1,5 @@
 <%-- 
-    Document   : MGR_ProductManagement
+    Document   : MGR_ProducDetailtManagement
     Created on : Sep 25, 2024, 3:04:54 PM
     Author     : User
 --%>
@@ -107,8 +107,9 @@
                         <i class="fa fa-bars"></i>
                     </a>
                     <form class="d-none d-md-flex ms-4" action="MainController" method="get">
+                        <input type="hidden" name="productID" value="${param.productID}">
                         <input class="form-control border-0" type="search" placeholder="Search" name="search">
-                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="Search product" name="action">
+                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="SearchProductDetail" name="action">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -211,63 +212,43 @@
                                                                         </button>-->
                                 </div>
                                 <div class="table-responsive">
-                                    <c:if test="${requestScope.SHOW_ALL_PRODUCT_MANAGER!=null}">
-
+                                    <c:if test="${requestScope.LIST_PRODUCT_DETAIL_MANAGER!=null}">
                                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                                             <thead>
                                                 <tr class="text-dark">
-                                                    <th scope="col">ProductID</th>
-                                                    <th scope="col">Brand</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Descrption</th>
+                                                    <th scope="col">Size</th>
+                                                    <th scope="col">Imgport Date</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Stock quantity</th>
+                                                    <th scope="col">Number of purchasing</th>
                                                     <th scope="col">Image</th>
-                                                    <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="pro" varStatus="counter" items="${requestScope.SHOW_ALL_PRODUCT_MANAGER}">
+                                                <c:forEach var="proDe" items="${requestScope.LIST_PRODUCT_DETAIL_MANAGER}">
                                                     <tr>
                                                         <td>
-                                                            ${pro.productID}
+                                                            ${proDe.sizeID}
                                                         </td>
                                                         <td>
-                                                            <form action="MainController" method="get" enctype="multipart/form-data">
-                                                                <select name="brandID">
-                                                                    <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
-                                                                        <option value="${brand.brandID}"
-                                                                                <c:if test="${brand.brandID == pro.brandID}">
-                                                                                    SELECTED
-                                                                                </c:if>
-                                                                                >
-                                                                            ${brand.name}
-                                                                        </option>
-                                                                    </c:forEach>
-                                                                </select>
+                                                            ${proDe.importDate}
                                                         </td>
                                                         <td>
-                                                            <input class="form-control border-0" type="text" name="productName" value="${pro.name}">
+                                                            ${proDe.price}
                                                         </td>
                                                         <td>
-                                                            <input class="form-control border-0" type="text" name="description" value="${pro.description}">
+                                                            ${proDe.stockQuantity}
                                                         </td>
                                                         <td>
-                                                            <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px;">
-                                                            <input type="hidden" value="${pro.image}" name="existingImage">
+                                                            ${proDe.numberOfPurchasing}
                                                         </td>
                                                         <td>
-                                                            <c:if test="${pro.status==1}">
-                                                                AVAILABLE
-                                                            </c:if>
+                                                            <img src="${proDe.image}" style="width: 100px; height: 100px; margin-right: 10px;">
                                                         </td>
                                                         <td>
-                                                            <input type="hidden" name="status" value="${pro.status}" >
-                                                            <input type="hidden" name="productID" value="${pro.productID}">
-                                                            <input type="hidden" name="search" value="${requestScope.SEARCH}">
                                                             <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
                                                             <input type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">
-                                                            <button type="submit" name="action" value="ProductDetailPage" class="btn btn-sm btn-primary">Detail</button>
                                                         </td>
-                                                        </form>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

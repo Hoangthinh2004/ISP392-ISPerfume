@@ -30,9 +30,8 @@ public class ProductDAO {
                                                         + "WHERE p.Status = 1 AND pc.CategoryID = ? AND p.BrandID = ?";
 
     private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, ManagerID ,BrandID, ProName, Description, Image, Status FROM Products WHERE ProName LIKE ? AND Status = 1";
-    private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, BrandID, ManagerID, ProName, Description, Image, Status FROM Products WHERE ProName LIKE ? AND Status = 1";
     private static final String UPDATE_PRODUCT_MANAGER = "UPDATE Products SET BrandID = ?, ProName = ?, Description = ?, Image = ? WHERE ProductID = ?";
-    private static final String INSERT_PRODUCT_MANAGER = "INSERT INTO Products(BrandID, Description, Image, ProName, Status) VALUES(?,?,?,?,?)";
+    private static final String INSERT_PRODUCT_MANAGER = "INSERT INTO Products(BrandID, ManagerID, Description, Image, ProName, Status) VALUES(?,?,?,?,?,?)";
     private static final String CHECK_DUPLICATE_PRODUCT_BY_NAME = "SELECT ProductID FROM Products WHERE ProName LIKE ?";
     private static final String DELETE_PRODUCT_MANAGER = "UPDATE Products SET Status = 0 WHERE ProductID = ? ";
     private static final String DESCENDING_PRODUCT_BY_PRICE = "SELECT P.ProductID, P.Image, P.ProName  FROM Products P "
@@ -112,23 +111,34 @@ public class ProductDAO {
         return check;
     }
 
-    public boolean addProduct(String name, int brandID, String description, String imagePath, int status) throws SQLException, ClassNotFoundException {
-//        INSERT INTO Products(BrandID, Description, Image, ProName, Status) VALUES(?,?,?,?,?)
-        boolean check = false;
+    public int addProduct(String name, int brandID, int managerID, String description, String imagePath, int status) throws SQLException, ClassNotFoundException {
+//        INSERT INTO Products(BrandID, ManagerID ,Description, Image, ProName, Status) VALUES(?,?,?,?,?,?)
         Connection conn = null;
         PreparedStatement ptm = null;
+        ResultSet rs = null;
+        int productID = -1;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(INSERT_PRODUCT_MANAGER);
+                ptm = conn.prepareStatement(INSERT_PRODUCT_MANAGER, PreparedStatement.RETURN_GENERATED_KEYS);
                 ptm.setInt(1, brandID);
-                ptm.setString(2, description);
-                ptm.setString(3, imagePath);
-                ptm.setString(4, name);
-                ptm.setInt(5, status);
-                check = ptm.executeUpdate() > 0;
+                ptm.setInt(2, managerID);
+                ptm.setString(3, description);
+                ptm.setString(4, imagePath);
+                ptm.setString(5, name);
+                ptm.setInt(6, status);
+                int check = ptm.executeUpdate();
+                if(check>0){
+                    rs = ptm.getGeneratedKeys();
+                    if(rs.next()){
+                        productID = rs.getInt(1);
+                    }
+                }
             }
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
             if (ptm != null) {
                 ptm.close();
             }
@@ -136,7 +146,7 @@ public class ProductDAO {
                 conn.close();
             }
         }
-        return check;
+        return productID;
     }
 
     public boolean checkDuplicateByName(String name) throws SQLException, ClassNotFoundException {

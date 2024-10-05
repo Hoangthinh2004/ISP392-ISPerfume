@@ -26,7 +26,7 @@ public class MainController extends HttpServlet {
     private static final String FILTER_BY_BRAND = "FilterByBrand";
     private static final String FILTER_BY_BRAND_CONTROLLER = "BrandFilterController";
     
-    private static final String SHOW_ALL_PRODUCT_MANAGER = "Search";
+    private static final String SHOW_ALL_PRODUCT_MANAGER = "Search product";
     private static final String SHOW_ALL_PRODUCT_MANAGER_CONTROLLER = "ShowAllProductManager";
     
     private static final String UPDATE_PRODUCT_MANAGER = "Update";
@@ -47,7 +47,9 @@ public class MainController extends HttpServlet {
     private static final String ASCENDING_SORT_BY_PRICE = "AscendingSortByPrice";
     private static final String ASCENDING_SORT_BY_PRICE_CONTROLLER = "AscendingProductByPriceController";
     
-    
+    private static final String PRODUCT_DETAIL_PAGE = "ProductDetailPage";
+    private static final String PRODUCT_DETAIL_PAGE_VIEW = "SearchProductDetailManager";
+        
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -72,6 +74,8 @@ public class MainController extends HttpServlet {
                 url = DESCENDING_SORT_BY_PRICE_CONTROLLER;
             } else if (ASCENDING_SORT_BY_PRICE.equals(action)) {
                 url = ASCENDING_SORT_BY_PRICE_CONTROLLER;
+            } else if(PRODUCT_DETAIL_PAGE.equals(action)){
+                url = PRODUCT_DETAIL_PAGE_VIEW;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
