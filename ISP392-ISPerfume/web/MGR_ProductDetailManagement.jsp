@@ -221,6 +221,8 @@
                                                     <th scope="col">Price</th>
                                                     <th scope="col">Stock quantity</th>
                                                     <th scope="col">Number of purchasing</th>
+                                                    <th scope="col">Country</th>
+                                                    <th scope="col">Fragrance families </th>
                                                     <th scope="col">Image</th>
                                                 </tr>
                                             </thead>
@@ -228,27 +230,41 @@
                                                 <c:forEach var="proDe" items="${requestScope.LIST_PRODUCT_DETAIL_MANAGER}">
                                                     <tr>
                                                         <td>
-                                                            ${proDe.sizeID}
+                                                            <form action="MainController" method="get">
+                                                                <c:forEach var="size" items="${sessionScope.SIZE_LIST_MANAGER}" >
+                                                                    <c:if test="${size.sizeID == proDe.sizeID}">
+                                                                        ${size.name}
+                                                                    </c:if>
+                                                                </c:forEach>
                                                         </td>
                                                         <td>
                                                             ${proDe.importDate}
                                                         </td>
                                                         <td>
-                                                            ${proDe.price}
+                                                            <input type="number" min="1" name="price" value="${proDe.price}" class="form-control border-0">
                                                         </td>
                                                         <td>
-                                                            ${proDe.stockQuantity}
+                                                            <input type="number" min="1" name="stockQuantiy" value="${proDe.stockQuantity}" class="form-control border-0">
                                                         </td>
                                                         <td>
                                                             ${proDe.numberOfPurchasing}
                                                         </td>
                                                         <td>
+                                                            <input type="text" name="country" value="${proDe.country}" class="form-control border-0">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="fragranceFamilies" value="${proDe.fragranceFamilies}" class="form-control border-0">
+                                                        </td>
+                                                        <td>
                                                             <img src="${proDe.image}" style="width: 100px; height: 100px; margin-right: 10px;">
                                                         </td>
                                                         <td>
-                                                            <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
-                                                            <input type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">
+                                                            <input type="hidden" name="productID" value="${proDe.productID}">
+                                                            <input type="hidden" name="sizeID" value="${proDe.sizeID}">
+                                                            <button type="submit" name="action" value="UpdateProductDetail" class="btn btn-sm btn-primary">Update</button>
+                                                            <button type="submit" name="action" value="DeleteProductDetail" class="btn btn-sm btn-primary">Delete</button>
                                                         </td>
+                                                        </form>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

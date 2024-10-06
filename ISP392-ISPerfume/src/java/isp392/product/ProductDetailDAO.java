@@ -21,7 +21,9 @@ import java.util.List;
  */
 public class ProductDetailDAO {
 
-    private static final String LIST_PRODUCT_DETAIL = "SELECT * FROM ProductDetail WHERE ProductID = ?";
+    private static final String LIST_PRODUCT_DETAIL = "SELECT * FROM ProductDetail WHERE ProductID = ? AND Status = 1";
+    private static final String UPDATE_PRODUCT_DETAIL = "UPDATE ProductDetail SET Price = ?, StockQuantity = ?, Country = ?, FragranceFamilies = ? WHERE ProductID = ? AND SizeID = ?";
+    private static final String DELETE_PRODUCT_DETAIL = "UPDATE ProductDetail SET Status = 0 WHERE ProductID = ? AND SizeID = ?";
 
     public List<ProductDetailDTO> getListProductDetail(int productID) throws SQLException, ClassNotFoundException {
         Connection conn = null;
@@ -45,7 +47,7 @@ public class ProductDetailDAO {
                     String fraganceFamilies = rs.getString("FragranceFamilies");
                     String image = rs.getString("Image");
                     int status = rs.getInt("Status");
-                    ProductDetailDTO newProDe = new ProductDetailDTO(productID, sizeID, price, stockQuantity, numOfPur,importDate, country, releaseDate, fraganceFamilies, image, status);
+                    ProductDetailDTO newProDe = new ProductDetailDTO(productID, sizeID, price, stockQuantity, numOfPur, importDate, country, releaseDate, fraganceFamilies, image, status);
                     list.add(newProDe);
                 }
             }
@@ -61,6 +63,58 @@ public class ProductDetailDAO {
             }
         }
         return list;
+    }
+
+    public boolean updateProductDetail(int productID, int sizeID, int price, int stockQuantity, String country, String fragranceFamilies) throws SQLException, ClassNotFoundException {
+//        "UPDATE ProductDetail SET Price = ?, StockQuantity = ?, Country = ?, FragranceFamilies = ? WHERE ProductID = ? AND SizeID = ?"
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_PRODUCT_DETAIL);
+                ptm.setInt(1, price);
+                ptm.setInt(2, stockQuantity);
+                ptm.setString(3, country);
+                ptm.setString(4, fragranceFamilies);
+                ptm.setInt(5, productID);
+                ptm.setInt(6, sizeID);
+                check = ptm.executeUpdate() > 0;
+            }
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean deleteProductDeltail(int productID, int sizeID) throws SQLException, ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        boolean check = false;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn!=null){
+//              UPDATE ProductDetail SET Status = 0 WHERE ProductID = ? AND SizeID = ?
+                ptm = conn.prepareStatement(DELETE_PRODUCT_DETAIL);
+                ptm.setInt(1, productID);
+                ptm.setInt(2, sizeID);
+                check = ptm.executeUpdate()>0;
+            }
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 
 }

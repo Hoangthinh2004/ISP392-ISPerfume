@@ -56,6 +56,12 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_PRODUCT = "SeacrhProduct";
     private static final String SEARCH_PRODUCT_CONTROLLER = "SearchProductController";
     
+    private static final String UPDATE_PRODUCT_DETAIL_MANAGER = "UpdateProductDetail";
+    private static final String UPDATE_PRODUCT_DETAIL_MANAGER_CONTROLLER = "UpdateProductDetailManager";
+    
+    private static final String DELETE_PRODUCT_DETAIL_MANAGER = "DeleteProductDetail";
+    private static final String DELETE_PRODUCT_DETAIL_MANAGER_CONTROLLER = "DeleteProductDetailManager";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -86,6 +92,10 @@ public class MainController extends HttpServlet {
                 url = FILTER_BY_SIZE_CONTROLLER;
             } else if (SEARCH_PRODUCT.equals(action)) {
                 url = SEARCH_PRODUCT_CONTROLLER;
+            }else if(UPDATE_PRODUCT_DETAIL_MANAGER.equals(action)){
+                url = UPDATE_PRODUCT_DETAIL_MANAGER_CONTROLLER;
+            }else if(DELETE_PRODUCT_DETAIL_MANAGER.equals(action)){
+                url = DELETE_PRODUCT_DETAIL_MANAGER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
