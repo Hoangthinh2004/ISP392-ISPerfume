@@ -34,7 +34,7 @@ public class UpdateProductManager extends HttpServlet {
             String existingImage = request.getParameter("existingImage");
             int managerID = 4;
             int status=Integer.parseInt(request.getParameter("status"));
-            ProductDTO pro = new ProductDTO(productID, managerID, brandID, productName, description, existingImage, status);
+            ProductDTO pro = new ProductDTO(productID, managerID, brandID, productName, description, existingImage, "", 0, "", status);
             boolean checkUpdate = dao.updateProduct(pro);
             if (checkUpdate) {
                 url = SUCCESS;

@@ -30,7 +30,7 @@ public class DescendingProductByPriceController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            ProductDAO productDAO = new ProductDAO();            
+            ProductDAO productDAO = new ProductDAO();
             if (session.getAttribute("CURRENT_IDS") == null) {
                 int categoryID = (Integer) session.getAttribute("CURRENT_CATEGORY");
                 List<ViewProductDTO> descendingListProduct = productDAO.DescendingListProductByPrice(categoryID);

@@ -177,16 +177,7 @@
             <div class="row px-xl-5">
                 <!-- Shop Sidebar Start -->
                 <div class="col-lg-3 col-md-4">
-                    <!-- Filter By Brand Start -->
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter By Brand</span></h5>
-                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                        <c:forEach var="brand" items="${sessionScope.LIST_BRAND}">
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <a href="MainController?action=FilterByBrand&brandID=${brand.brandID}">${brand.name}</a>
-                            </div>
-                        </c:forEach>
-                    </div>
-                    <!--/category-products-->
+                    
 
                     <!-- Filter By Size Start -->
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
@@ -232,7 +223,7 @@
                             </div>
                         </div>
 
-                        <c:forEach var="Product" items="${requestScope.LIST_PRODUCT}">
+                        <c:forEach var="Product" items="${requestScope.LIST_PRODUCT_SEARCH}">
                             <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                 <div class="product-item bg-light mb-4">
                                     <div class="product-img position-relative overflow-hidden">
@@ -241,7 +232,7 @@
                                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}"><i class="fa fa-search"></i></a>
+                                            <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}""><i class="fa fa-search"></i></a>
                                         </div>
                                     </div>
                                     <div class="text-center py-4">

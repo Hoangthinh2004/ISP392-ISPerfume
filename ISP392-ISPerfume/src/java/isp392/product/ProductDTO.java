@@ -16,6 +16,9 @@ public class ProductDTO {
     private String name;
     private String description;
     private String image;
+    private String country;
+    private int releaseDate;
+    private String fragranceFamilies;
     private int status;
 
     public ProductDTO() {
@@ -28,13 +31,16 @@ public class ProductDTO {
         this.status = 0;
     }
 
-    public ProductDTO(int productID, int managerID, int brandID, String name, String description, String image, int status) {
+    public ProductDTO(int productID, int managerID, int brandID, String name, String description, String image, String country, int releaseDate, String fragranceFamilies, int status) {
         this.productID = productID;
         this.managerID = managerID;
         this.brandID = brandID;
         this.name = name;
         this.description = description;
         this.image = image;
+        this.country = country;
+        this.releaseDate = releaseDate;
+        this.fragranceFamilies = fragranceFamilies;
         this.status = status;
     }
 
@@ -86,6 +92,30 @@ public class ProductDTO {
         this.image = image;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(int releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getFragranceFamilies() {
+        return fragranceFamilies;
+    }
+
+    public void setFragranceFamilies(String fragranceFamilies) {
+        this.fragranceFamilies = fragranceFamilies;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -93,8 +123,5 @@ public class ProductDTO {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    
-    
     
 }

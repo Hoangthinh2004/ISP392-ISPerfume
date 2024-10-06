@@ -6,7 +6,12 @@
 package isp392.controllers;
 
 import isp392.product.ProductDAO;
-import isp392.product.ViewProductDTO;
+import isp392.product.ProductDTO;
+import isp392.product.ProductDetailDAO;
+import isp392.product.ProductDetailDTO;
+import isp392.product.ViewProductDetailDTO;
+import isp392.size.SizeDAO;
+import isp392.size.SizeDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -22,37 +27,49 @@ import javax.servlet.http.HttpSession;
  *
  * @author ThinhHoang
  */
-public class SearchProductController extends HttpServlet {
+public class NavigateProductDetailController extends HttpServlet {
 
-    private static final String ERROR ="HomeController";
-    private static final String SUCCESS = "shoppingSearch.jsp";
+    private static final String ERROR = "shopping.jsp";
+    private static final String SUCCESS = "productDetail.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            String search = request.getParameter("search");
-            session.setAttribute("CURRENT_SEARCH", search);
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            int sizeID = Integer.parseInt(request.getParameter("sizeID"));
+            
+            Map<String, Integer> listProIDs = new HashMap<>();
+            listProIDs.put("productID", productID);
+            session.setAttribute("CURRENT_PRODUCT_ID", listProIDs);
+            
+            SizeDAO sizeDAO = new SizeDAO();
+            List<SizeDTO> sizeAvailable =  sizeDAO.getAvailableSize(productID);
+            if (sizeAvailable.size() > 0) {
+                session.setAttribute("AVAILABLE_SIZE", sizeAvailable);
+            }
+            
+            ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+            List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);           
+            if (listPriceBySize.size() > 0) {
+                request.setAttribute("PRICE_BY_SIZE", listPriceBySize);
+            }
+                         
+            List<ProductDetailDTO> listImage = productDetailDAO.getListImage(productID);
+            if (listImage.size() > 0) {
+                session.setAttribute("LIST_IMAGE", listImage);
+            }
             
             ProductDAO productDAO = new ProductDAO();
-            List<ViewProductDTO> listProduct = productDAO.getListProduct(search);
-                     
-            request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
-            List<ViewProductDTO> proIDs = (List<ViewProductDTO>) request.getAttribute("LIST_PRODUCT_SEARCH");
-            Map<String, Integer> listProductID = new HashMap<>();
-            for (ViewProductDTO product : proIDs) {
-                int productID = product.getProductID();
-                listProductID.put("productID", productID);
-                
-                int sizeID = product.getSizeID();
-                listProductID.put("sizeID", sizeID);
+            List<ProductDTO> productInformation = productDAO.getProductInformation(productID);
+            if (productInformation.size() > 0) {
+                session.setAttribute("PRODUCT_INFORMATION", productInformation);
             }
-            request.setAttribute("SEARCH_IDS", listProductID);
-            
-            url = SUCCESS;     
+            url = SUCCESS;            
         } catch (Exception e) {
-            log("Error at SearchProductController: " + e.toString());
+            log("Error at NavigateProductDetailController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
