@@ -1,6 +1,6 @@
 <%-- 
-    Document   : orderStatus
-    Created on : Sep 28, 2024, 8:18:28 PM
+    Document   : forgetPassword
+    Created on : Oct 5, 2024, 9:48:46 AM
     Author     : User
 --%>
 
@@ -30,115 +30,6 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-              rel="stylesheet">
-        <style>
-            .step-wizard {
-
-                height: 300px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .step-wizard-list {
-                background: #fff;
-                box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
-                color: #333;
-                list-style-type: none;
-                border-radius: 10px;
-                display: flex;
-                padding: 20px 10px;
-                position: relative;
-                z-index: 10;
-            }
-
-            .step-wizard-item {
-                padding: 0 20px;
-                flex-basis: 0;
-                -webkit-box-flex: 1;
-                -ms-flex-positive: 1;
-                flex-grow: 1;
-                max-width: 100%;
-                display: flex;
-                flex-direction: column;
-                text-align: center;
-                min-width: 170px;
-                position: relative;
-            }
-            .step-wizard-item + .step-wizard-item:after {
-                content: "";
-                position: absolute;
-                left: 0;
-                top: 19px;
-                background: #FE980F;
-                width: 100%;
-                height: 2px;
-                transform: translateX(-50%);
-                z-index: -10;
-            }
-            .progress-count {
-                height: 40px;
-                width: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                font-weight: 600;
-                margin: 0 auto;
-                position: relative;
-                z-index: 10;
-                color: transparent;
-            }
-            .progress-count:after {
-                content: "";
-                height: 40px;
-                width: 40px;
-                background: #FE980F;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
-                z-index: -10;
-            }
-            .progress-count:before {
-                content: "";
-                height: 10px;
-                width: 20px;
-                border-left: 3px solid #fff;
-                border-bottom: 3px solid #fff;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -60%) rotate(-45deg);
-                transform-origin: center center;
-            }
-            .progress-label {
-                font-size: 14px;
-                font-weight: 600;
-                margin-top: 10px;
-            }
-            .current-item .progress-count:before,
-            .current-item ~ .step-wizard-item .progress-count:before {
-                display: none;
-            }
-            .current-item ~ .step-wizard-item .progress-count:after {
-                height: 10px;
-                width: 10px;
-            }
-            .current-item ~ .step-wizard-item .progress-label {
-                opacity: 0.5;
-            }
-            .current-item .progress-count:after {
-                background: #fff;
-                border: 2px solid ;
-            }
-            .current-item .progress-count {
-                color: #FE980F;
-            }
-
-        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -147,7 +38,7 @@
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
                         <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
-                        <a class="text-body mr-3" href="">Contact</a>
+                        <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
                         <a class="text-body mr-3" href="">Help</a>
                         <a class="text-body mr-3" href="">FAQs</a>
                     </div>
@@ -158,10 +49,25 @@
                             <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
+                                <button class="dropdown-item" type="button">Sign up</button>
                             </div>
-                        </div>                                            
+                        </div>
+                        <div class="btn-group mx-2">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">EUR</button>
+                                <button class="dropdown-item" type="button">GBP</button>
+                                <button class="dropdown-item" type="button">CAD</button>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="dropdown-item" type="button">FR</button>
+                                <button class="dropdown-item" type="button">AR</button>
+                                <button class="dropdown-item" type="button">RU</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -186,10 +92,10 @@
                     <form action="">
                         <div class="input-group">
                             <form action="MainController" method="POST">
-                                <input type="text" class="form-control" placeholder="Enter orderID.." name="orderID">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
                             </form>
@@ -219,12 +125,10 @@
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
                                 </c:forEach>
-                                <!--                            <div class="nav-item dropdown dropright">
-                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
+                                <!--                            <div class="nav-item dropdown dropright"> 
+                                                                <a href="MainController?action=ViewAllBrand" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand <i class="fa fa-angle-right float-right mt-1"></i></a>
                                                                 <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Baby's Dresses</a>
+                                                                    <a type="submit" name="action" value="NavigateBrand" class="dropdown-item">name</a>
                                                                 </div>
                                                             </div>-->
                             </div>
@@ -241,7 +145,7 @@
                             </button>
                             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                 <div class="navbar-nav mr-auto py-0">
-                                    <a href="home.jsp" class="nav-item nav-link ">Home</a>
+                                    <a href="home.jsp" class="nav-item nav-link">Home</a>
                                     <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
                                     <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
                                     <div class="nav-item dropdown">
@@ -252,7 +156,7 @@
                                         </div>
                                     </div>
                                     <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                    <a href="orderStatus.jsp" class="nav-item nav-link active">Order Status</a>
+                                    <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>
                                 <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
                                     <a href="cart.jsp" class="btn px-0 ml-3">
@@ -266,28 +170,39 @@
                 </div>
             </div>
         </form>
+
         <!-- Navbar End -->
 
 
-        <section class="step-wizard">
-            <ul class="step-wizard-list">
-                <li class="step-wizard-item">
-                    <span class="progress-count">1</span>
-                    <span class="progress-label">Billing Info</span>
-                </li>
-                <li class="step-wizard-item ">
-                    <span class="progress-count">2</span>
-                    <span class="progress-label">Payment Method</span>
-                </li>
-                <li class="step-wizard-item current-item">
-                    <span class="progress-count">3</span>
-                    <span class="progress-label">Checkout</span>
-                </li>
-                <li class="step-wizard-item">
-                    <span class="progress-count">4</span>
-                    <span class="progress-label">Success</span>
-                </li>
-            </ul>
-        </section>
+        <!--Sigin in form Start-->
+        <div class="container-fluid">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sign
+                    In</span></h2>
+            <div class="row px-xl-5">
+
+                <div class="col-lg-12 mb-5">
+                    <div class="row h-100 align-items-center justify-content-center">
+                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3" style="padding-bottom: 15px !important; width: 455px;">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <h3 class="text-primary"></i>Forgot Password</h3>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <label for="floatingInput">Email</label>
+                                    <input type="email" class="form-control" id="floatingInput"
+                                           placeholder="Enter your email">
+                                </div>
+                                <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Send email</button>
+                                <p class="text-left mb-0">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
+                                <p class="text-left mb-0">Do you already have an Account? <a href="signup.jsp">Sign In</a></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--Sigin in form End-->
     </body>
 </html>

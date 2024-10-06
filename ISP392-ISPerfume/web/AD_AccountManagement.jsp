@@ -1,6 +1,6 @@
 <%-- 
-    Document   : MGR_BrandManagement
-    Created on : Sep 25, 2024, 3:55:44 PM
+    Document   : AD_AccountManagement
+    Created on : Oct 4, 2024, 9:24:31 AM
     Author     : User
 --%>
 
@@ -27,8 +27,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="dashmin/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="dashmin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="dashmin/css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +36,7 @@
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
     </head>
+
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
             <!-- Spinner Start -->
@@ -64,28 +65,16 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
+                            <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-plus me-2"></i>Create Account</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Product Management</a>
-                                <a href="MGR_BrandManagement.jsp" class="dropdown-item active">Brand Management</a>
-                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Create Manager</a>
+                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Create Staff</a>
+                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Create Shipper</a>
                             </div>
                         </div>
-                        <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                        <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                        <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                        <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="signin.html" class="dropdown-item">Sign In</a>
-                                <a href="signup.html" class="dropdown-item">Sign Up</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                                <a href="blank.html" class="dropdown-item">Blank Page</a>
-                            </div>
-                        </div>
+                       
                     </div>
                 </nav>
             </div>
@@ -102,8 +91,8 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search">
+                    <form class="d-none d-md-flex ms-4" action="MainController" method="get">
+                        <input class="form-control border-0" type="search" placeholder="Search" name="">
                         <button class="btn btn-primary" type="submit" name="action" value="" style="margin-left: 10px;">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
@@ -189,84 +178,72 @@
                 </nav>
                 <!-- Navbar End -->
 
-
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0">
-                        <!--                        <div class="col-md-6 text-center">-->
-                        <!-- Recent Sales Start -->
-                        <div class="container-fluid pt-4 px-4">
-                            <div class="bg-light text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Brand Management</h6>
-                                    <a href="MGR_CreateBrand.jsp" class="btn btn-primary">Create new Brand</a>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0 " style="height: auto !important">
+                        <div class="table-responsive">
+                            <div class="col-sm-12 col-xl-12">
+                                <div class="bg-light rounded h-100 p-4">
+                                    <h6 class="mb-4">Account Table</h6>
+                                    <table class="table table-hover">
                                         <thead>
-                                            <tr class="text-dark">
-                                                <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Invoice</th>
-                                                <th scope="col">Customer</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Email</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                                <th scope="row">3</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>jacob@email.com</td>
+                                                <td>jacob@email.com</td>
+                                                <td>jacob@email.com</td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                                <th scope="row">3</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>jacob@email.com</td>
+                                                <td>jacob@email.com</td>
+                                                <td>jacob@email.com</td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                                <th scope="row">3</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>jacob@email.com</td>
+                                                <td>jacob@email.com</td>
+                                                <td>jacob@email.com</td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                                <th scope="row">3</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>Thornton</td>
+                                                <td>jacob@email.com</td>
+                                                <td>jacob@email.com</td>
+                                                <td>jacob@email.com</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        <!-- Recent Sales End -->
-                        <!--</div>-->
                     </div>
                 </div>
                 <!-- Blank End -->

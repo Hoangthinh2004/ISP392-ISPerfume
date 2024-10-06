@@ -134,7 +134,7 @@
                             </button>
                             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                 <div class="navbar-nav mr-auto py-0">
-                                    <a href="home.jsp" class="nav-item nav-link active">Home</a>
+                                    <a href="home.jsp" class="nav-item nav-link ">Home</a>
                                     <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
                                     <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
                                     <div class="nav-item dropdown">
@@ -144,7 +144,7 @@
                                             <a href="checkout.jsp" class="dropdown-item">Checkout</a>
                                         </div>
                                     </div>
-                                    <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                    <a href="blog.jsp" class="nav-item nav-link active">Blog</a>
                                     <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>
                                 <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            

@@ -108,7 +108,8 @@
                     </a>
                     <form class="d-none d-md-flex ms-4" action="MainController" method="get">
                         <input class="form-control border-0" type="search" placeholder="Search" name="search">
-                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="Search product" name="action">
+
+                        <button class="btn btn-primary" type="submit" name="action" value="Search" style="margin-left: 10px;">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -196,7 +197,7 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0">
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important">
                         <!--                        <div class="col-md-6 text-center">-->
                         <!-- Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
@@ -245,10 +246,10 @@
                                                                 </select>
                                                         </td>
                                                         <td>
-                                                            <input class="form-control border-0" type="text" name="productName" value="${pro.name}">
+                                                            <input type="text" name="productName" value="${pro.name}" class="form-control">
                                                         </td>
                                                         <td>
-                                                            <input class="form-control border-0" type="text" name="description" value="${pro.description}">
+                                                            <input type="text" name="description" value="${pro.description}>
                                                         </td>
                                                         <td>
                                                             <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px;">
