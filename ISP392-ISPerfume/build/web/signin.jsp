@@ -30,226 +30,7 @@
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-        <style>
-            /* From Uiverse.io by csozidev */ 
-            /* Fancy Google hover button made by: csozi | Website: www.csozi.hu*/
-
-            .button-signin {
-                padding: 10px;
-                font-weight: bold;
-                display: flex;
-                position: relative;
-                overflow: hidden;
-                border-radius: 35px;
-                align-items: center;
-                border: solid black 2px;
-                outline: none;
-            }
-
-            .svg {
-                height: 25px;
-                margin-right: 10px;
-            }
-
-            .button-signin .text {
-                z-index: 10;
-                font-size: 14px;
-            }
-
-            .button-signin:hover .text {
-                animation: text forwards 0.3s;
-                /*color: white;*/
-            }
-
-            @keyframes text {
-                from {
-                    color: black;
-                }
-
-                to {
-                    color: white;
-                }
-            }
-
-            .svg {
-                z-index: 6;
-            }
-
-            .button-signin:hover::before {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 9%;
-                transform: translate(-50%, -50%);
-                width: 0;
-                height: 0;
-                opacity: 0;
-                border-radius: 300px;
-                animation: wave1 2.5s ease-in-out forwards;
-            }
-
-            .button-signin:hover::after {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 9%;
-                transform: translate(-50%, -50%);
-                width: 0;
-                height: 0;
-                opacity: 0;
-                border-radius: 300px;
-                animation: wave2 2.5s ease-in-out forwards;
-            }
-
-            @keyframes wave1 {
-                0% {
-                    z-index: 1;
-                    background: #EB4335;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                1% {
-                    z-index: 1;
-                    background: #EB4335;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                25% {
-                    z-index: 1;
-                    background: #EB4335;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                26% {
-                    z-index: 3;
-                    background: #34A853;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                50% {
-                    z-index: 3;
-                    background: #34A853;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                70% {
-                    z-index: 3;
-                    background: #34A853;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                100% {
-                    z-index: 3;
-                    background: #34A853;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-            }
-
-            @keyframes wave2 {
-                0% {
-                    z-index: 2;
-                    background: #FBBC05;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                11% {
-                    z-index: 2;
-                    background: #FBBC05;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                35% {
-                    z-index: 2;
-                    background: #FBBC05;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                39% {
-                    z-index: 2;
-                    background: #FBBC05;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                40% {
-                    z-index: 4;
-                    background: #4285F4;
-                    width: 0;
-                    height: 0;
-                    opacity: 1;
-                }
-
-                64% {
-                    z-index: 4;
-                    background: #4285F4;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-
-                100% {
-                    z-index: 4;
-                    background: #4285F4;
-                    width: 800px;
-                    height: 800px;
-                    opacity: 1;
-                }
-            }
-
-            .button-signin:hover .red {
-                animation: disappear 0.1s forwards;
-                animation-delay: 0.1s;
-            }
-
-            .button-signin:hover .yellow {
-                animation: disappear 0.1s forwards;
-                animation-delay: 0.3s;
-            }
-
-            .button-signin:hover .green {
-                animation: disappear 0.1s forwards;
-                animation-delay: 0.7s;
-            }
-
-            .button-signin:hover .blue {
-                animation: disappear 0.1s forwards;
-                animation-delay: 1.1s;
-            }
-
-            @keyframes disappear {
-                from {
-                    filter: brightness(1);
-                }
-
-                to {
-                    filter: brightness(100);
-                }
-            }
-        </style>
+        <link href="css/style.css" rel="stylesheet">     
     </head>
     <body>
         <!-- Topbar Start -->
@@ -370,6 +151,19 @@
         </div>
         <!-- Navbar End -->
 
+        <!-- Breadcrumb Start -->
+        <div class="container-fluid">
+            <div class="row px-xl-5">
+                <div class="col-12">
+                    <nav class="breadcrumb bg-light mb-30">
+                        <a class="breadcrumb-item text-dark" href="home.jsp">Home</a>
+                        <span class="breadcrumb-item active">Sign In</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+
 
         <!--Sigin in form Start-->
         <div class="container-fluid">
@@ -388,24 +182,23 @@
                                     <h3>Sign In</h3>
                                 </div>
                                 <div class="form-floating mb-3">
+                                    <label for="floatingInput">Username</label>
                                     <input type="email" class="form-control" id="floatingInput"
                                            placeholder="Enter username">
-                                    <label for="floatingInput">Username</label>
+
                                 </div>
                                 <div class="form-floating mb-4">
+                                    <label for="floatingPassword">Password</label>
                                     <input type="password" class="form-control" id="floatingPassword"
                                            placeholder="Password">
-                                    <label for="floatingPassword">Password</label>
+
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div>
-                                    <a href="">Forgot Password</a>
+
+                                    <a href="forgotPassword.jsp">Forgot Password</a>
                                 </div>
                                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                                <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
+                                <p class="text-center mb-0">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
                                 <div class="d-flex align-items-center justify-content-between mb-4" style="margin: 28px 0 0 32px;">
                                     <button class="button-signin text-center" style="width: 310px; padding-left: 68px; ">
                                         <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" class="svg">

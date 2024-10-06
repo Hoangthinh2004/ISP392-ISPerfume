@@ -24,6 +24,12 @@ public class ProductDAO {
                                             +  "INNER JOIN Size S ON S.SizeID = PD.SizeID "
                                             +  "INNER JOIN Brands B ON B.BrandID = P.BrandID "
                                             +  "WHERE P.ProName LIKE ? AND P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4";
+    private static final String FILTER_SEARCH_RESULT_BY_SIZE = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
+                                                            +  "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+                                                            +  "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+                                                            +  "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+                                                            +  "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+                                                            +  "WHERE P.ProName LIKE ? AND P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4 AND PD.SizeID = ?";
     private static final String LIST_PRODUCT_BY_CATEGORY = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
                                                         +  "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
                                                         +  "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
@@ -73,6 +79,9 @@ public class ProductDAO {
                                                               + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
                                                               + "WHERE PC.CategoryID = ? AND P.BrandID = ? "
                                                               + "ORDER BY PD.Price DESC";
+    private static final String PRODUCT_INFORMATION = "SELECT P.ProductID, P.BrandID, P.ProName, P.Description, P.Country, P.ReleaseDate, P.FragranceFamilies FROM Products P "
+                                                    + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+                                                    + "WHERE P.ProductID = ?";
     
     public List<ViewProductDTO> getListProduct(String search) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
@@ -124,7 +133,7 @@ public class ProductDAO {
                     String descrip = rs.getString("Description");
                     String image = rs.getString("Image");
                     int status = rs.getInt("Status");
-                    ProductDTO newPro = new ProductDTO(productID, managerID, brandID, proName, descrip, image, status);
+                    ProductDTO newPro = new ProductDTO(productID, managerID, brandID, proName, descrip, image, "", 0, "", status);
                     listProduct.add(newPro);
                 }
             }
@@ -471,4 +480,64 @@ public class ProductDAO {
         }
         return listProductByBrand;
     }    
+
+    public List<ViewProductDTO> filterSearchResultBySize(String search, int sizeID) throws ClassNotFoundException, SQLException {
+        List<ViewProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(FILTER_SEARCH_RESULT_BY_SIZE);
+                ptm.setString(1, "%" + search + "%");
+                ptm.setInt(2, sizeID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("ProductID");
+                    int brandID = rs.getInt("BrandID");
+                    String sizeName = rs.getString("Name");
+                    String brandName = rs.getString("BrandName");
+                    String productName = rs.getString("ProName");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    listProduct.add(new ViewProductDTO(0, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
+                }
+            }
+        } finally {
+            if(rs!=null) rs.close();
+            if(ptm!=null) ptm.close();
+            if(conn!=null) conn.close();
+        }
+        return listProduct;
+    }
+
+    public List<ProductDTO> getProductInformation(int productID) throws ClassNotFoundException, SQLException {
+        List<ProductDTO> productInformation = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PRODUCT_INFORMATION);
+                ptm.setInt(1, productID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int brandID = rs.getInt("BrandID");
+                    String productName = rs.getString("ProName");
+                    String description = rs.getString("Description");
+                    String country = rs.getString("Country");
+                    int releaseDate = rs.getInt("ReleaseDate");
+                    String fragranceFamilies = rs.getString("FragranceFamilies");
+                    productInformation.add(new ProductDTO(productID, brandID, 0, productName, description, "", country, releaseDate, fragranceFamilies, 0));
+                }
+            }
+        } finally {
+            if(rs!=null) rs.close();
+            if(ptm!=null) ptm.close();
+            if(conn!=null) conn.close();
+        }
+        return productInformation;
+    }
 }

@@ -56,6 +56,12 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_PRODUCT = "SeacrhProduct";
     private static final String SEARCH_PRODUCT_CONTROLLER = "SearchProductController";
     
+    private static final String NAVIGATE_PRODUCT_DETAIL = "NavigateProductDetail";
+    private static final String NAVIGATE_PRODUCT_DETAIL_CONTROLLER = "NavigateProductDetailController";
+    
+    private static final String SHOW_PRICE_BY_SIZE = "PriceBySize";
+    private static final String SHOW_PRICE_BY_SIZE_CONTROLLER = "PriceBySizeController";
+    
     private static final String UPDATE_PRODUCT_DETAIL_MANAGER = "UpdateProductDetail";
     private static final String UPDATE_PRODUCT_DETAIL_MANAGER_CONTROLLER = "UpdateProductDetailManager";
     
@@ -92,6 +98,11 @@ public class MainController extends HttpServlet {
                 url = FILTER_BY_SIZE_CONTROLLER;
             } else if (SEARCH_PRODUCT.equals(action)) {
                 url = SEARCH_PRODUCT_CONTROLLER;
+            } else if (NAVIGATE_PRODUCT_DETAIL.equals(action)) {
+                url = NAVIGATE_PRODUCT_DETAIL_CONTROLLER;
+            } else if (SHOW_PRICE_BY_SIZE.equals(action)) {
+                url = SHOW_PRICE_BY_SIZE_CONTROLLER;
+            } 
             }else if(UPDATE_PRODUCT_DETAIL_MANAGER.equals(action)){
                 url = UPDATE_PRODUCT_DETAIL_MANAGER_CONTROLLER;
             }else if(DELETE_PRODUCT_DETAIL_MANAGER.equals(action)){
