@@ -56,7 +56,6 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_PRODUCT = "SeacrhProduct";
     private static final String SEARCH_PRODUCT_CONTROLLER = "SearchProductController";
 
-    
     private static final String VIEW_PROMOTION = "ViewPromotion";
     private static final String VIEW_PROMOTION_CONTROLLER = "ManagePromotionController";
 
@@ -65,7 +64,7 @@ public class MainController extends HttpServlet {
 
     private static final String UPDATE_PROMOTION = "UpdatePromotion";
     private static final String UPDATE_PROMOTION_CONTROLLER = "UpdatePromotionController";
-    
+
     private static final String NAVIGATE_PRODUCT_DETAIL = "NavigateProductDetail";
     private static final String NAVIGATE_PRODUCT_DETAIL_CONTROLLER = "NavigateProductDetailController";
 
@@ -78,10 +77,9 @@ public class MainController extends HttpServlet {
     private static final String DELETE_PRODUCT_DETAIL_MANAGER = "DeleteProductDetail";
     private static final String DELETE_PRODUCT_DETAIL_MANAGER_CONTROLLER = "DeleteProductDetailManager";
 
-    
     private static final String SORT_BY_PURCHASING = "SortByPurchasing";
     private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -118,7 +116,6 @@ public class MainController extends HttpServlet {
                 url = CREATE_PROMOTION_CONTROLLER;
             } else if (UPDATE_PROMOTION.equals(action)) {
                 url = UPDATE_PROMOTION_CONTROLLER;
-            } 
             } else if (NAVIGATE_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_PRODUCT_DETAIL_CONTROLLER;
             } else if (SHOW_PRICE_BY_SIZE.equals(action)) {
@@ -127,7 +124,6 @@ public class MainController extends HttpServlet {
                 url = UPDATE_PRODUCT_DETAIL_MANAGER_CONTROLLER;
             } else if (DELETE_PRODUCT_DETAIL_MANAGER.equals(action)) {
                 url = DELETE_PRODUCT_DETAIL_MANAGER_CONTROLLER;
-            }
             } else if (SORT_BY_PURCHASING.equals(action)) {
                 url = SORT_BY_PURCHASING_CONTROLLER;
             }
