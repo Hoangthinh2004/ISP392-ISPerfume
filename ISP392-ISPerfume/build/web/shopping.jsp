@@ -86,7 +86,7 @@
                                 <input type="text" class="form-control" placeholder="Search for products" name="search">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                        <button name="action" value="SeacrhProduct" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
                             </form>
@@ -162,9 +162,12 @@
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="#">Home</a>
-                        <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                        <span class="breadcrumb-item active">Shop List</span>
+                        <a class="breadcrumb-item text-dark" href="MainController?action=HomeController">Home</a>
+                        <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
+                            <c:if test="${category.categoryID == requestScope.LIST_PRODUCT[0].categoryID}">
+                                <span class="breadcrumb-item active">${category.name}</span>
+                            </c:if>
+                        </c:forEach>
                     </nav>
                 </div>
             </div>
@@ -217,7 +220,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="MainController?action=DescendingSortByPrice">Descending Price</a>
                                             <a class="dropdown-item" href="MainController?action=AscendingSortByPrice">Ascending price</a>
-                                            <a class="dropdown-item" href="#">Best Rating</a>
+                                            <a class="dropdown-item" href="MainController?action=SortByPurchasing">Best Seller</a>
                                         </div>
                                     </div>
                                     <div class="btn-group ml-2">
@@ -240,8 +243,8 @@
                                         <div class="product-action">
                                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                            
-                                            <a class="btn btn-outline-dark btn-square" href="MainController?productID=${Product.productID}"><i class="fa fa-search"></i></a>
+                                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                            <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}"><i class="fa fa-search"></i></a>
                                         </div>
                                     </div>
                                     <div class="text-center py-4">

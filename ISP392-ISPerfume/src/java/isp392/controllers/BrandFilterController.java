@@ -38,12 +38,12 @@ public class BrandFilterController extends HttpServlet {
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
             int categoryID = ids.get("categoryID");
             ids.put("brandID", brandID);
-            if (ids.containsKey("sizeID")) {               
+            if (ids.containsKey("sizeID")) { // Filter by brand after filtering by size
                 int sizeID = ids.get("sizeID");           
                 List<ViewProductDTO> listProduct = productDAO.filterProductByChildBrand(categoryID, brandID, sizeID);
                 request.setAttribute("LIST_PRODUCT", listProduct);
                 //session.removeAttribute("CURRENT_IDS");
-            } else {
+            } else { // Filter by brand after categorizing
                 List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
                 request.setAttribute("LIST_PRODUCT", listProduct);
             }            

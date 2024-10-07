@@ -95,7 +95,7 @@
                 <div class="col-lg-4 col-6 text-left">
                     <form action="MainController">
                         <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for products" name="search" value="${param.search}">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
                                         <button name="action" value="SeacrhProduct" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
