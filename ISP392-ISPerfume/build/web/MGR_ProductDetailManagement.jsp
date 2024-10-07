@@ -108,12 +108,12 @@
                     </a>
                     <form class="d-none d-md-flex ms-4" action="MainController" method="get">
                         <input type="hidden" name="productID" value="${param.productID}">
-                        <input class="form-control border-0" type="search" placeholder="Search" name="search">
-                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="SearchProductDetail" name="action">
+<!--                        <input class="form-control border-0" type="text" placeholder="" name="">
+                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="" name="action">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
-                        </button>
+                        </button>-->
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
@@ -204,7 +204,7 @@
                             <div class="bg-light text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">   
                                     <h6 class="mb-0">Product Management</h6>
-                                    <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create product</a>
+                                    <a href="MGR_CreateProductDetail.jsp?productID=${param.productID}" class="btn btn-primary">Create</a>
                                     <!--                                    <button class="btn btn-primary">
                                                                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -228,16 +228,21 @@
                                                 <c:forEach var="proDe" items="${requestScope.LIST_PRODUCT_DETAIL_MANAGER}">
                                                     <tr>
                                                         <td>
-                                                            ${proDe.sizeID}
+                                                            <form action="MainController" method="get">
+                                                                <c:forEach var="size" items="${sessionScope.SIZE_LIST_MANAGER}" >
+                                                                    <c:if test="${size.sizeID == proDe.sizeID}">
+                                                                        ${size.name}
+                                                                    </c:if>
+                                                                </c:forEach>
                                                         </td>
                                                         <td>
                                                             ${proDe.importDate}
                                                         </td>
                                                         <td>
-                                                            ${proDe.price}
+                                                            <input type="number" min="1" name="price" value="${proDe.price}" class="form-control border-0">
                                                         </td>
                                                         <td>
-                                                            ${proDe.stockQuantity}
+                                                            <input type="number" min="1" name="stockQuantiy" value="${proDe.stockQuantity}" class="form-control border-0">
                                                         </td>
                                                         <td>
                                                             ${proDe.numberOfPurchasing}
@@ -246,9 +251,12 @@
                                                             <img src="${proDe.image}" style="width: 100px; height: 100px; margin-right: 10px;">
                                                         </td>
                                                         <td>
-                                                            <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
-                                                            <input type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">
+                                                            <input type="hidden" name="productID" value="${proDe.productID}">
+                                                            <input type="hidden" name="sizeID" value="${proDe.sizeID}">
+                                                            <button type="submit" name="action" value="UpdateProductDetail" class="btn btn-sm btn-primary">Update</button>
+                                                            <button type="submit" name="action" value="DeleteProductDetail" class="btn btn-sm btn-primary">Delete</button>
                                                         </td>
+                                                        </form>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

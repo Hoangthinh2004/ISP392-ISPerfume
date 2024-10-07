@@ -18,36 +18,19 @@ public class ProductDetailDTO {
     private int stockQuantity;
     private int numberOfPurchasing;
     private Date importDate;
-    private String country;
-    private int releaseDate;
-    private String fragranceFamilies;
     private String image;
     private int status;
 
     public ProductDetailDTO() {
-        this.productID = 0;
-        this.sizeID = 0;
-        this.price = 0;
-        this.stockQuantity = 0;
-        this.numberOfPurchasing = 0;
-        this.importDate = null;
-        this.country = "";
-        this.releaseDate = 0;
-        this.fragranceFamilies = "";
-        this.image = "";
-        this.status = 0;
     }
 
-    public ProductDetailDTO(int productID, int sizeID, int price, int stockQuantity, int numberOfPurchasing, Date importDate, String country, int releaseDate, String fragranceFamilies, String image, int status) {
+    public ProductDetailDTO(int productID, int sizeID, int price, int stockQuantity, int numberOfPurchasing, Date importDate, String image, int status) {
         this.productID = productID;
         this.sizeID = sizeID;
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.numberOfPurchasing = numberOfPurchasing;
         this.importDate = importDate;
-        this.country = country;
-        this.releaseDate = releaseDate;
-        this.fragranceFamilies = fragranceFamilies;
         this.image = image;
         this.status = status;
     }
@@ -100,30 +83,6 @@ public class ProductDetailDTO {
         this.importDate = importDate;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public int getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(int releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public String getFragranceFamilies() {
-        return fragranceFamilies;
-    }
-
-    public void setFragranceFamilies(String fragranceFamilies) {
-        this.fragranceFamilies = fragranceFamilies;
-    }
-
     public String getImage() {
         return image;
     }
@@ -139,9 +98,6 @@ public class ProductDetailDTO {
     public void setStatus(int status) {
         this.status = status;
     }
-    
 
-    
-    
     
 }
