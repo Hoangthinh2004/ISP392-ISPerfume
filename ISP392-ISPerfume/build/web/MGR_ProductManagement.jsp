@@ -109,7 +109,7 @@
                     <form class="d-none d-md-flex ms-4" action="MainController" method="get">
                         <input class="form-control border-0" type="search" placeholder="Search" name="search">
 
-                        <button class="btn btn-primary" type="submit" name="action" value="Search" style="margin-left: 10px;">
+                        <button class="btn btn-primary" type="submit" name="action" value="Search product" style="margin-left: 10px;">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -220,9 +220,12 @@
                                                     <th scope="col">ProductID</th>
                                                     <th scope="col">Brand</th>
                                                     <th scope="col">Name</th>
+                                                    <th scope="col">Release year</th>
                                                     <th scope="col">Descrption</th>
+                                                    <th scope="col">Country</th>
+                                                    <th scope="col">Fragrance Families</th>
                                                     <th scope="col">Image</th>
-                                                    <th scope="col">Status</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -249,23 +252,28 @@
                                                             <input type="text" name="productName" value="${pro.name}" class="form-control">
                                                         </td>
                                                         <td>
-                                                            <input type="text" name="description" value="${pro.description}>
+                                                            ${pro.releaseDate}
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="description" value="${pro.description}" class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="country"  value="${pro.country}" class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="fragranceFamilies"  value="${pro.fragranceFamilies}" class="form-control">
                                                         </td>
                                                         <td>
                                                             <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px;">
                                                             <input type="hidden" value="${pro.image}" name="existingImage">
                                                         </td>
                                                         <td>
-                                                            <c:if test="${pro.status==1}">
-                                                                AVAILABLE
-                                                            </c:if>
-                                                        </td>
-                                                        <td>
                                                             <input type="hidden" name="status" value="${pro.status}" >
+                                                            <input type="hidden" name="releaseDate" value="${pro.releaseDate}" >
                                                             <input type="hidden" name="productID" value="${pro.productID}">
                                                             <input type="hidden" name="search" value="${requestScope.SEARCH}">
                                                             <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
-                                                            <input type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">
+                                                            <button type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">Delete</button>
                                                             <button type="submit" name="action" value="ProductDetailPage" class="btn btn-sm btn-primary">Detail</button>
                                                         </td>
                                                         </form>

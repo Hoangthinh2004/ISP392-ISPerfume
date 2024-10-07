@@ -1,6 +1,6 @@
 <%-- 
-    Document   : MGR_CreateProduct
-    Created on : Sep 25, 2024, 9:29:34 PM
+    Document   : MGR_CreatePromotion
+    Created on : Sep 26, 2024, 12:33:15 PM
     Author     : User
 --%>
 
@@ -69,7 +69,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MGR_ProductManagement.jsp" class="dropdown-item active">Product Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item active">Product Management</a>
                                 <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
                                 <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
                             </div>
@@ -103,9 +103,9 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                    </form>
+                    <!--                    <form class="d-none d-md-flex ms-4">
+                                            <input class="form-control border-0" type="search" placeholder="Search">
+                                        </form>-->
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -184,63 +184,39 @@
                     </div>
                 </nav>
                 <!-- Navbar End -->
+
+
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
                                 <h6 class="mb-4">Create Form</h6>
-                                <form action="CreateProductManager" method="post" enctype="multipart/form-data">
+                                <form action="CreateProductDetailManager" method="post" enctype="multipart/form-data">
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Name</label>
+                                        <label  class="col-sm-2 col-form-label">Price</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productName" required="" class="form-control" placeholder="${requestScope.ERROR.productName}">
+                                            <input type="number" name="price" class="form-control" min="1">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Decription</label>
+                                        <label  class="col-sm-2 col-form-label">Quantity</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="description" class="form-control">
+                                            <input type="number" name="quantity" class="form-control" min="1">
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Country</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="country" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Release date</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="releaaseDate" class="form-control" min="1900" max="2024">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Fragrance</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="fregranceFamilies" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="brandImage"  class="col-sm-2 col-form-label">Image</label>
-                                        <div class="col-sm-10">
-                                            <input type="file" name="brandImage" class="form-control" required="">
-                                        </div>
-                                    </div>
-                                    Brand <select name="brandID" class="form-select mb-3" aria-label="Default select example" required="">
-                                        <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
-                                            <option value="${brand.brandID}">${brand.name}</option>
+                                    <select class="form-select mb-3" aria-label="Default select example" name="sizeID">
+                                        <c:forEach var="size" items="${sessionScope.SIZE_LIST_MANAGER}">
+                                            <option value="${size.sizeID}">${size.name}</option>
                                         </c:forEach>
                                     </select>
-                                    Category <select name="categoryID" class="form-select mb-3" aria-label="Default select example" required="">
-                                        <c:forEach var="cate" items="${sessionScope.CATEGORY_LIST_MANAGER}">
-                                            <c:if test="${cate.categoryID!=4}">
-                                                <option value="${cate.categoryID}">${cate.name}</option>
-                                            </c:if>
-                                        </c:forEach>
-                                    </select>
-                                    <button type="submit"class="btn btn-primary">CREATE</button>
-                                    <input type="hidden" name="search" value="${requestScope.SEARCH}">
+                                    ${requestScope.CREATE_PRODUCT_DETAIL_ERROR.sizeIDErr}
+                                    <div class="mb-3">
+                                        <label for="productDetailImage" class="form-label">Picture</label>
+                                        <input class="form-control" type="file" id="formFile" name="productDetailImage">
+                                    </div>
+                                    <input type="hidden" name="productID" value="${param.productID}">
+                                    <button type="submit" class="btn btn-primary">CREATE</button>
                                 </form>
                             </div>
                         </div>
@@ -256,7 +232,8 @@
                             <div class="col-12 col-sm-6 text-center text-sm-start">
                                 &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
                             </div>
-                            <div class="col-12 col-sm-6 text-center text-sm-end">                               
+                            <div class="col-12 col-sm-6 text-center text-sm-end">
+                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                                 Designed By <a href="https://htmlcodex.com">HTML Codex</a>
                             </div>
                         </div>
@@ -271,9 +248,6 @@
             <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </div>
 
-        <!-- JavaScript Libraries -->
-        <!-- JavaScript Libraries -->
-        <!-- JavaScript Libraries -->
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

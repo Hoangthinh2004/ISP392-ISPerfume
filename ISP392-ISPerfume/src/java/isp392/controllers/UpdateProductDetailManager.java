@@ -33,9 +33,7 @@ public class UpdateProductDetailManager extends HttpServlet {
            int sizeID = Integer.parseInt(request.getParameter("sizeID"));
            int price = Integer.parseInt(request.getParameter("price"));
            int stockQuantity = Integer.parseInt(request.getParameter("stockQuantiy"));
-           String country = request.getParameter("country");
-           String fragranceFamilies = request.getParameter("fragranceFamilies");
-           boolean check = dao.updateProductDetail(productID,sizeID,price,stockQuantity, country, fragranceFamilies);
+           boolean check = dao.updateProductDetail(productID,sizeID,price,stockQuantity);
            if(check){
                url = SUCCESS;
            }

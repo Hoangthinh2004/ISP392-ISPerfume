@@ -108,12 +108,12 @@
                     </a>
                     <form class="d-none d-md-flex ms-4" action="MainController" method="get">
                         <input type="hidden" name="productID" value="${param.productID}">
-                        <input class="form-control border-0" type="search" placeholder="Search" name="search">
-                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="SearchProductDetail" name="action">
+<!--                        <input class="form-control border-0" type="text" placeholder="" name="">
+                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="" name="action">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
-                        </button>
+                        </button>-->
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
@@ -204,7 +204,7 @@
                             <div class="bg-light text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">   
                                     <h6 class="mb-0">Product Management</h6>
-                                    <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create product</a>
+                                    <a href="MGR_CreateProductDetail.jsp?productID=${param.productID}" class="btn btn-primary">Create</a>
                                     <!--                                    <button class="btn btn-primary">
                                                                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -221,8 +221,6 @@
                                                     <th scope="col">Price</th>
                                                     <th scope="col">Stock quantity</th>
                                                     <th scope="col">Number of purchasing</th>
-                                                    <th scope="col">Country</th>
-                                                    <th scope="col">Fragrance families </th>
                                                     <th scope="col">Image</th>
                                                 </tr>
                                             </thead>
@@ -248,12 +246,6 @@
                                                         </td>
                                                         <td>
                                                             ${proDe.numberOfPurchasing}
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" name="country" value="${proDe.country}" class="form-control border-0">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" name="fragranceFamilies" value="${proDe.fragranceFamilies}" class="form-control border-0">
                                                         </td>
                                                         <td>
                                                             <img src="${proDe.image}" style="width: 100px; height: 100px; margin-right: 10px;">
