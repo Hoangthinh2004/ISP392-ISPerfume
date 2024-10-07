@@ -40,6 +40,10 @@
         <servlet-name>PriceBySizeController</servlet-name>
         <servlet-class>isp392.controllers.PriceBySizeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SortByPurchasingController</servlet-name>
+        <servlet-class>isp392.controllers.SortByPurchasingController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>PriceBySizeController</servlet-name>
         <url-pattern>/PriceBySizeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortByPurchasingController</servlet-name>
+        <url-pattern>/SortByPurchasingController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
