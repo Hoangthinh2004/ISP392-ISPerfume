@@ -86,7 +86,7 @@
                                 <input type="text" class="form-control" placeholder="Search for products" name="search">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                        <button name="action" value="SeacrhProduct" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
                             </form>
@@ -162,9 +162,10 @@
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="#">Home</a>
+                        <h3>We have ${requestScope.SEARCH_RESULT_SIZE} Perfume bottles</h3>
+<!--                        <a class="breadcrumb-item text-dark" href="MainController?action=HomeController">Home</a>
                         <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                        <span class="breadcrumb-item active">Shop List</span>
+                        <span class="breadcrumb-item active">Shop List</span>-->
                     </nav>
                 </div>
             </div>
@@ -208,7 +209,6 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="MainController?action=DescendingSortByPrice">Descending Price</a>
                                             <a class="dropdown-item" href="MainController?action=AscendingSortByPrice">Ascending price</a>
-                                            <a class="dropdown-item" href="#">Best Rating</a>
                                         </div>
                                     </div>
                                     <div class="btn-group ml-2">

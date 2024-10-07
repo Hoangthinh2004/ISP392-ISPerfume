@@ -81,7 +81,7 @@
                                 <input type="text" class="form-control" placeholder="Search for products" name="search">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                        <button name="action" value="SeacrhProduct" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
                             </form>
@@ -166,9 +166,9 @@
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="#">Home</a>
-                        <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                        <span class="breadcrumb-item active">Shop Detail</span>
+                        <a class="breadcrumb-item text-dark" href="MainController?action=HomeController">Home</a>
+                        <a class="breadcrumb-item text-dark" href="#">Coding: Navigate to Category of this Product Name </a>
+                        <span class="breadcrumb-item active">${sessionScope.PRODUCT_NAME}</span>
                     </nav>
                 </div>
             </div>

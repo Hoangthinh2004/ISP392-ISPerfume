@@ -30,26 +30,37 @@ import javax.servlet.http.HttpSession;
 public class NavigateProductDetailController extends HttpServlet {
 
     private static final String ERROR = "shopping.jsp";
+    private static final String ERROR_SEARCH = "shoppingSearch.jsp";
     private static final String SUCCESS = "productDetail.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = "";
+        HttpSession session = request.getSession();
+        Object search = session.getAttribute("CURRENT_SEARCH");
+        Object category = session.getAttribute("CURRENT_IDS");
+        if (search != null) {
+            url = ERROR_SEARCH;
+        } else if (category != null) {
+            url = ERROR;
+        }      
         try {
-            HttpSession session = request.getSession();
+            
             int productID = Integer.parseInt(request.getParameter("productID"));
             int sizeID = Integer.parseInt(request.getParameter("sizeID"));
             
             Map<String, Integer> listProIDs = new HashMap<>();
             listProIDs.put("productID", productID);
-            session.setAttribute("CURRENT_PRODUCT_ID", listProIDs);
+            session.setAttribute("CURRENT_PRODUCT_ID", listProIDs); // Storing productID for PriceBySizeController
             
             SizeDAO sizeDAO = new SizeDAO();
             List<SizeDTO> sizeAvailable =  sizeDAO.getAvailableSize(productID);
             if (sizeAvailable.size() > 0) {
                 session.setAttribute("AVAILABLE_SIZE", sizeAvailable);
             }
+            
+            //Get Category Name except Brand in Cate
             
             ProductDetailDAO productDetailDAO = new ProductDetailDAO();
             List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);           
@@ -66,6 +77,8 @@ public class NavigateProductDetailController extends HttpServlet {
             List<ProductDTO> productInformation = productDAO.getProductInformation(productID);
             if (productInformation.size() > 0) {
                 session.setAttribute("PRODUCT_INFORMATION", productInformation);
+                String productName = productInformation.get(0).getName();
+                session.setAttribute("PRODUCT_NAME", productName);
             }
             url = SUCCESS;            
         } catch (Exception e) {

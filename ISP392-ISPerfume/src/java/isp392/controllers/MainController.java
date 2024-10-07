@@ -62,6 +62,9 @@ public class MainController extends HttpServlet {
     private static final String SHOW_PRICE_BY_SIZE = "PriceBySize";
     private static final String SHOW_PRICE_BY_SIZE_CONTROLLER = "PriceBySizeController";
     
+    private static final String SORT_BY_PURCHASING = "SortByPurchasing";
+    private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -96,7 +99,9 @@ public class MainController extends HttpServlet {
                 url = NAVIGATE_PRODUCT_DETAIL_CONTROLLER;
             } else if (SHOW_PRICE_BY_SIZE.equals(action)) {
                 url = SHOW_PRICE_BY_SIZE_CONTROLLER;
-            } 
+            } else if (SORT_BY_PURCHASING.equals(action)) {
+                url = SORT_BY_PURCHASING_CONTROLLER;
+            }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
