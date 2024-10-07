@@ -12,26 +12,26 @@ import java.sql.Date;
  */
 public class PromotionDTO {
     private int promotionID;
+    private String promotionName;
     private int managerID;
-    private String name;
     private String description;
     private Date startDate;
     private Date endDate;
-    private int discountPercent;
+    private int discountPer;
     private int condition;
-    private boolean status;
+    private int status;
 
     public PromotionDTO() {
     }
 
-    public PromotionDTO(int promotionID, int managerID, String name, String description, Date startDate, Date endDate, int discountPercent, int condition, boolean status) {
+    public PromotionDTO(int promotionID, int managerID, String promotionName, String description, Date startDate, Date endDate, int discountPer, int condition, int status) {
         this.promotionID = promotionID;
         this.managerID = managerID;
-        this.name = name;
+        this.promotionName = promotionName;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.discountPercent = discountPercent;
+        this.discountPer = discountPer;
         this.condition = condition;
         this.status = status;
     }
@@ -52,12 +52,12 @@ public class PromotionDTO {
         this.managerID = managerID;
     }
 
-    public String getName() {
-        return name;
+    public String getPromotionName() {
+        return promotionName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPromotionName(String promotionName) {
+        this.promotionName = promotionName;
     }
 
     public String getDescription() {
@@ -84,12 +84,12 @@ public class PromotionDTO {
         this.endDate = endDate;
     }
 
-    public int getDiscountPercent() {
-        return discountPercent;
+    public int getDiscountPer() {
+        return discountPer;
     }
 
-    public void setDiscountPercent(int discountPercent) {
-        this.discountPercent = discountPercent;
+    public void setDiscountPer(int discountPer) {
+        this.discountPer = discountPer;
     }
 
     public int getCondition() {
@@ -100,13 +100,15 @@ public class PromotionDTO {
         this.condition = condition;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+    
 
     
     
