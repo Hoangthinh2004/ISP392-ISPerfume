@@ -204,6 +204,24 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Country</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="country" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Release date</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="releaaseDate" class="form-control" min="1900" max="2024">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Fragrance</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="fregranceFamilies" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
                                         <label for="brandImage"  class="col-sm-2 col-form-label">Image</label>
                                         <div class="col-sm-10">
                                             <input type="file" name="brandImage" class="form-control" required="">
