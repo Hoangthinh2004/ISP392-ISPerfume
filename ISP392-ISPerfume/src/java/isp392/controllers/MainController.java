@@ -109,8 +109,7 @@ public class MainController extends HttpServlet {
             } else if (CREATE_PROMOTION.equals(action)) {
                 url = CREATE_PROMOTION_CONTROLLER;
             } else if (UPDATE_PROMOTION.equals(action)) {
-                url = UPDATE_PROMOTION_CONTROLLER;
-            } 
+                url = UPDATE_PROMOTION_CONTROLLER; 
             } else if (NAVIGATE_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_PRODUCT_DETAIL_CONTROLLER;
             } else if (SHOW_PRICE_BY_SIZE.equals(action)) {
