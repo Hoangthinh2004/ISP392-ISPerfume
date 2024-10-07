@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class SizeFilterController extends HttpServlet {
 
     private static final String ERROR = "shopping.jsp";
-    private static final String SUCCESS = "shopping.jsp";
+    private static final String SUCCESS_CATEGORY = "shopping.jsp";
     private static final String SUCCESS_SEARCH = "shoppingSearch.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,24 +34,38 @@ public class SizeFilterController extends HttpServlet {
             ProductDAO productDAO = new ProductDAO();
 
             HttpSession session = request.getSession();
-            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            
-            if (ids != null) { // Filter by size from Category 
-                int categoryID = ids.get("categoryID");
-                ids.put("sizeID", sizeID);
-                if (ids.containsKey("brandID")) {
-                    int brandID = ids.get("brandID");
-                    List<ViewProductDTO> listProduct = productDAO.filterProductByChildSize(categoryID, brandID, sizeID);
-                    request.setAttribute("LIST_PRODUCT", listProduct);
-                    //session.removeAttribute("CURRENT_IDS");
-                } else if (!ids.containsKey("brandID")) {
-                    List<ViewProductDTO> listProduct = productDAO.filterProductBySize(sizeID, categoryID);
-                    request.setAttribute("LIST_PRODUCT", listProduct);
+            Map<String, Integer> categoryIDs = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+            Map<String, Integer> searchIDs = (Map<String, Integer>) session.getAttribute("SEARCH_IDS"); // Get attribute from searchProductController
+
+            if (categoryIDs != null) { // Filter by size from Category 
+                int categoryID = categoryIDs.get("categoryID");
+                categoryIDs.put("sizeID", sizeID);
+                if (session.getAttribute("CURRENT_SEARCH") != null) { // Categorize -> Search -> Filter by size
+                    String search = (String) session.getAttribute("CURRENT_SEARCH");
+                    searchIDs.put("sizeID", sizeID);
+                    List<ViewProductDTO> listProduct = productDAO.filterSearchResultBySize(search, sizeID);
+                    int listSize = listProduct.size();
+                    request.setAttribute("SEARCH_RESULT_SIZE", listSize);
+                    request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
+                    url = SUCCESS_SEARCH;
+                } else {
+                    if (categoryIDs.containsKey("brandID")) { // Filter by size after filtering by brand
+                        int brandID = categoryIDs.get("brandID");
+                        List<ViewProductDTO> listProduct = productDAO.filterProductByChildSize(categoryID, brandID, sizeID);
+                        request.setAttribute("LIST_PRODUCT", listProduct);
+                        //session.removeAttribute("CURRENT_IDS");
+                    } else { //Filter by size after categorizing
+                        List<ViewProductDTO> listProduct = productDAO.filterProductBySize(sizeID, categoryID);
+                        request.setAttribute("LIST_PRODUCT", listProduct);
+                    }
+                    url = SUCCESS_CATEGORY;
                 }
-                url = SUCCESS;
-            } else { // Filter by Size from Search result
+            } else { // Filter by Size from Search result                
                 String search = (String) session.getAttribute("CURRENT_SEARCH");
+                searchIDs.put("sizeID", sizeID);
                 List<ViewProductDTO> listProduct = productDAO.filterSearchResultBySize(search, sizeID);
+                int listSize = listProduct.size();
+                request.setAttribute("SEARCH_RESULT_SIZE", listSize);
                 request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
                 url = SUCCESS_SEARCH;
             }

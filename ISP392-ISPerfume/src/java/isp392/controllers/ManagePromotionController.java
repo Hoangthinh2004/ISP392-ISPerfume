@@ -5,49 +5,40 @@
  */
 package isp392.controllers;
 
-import isp392.product.ProductDAO;
-import isp392.product.ViewProductDTO;
+import isp392.promotion.PromotionDAO;
+import isp392.promotion.PromotionDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ThinhHoang
+ * @author anhng
  */
-public class SearchProductController extends HttpServlet {
+@WebServlet(name = "ManagePromotionController", urlPatterns = {"/ManagePromotionController"})
+public class ManagePromotionController extends HttpServlet {
 
-    private static final String ERROR ="HomeController";
-    private static final String SUCCESS = "shoppingSearch.jsp";
+    private static final String ERROR = "home.jsp";
+    private static final String SUCCESS = "MGR_PromotionManagement.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try {
-            HttpSession session = request.getSession();
-            String search = request.getParameter("search");
-            session.setAttribute("CURRENT_SEARCH", search);
-            
-            ProductDAO productDAO = new ProductDAO();
-            List<ViewProductDTO> listProduct = productDAO.getListProduct(search);
-            int listSize = listProduct.size();
-            
-            request.setAttribute("SEARCH_RESULT_SIZE", listSize);
-            request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
-            
-            Map<String, Integer> listProductID = new HashMap<>();
-            session.setAttribute("SEARCH_IDS", listProductID); //  storing search key to filter by size of search result
-            
-            url = SUCCESS;     
+        try {           
+            PromotionDAO dao = new PromotionDAO();
+            List<PromotionDTO> listPromotion = dao.getListPromotion();
+            if(listPromotion.size() > 0) {
+                request.setAttribute("LIST_PROMOTION", listPromotion);
+                url = SUCCESS;
+            }
         } catch (Exception e) {
-            log("Error at SearchProductController: " + e.toString());
+            log("Error at ManagementPromotionController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
