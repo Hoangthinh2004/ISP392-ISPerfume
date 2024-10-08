@@ -200,7 +200,8 @@
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Decription</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="description" class="form-control">
+<!--                                            <input type="text" name="description" class="form-control">-->
+                                            <textarea name="description" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -218,7 +219,8 @@
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Fragrance</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="fregranceFamilies" class="form-control">
+<!--                                            <input type="text" name="fregranceFamilies" class="form-control">-->
+                                            <textarea name="fregranceFamilies" class="form-control"></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">

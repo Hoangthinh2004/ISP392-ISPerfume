@@ -60,11 +60,11 @@ public class ProductDAO {
                                                              + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
                                                              + "INNER JOIN Brands B ON B.BrandID = P.BrandID " 
                                                              + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? AND P.BrandID = ? AND PD.SizeID = ?";
-    private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, BrandID, ManagerID, ProName, Description, Image, Country, ReleaseDate, FragranceFamilies, Status FROM Products WHERE ProName LIKE ? AND Status = 1";
-    private static final String UPDATE_PRODUCT_MANAGER = "UPDATE Products SET BrandID = ?, ProName = ?, Description = ?, Image = ? , Country = ?,  FragranceFamilies= ? WHERE ProductID = ?";
+    private static final String LIST_PRODUCT_MANAGER = "SELECT ProductID, BrandID, ManagerID, ProName, Description, Image, Country, ReleaseDate, FragranceFamilies, Status FROM Products WHERE ProName LIKE ?";
+    private static final String UPDATE_PRODUCT_MANAGER = "UPDATE Products SET BrandID = ?, ProName = ?, Description = ?, Image = ? , Country = ?,  FragranceFamilies= ?, Status = ? WHERE ProductID = ?";
     private static final String INSERT_PRODUCT_MANAGER = "INSERT INTO Products(BrandID, ManagerID, Description, Image, ProName, Status, Country, ReleaseDate, FragranceFamilies) VALUES(?,?,?,?,?,?,?,?,?)";
     private static final String CHECK_DUPLICATE_PRODUCT_BY_NAME = "SELECT ProductID FROM Products WHERE ProName LIKE ?";
-    private static final String DELETE_PRODUCT_MANAGER = "UPDATE Products SET Status = 0 WHERE ProductID = ? ";
+    private static final String DELETE_PRODUCT_MANAGER = "DELETE FROM Products WHERE ProductID = ? ";
     private static final String DESCENDING_PRODUCT_BY_PRICE = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
                                                             + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
                                                             + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
@@ -257,7 +257,7 @@ public class ProductDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
-//          UPDATE Products SET BrandID = ?, ProName = ?, Description = ?, Image = ? , Country = ?, FragranceFamilies=? WHERE ProductID = ?
+//          UPDATE Products SET BrandID = ?, ProName = ?, Description = ?, Image = ? , Country = ?, FragranceFamilies=?, Status = ? WHERE ProductID = ?
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(UPDATE_PRODUCT_MANAGER);
@@ -267,7 +267,8 @@ public class ProductDAO {
                 ptm.setString(4, pro.getImage());
                 ptm.setString(5, pro.getCountry());
                 ptm.setString(6, pro.getFragranceFamilies());
-                ptm.setInt(7, pro.getProductID());
+                ptm.setInt(7, pro.getStatus());
+                ptm.setInt(8, pro.getProductID());
                 check = ptm.executeUpdate() > 0;
             }
         } finally {

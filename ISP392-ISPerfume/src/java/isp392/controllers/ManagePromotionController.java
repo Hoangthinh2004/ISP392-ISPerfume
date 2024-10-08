@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ManagePromotionController", urlPatterns = {"/ManagePromotionController"})
 public class ManagePromotionController extends HttpServlet {
 
-    private static final String ERROR = "home.jsp";
+    private static final String ERROR = "MGR_PromotionManagement.jsp";
     private static final String SUCCESS = "MGR_PromotionManagement.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

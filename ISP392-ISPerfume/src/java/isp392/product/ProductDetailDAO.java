@@ -23,9 +23,9 @@ import java.util.List;
 public class ProductDetailDAO {
 
 //    private static final String LIST_PRODUCT_DETAIL = "SELECT * FROM ProductDetail WHERE ProductID = ? AND Status = 1";
-    private static final String UPDATE_PRODUCT_DETAIL = "UPDATE ProductDetail SET Price = ?, StockQuantity = ? WHERE ProductID = ? AND SizeID = ?";
-    private static final String DELETE_PRODUCT_DETAIL = "UPDATE ProductDetail SET Status = 0 WHERE ProductID = ? AND SizeID = ?";
-    private static final String LIST_PRODUCT_DETAIL = "SELECT * FROM ProductDetail WHERE ProductID = ? AND Status = 1";
+    private static final String UPDATE_PRODUCT_DETAIL = "UPDATE ProductDetail SET Price = ?, StockQuantity = ?, Status = ?, Image = ? WHERE ProductID = ? AND SizeID = ?";
+    private static final String DELETE_PRODUCT_DETAIL = "DELETE FROM ProductDetail WHERE ProductID = ? AND SizeID = ?";
+    private static final String LIST_PRODUCT_DETAIL = "SELECT * FROM ProductDetail WHERE ProductID = ?";
     private static final String VIEW_PRODUCT_DETAIL = "SELECT P.ProductID, S.SizeID, P.ProName, P.Description, PD.Price ,S.Name, PD.NumberOfPurchasing, PD.Country, PD.ReleaseDate, PD.FragranceFamilies, PD.Image FROM ProductDetail PD "
             + "INNER JOIN Products P ON PD.ProductID = P.ProductID "
             + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
@@ -74,18 +74,21 @@ public class ProductDetailDAO {
         return list;
     }
 
-    public boolean updateProductDetail(int productID, int sizeID, int price, int stockQuantity) throws SQLException, ClassNotFoundException {
+    public boolean updateProductDetail(int productID, int sizeID, int price, int stockQuantity, String image ,int status) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ptm = null;
         boolean check = false;
         try {
+//            UPDATE ProductDetail SET Price = ?, StockQuantity = ?, Status = ?, Image = ? WHERE ProductID = ? AND SizeID = ?
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(UPDATE_PRODUCT_DETAIL);
                 ptm.setInt(1, price);
                 ptm.setInt(2, stockQuantity);
-                ptm.setInt(3, productID);
-                ptm.setInt(4, sizeID);
+                ptm.setInt(3, status);
+                ptm.setString(4, image);
+                ptm.setInt(5, productID);
+                ptm.setInt(6, sizeID);
                 check = ptm.executeUpdate() > 0;
             }
         } finally {
