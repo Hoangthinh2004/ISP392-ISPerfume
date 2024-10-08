@@ -217,7 +217,6 @@
                                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                                             <thead>
                                                 <tr class="text-dark">
-                                                    <th scope="col">ProductID</th>
                                                     <th scope="col">Brand</th>
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Release year</th>
@@ -232,11 +231,8 @@
                                                 <c:forEach var="pro" varStatus="counter" items="${requestScope.SHOW_ALL_PRODUCT_MANAGER}">
                                                     <tr>
                                                         <td>
-                                                            ${pro.productID}
-                                                        </td>
-                                                        <td>
-                                                            <form action="MainController" method="get" enctype="multipart/form-data">
-                                                                <select name="brandID">
+                                                            <form action="UpdateProductManager" method="post" enctype="multipart/form-data">
+                                                                <select name="brandID" class="form-select mb-3">
                                                                     <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
                                                                         <option value="${brand.brandID}"
                                                                                 <c:if test="${brand.brandID == pro.brandID}">
@@ -266,6 +262,16 @@
                                                         <td>
                                                             <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px;">
                                                             <input type="hidden" value="${pro.image}" name="existingImage">
+                                                            <label for="image"  class="col-sm-2 col-form-label">Image</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="file" name="image" class="form-control">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <select name="status" class="form-select mb-3" aria-label="Default select example">
+                                                                <option value="1" ${pro.status == 1 ? 'selected' : ''}>Available</option>
+                                                                <option value="0" ${pro.status == 0 ? 'selected' : ''}>Unavailable</option>
+                                                            </select>
                                                         </td>
                                                         <td>
                                                             <input type="hidden" name="status" value="${pro.status}" >
@@ -273,10 +279,15 @@
                                                             <input type="hidden" name="productID" value="${pro.productID}">
                                                             <input type="hidden" name="search" value="${requestScope.SEARCH}">
                                                             <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
-                                                            <button type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">Delete</button>
-                                                            <button type="submit" name="action" value="ProductDetailPage" class="btn btn-sm btn-primary">Detail</button>
+                                                            <!-- <button type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">Delete</button>-->
                                                         </td>
                                                         </form>
+                                                        <td>
+                                                            <form action="MainController" method="get">
+                                                                <button type="submit" name="action" value="ProductDetailPage" class="btn btn-sm btn-primary">Detail</button>
+                                                                <input type="hidden" name="productID" value="${pro.productID}">
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -325,20 +336,20 @@
 
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
-        <!--        <script>
-                    window.onload = function () {
-                        const searchInput = document.querySelector('input[name="search"]');
-                        const form = searchInput.form;
-                        if (!sessionStorage.getItem('isSubmitted')) {
-                            const hiddenAction = document.createElement('input');
-                            hiddenAction.type = 'hidden';
-                            hiddenAction.name = 'action';
-                            hiddenAction.value = 'Search';
-                            form.appendChild(hiddenAction);
-                            form.submit();
-                            sessionStorage.setItem('isSubmitted', 'true');
-                        }
-                    };
-                </script>-->
+        <script>
+            window.onload = function () {
+                const searchInput = document.querySelector('input[name="search"]');
+                const form = searchInput.form;
+                if (!sessionStorage.getItem('isSubmitted')) {
+                    const hiddenAction = document.createElement('input');
+                    hiddenAction.type = 'hidden';
+                    hiddenAction.name = 'action';
+                    hiddenAction.value = 'Search product';
+                    form.appendChild(hiddenAction);
+                    form.submit();
+                    sessionStorage.setItem('isSubmitted', 'true');
+                }
+            };
+        </script>
     </body>
 </html>
