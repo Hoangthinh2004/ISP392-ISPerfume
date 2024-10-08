@@ -3,14 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ProductDetailDAO.java</file>
-            <file>file:/C:/cancaucom/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/MainController.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/CreatePromotionController.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/UpdatePromotionController.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/ManagePromotionController.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/MainController.java</file>
-        </group>
-        <group>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/product/ViewProductDTO.java</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/profile.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfume/web/signin.jsp</file>
@@ -155,6 +147,10 @@
         </group>
         <group>
             <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfume/src/java/isp392/controllers/AscendingProductByPriceController.java</file>
+        </group>
+        <group>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/ShowAllProductManager.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfume/src/java/isp392/controllers/AscendingProductByPriceController.java</file>
         </group>
     </open-files>
 </project-private>
