@@ -167,7 +167,7 @@
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
                         <a class="breadcrumb-item text-dark" href="MainController?action=HomeController">Home</a>
-                        <a class="breadcrumb-item text-dark" href="#">Coding: Navigate to Category of this Product Name </a>
+                        <a class="breadcrumb-item text-dark" href="MainController?action=NavigateShopping&brandID=${requestScope.CURRENT_BRAND_ID}">${sessionScope.BRAND_BY_PRODUCT}</a>
                         <span class="breadcrumb-item active">${sessionScope.PRODUCT_NAME}</span>
                     </nav>
                 </div>
@@ -221,7 +221,7 @@
                                     <c:forEach var="size" items="${sessionScope.AVAILABLE_SIZE}">
                                         <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" class="custom-control-input" id="${size.sizeID}" name="selectedSize" value="${size.sizeID}"
-                                                   onclick="redirectToController(${size.sizeID})">
+                                                   onclick="(${size.sizeID})">
                                             <label class="custom-control-label" for="${size.sizeID}">${size.name}</label>
                                         </div>
                                     </c:forEach>

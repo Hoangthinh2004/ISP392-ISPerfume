@@ -39,7 +39,7 @@ public class SearchProductController extends HttpServlet {
             List<ViewProductDTO> listProduct = productDAO.getListProduct(search);
             int listSize = listProduct.size();
             
-            request.setAttribute("SEARCH_RESULT_SIZE", listSize);
+            request.setAttribute("SEARCH_RESULT_SIZE", listSize); // show number of perfume
             request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
             
             Map<String, Integer> listProductID = new HashMap<>();

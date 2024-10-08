@@ -12,7 +12,9 @@ import isp392.category.CategoryDTO;
 import isp392.size.SizeDAO;
 import isp392.size.SizeDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +35,10 @@ public class HomeController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
+            
+            Map<String, Integer> ids = new HashMap<>();
+            session.setAttribute("CURRENT_IDS", ids);
+            
             CategoryDAO categoryDAO = new CategoryDAO();
             BrandDAO brandDAO = new BrandDAO();
             SizeDAO sizeDAO = new SizeDAO();

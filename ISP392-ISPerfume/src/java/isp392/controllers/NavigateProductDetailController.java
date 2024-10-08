@@ -5,6 +5,8 @@
  */
 package isp392.controllers;
 
+import isp392.brand.BrandDAO;
+import isp392.brand.BrandDTO;
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
 import isp392.product.ProductDetailDAO;
@@ -60,7 +62,15 @@ public class NavigateProductDetailController extends HttpServlet {
                 session.setAttribute("AVAILABLE_SIZE", sizeAvailable);
             }
             
-            //Get Category Name except Brand in Cate
+            BrandDAO brandDAO = new BrandDAO();
+            List<BrandDTO> brand = brandDAO.getBrandByProduct(productID);
+            if (brand.size() > 0) {
+                int brandID = brand.get(0).getBrandID();
+                request.setAttribute("CURRENT_BRAND_ID", brandID);
+                
+                String brandName = brand.get(0).getName();
+                session.setAttribute("BRAND_BY_PRODUCT", brandName);
+            }
             
             ProductDetailDAO productDetailDAO = new ProductDetailDAO();
             List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);           
@@ -77,8 +87,10 @@ public class NavigateProductDetailController extends HttpServlet {
             List<ProductDTO> productInformation = productDAO.getProductInformation(productID);
             if (productInformation.size() > 0) {
                 session.setAttribute("PRODUCT_INFORMATION", productInformation);
+                
                 String productName = productInformation.get(0).getName();
                 session.setAttribute("PRODUCT_NAME", productName);
+                
             }
             url = SUCCESS;            
         } catch (Exception e) {

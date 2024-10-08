@@ -24,7 +24,8 @@ import javax.servlet.http.HttpSession;
 public class SortByPurchasingController extends HttpServlet {
 
     private static final String ERROR = "shopping.jsp";
-    private static final String SUCCESS = "shopping.jsp";
+    private static final String SUCCESS_CATE = "shopping.jsp";
+    private static final String SUCCESS_SEARCH = "shoppingSearch.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,6 +35,7 @@ public class SortByPurchasingController extends HttpServlet {
             ProductDAO productDAO = new ProductDAO();
             HttpSession session = request.getSession();
             Map<String, Integer> categoryIDs = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+            Map<String, Integer> searchIDs = (Map<String, Integer>) session.getAttribute("SEARCH_IDS");
 
             if (categoryIDs != null) { // Sort in Category
                 int categoryID = categoryIDs.get("categoryID");
@@ -55,11 +57,21 @@ public class SortByPurchasingController extends HttpServlet {
                     List<ViewProductDTO> listProduct = productDAO.sortByPurchasingAll(categoryID);
                     request.setAttribute("LIST_PRODUCT", listProduct);
                 }
-                url = SUCCESS;
+                url = SUCCESS_CATE;
             } else { //sort in Search result
-
+                String search = (String) session.getAttribute("CURRENT_SEARCH");
+                if (searchIDs.containsKey("sizeID")) {
+                    int sizeID = searchIDs.get("sizeID");                    
+                    List<ViewProductDTO> listProduct = productDAO.sortSearchResultByPurChasing1(search, sizeID);
+                    request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);               
+                } else {
+                    List<ViewProductDTO> listProduct = productDAO.sortSearchResultByPurChasing2(search);
+                    if (listProduct.size() > 0) {
+                        request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
+                        url = SUCCESS_SEARCH;
+                    }    
+                }               
             }
-
         } catch (Exception e) {
             log("Error at SortByPurchasingController: " + e.toString());
         } finally {
