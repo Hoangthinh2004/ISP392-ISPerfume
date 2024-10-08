@@ -157,29 +157,43 @@ public class ProductDAO {
                                                    + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
                                                    + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
                                                    + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-                                                   + "WHERE PC.CategoryID = ? AND P.BrandID = ? AND PD.SizeID = ? "
-                                                   + "ORDER BY PD.Price DESC";
+                                                   + "WHERE PC.CategoryID = ? AND P.Status = 1 AND PD.Status = 1 AND P.BrandID = ? AND PD.SizeID = ? "
+                                                   + "ORDER BY PD.NumberOfPurchasing DESC";
     private static final String SORT_BY_PURCHASING_2 = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
                                                     + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
                                                     + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
                                                     + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
                                                     + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-                                                    + "WHERE PC.CategoryID = ? AND P.BrandID = ? "
-                                                    + "ORDER BY PD.Price DESC";
+                                                    + "WHERE PC.CategoryID = ? AND P.BrandID = ? AND P.Status = 1 AND PD.Status = 1 "
+                                                    + "ORDER BY PD.NumberOfPurchasing DESC";
     private static final String SORT_BY_PURCHASING_3 = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
                                                    + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
                                                    + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
                                                    + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
                                                    + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-                                                   + "WHERE PC.CategoryID = ? AND PD.SizeID = ? "
-                                                   + "ORDER BY PD.Price DESC";
+                                                   + "WHERE PC.CategoryID = ? AND PD.SizeID = ? AND P.Status = 1 AND PD.Status = 1 "
+                                                   + "ORDER BY PD.NumberOfPurchasing DESC";
     private static final String SORT_BY_PURCHASING_ALL = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
                                                    + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
                                                    + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
                                                    + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
                                                    + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-                                                   + "WHERE PC.CategoryID = ? "
-                                                   + "ORDER BY PD.Price DESC";
+                                                   + "WHERE PC.CategoryID = ? AND P.Status = 1 AND PD.Status = 1 "
+                                                   + "ORDER BY PD.NumberOfPurchasing DESC";
+    private static final String SORT_SEARCH_RESULT_BY_PURCHASING_2 = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
+                                                                    + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+                                                                    + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+                                                                    + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+                                                                    + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+                                                                    + "WHERE P.ProName LIKE ? AND PC.CategoryID = 4 AND P.Status = 1 AND PD.Status = 1 "
+                                                                    + "ORDER BY PD.NumberOfPurchasing DESC";
+    private static final String SORT_SEARCH_RESULT_BY_PURCHASING_1 = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
+                                                                    + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+                                                                    + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+                                                                    + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+                                                                    + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+                                                                    + "WHERE P.ProName LIKE ? AND PD.SizeID = ? AND PC.CategoryID = 4 AND P.Status = 1 AND PD.Status = 1"
+                                                                    + "ORDER BY PD.NumberOfPurchasing DESC";
     
     public List<ViewProductDTO> getListProduct(String search) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
@@ -1063,6 +1077,65 @@ public class ProductDAO {
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
                     listProduct.add(new ViewProductDTO(categoryID, 0, productID, 0, sizeName, brandName, productName, price, image));
+                }
+            }
+        } finally {
+            if(rs!=null) rs.close();
+            if(ptm!=null) ptm.close();
+            if(conn!=null) conn.close();
+        }
+        return listProduct;
+    }
+
+    public List<ViewProductDTO> sortSearchResultByPurChasing1(String search, int sizeID) throws ClassNotFoundException, SQLException {
+        List<ViewProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SORT_SEARCH_RESULT_BY_PURCHASING_1);
+                ptm.setString(1, "%" + search + "%");
+                ptm.setInt(2, sizeID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("ProductID");
+                    String sizeName = rs.getString("Name");
+                    String brandName = rs.getString("BrandName");
+                    String productName = rs.getString("ProName");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    listProduct.add(new ViewProductDTO(0, 0, productID, 0, sizeName, brandName, productName, price, image));
+                }
+            }
+        } finally {
+            if(rs!=null) rs.close();
+            if(ptm!=null) ptm.close();
+            if(conn!=null) conn.close();
+        }
+        return listProduct;
+    }
+
+    public List<ViewProductDTO> sortSearchResultByPurChasing2(String search) throws ClassNotFoundException, SQLException {
+        List<ViewProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SORT_SEARCH_RESULT_BY_PURCHASING_2);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("ProductID");
+                    String sizeName = rs.getString("Name");
+                    String brandName = rs.getString("BrandName");
+                    String productName = rs.getString("ProName");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    listProduct.add(new ViewProductDTO(0, 0, productID, 0, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {

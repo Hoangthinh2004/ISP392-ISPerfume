@@ -4,6 +4,9 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.List"%>
+<%@page import="isp392.brand.BrandDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -102,13 +105,11 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                        <button class="btn btn-primary" type="submit" name="action" value="" style="margin-left: 10px;">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </button>
+
+                    <form action="ShowAllBrandManager" method="GET" class="d-none d-md-flex ms-4">
+                        <input class="form-control border-0" type="search" placeholder="Search" name="search">
+                        <input type="submit" name="action" value="Search" class="btn btn-sm btn-primary">
+
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
@@ -193,8 +194,8 @@
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
-                        <!--                        <div class="col-md-6 text-center">-->
-                        <!-- Recent Sales Start -->
+                        <!--                                                <div class="col-md-6 text-center">
+                                                 Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
                             <div class="bg-light text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
@@ -205,62 +206,52 @@
                                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                                         <thead>
                                             <tr class="text-dark">
-                                                <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Invoice</th>
-                                                <th scope="col">Customer</th>
-                                                <th scope="col">Amount</th>
+                                                <th scope="col">BrandID</th>
+                                                <th scope="col">BrandName</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Image</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
+                                            <c:forEach var="brand" items="${requestScope.LIST_BRAND_MANAGER}">
+                                            <form action="MainController" method="get">
+                                                <tr>
+                                                    <td>${brand.brandID}</td>
+                                                    <td>
+                                                        <input type="text" name="brandName" value="${brand.name}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="brandDes" value="${brand.description}">
+                                                    </td>
+                                                    <td>
+                                                        <img src="${brand.image}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                                    </td>
+                                                    <td>
+                                                        <!-- Hiển thị dropdown trạng thái hiện tại -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-sm-12">
+                                                                <select class="form-control" id="statusSelect" name="status">
+                                                                    <option value="true" ${brand.status == true ? 'selected="selected"' : ''}>Available</option>
+                                                                    <option value="false" ${brand.status == false ? 'selected="selected"' : ''}>Unavailable</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <!-- Nút để cập nhật -->
+                                                        <input type="submit" name="action" value="Update Brand" style="background-color: #00BFFF; color: white; border: none; padding: 5px 10px; border-radius: 5px;">
+                                                        <input type="hidden" name="search" value="${param.search}"/>
+                                                        <input type="hidden" name="brandID" value="${brand.brandID}"/>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        </c:forEach>
                                         </tbody>
+
+
+                                        </tbody>                            
+
                                     </table>
                                 </div>
                             </div>
@@ -280,7 +271,8 @@
                                 &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink.
+                                If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                                 Designed By <a href="https://htmlcodex.com">HTML Codex</a>
                             </div>
                         </div>

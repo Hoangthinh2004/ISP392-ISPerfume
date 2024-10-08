@@ -5,47 +5,45 @@
  */
 package isp392.controllers;
 
-import isp392.product.ProductDAO;
-import isp392.product.ViewProductDTO;
+import isp392.brand.BrandDAO;
+import isp392.brand.BrandDTO;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ThinhHoang
+ * @author GIGABYTE
  */
-public class CategoryController extends HttpServlet {
+public class UpdateBrandManager extends HttpServlet {
 
-    private static final String ERROR ="home.jsp";
-    private static final String SUCCESS ="shopping.jsp";
-    
+    private static final String ERROR = "ShowAllBrandManager";
+    private static final String SUCCESS = "ShowAllBrandManager";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url=ERROR;
+        response.setContentType("text/html;charset=UTF-8");
+
+        String url = ERROR;
         try {
-            int categoryID = Integer.parseInt(request.getParameter("Category"));
-            
-            HttpSession session = request.getSession();
-            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            ids.put("categoryID", categoryID);
-            //session.setAttribute("CURRENT_IDS", ids);
-            //session.setAttribute("CURRENT_CATEGORY", categoryID); //Store categoryID into attribute for DescendingProductByPrice Controller
-            
-            ProductDAO productDAO = new ProductDAO();           
-            List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
-                       
-            request.setAttribute("LIST_PRODUCT", listProduct);
-            url = SUCCESS;
-            
+            String brandName = request.getParameter("brandName");
+            String brandDes = request.getParameter("brandDes");
+            int brandID = Integer.parseInt(request.getParameter("brandID"));
+            boolean status = Boolean.parseBoolean(request.getParameter("status"));
+//            String existingImage = request.getParameter("existingImage");
+            int managerID = 4;
+            BrandDTO brand = new BrandDTO(brandID, managerID, brandName, brandDes  ,"", status);
+            BrandDAO dao = new BrandDAO();
+            boolean check = dao.updateBrand(brand);
+
+            if (check) {
+                url = SUCCESS;
+            }
         } catch (Exception e) {
-            log("Error at CategoryController: " + e.toString());
+            log("Error at UpdateBrandManager: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

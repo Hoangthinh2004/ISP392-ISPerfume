@@ -5,47 +5,40 @@
  */
 package isp392.controllers;
 
-import isp392.product.ProductDAO;
-import isp392.product.ViewProductDTO;
+import isp392.brand.BrandDAO;
+import isp392.brand.BrandDTO;
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ThinhHoang
+ * @author GIGABYTE
  */
-public class CategoryController extends HttpServlet {
+public class ShowAllBrandManager extends HttpServlet {
 
-    private static final String ERROR ="home.jsp";
-    private static final String SUCCESS ="shopping.jsp";
+    private static final String SUCCESS = "MGR_BrandManagement.jsp";
+    private static final String ERROR = "MGR_BrandManagement.jsp"; 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url=ERROR;
+        response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            int categoryID = Integer.parseInt(request.getParameter("Category"));
+            String search = request.getParameter("search");
+            BrandDAO daoBrand = new BrandDAO();
+            List<BrandDTO> listBrand = daoBrand.getListBrandManager(search);
             
-            HttpSession session = request.getSession();
-            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            ids.put("categoryID", categoryID);
-            //session.setAttribute("CURRENT_IDS", ids);
-            //session.setAttribute("CURRENT_CATEGORY", categoryID); //Store categoryID into attribute for DescendingProductByPrice Controller
-            
-            ProductDAO productDAO = new ProductDAO();           
-            List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
-                       
-            request.setAttribute("LIST_PRODUCT", listProduct);
-            url = SUCCESS;
-            
+            if (!listBrand.isEmpty()) {
+                request.setAttribute("LIST_BRAND_MANAGER", listBrand);  
+                url = SUCCESS;
+            }
         } catch (Exception e) {
-            log("Error at CategoryController: " + e.toString());
+            log("Error at ShowAllBrandManager: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

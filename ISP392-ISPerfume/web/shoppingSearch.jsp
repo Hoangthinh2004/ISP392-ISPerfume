@@ -209,6 +209,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="MainController?action=DescendingSortByPrice">Descending Price</a>
                                             <a class="dropdown-item" href="MainController?action=AscendingSortByPrice">Ascending price</a>
+                                            <a class="dropdown-item" href="MainController?action=SortByPurchasing">Best Seller</a>
                                         </div>
                                     </div>
                                     <div class="btn-group ml-2">
