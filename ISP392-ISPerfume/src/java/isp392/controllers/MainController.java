@@ -77,10 +77,12 @@ public class MainController extends HttpServlet {
 
     private static final String DELETE_PRODUCT_DETAIL_MANAGER = "DeleteProductDetail";
     private static final String DELETE_PRODUCT_DETAIL_MANAGER_CONTROLLER = "DeleteProductDetailManager";
-
-    
+  
     private static final String SORT_BY_PURCHASING = "SortByPurchasing";
     private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
+    
+    private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
+    private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -126,9 +128,10 @@ public class MainController extends HttpServlet {
                 url = UPDATE_PRODUCT_DETAIL_MANAGER_CONTROLLER;
             } else if (DELETE_PRODUCT_DETAIL_MANAGER.equals(action)) {
                 url = DELETE_PRODUCT_DETAIL_MANAGER_CONTROLLER;
-            }
             } else if (SORT_BY_PURCHASING.equals(action)) {
                 url = SORT_BY_PURCHASING_CONTROLLER;
+            } else if (NAVIGATE_DETAIL_TO_SHOPPING.equals(action)) {
+                url = NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

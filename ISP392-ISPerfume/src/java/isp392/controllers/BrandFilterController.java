@@ -36,6 +36,7 @@ public class BrandFilterController extends HttpServlet {
             ProductDAO productDAO = new ProductDAO();
             HttpSession session = request.getSession();
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+            
             int categoryID = ids.get("categoryID");
             ids.put("brandID", brandID);
             if (ids.containsKey("sizeID")) { // Filter by brand after filtering by size

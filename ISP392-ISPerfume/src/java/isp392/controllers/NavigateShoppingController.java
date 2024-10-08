@@ -8,7 +8,7 @@ package isp392.controllers;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -21,31 +21,32 @@ import javax.servlet.http.HttpSession;
  *
  * @author ThinhHoang
  */
-public class CategoryController extends HttpServlet {
+public class NavigateShoppingController extends HttpServlet {
 
-    private static final String ERROR ="home.jsp";
-    private static final String SUCCESS ="shopping.jsp";
+    private static final String ERROR="productDetail.jsp";
+    private static final String SUCCESS="shopping.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url=ERROR;
+        response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            int categoryID = Integer.parseInt(request.getParameter("Category"));
+            int brandID = Integer.parseInt(request.getParameter("brandID"));
+            int categoryID = 4;
             
             HttpSession session = request.getSession();
+            ProductDAO productDAO = new ProductDAO();
+            
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
             ids.put("categoryID", categoryID);
-            //session.setAttribute("CURRENT_IDS", ids);
-            //session.setAttribute("CURRENT_CATEGORY", categoryID); //Store categoryID into attribute for DescendingProductByPrice Controller
             
-            ProductDAO productDAO = new ProductDAO();           
-            List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
-                       
-            request.setAttribute("LIST_PRODUCT", listProduct);
-            url = SUCCESS;
-            
+            List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
+            if (listProduct.size() > 0) {
+                request.setAttribute("LIST_PRODUCT", listProduct);
+                url = SUCCESS;
+            }
         } catch (Exception e) {
-            log("Error at CategoryController: " + e.toString());
+            log("Error at NavigateShoppingController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
