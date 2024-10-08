@@ -48,6 +48,18 @@
         <servlet-name>NavigateShoppingController</servlet-name>
         <servlet-class>isp392.controllers.NavigateShoppingController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowAllBrandManager</servlet-name>
+        <servlet-class>isp392.controllers.ShowAllBrandManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBrandManager</servlet-name>
+        <servlet-class>isp392.controllers.UpdateBrandManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateBrandManager</servlet-name>
+        <servlet-class>isp392.controllers.CreateBrandManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -95,6 +107,18 @@
     <servlet-mapping>
         <servlet-name>NavigateShoppingController</servlet-name>
         <url-pattern>/NavigateShoppingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAllBrandManager</servlet-name>
+        <url-pattern>/ShowAllBrandManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBrandManager</servlet-name>
+        <url-pattern>/UpdateBrandManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateBrandManager</servlet-name>
+        <url-pattern>/CreateBrandManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

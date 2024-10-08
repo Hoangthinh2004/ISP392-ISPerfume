@@ -84,6 +84,12 @@ public class MainController extends HttpServlet {
     private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
     private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
     
+    private static final String SEARCH_BRAND = "Search";
+    private static final String SEARCH_BRAND_CONTROLLER = "ShowAllBrandManager";
+
+    private static final String UPDATE_BRAND = "Update Brand";
+    private static final String UPDATE_BRAND_CONTROLLER = "UpdateBrandManager";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -132,6 +138,10 @@ public class MainController extends HttpServlet {
                 url = SORT_BY_PURCHASING_CONTROLLER;
             } else if (NAVIGATE_DETAIL_TO_SHOPPING.equals(action)) {
                 url = NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER;
+            } else if (SEARCH_BRAND.equals(action)) {
+                url = SEARCH_BRAND_CONTROLLER;
+            } else if (UPDATE_BRAND.equals(action)) {
+                url = UPDATE_BRAND_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
