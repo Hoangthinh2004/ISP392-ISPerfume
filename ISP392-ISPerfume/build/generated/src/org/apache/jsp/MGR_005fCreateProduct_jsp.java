@@ -4,17 +4,30 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class MGR_005fCreateProduct_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_if_test;
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_c_if_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _jspx_tagPool_c_forEach_var_items.release();
+    _jspx_tagPool_c_if_test.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -44,6 +57,7 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -66,8 +80,8 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
       out.write("        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css\" rel=\"stylesheet\">\n");
       out.write("\n");
       out.write("        <!-- Libraries Stylesheet -->\n");
-      out.write("        <link href=\"lib/owlcarousel/assets/owl.carousel.min.css\" rel=\"stylesheet\">\n");
-      out.write("        <link href=\"lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css\" rel=\"stylesheet\" />\n");
+      out.write("        <link href=\"dashmin/lib/owlcarousel/assets/owl.carousel.min.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"dashmin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css\" rel=\"stylesheet\" />\n");
       out.write("\n");
       out.write("        <!-- Customized Bootstrap Stylesheet -->\n");
       out.write("        <link href=\"dashmin/css/bootstrap.min.css\" rel=\"stylesheet\">\n");
@@ -75,7 +89,6 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
       out.write("        <!-- Template Stylesheet -->\n");
       out.write("        <link href=\"dashmin/css/style.css\" rel=\"stylesheet\">\n");
       out.write("    </head>\n");
-      out.write("\n");
       out.write("    <body>\n");
       out.write("        <div class=\"container-fluid position-relative bg-white d-flex p-0\">\n");
       out.write("            <!-- Spinner Start -->\n");
@@ -104,16 +117,28 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"navbar-nav w-100\">\n");
-      out.write("                        <a href=\"MGR_Dashboard.jsp\" class=\"nav-item nav-link active\"><i class=\"fa fa-tachometer-alt me-2\"></i>Dashboard</a>\n");
+      out.write("                        <a href=\"MGR_Dashboard.jsp\" class=\"nav-item nav-link\"><i class=\"fa fa-tachometer-alt me-2\"></i>Dashboard</a>\n");
       out.write("                        <div class=\"nav-item dropdown\">\n");
-      out.write("                            <a href=\"#\" class=\"nav-link dropdown-toggle \" data-bs-toggle=\"dropdown\"><i class=\"fa fa-plus me-2\"></i>Create Account</a>\n");
+      out.write("                            <a href=\"#\" class=\"nav-link dropdown-toggle active\" data-bs-toggle=\"dropdown\"><i class=\"fa fa-laptop me-2\"></i>Management</a>\n");
       out.write("                            <div class=\"dropdown-menu bg-transparent border-0\">\n");
-      out.write("                                <a href=\"MainController?action=Manage_Product_Page\" class=\"dropdown-item \">Create Manager</a>\n");
-      out.write("                                <a href=\"MGR_BrandManagement.jsp\" class=\"dropdown-item\">Create Staff</a>\n");
-      out.write("                                <a href=\"MGR_PromotionManagement.jsp\" class=\"dropdown-item\">Create Shipper</a>\n");
+      out.write("                                <a href=\"MGR_ProductManagement.jsp\" class=\"dropdown-item active\">Product Management</a>\n");
+      out.write("                                <a href=\"MGR_BrandManagement.jsp\" class=\"dropdown-item\">Brand Management</a>\n");
+      out.write("                                <a href=\"MGR_PromotionManagement.jsp\" class=\"dropdown-item\">Promotion Management</a>\n");
       out.write("                            </div>\n");
       out.write("                        </div>\n");
-      out.write("                       \n");
+      out.write("                        <a href=\"widget.html\" class=\"nav-item nav-link\"><i class=\"fa fa-th me-2\"></i>Widgets</a>\n");
+      out.write("                        <a href=\"form.html\" class=\"nav-item nav-link\"><i class=\"fa fa-keyboard me-2\"></i>Forms</a>\n");
+      out.write("                        <a href=\"table.html\" class=\"nav-item nav-link\"><i class=\"fa fa-table me-2\"></i>Tables</a>\n");
+      out.write("                        <a href=\"chart.html\" class=\"nav-item nav-link\"><i class=\"fa fa-chart-bar me-2\"></i>Charts</a>\n");
+      out.write("                        <div class=\"nav-item dropdown\">\n");
+      out.write("                            <a href=\"#\" class=\"nav-link dropdown-toggle\" data-bs-toggle=\"dropdown\"><i class=\"far fa-file-alt me-2\"></i>Pages</a>\n");
+      out.write("                            <div class=\"dropdown-menu bg-transparent border-0\">\n");
+      out.write("                                <a href=\"signin.html\" class=\"dropdown-item\">Sign In</a>\n");
+      out.write("                                <a href=\"signup.html\" class=\"dropdown-item\">Sign Up</a>\n");
+      out.write("                                <a href=\"404.html\" class=\"dropdown-item\">404 Error</a>\n");
+      out.write("                                <a href=\"blank.html\" class=\"dropdown-item\">Blank Page</a>\n");
+      out.write("                            </div>\n");
+      out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                </nav>\n");
       out.write("            </div>\n");
@@ -130,13 +155,8 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
       out.write("                    <a href=\"#\" class=\"sidebar-toggler flex-shrink-0\">\n");
       out.write("                        <i class=\"fa fa-bars\"></i>\n");
       out.write("                    </a>\n");
-      out.write("                    <form class=\"d-none d-md-flex ms-4\" action=\"MainController\" method=\"get\">\n");
-      out.write("                        <input class=\"form-control border-0\" type=\"search\" placeholder=\"Search\" name=\"\">\n");
-      out.write("                        <button class=\"btn btn-primary\" type=\"submit\" name=\"action\" value=\"\" style=\"margin-left: 10px;\">\n");
-      out.write("                            <svg class=\"w-6 h-6 text-gray-800 dark:text-white\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" fill=\"none\" viewBox=\"0 0 24 24\">\n");
-      out.write("                            <path stroke=\"currentColor\" stroke-linecap=\"round\" stroke-width=\"2\" d=\"m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z\"/>\n");
-      out.write("                            </svg>\n");
-      out.write("                        </button>\n");
+      out.write("                    <form class=\"d-none d-md-flex ms-4\">\n");
+      out.write("                        <input class=\"form-control border-0\" type=\"search\" placeholder=\"Search\">\n");
       out.write("                    </form>\n");
       out.write("                    <div class=\"navbar-nav align-items-center ms-auto\">\n");
       out.write("                        <div class=\"nav-item dropdown\">\n");
@@ -216,71 +236,68 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
       out.write("                    </div>\n");
       out.write("                </nav>\n");
       out.write("                <!-- Navbar End -->\n");
-      out.write("\n");
       out.write("                <!-- Blank Start -->\n");
       out.write("                <div class=\"container-fluid pt-4 px-4\">\n");
-      out.write("                    <div class=\"row vh-100 bg-light rounded align-items-center justify-content-center mx-0 \" style=\"height: auto !important\">\n");
-      out.write("                        <div class=\"table-responsive\">\n");
-      out.write("                            <div class=\"col-sm-12 col-xl-12\">\n");
-      out.write("                                <div class=\"bg-light rounded h-100 p-4\">\n");
-      out.write("                                    <h6 class=\"mb-4\">Account Table</h6>\n");
-      out.write("                                    <table class=\"table table-hover\">\n");
-      out.write("                                        <thead>\n");
-      out.write("                                            <tr>\n");
-      out.write("                                                <th scope=\"col\">#</th>\n");
-      out.write("                                                <th scope=\"col\">First Name</th>\n");
-      out.write("                                                <th scope=\"col\">Last Name</th>\n");
-      out.write("                                                <th scope=\"col\">Last Name</th>\n");
-      out.write("                                                <th scope=\"col\">Last Name</th>\n");
-      out.write("                                                <th scope=\"col\">Email</th>\n");
-      out.write("                                                <th scope=\"col\">Email</th>\n");
-      out.write("                                                <th scope=\"col\">Email</th>\n");
-      out.write("                                            </tr>\n");
-      out.write("                                        </thead>\n");
-      out.write("                                        <tbody>\n");
-      out.write("                                            <tr>\n");
-      out.write("                                                <th scope=\"row\">3</th>\n");
-      out.write("                                                <td>Jacob</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                            </tr>\n");
-      out.write("                                            <tr>\n");
-      out.write("                                                <th scope=\"row\">3</th>\n");
-      out.write("                                                <td>Jacob</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                            </tr>\n");
-      out.write("                                            <tr>\n");
-      out.write("                                                <th scope=\"row\">3</th>\n");
-      out.write("                                                <td>Jacob</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                            </tr>\n");
-      out.write("                                            <tr>\n");
-      out.write("                                                <th scope=\"row\">3</th>\n");
-      out.write("                                                <td>Jacob</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>Thornton</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                                <td>jacob@email.com</td>\n");
-      out.write("                                            </tr>\n");
-      out.write("                                        </tbody>\n");
-      out.write("                                    </table>\n");
-      out.write("                                </div>\n");
+      out.write("                    <div class=\"row vh-100 bg-light rounded justify-content-center mx-0\">\n");
+      out.write("                        <div class=\"col-sm-12 col-xl-6\">\n");
+      out.write("                            <div class=\"bg-light rounded h-100 p-4\">\n");
+      out.write("                                <h6 class=\"mb-4\">Create Form</h6>\n");
+      out.write("                                <form action=\"CreateProductManager\" method=\"post\" enctype=\"multipart/form-data\">\n");
+      out.write("                                    <div class=\"row mb-3\">\n");
+      out.write("                                        <label  class=\"col-sm-2 col-form-label\">Name</label>\n");
+      out.write("                                        <div class=\"col-sm-10\">\n");
+      out.write("                                            <input type=\"text\" name=\"productName\" required=\"\" class=\"form-control\" placeholder=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${requestScope.ERROR.productName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <div class=\"row mb-3\">\n");
+      out.write("                                        <label  class=\"col-sm-2 col-form-label\">Decription</label>\n");
+      out.write("                                        <div class=\"col-sm-10\">\n");
+      out.write("                                            <input type=\"text\" name=\"description\" class=\"form-control\">\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <div class=\"row mb-3\">\n");
+      out.write("                                        <label  class=\"col-sm-2 col-form-label\">Country</label>\n");
+      out.write("                                        <div class=\"col-sm-10\">\n");
+      out.write("                                            <input type=\"text\" name=\"country\" class=\"form-control\">\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <div class=\"row mb-3\">\n");
+      out.write("                                        <label  class=\"col-sm-2 col-form-label\">Release date</label>\n");
+      out.write("                                        <div class=\"col-sm-10\">\n");
+      out.write("                                            <input type=\"number\" name=\"releaaseDate\" class=\"form-control\" min=\"1900\" max=\"2024\">\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <div class=\"row mb-3\">\n");
+      out.write("                                        <label  class=\"col-sm-2 col-form-label\">Fragrance</label>\n");
+      out.write("                                        <div class=\"col-sm-10\">\n");
+      out.write("                                            <input type=\"text\" name=\"fregranceFamilies\" class=\"form-control\">\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <div class=\"row mb-3\">\n");
+      out.write("                                        <label for=\"brandImage\"  class=\"col-sm-2 col-form-label\">Image</label>\n");
+      out.write("                                        <div class=\"col-sm-10\">\n");
+      out.write("                                            <input type=\"file\" name=\"brandImage\" class=\"form-control\" required=\"\">\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    Brand <select name=\"brandID\" class=\"form-select mb-3\" aria-label=\"Default select example\" required=\"\">\n");
+      out.write("                                        ");
+      if (_jspx_meth_c_forEach_0(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("                                    </select>\n");
+      out.write("                                    Category <select name=\"categoryID\" class=\"form-select mb-3\" aria-label=\"Default select example\" required=\"\">\n");
+      out.write("                                        ");
+      if (_jspx_meth_c_forEach_1(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("                                    </select>\n");
+      out.write("                                    <button type=\"submit\"class=\"btn btn-primary\">CREATE</button>\n");
+      out.write("                                    <input type=\"hidden\" name=\"search\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${requestScope.SEARCH}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
+      out.write("                                </form>\n");
       out.write("                            </div>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
@@ -295,8 +312,7 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
       out.write("                            <div class=\"col-12 col-sm-6 text-center text-sm-start\">\n");
       out.write("                                &copy; <a href=\"#\">Your Site Name</a>, All Right Reserved. \n");
       out.write("                            </div>\n");
-      out.write("                            <div class=\"col-12 col-sm-6 text-center text-sm-end\">\n");
-      out.write("                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from \"https://htmlcodex.com/credit-removal\". Thank you for your support. ***/-->\n");
+      out.write("                            <div class=\"col-12 col-sm-6 text-center text-sm-end\">                               \n");
       out.write("                                Designed By <a href=\"https://htmlcodex.com\">HTML Codex</a>\n");
       out.write("                            </div>\n");
       out.write("                        </div>\n");
@@ -311,6 +327,9 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
       out.write("            <a href=\"#\" class=\"btn btn-lg btn-primary btn-lg-square back-to-top\"><i class=\"bi bi-arrow-up\"></i></a>\n");
       out.write("        </div>\n");
       out.write("\n");
+      out.write("        <!-- JavaScript Libraries -->\n");
+      out.write("        <!-- JavaScript Libraries -->\n");
+      out.write("        <!-- JavaScript Libraries -->\n");
       out.write("        <!-- JavaScript Libraries -->\n");
       out.write("        <script src=\"https://code.jquery.com/jquery-3.4.1.min.js\"></script>\n");
       out.write("        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js\"></script>\n");
@@ -337,5 +356,120 @@ public final class AD_005fAccountManagement_jsp extends org.apache.jasper.runtim
     } finally {
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
+  }
+
+  private boolean _jspx_meth_c_forEach_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_0.setParent(null);
+    _jspx_th_c_forEach_0.setVar("brand");
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.BRAND_LIST_MANAGER}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
+      if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\n");
+          out.write("                                            <option value=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${brand.brandID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write('"');
+          out.write('>');
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${brand.name}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</option>\n");
+          out.write("                                        ");
+          int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_0.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_0.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_1 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_1.setParent(null);
+    _jspx_th_c_forEach_1.setVar("cate");
+    _jspx_th_c_forEach_1.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.CATEGORY_LIST_MANAGER}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    int[] _jspx_push_body_count_c_forEach_1 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_1 = _jspx_th_c_forEach_1.doStartTag();
+      if (_jspx_eval_c_forEach_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\n");
+          out.write("                                            ");
+          if (_jspx_meth_c_if_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_1, _jspx_page_context, _jspx_push_body_count_c_forEach_1))
+            return true;
+          out.write("\n");
+          out.write("                                        ");
+          int evalDoAfterBody = _jspx_th_c_forEach_1.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_1[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_1.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_1.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_1);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_0(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_1, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_1)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_0 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_1);
+    _jspx_th_c_if_0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${cate.categoryID!=4}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_0 = _jspx_th_c_if_0.doStartTag();
+    if (_jspx_eval_c_if_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\n");
+        out.write("                                                <option value=\"");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${cate.categoryID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write('"');
+        out.write('>');
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${cate.name}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("</option>\n");
+        out.write("                                            ");
+        int evalDoAfterBody = _jspx_th_c_if_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_0);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_0);
+    return false;
   }
 }

@@ -190,30 +190,35 @@
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Create Form</h6>
-                                <form>
+                                <h6 class="mb-4">Create Brand</h6>
+                                <!-- Update form to include action and method POST -->
+                                <form action="CreateBrandManager" method="POST" enctype="multipart/form-data">
+                                    <!-- Brand Name -->
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Brand Name</label>
+                                        <label class="col-sm-2 col-form-label">Brand Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" name="brandName" class="form-control" required>
                                         </div>
                                     </div>
+                                    
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Image</label>
+                                        <label class="col-sm-2 col-form-label">Brand Description</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" name="description" class="form-control" required>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Status</label>
-                                        <select class="form-select" aria-label="Default select example">
-                                           
-                                            <option value="1">Active</option>
-                                            <option value="2">áđá</option>                                     
-                                        </select>
                                     </div>
 
+                                    <!-- Image Upload -->
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Image</label>
+                                        <div class="col-sm-10">
+                                            <!-- Use file input for image uploads -->
+                                            <input type="file" name="brandImage" class="form-control" accept="image/*" required="">
+                                        </div>
+                                    </div>
+                                <!-- Submit Button -->
                                     <button type="submit" class="btn btn-primary">CREATE</button>
+                                    <input type="hidden" name="search" value="${param.search}"/>
                                 </form>
                             </div>
                         </div>

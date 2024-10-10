@@ -108,12 +108,12 @@
                     </a>
                     <form class="d-none d-md-flex ms-4" action="MainController" method="get">
                         <input type="hidden" name="productID" value="${param.productID}">
-                        <input class="form-control border-0" type="search" placeholder="Search" name="search">
-                        <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="SearchProductDetail" name="action">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </button>
+                        <!--                        <input class="form-control border-0" type="text" placeholder="" name="">
+                                                <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="" name="action">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                                                    </svg>
+                                                </button>-->
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
@@ -204,7 +204,7 @@
                             <div class="bg-light text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">   
                                     <h6 class="mb-0">Product Management</h6>
-                                    <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create product</a>
+                                    <a href="MGR_CreateProductDetail.jsp?productID=${param.productID}" class="btn btn-primary">Create</a>
                                     <!--                                    <button class="btn btn-primary">
                                                                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -222,33 +222,69 @@
                                                     <th scope="col">Stock quantity</th>
                                                     <th scope="col">Number of purchasing</th>
                                                     <th scope="col">Image</th>
+                                                    <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <c:forEach var="proDe" items="${requestScope.LIST_PRODUCT_DETAIL_MANAGER}">
                                                     <tr>
                                                         <td>
-                                                            ${proDe.sizeID}
+                                                            <form action="UpdateProductDetailManager" method="post" enctype="multipart/form-data"  onsubmit="convertToInt()" >
+                                                                <c:forEach var="size" items="${sessionScope.SIZE_LIST_MANAGER}" >
+                                                                    <c:if test="${size.sizeID == proDe.sizeID}">
+                                                                        ${size.name}
+                                                                    </c:if>
+                                                                </c:forEach>
                                                         </td>
                                                         <td>
                                                             ${proDe.importDate}
                                                         </td>
                                                         <td>
-                                                            ${proDe.price}
+                                                            <input type="text" min="1" name="price" value="${proDe.price}" class="form-control border-0" id="priceInput" oninput="formatPrice(this)">
+                                                            <script>
+                                                                function formatPrice(input) {
+                                                                    let value = input.value.replace(/\./g, '');
+
+                                                                    let intValue = parseInt(value, 10);
+
+                                                                    if (!isNaN(intValue)) {
+                                                                        input.value = intValue.toLocaleString('vi-VN');
+                                                                    }
+                                                                }
+                                                                function convertToInt() {
+                                                                    let priceInput = document.getElementById('priceInput');
+                                                                    let value = priceInput.value.replace(/\./g, '');
+                                                                    priceInput.value = parseInt(value, 10);
+                                                                }
+                                                            </script>
                                                         </td>
                                                         <td>
-                                                            ${proDe.stockQuantity}
+                                                            <input type="number" min="1" name="stockQuantiy" value="${proDe.stockQuantity}" class="form-control border-0">
                                                         </td>
                                                         <td>
                                                             ${proDe.numberOfPurchasing}
                                                         </td>
                                                         <td>
                                                             <img src="${proDe.image}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                                            <input type="hidden" name="existingImage" value="${proDe.image}">
+                                                            <label for="productDetailImage"  class="col-sm-2 col-form-label">Image</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="file" name="productDetailImage" class="form-control">
+                                                            </div>
                                                         </td>
                                                         <td>
-                                                            <input type="submit" name="action" value="Update" class="btn btn-sm btn-primary">
-                                                            <input type="submit" name="action" value="Delete Product" class="btn btn-sm btn-primary">
+                                                            <select name="status" class="form-select mb-3" aria-label="Default select example">
+                                                                <option value="1" ${proDe.status == 1 ? 'selected' : ''}>Available</option>
+                                                                <option value="0" ${proDe.status == 0 ? 'selected' : ''}>Unavailable</option>
+                                                            </select>
                                                         </td>
+                                                        <td>
+                                                            <input type="hidden" name="productID" value="${proDe.productID}">
+                                                            <input type="hidden" name="sizeID" value="${proDe.sizeID}">
+                                                            <button type="submit" name="action" value="UpdateProductDetail" class="btn btn-sm btn-primary">Update</button>
+<!--                                                        <button type="submit" name="action" value="DeleteProductDetail" class="btn btn-sm btn-primary">Delete</button>-->
+                                                        </td>
+                                                        </form>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -294,23 +330,8 @@
         <script src="dashmin/lib/tempusdominus/js/moment.min.js"></script>
         <script src="dashmin/lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="dashmin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
-        <!--        <script>
-                    window.onload = function () {
-                        const searchInput = document.querySelector('input[name="search"]');
-                        const form = searchInput.form;
-                        if (!sessionStorage.getItem('isSubmitted')) {
-                            const hiddenAction = document.createElement('input');
-                            hiddenAction.type = 'hidden';
-                            hiddenAction.name = 'action';
-                            hiddenAction.value = 'Search';
-                            form.appendChild(hiddenAction);
-                            form.submit();
-                            sessionStorage.setItem('isSubmitted', 'true');
-                        }
-                    };
-                </script>-->
+
     </body>
 </html>

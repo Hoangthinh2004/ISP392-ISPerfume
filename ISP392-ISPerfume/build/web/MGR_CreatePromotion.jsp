@@ -5,6 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.time.LocalDate" %>
+<%
+    LocalDate today = LocalDate.now();
+    String todayStr = today.toString(); // Định dạng YYYY-MM-DD
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -190,79 +195,59 @@
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Create Form</h6>
-                                <form>
+                                <h6 class="mb-4 text-center">Create A Promotion</h6>
+                                <c:set var="promotionError" value="${requestScope.PROMOTION_ERROR}" />
+                                <form action="MainController" method="GET">
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <label  class="col-sm-2 col-form-label">Promotion Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="promotionName" required=""> ${requestScope.PROMOTION_ERROR.promotionNameError}
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <label  class="col-sm-2 col-form-label">Description</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <textarea class="form-control" name="description" required=""> ${requestScope.PROMOTION_ERROR.descriptionError}</textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <label  class="col-sm-2 col-form-label">Start Date</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="date" class="form-control" name="startDate" required="" min="<%= todayStr %>"> ${requestScope.PROMOTION_ERROR.startDateError}
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <label  class="col-sm-2 col-form-label">End Date</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="date" class="form-control" name="endDate" required="" min="<%= todayStr %>"> ${requestScope.PROMOTION_ERROR.endDateError}
                                         </div>
                                     </div>
-                                    <!--                                    <fieldset class="row mb-3">
-                                                                            <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                                                            <div class="col-sm-10">
-                                                                                <div class="form-check">
-                                                                                    <input class="form-check-input" type="radio" name="gridRadios"
-                                                                                           id="gridRadios1" value="option1" checked>
-                                                                                    <label class="form-check-label" for="gridRadios1">
-                                                                                        First radio
-                                                                                    </label>
-                                                                                </div>
-                                                                                <div class="form-check">
-                                                                                    <input class="form-check-input" type="radio" name="gridRadios"
-                                                                                           id="gridRadios2" value="option2">
-                                                                                    <label class="form-check-label" for="gridRadios2">
-                                                                                        Second radio
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </fieldset>-->
-                                    <!--                                    <div class="row mb-3">
-                                                                            <legend class="col-form-label col-sm-2 pt-0">Checkbox</legend>
-                                                                            <div class="col-sm-10">
-                                                                                <div class="form-check">
-                                                                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                                                                    <label class="form-check-label" for="gridCheck1">
-                                                                                        Check me out
-                                                                                    </label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Input</label>
+                                        <label  class="col-sm-2 col-form-label">Discount Percent</label> ${requestScope.PROMOTION_ERROR.discountPerError}
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="number" class="form-control" name="discountPer" required="" min="0" max="100">
                                         </div>
                                     </div>
-                                    <select class="form-select mb-3" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label">Default file input example</label>
-                                        <input class="form-control" type="file" id="formFile">
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Condition</label> ${requestScope.PROMOTION_ERROR.conditionError}
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" name="condition" required="" min="0">
+                                        </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">CREATE</button>
+                                    <div class="row mb-3">
+                                        <label for="statusSelect" class="col-sm-2 col-form-label">Status</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="statusSelect" name="status"> ${requestScope.PROMOTION_ERROR.statusError}
+                                                <!-- Kiểm tra nếu status là 1 thì chọn Available -->
+                                                <option value="1" ${status == 1 ? 'selected' : ''}>Available</option>
+                                                <!-- Kiểm tra nếu status là 0 thì chọn Unavailable -->
+                                                <option value="0" ${status == 0 ? 'selected' : ''}>Unavailable</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" name="action" value="CreatePromotion">CREATE</button>
+                                    ${requestScope.PROMOTION_ERROR.error}
                                 </form>
                             </div>
                         </div>

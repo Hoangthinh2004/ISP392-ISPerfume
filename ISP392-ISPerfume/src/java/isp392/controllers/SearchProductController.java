@@ -9,7 +9,9 @@ import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,22 +25,26 @@ import javax.servlet.http.HttpSession;
 public class SearchProductController extends HttpServlet {
 
     private static final String ERROR ="HomeController";
-    private static final String SUCCESS = "shopping.jsp";
+    private static final String SUCCESS = "shoppingSearch.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             String search = request.getParameter("search");
+            session.setAttribute("CURRENT_SEARCH", search);
             
             ProductDAO productDAO = new ProductDAO();
             List<ViewProductDTO> listProduct = productDAO.getListProduct(search);
-            if (listProduct.size() == 0) {
-                System.out.println("NO PRODUCT !!!");
-            }
+            int listSize = listProduct.size();
             
-            HttpSession session = request.getSession();
-            request.setAttribute("LIST_PRODUCT", listProduct);
+            request.setAttribute("SEARCH_RESULT_SIZE", listSize); // show number of perfume
+            request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
+            
+            Map<String, Integer> listProductID = new HashMap<>();
+            session.setAttribute("SEARCH_IDS", listProductID); //  storing search key to filter by size of search result
+            
             url = SUCCESS;     
         } catch (Exception e) {
             log("Error at SearchProductController: " + e.toString());

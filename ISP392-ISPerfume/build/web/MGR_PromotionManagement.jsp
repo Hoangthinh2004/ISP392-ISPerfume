@@ -3,7 +3,9 @@
     Created on : Sep 25, 2024, 3:56:09 PM
     Author     : User
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.List"%>
+<%@page import="isp392.promotion.PromotionDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -191,74 +193,74 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0">
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important" >
                         <!--                        <div class="col-md-6 text-center">-->
                         <!-- Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
                             <div class="bg-light text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div class="d-flex align-items-center justify-content-between mb-4" >
                                     <h6 class="mb-0">Promotion Management</h6>
                                     <a href="MGR_CreatePromotion.jsp" class="btn btn-primary">Create new Promotion</a>
                                 </div>
-                                <div class="table-responsive">
+                                <form action="MainController">
+                                    <input type="submit" name="action" value="ViewPromotion" class="btn btn-sm btn-primary">
+                                </form>
+                                <div class="table-responsive" style="height: auto">
                                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                                         <thead>
                                             <tr class="text-dark">
-                                                <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Invoice</th>
-                                                <th scope="col">Customer</th>
-                                                <th scope="col">Amount</th>
+                                                <th scope="col">No</th>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Start Date</th>
+                                                <th scope="col">End Date</th>
+                                                <th scope="col">Discount Per</th>
+                                                <th scope="col">Condition</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">Update</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input class="form-check-input" type="checkbox"></td>
-                                                <td>01 Jan 2045</td>
-                                                <td>INV-0123</td>
-                                                <td>Jhon Doe</td>
-                                                <td>$123</td>
-                                                <td>Paid</td>
-                                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                            </tr>
+                                            <c:forEach var="promotion" varStatus="counter" items="${requestScope.LIST_PROMOTION}">
+                                            <form action="MainController" method="GET"> 
+                                                <tr>
+                                                    <td>${counter.count}</td>
+                                                    <td>
+                                                        <input name="promotionID" value="${promotion.promotionID}" readonly="">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="promotionName" value="${promotion.promotionName}"
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="description" value="${promotion.description}"
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" name="startDate" value="${promotion.startDate}"
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" name="endDate" value="${promotion.endDate}"
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="discountPer" value="${promotion.discountPer}"
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="condition" value="${promotion.condition}"
+                                                    </td>
+                                                    <td>
+                                                        <select name="status" class="form-control">
+                                                            <option value="0" ${promotion.status == 0 ? 'selected' : ''}>Unavailable</option>
+                                                            <option value="1" ${promotion.status == 1 ? 'selected' : ''}>Available</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="submit" name="action" value="UpdatePromotion" class="btn btn-sm btn-primary">
+                                                        <input type="hidden" name="action" value="ViewPromotion"/>
+                                                    </td>
+                                                    
+                                                </tr>
+                                            </form>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

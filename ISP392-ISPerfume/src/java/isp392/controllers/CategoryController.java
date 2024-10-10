@@ -33,16 +33,15 @@ public class CategoryController extends HttpServlet {
             int categoryID = Integer.parseInt(request.getParameter("Category"));
             
             HttpSession session = request.getSession();
-            Map<String, Integer> ids = new HashMap<>();
+            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
             ids.put("categoryID", categoryID);
-            session.setAttribute("CURRENT_IDS", ids);
-            session.setAttribute("CURRENT_CATEGORY", categoryID); //Store categoryID into attribute for DescendingProductByPrice Controller
+            //session.setAttribute("CURRENT_IDS", ids);
+            //session.setAttribute("CURRENT_CATEGORY", categoryID); //Store categoryID into attribute for DescendingProductByPrice Controller
             
             ProductDAO productDAO = new ProductDAO();           
             List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
                        
             request.setAttribute("LIST_PRODUCT", listProduct);
-            session.setAttribute("LIST_PRODUCT_REFERENCE", listProduct);
             url = SUCCESS;
             
         } catch (Exception e) {

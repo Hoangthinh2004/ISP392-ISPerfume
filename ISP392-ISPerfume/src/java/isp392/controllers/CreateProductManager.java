@@ -53,6 +53,9 @@ public class CreateProductManager extends HttpServlet {
             String name = request.getParameter("productName");
             int brandID = Integer.parseInt(request.getParameter("brandID"));
             String description = request.getParameter("description");
+            String country = request.getParameter("country");
+            int releaseYear = Integer.parseInt(request.getParameter("releaaseDate"));
+            String fragranceFamilies = request.getParameter("fregranceFamilies");
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
             int managerID = 4;
             int status = 1;
@@ -77,7 +80,7 @@ public class CreateProductManager extends HttpServlet {
                         .toFile(outputFile);
 
                 filePart.write(path + File.separator + fileName);
-                int check = dao.addProduct(name, brandID, managerID, description, imagePath, status);
+                int check = dao.addProduct(name, brandID, managerID, description, country,releaseYear, fragranceFamilies ,imagePath, status);
                 if (check != -1) {
                     boolean checkAddProCate = proCateDao.addProCate(check, categoryID);
                     if (checkAddProCate) {

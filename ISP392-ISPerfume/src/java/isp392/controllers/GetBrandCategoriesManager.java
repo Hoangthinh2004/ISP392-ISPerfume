@@ -9,6 +9,8 @@ import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
 import isp392.category.CategoryDAO;
 import isp392.category.CategoryDTO;
+import isp392.size.SizeDAO;
+import isp392.size.SizeDTO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -33,15 +35,18 @@ public class GetBrandCategoriesManager extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        BrandDAO BrandDAO = new BrandDAO();
-        CategoryDAO CateDAO = new CategoryDAO();
+        BrandDAO brandDAO = new BrandDAO();
+        CategoryDAO cateDAO = new CategoryDAO();
+        SizeDAO sizeDAO = new SizeDAO();
         try {
-            List<BrandDTO> Brandlist = BrandDAO.getListBrand();
-            List<CategoryDTO> CateList = CateDAO.getListCategory();
-            if (Brandlist != null || CateList!=null) {
+            List<BrandDTO> brandList = brandDAO.getListBrand();
+            List<CategoryDTO> cateList = cateDAO.getListCategory();
+            List<SizeDTO> sizeList = sizeDAO.getListSize();
+            if (brandList != null || cateList!=null ||sizeList!=null) {
                 HttpSession ses = request.getSession();
-                ses.setAttribute("BRAND_LIST_MANAGER", Brandlist);
-                ses.setAttribute("CATEGORY_LIST_MANAGER", CateList);
+                ses.setAttribute("BRAND_LIST_MANAGER", brandList);
+                ses.setAttribute("CATEGORY_LIST_MANAGER", cateList);
+                ses.setAttribute("SIZE_LIST_MANAGER", sizeList);
                 url = SUCCESS;
             }
         } catch (ClassNotFoundException | SQLException e) {
