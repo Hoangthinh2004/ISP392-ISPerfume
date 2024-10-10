@@ -65,16 +65,8 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-plus me-2"></i>Create Account</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Create Manager</a>
-                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Create Staff</a>
-                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Create Shipper</a>
-                            </div>
-                        </div>
-                       
+                        <a href="" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Management</a>                     
+
                     </div>
                 </nav>
             </div>
@@ -184,7 +176,11 @@
                         <div class="table-responsive">
                             <div class="col-sm-12 col-xl-12">
                                 <div class="bg-light rounded h-100 p-4">
-                                    <h6 class="mb-4">Account Table</h6>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h6 class="mb-0">Account Management</h6>
+                                        <a href="AD_CreateAccount.jsp">Create Account</a>
+                                    </div>
+
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -199,6 +195,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <td>Jacob</td>
@@ -208,37 +205,7 @@
                                                 <td>jacob@email.com</td>
                                                 <td>jacob@email.com</td>
                                                 <td>jacob@email.com</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>Thornton</td>
-                                                <td>Thornton</td>
-                                                <td>jacob@email.com</td>
-                                                <td>jacob@email.com</td>
-                                                <td>jacob@email.com</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>Thornton</td>
-                                                <td>Thornton</td>
-                                                <td>jacob@email.com</td>
-                                                <td>jacob@email.com</td>
-                                                <td>jacob@email.com</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>Thornton</td>
-                                                <td>Thornton</td>
-                                                <td>jacob@email.com</td>
-                                                <td>jacob@email.com</td>
-                                                <td>jacob@email.com</td>
-                                            </tr>
+                                            </tr>                                         
                                         </tbody>
                                     </table>
                                 </div>

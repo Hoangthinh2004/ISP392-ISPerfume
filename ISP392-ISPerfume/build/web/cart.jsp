@@ -176,127 +176,186 @@
 
 
         <!-- Cart Start -->
-        <div class="container-fluid">
-            <div class="row px-xl-5">
-                <div class="col-lg-8 table-responsive mb-5">
-                    <table class="table table-light table-borderless table-hover text-center mb-0">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Products</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody class="align-middle">
-                            <tr>
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
-                                    Product
-                                    Name</td>
-                                <td class="align-middle price">$12</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" readonly=""
-                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                               value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle total">$12</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                            class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;">
-                                    Product
-                                    Name</td>
-                                <td class="align-middle price">$40</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" readonly=""
-                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                               value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle total">$40</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                            class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;">
-                                    Product
-                                    Name</td>
-                                <td class="align-middle price">$30</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text"
-                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                               value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle total">$30</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                            class="fa fa-times"></i></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!--Pop-up start-->
+        <div id="modalOverlay" class="modal-overlay" style="display: none;">
+            <div id="deleteConfirmation" class="card">
+                <div class="card-content">
+                    <p class="card-heading">Delete Product</p>
+                    <p class="card-description">Are you sure you want to delete this product?</p>
                 </div>
-                <div class="col-lg-4">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
-                            Summary</span></h5>
-                    <div class="bg-light p-30 mb-5">
-                        <div class="border-bottom pb-2">
-                            <div class="d-flex justify-content-between mb-3">
-                                <h6>Subtotal</h6>
-                                <h6 id="subtotal" >$150</h6> 
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
-                                <h6 class="font-weight-medium">$10</h6>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <div class="d-flex justify-content-between mt-2">
-                                <h5>Total</h5>
-                                <h5 id="total-cart">$160</h5> 
-                            </div>
-                            <button  type="submit" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
-                                Checkout</button>
-                        </div>
-                    </div>
+                <div class="card-button-wrapper">
+                    <button class="card-button secondary" onclick="cancelDelete()">Cancel</button>
+                    <button class="card-button primary" onclick="proceedDelete()">Delete</button>
                 </div>
+                <button class="exit-button" onclick="cancelDelete()">
+                    <svg height="20px" viewBox="0 0 384 512">
+                    <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                    </path>
+                    </svg>
+                </button>
             </div>
         </div>
+        <!--Pop-up End-->
+        <form action="MainController">
+            <div class="container-fluid">
+                <div class="row px-xl-5">
+
+                    <div class="col-lg-8 table-responsive mb-5">
+                        <table class="table table-light table-borderless table-hover text-center mb-0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Products</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">                      
+                                <tr>
+                                    <td class="align-middle">
+                                        <img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name
+                                    </td>
+                                    <td class="align-middle price">
+                                        <span class="currency">$</span><span class="amount">12</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-minus"
+                                                        onclick="updateQuantity(this, -1, event)">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" readonly
+                                                   class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
+                                                   value="1">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-plus"
+                                                        onclick="updateQuantity(this, 1, event)">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle total">
+                                        <span class="currency">$</span><span class="amount">12</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        <img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name
+                                    </td>
+                                    <td class="align-middle price">
+                                        <span class="currency">$</span><span class="amount">11</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-minus"
+                                                        onclick="updateQuantity(this, -1, event)">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" readonly
+                                                   class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
+                                                   value="1">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-plus"
+                                                        onclick="updateQuantity(this, 1, event)">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle total">
+                                        <span class="currency">$</span><span class="amount">11</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        <img src="img/product-3.jpg" alt="" style="width: 50px;"> Product Name
+                                    </td>
+                                    <td class="align-middle price">
+                                        <span class="currency">$</span><span class="amount">30</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-minus"
+                                                        onclick="updateQuantity(this, -1, event)">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" readonly
+                                                   class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
+                                                   value="1">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-plus"
+                                                        onclick="updateQuantity(this, 1, event)">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle total">
+                                        <span class="currency">$</span><span class="amount">30</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
+                                Summary</span></h5>
+                        <div class="bg-light p-30 mb-5">
+                            <div class="border-bottom pb-2">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6>Subtotal</h6>
+                                    <h6>
+                                        <span>$</span>
+                                        <span id="subtotal">72</span>
+                                    </h6>
+
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-medium">Shipping</h6>
+                                    <h6 class="font-weight-medium">$10</h6>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5>Total</h5>
+                                    <h5 >
+                                        <span>$</span>
+                                        <span id="total-cart">82</span>
+                                    </h5> 
+                                </div>
+                                <button  type="submit" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
+                                    Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
         <!-- Cart End -->
 
 
@@ -387,90 +446,98 @@
         <script src="mail/contact.js"></script>
 
         <!-- Template Javascript -->
-        <!--<script src="js/main.js"></script>-->
-
+        <script src="js/main.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const shippingCost = 10; // Giá vận chuyển cố định
-                let subtotalElement = document.getElementById('subtotal');
-                let totalCartElement = document.getElementById('total-cart');
+                                            window.onload = function () {
+                                                updateCartTotal();
+                                                updateAllProductTotals();
+                                            };
 
-                console.log(subtotalElement);  // Kiểm tra phần tử subtotal
-                console.log(totalCartElement);
-                // Hàm tính tổng giỏ hàng và cập nhật subtotal, total
-                function updateCartTotals() {
-                    let subtotal = 0;
-                    // Duyệt qua tất cả các hàng sản phẩm để tính tổng
-                    document.querySelectorAll('tr').forEach(function (row) {
-                        const totalElement = row.querySelector('.total');
-                        if (totalElement) {
-                            // Chuyển đổi chuỗi '$xxx' thành số
-                            let total = parseFloat(totalElement.innerText.replace('$', '')) || 0;
-                            subtotal += total; // Cộng dồn vào subtotal
-                        }
-                    });
+                                            function updateQuantity(button, change, event) {
+                                                event.preventDefault();
 
-                    // Kiểm tra và cập nhật Subtotal
+                                                const row = button.closest('tr');
+                                                const quantityInput = row.querySelector('.quantity-input');
+                                                const priceText = row.querySelector('.amount').innerText;
 
-                    if (subtotalElement) {
-                        subtotalElement.innerText = `$${subtotal.toFixed()}`; // Cập nhật giá trị hiển thị với 2 chữ số thập phân
-                    }
+                                                const price = parseFloat(priceText);
 
-                    // Kiểm tra và cập nhật Total (Subtotal + Shipping)
+                                                let quantity = parseInt(quantityInput.value) + change;
+                                                if (quantity < 1) {
+                                                    quantity = 1;
+                                                }
+                                                quantityInput.value = quantity;
+                                                const total = (quantity * price).toFixed();
+                                                row.querySelector('.total .amount').innerText = total;
+                                                updateCartTotal();
+                                            }
 
-                    if (totalCartElement) {
-                        let total = subtotal + shippingCost;
-                        totalCartElement.innerText = `$${total.toFixed(0)}`; // Cập nhật giá trị hiển thị với 2 chữ số thập phân
-                    }
-                }
+                                            function removeProduct(button, event) {
+                                                event.preventDefault();
 
-                // Event delegation cho nút tăng/giảm số lượng và xóa
-                document.body.addEventListener('click', function (e) {
-                    if (e.target.closest('.btn-plus') || e.target.closest('.btn-minus')) {
-                        e.preventDefault(); // Ngăn form bị gửi đi
+                                                const row = button.closest('tr');
+                                                row.remove();
 
-                        const row = e.target.closest('tr');
-                        const quantityInput = row.querySelector('.quantity-input');
-                        const priceElement = row.querySelector('.price');
-                        const totalElement = row.querySelector('.total');
-                        let price = parseFloat(priceElement.innerText.replace('$', '')) || 0;
-                        let quantity = parseInt(quantityInput.value);
-                        // Tăng/giảm số lượng
-                        if (e.target.closest('.btn-plus')) {
-                            quantity++;
-                        } else if (e.target.closest('.btn-minus') && quantity > 1) {
-                            quantity--;
-                        }
+                                                updateCartTotal();
+                                            }
 
-                        quantityInput.value = quantity; // Cập nhật số lượng
-                        let total = price * quantity; // Tính toán tổng tiền của sản phẩm
-                        totalElement.innerText = `$${total.toFixed()}`; // Cập nhật lại total với định dạng 2 chữ số thập phân
+                                            function updateCartTotal() {
+                                                const totals = document.querySelectorAll('.total .amount');
+                                                let subtotal = 0;
+                                                totals.forEach((total) => {
+                                                    subtotal += parseFloat(total.innerText);
+                                                });
 
-                        // Thêm log để kiểm tra phần tử trước khi tính toán
-                        console.log(subtotalElement);  // Kiểm tra phần tử subtotal
-                        console.log(totalCartElement); // Kiểm tra phần tử total cart
-                        console.log(totalElement); // Kiểm tra phần tử total cart
+                                                document.getElementById('subtotal').innerText = subtotal.toFixed();
 
-                        // Cập nhật lại tổng số tiền của giỏ hàng
-                        updateCartTotals();
-                    }
+                                                const shipping = 10;
+                                                const totalCart = subtotal + shipping;
+                                                document.getElementById('total-cart').innerText = totalCart.toFixed();
+                                            }
 
-                    // Xử lý xóa sản phẩm
-                    if (e.target.closest('.btn-danger')) {
-                        e.preventDefault(); // Ngăn form bị gửi đi
+                                            function updateAllProductTotals() {
+                                                const rows = document.querySelectorAll('tr');
+                                                rows.forEach((row) => {
+                                                    const quantityInput = row.querySelector('.quantity-input');
+                                                    const priceText = row.querySelector('.amount') ? row.querySelector('.amount').innerText : null;
 
-                        const row = e.target.closest('tr');
-                        if (row) {
-                            row.remove(); // Xóa dòng sản phẩm
-                        }
+                                                    if (quantityInput && priceText) {
+                                                        const price = parseFloat(priceText);
+                                                        const quantity = parseInt(quantityInput.value);
+                                                        const total = (quantity * price).toFixed();
+                                                        row.querySelector('.total .amount').innerText = total;
+                                                    }
+                                                });
+                                            }
+                                            function openDeleteModal(button, event) {
+                                                event.preventDefault();
+                                                deleteButtonRef = button; // Store the reference to the delete button
 
-                        updateCartTotals(); // Cập nhật lại tổng số tiền
-                    }
-                });
+                                                // Show the modal
+                                                document.getElementById('deleteConfirmation').style.display = 'block';
+                                                document.getElementById('modalOverlay').style.display = 'block';
+                                            }
 
-                // Gọi hàm updateCartTotals khi tải trang để cập nhật subtotal và total-cart ngay từ đầu
-                updateCartTotals();
-            });
+                                            function cancelDelete() {
+                                                // Hide the modal and overlay
+                                                document.getElementById('deleteConfirmation').style.display = 'none';
+                                                document.getElementById('modalOverlay').style.display = 'none';
+                                            }
+
+                                            function proceedDelete() {
+                                                if (deleteButtonRef) {
+                                                    // Pass the stored button to removeProduct
+                                                    removeProduct(deleteButtonRef, event);
+                                                }
+
+                                                // Hide modal and overlay after action
+                                                document.getElementById('deleteConfirmation').style.display = 'none';
+                                                document.getElementById('modalOverlay').style.display = 'none';
+                                            }
+
+
         </script>
+
+
     </body>
 </html>
