@@ -67,92 +67,75 @@
                     </div>
                 </div>
             </div>
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-                <div class="col-lg-4">
+            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
+                <div class="col-lg-4 justify-content-center text-center">
                     <a href="home.jsp" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
                 </div>
-                <div class="col-lg-4 col-6 text-left">
-                    <form action="">
-                        <div class="input-group">
-                            <form action="MainController" method="POST">
-                                <input type="text" class="form-control" placeholder="Search for products" name="search">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-lg-4 col-6 text-right">
-                    <p class="m-0">Customer Service</p>
-                    <h5 class="m-0">+012 345 6789</h5>
-                </div>
+
             </div>
         </div>
         <!-- Topbar End -->
 
 
-        <!-- Navbar Start -->
-        <div class="container-fluid bg-dark mb-30">
-            <div class="row px-xl-5">
-                <div class="col-lg-3 d-none d-lg-block">
-                    <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                        <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
-                        <i class="fa fa-angle-down text-dark"></i>
-                    </a>
-                    <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                        <div class="navbar-nav w-100">                         
-                            <a href="" class="nav-item nav-link">Shirts</a>
-                            <a href="" class="nav-item nav-link">Jeans</a>
-                            <a href="" class="nav-item nav-link">Jackets</a>
-                            <a href="" class="nav-item nav-link">Shoes</a>
+        <!--         Navbar Start 
+                <div class="container-fluid bg-dark mb-30">
+                    <div class="row px-xl-5">
+                        <div class="col-lg-3 d-none d-lg-block">
+                            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+                                <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                                <i class="fa fa-angle-down text-dark"></i>
+                            </a>
+                            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                                <div class="navbar-nav w-100">                         
+                                    <a href="" class="nav-item nav-link">Shirts</a>
+                                    <a href="" class="nav-item nav-link">Jeans</a>
+                                    <a href="" class="nav-item nav-link">Jackets</a>
+                                    <a href="" class="nav-item nav-link">Shoes</a>
+                                </div>
+                            </nav>
                         </div>
-                    </nav>
-                </div>
-                <div class="col-lg-9">
-                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                        <a href="" class="text-decoration-none d-block d-lg-none">
-                            <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
-                        </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="home.jsp" class="nav-item nav-link">Home</a>
-                                <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
-                                <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                    <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                        <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
-                                        <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                        <div class="col-lg-9">
+                            <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                                <a href="" class="text-decoration-none d-block d-lg-none">
+                                    <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
+                                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                                </a>
+                                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                    <div class="navbar-nav mr-auto py-0">
+                                        <a href="home.jsp" class="nav-item nav-link">Home</a>
+                                        <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
+                                        <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
+                                        <div class="nav-item dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                                            <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                                <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
+                                                <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                                            </div>
+                                        </div>
+                                        <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                        <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
+                                    </div>
+                                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
+                                        <a href="cart.jsp" class="btn px-0 ml-3">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                        </a>
                                     </div>
                                 </div>
-                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
-                            </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                <a href="cart.jsp" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                </a>
-                            </div>
+                            </nav>
                         </div>
-                    </nav>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- Navbar End -->
+                 Navbar End -->
 
         <!-- Breadcrumb Start -->
-        <div class="container-fluid">
+        <div class="container-fluid mt-4">
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
@@ -170,11 +153,10 @@
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sign
                     In</span></h2>
             <div class="row px-xl-5">
-
                 <div class="col-lg-12 mb-5">
                     <div class="row h-100 align-items-center justify-content-center">
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3" style="padding-bottom: 15px !important; width: 455px;">
+                        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 justify-content-center">
+                            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3 justify-content-center">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
                                     <a href="index.html" class="">
                                         <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
@@ -198,10 +180,10 @@
                                     <a href="forgotPassword.jsp">Forgot Password</a>
                                 </div>
                                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                                <p class="text-center mb-0">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
-                                <div class="d-flex align-items-center justify-content-between mb-4" style="margin: 28px 0 0 32px;">
-                                    <button class="button-signin text-center" style="width: 310px; padding-left: 68px; ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" class="svg">
+                                <p class="text-center mb-4">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
+                                <div class="d-flex align-items-center justify-content-center mb-4">
+                                    <button class="button-signin text-center" style="width: 300px; height: 50px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" class="svg" style="width: 24px; height: 24px;">
                                         <path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" class="blue"></path>
                                         <path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" class="green"></path>
                                         <path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" class="yellow"></path>

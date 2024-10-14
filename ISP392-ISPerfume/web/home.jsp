@@ -32,6 +32,126 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            .input-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+                position: relative;
+            }
+
+            .input {
+                border-style: none;
+                height: 50px;
+                width: 50px;
+                padding: 10px;
+                outline: none;
+                border-radius: 50%;
+                transition: .5s ease-in-out;
+                background-color: orange;
+                box-shadow: 0px 0px 3px #f3f3f3;
+                padding-right: 40px;
+                color: #fff;
+            }
+
+            .input::placeholder,
+            .input {
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                font-size: 17px;
+            }
+
+            .input::placeholder {
+                color: #8f8f8f;
+            }
+
+            .icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                right: 0px;
+                cursor: pointer;
+                width: 50px;
+                height: 50px;
+                outline: none;
+                border-style: none;
+                border-radius: 50%;
+                pointer-events: painted;
+                background-color: transparent;
+                transition: .2s linear;
+            }
+
+            .icon:focus ~ .input,
+            .input:focus {
+                box-shadow: none;
+                outline: none;
+                border: none;
+                border-style: none;
+                width: 250px;
+                border-radius: 0px;
+                background-color: transparent;
+                border-bottom: 3px solid orange;
+                transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+            }
+
+            .icon svg {
+                stroke: #000; 
+            }
+
+
+
+            #navbody {
+                width: 300px;
+                height: 60px;
+                background-color: rgb(255, 255, 255);
+                border-radius: 40px;
+                box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.041);
+                align-items: center;
+                justify-content: center;
+                display: flex;
+            }
+
+            .ul {
+                list-style: none;
+                width: 100%;
+                background-color: transparent;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 5px;
+            }
+
+            .ul .li {
+                display: inline-block;
+            }
+
+            .radio {
+                display: none;
+            }
+
+            .svg {
+                width: 70px;
+                height: 70px;
+                opacity: 80%;
+                cursor: pointer;
+                padding: 13px 20px;
+                transition: 0.2s;
+            }
+
+            .ul .li .svg:hover {
+                transition: 0.1s;
+                color: rgb(235, 40, 176);
+                position: relative;
+                margin-top: -4px;
+                opacity: 100%;
+            }
+
+            .radio:checked + label .li .svg {
+                color: rgb(235, 40, 176);
+                fill-rule: evenodd;
+            }
+
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -85,29 +205,29 @@
                     </div>
                 </div>
             </div>
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-                <div class="col-lg-4">
+            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-between">
+                <div class="col-lg-6">
                     <a href="home.jsp" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
                 </div>
-                <div class="col-lg-4 col-6 text-left">
+                <div class="col-lg-2 col-3 d-flex justify-content-center">
                     <form action="MainController">
                         <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for products" name="search">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="SeacrhProduct" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
+                            <div class="input-wrapper">
+                                <button class="icon" style="outline: none" type="submit" name="action" value=""> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25px" width="25px">
+                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000" d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"></path>
+                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000" d="M22 22L20 20"></path>
+                                    </svg>
+                                </button>
+                                <input placeholder="search.." class="input" name="" type="text" style="color: black">
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-4 col-6 text-right">
-                    <p class="m-0">Customer Service</p>
-                    <h5 class="m-0">+012 345 6789</h5>
-                </div>
+
             </div>
         </div>
         <!-- Topbar End -->
@@ -163,12 +283,7 @@
                                     <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>                              
                             </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                <a href="cart.jsp" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                </a>
-                            </div>
+
                     </div>
                     </nav>
                 </div>

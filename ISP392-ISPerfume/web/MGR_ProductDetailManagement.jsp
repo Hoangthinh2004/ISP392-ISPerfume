@@ -38,7 +38,6 @@
 
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
-
     </head>
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
@@ -73,7 +72,7 @@
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item active">Product Management</a>
-                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
                                 <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
                             </div>
                         </div>
@@ -223,68 +222,93 @@
                                                     <th scope="col">Number of purchasing</th>
                                                     <th scope="col">Image</th>
                                                     <th scope="col">Status</th>
+                                                    <th scope="col">Status</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="proDe" items="${requestScope.LIST_PRODUCT_DETAIL_MANAGER}">
+                                                <c:forEach var="proDe" items="${requestScope.LIST_PRODUCT_DETAIL_MANAGER}" varStatus="counter">
                                                     <tr>
                                                         <td>
-                                                            <form action="UpdateProductDetailManager" method="post" enctype="multipart/form-data"  onsubmit="convertToInt()" >
-                                                                <c:forEach var="size" items="${sessionScope.SIZE_LIST_MANAGER}" >
-                                                                    <c:if test="${size.sizeID == proDe.sizeID}">
-                                                                        ${size.name}
-                                                                    </c:if>
-                                                                </c:forEach>
+
+                                                            <c:forEach var="size" items="${sessionScope.SIZE_LIST_MANAGER}" >
+                                                                <c:if test="${size.sizeID == proDe.sizeID}">
+                                                                    ${size.name}
+                                                                </c:if>
+                                                            </c:forEach>
                                                         </td>
                                                         <td>
                                                             ${proDe.importDate}
                                                         </td>
                                                         <td>
-                                                            <input type="text" min="1" name="price" value="${proDe.price}" class="form-control border-0" id="priceInput" oninput="formatPrice(this)">
-                                                            <script>
-                                                                function formatPrice(input) {
-                                                                    let value = input.value.replace(/\./g, '');
-
-                                                                    let intValue = parseInt(value, 10);
-
-                                                                    if (!isNaN(intValue)) {
-                                                                        input.value = intValue.toLocaleString('vi-VN');
-                                                                    }
-                                                                }
-                                                                function convertToInt() {
-                                                                    let priceInput = document.getElementById('priceInput');
-                                                                    let value = priceInput.value.replace(/\./g, '');
-                                                                    priceInput.value = parseInt(value, 10);
-                                                                }
-                                                            </script>
+                                                            ${proDe.price}
                                                         </td>
                                                         <td>
-                                                            <input type="number" min="1" name="stockQuantiy" value="${proDe.stockQuantity}" class="form-control border-0">
+                                                            ${proDe.stockQuantity}
                                                         </td>
                                                         <td>
                                                             ${proDe.numberOfPurchasing}
                                                         </td>
                                                         <td>
-                                                            <img src="${proDe.image}" style="width: 100px; height: 100px; margin-right: 10px;">
-                                                            <input type="hidden" name="existingImage" value="${proDe.image}">
-                                                            <label for="productDetailImage"  class="col-sm-2 col-form-label">Image</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="file" name="productDetailImage" class="form-control">
+                                                            <img src="${proDe.image}" style="width: 100px; height: 100px;">
+                                                        </td>
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${proDe.status == 1}">
+                                                                    AVAILABLE
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    UNAVAILABLE
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </td>
+
+                                                        <td>
+                                                            <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${counter.count}">
+                                                                <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                                </svg>
+                                                            </a>
+                                                            <!-- Modal Update -->
+                                                            <div class="modal fade" id="updateModal-${counter.count}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" >
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content" style="border-radius: 24px;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="updateModalLabel">Product Detail Information</h1>
+                                                                            <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <form action="UpdateProductDetailManager" method="post" enctype="multipart/form-data" onsubmit="convertToInt()">
+                                                                            <div class="modal-body">
+                                                                                <div class="mb-3">
+                                                                                    <label  class="form-label">Price</label>
+                                                                                    <input type="number" min="1" name="price" value="${proDe.price}" class="form-control" id="priceInput" oninput="formatPrice(this)">                                                                  
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="password_field" class="form-label">Stock Quantity</label>
+                                                                                    <input type="number" min="1" name="stockQuantiy" value="${proDe.stockQuantity}" class="form-control input_field" id="password_field">                                                                   
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="formFileMultiple" class="form-label">Image</label>
+                                                                                    <input type="hidden" name="existingImage" value="${proDe.image}">
+                                                                                    <input type="file" name="productDetailImage" class="form-control" id="formFileMultiple">
+                                                                                </div>
+                                                                                <select name="status" class="form-select mb-3 form-control bg-transparent" aria-label="Default select example">
+                                                                                    <option value="1" ${proDe.status == 1 ? 'selected' : ''}>Available</option>
+                                                                                    <option value="0" ${proDe.status == 0 ? 'selected' : ''}>Unavailable</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                                                <input type="hidden" name="productID" value="${proDe.productID}">
+                                                                                <input type="hidden" name="sizeID" value="${proDe.sizeID}">
+                                                                                <button type="submit" name="action" value="UpdateProductDetail" class="btn btn-sm btn-primary">Update</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </td>
-                                                        <td>
-                                                            <select name="status" class="form-select mb-3" aria-label="Default select example">
-                                                                <option value="1" ${proDe.status == 1 ? 'selected' : ''}>Available</option>
-                                                                <option value="0" ${proDe.status == 0 ? 'selected' : ''}>Unavailable</option>
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <input type="hidden" name="productID" value="${proDe.productID}">
-                                                            <input type="hidden" name="sizeID" value="${proDe.sizeID}">
-                                                            <button type="submit" name="action" value="UpdateProductDetail" class="btn btn-sm btn-primary">Update</button>
-<!--                                                        <button type="submit" name="action" value="DeleteProductDetail" class="btn btn-sm btn-primary">Delete</button>-->
-                                                        </td>
-                                                        </form>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

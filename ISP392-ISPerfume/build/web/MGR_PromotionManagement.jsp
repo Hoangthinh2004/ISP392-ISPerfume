@@ -1,4 +1,4 @@
-<%-- 
+1<%-- 
     Document   : MGR_PromotionManagement
     Created on : Sep 25, 2024, 3:56:09 PM
     Author     : User
@@ -69,24 +69,11 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Product Management</a>
-                                <a href="MGR_BrandManagement.jsp" class="dropdown-item ">Brand Management</a>
-                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item active">Promotion Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
+                                <a href="MainController?action=ViewPromotion" class="dropdown-item active">Promotion Management</a>
                             </div>
-                        </div>
-                        <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                        <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                        <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                        <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="signin.html" class="dropdown-item">Sign In</a>
-                                <a href="signup.html" class="dropdown-item">Sign Up</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                                <a href="blank.html" class="dropdown-item">Blank Page</a>
-                            </div>
-                        </div>
+                        </div>                      
                     </div>
                 </nav>
             </div>
@@ -103,9 +90,9 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                        <button class="btn btn-primary" type="submit" name="action" value="" style="margin-left: 10px;">
+                    <form class="d-none d-md-flex ms-4" action="MainController">
+                        <input class="form-control border-0" type="" placeholder="Search">
+                        <button class="btn btn-primary" style="margin-left: 10px;" type="submit" name="action" value="ViewPromotion">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -202,65 +189,103 @@
                                     <h6 class="mb-0">Promotion Management</h6>
                                     <a href="MGR_CreatePromotion.jsp" class="btn btn-primary">Create new Promotion</a>
                                 </div>
-                                <form action="MainController">
-                                    <input type="submit" name="action" value="ViewPromotion" class="btn btn-sm btn-primary">
-                                </form>
+
                                 <div class="table-responsive" style="height: auto">
                                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                                         <thead>
                                             <tr class="text-dark">
                                                 <th scope="col">No</th>
-                                                <th scope="col">ID</th>
                                                 <th scope="col">Name</th>
-                                                <th scope="col">Description</th>
                                                 <th scope="col">Start Date</th>
                                                 <th scope="col">End Date</th>
                                                 <th scope="col">Discount Per</th>
                                                 <th scope="col">Condition</th>
-                                                <th scope="col">Status</th>
                                                 <th scope="col">Update</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach var="promotion" varStatus="counter" items="${requestScope.LIST_PROMOTION}">
-                                            <form action="MainController" method="GET"> 
+
                                                 <tr>
                                                     <td>${counter.count}</td>
                                                     <td>
-                                                        <input name="promotionID" value="${promotion.promotionID}" readonly="">
+                                                        ${promotion.promotionName}
+                                                    </td>
+
+                                                    <td>
+                                                        ${promotion.startDate}
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="promotionName" value="${promotion.promotionName}"
+                                                        ${promotion.endDate}
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="description" value="${promotion.description}"
+                                                        ${promotion.discountPer}
                                                     </td>
                                                     <td>
-                                                        <input type="date" name="startDate" value="${promotion.startDate}"
+                                                        ${promotion.condition}
                                                     </td>
                                                     <td>
-                                                        <input type="date" name="endDate" value="${promotion.endDate}"
+                                                        <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${counter.count}">
+                                                            <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                            </svg>
+
+                                                        </a>
+                                                        <!-- Modal Update -->
+                                                        <div class="modal fade" id="updateModal-${counter.count}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" >
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content" style="border-radius: 24px;">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="updateModalLabel">Promotion Information</h1>
+                                                                        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <form action="MainController" method="GET">
+                                                                        <input type="hidden" value="${promotion.promotionID}" name ="promotionID">
+                                                                        <div class="modal-body">
+                                                                            <div class="mb-3">
+                                                                                <label  class="form-label">Promotion Name</label>
+                                                                                <input type="text" class="form-control" value="${promotion.promotionName}" name="promotionName">                                                                   
+                                                                            </div>
+                                                                            <div class="form-floating mb-3">
+                                                                                <textarea class="form-control" style="height: 100px;"
+                                                                                          id="floatingTextarea" name="description">${promotion.description}</textarea>
+                                                                                <label for="floatingTextarea">Description</label>
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label  class="form-label">Start Date</label>
+                                                                                <input type="date" class="form-control" value="${promotion.startDate}" name="startDate">                                                                   
+                                                                            </div><div class="mb-3">
+                                                                                <label  class="form-label">End Date</label>
+                                                                                <input type="date" class="form-control" value="${promotion.endDate}" name="endDate">                                                                   
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="password_field" class="form-label">Discount Per</label>
+                                                                                <input type="number" class="form-control input_field" id="password_field" value="${promotion.discountPer}" name="discountPer">                                                                   
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="password_field" class="form-label">Condition</label>
+                                                                                <input type="number" class="form-control input_field" id="password_field" value="${promotion.condition}" name="condition">                                                                   
+                                                                            </div>
+
+                                                                            <select name="status" class="form-control bg-transparent">
+                                                                                <option value="0" ${promotion.status == 0 ? 'selected' : ''}>Unavailable</option>
+                                                                                <option value="1" ${promotion.status == 1 ? 'selected' : ''}>Available</option>
+                                                                            </select>                                                                    
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn" name="action" value="UpdatePromotion">Update</button>
+                                                                            <input type="hidden" name="action" value="ViewPromotion"/>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </td>
-                                                    <td>
-                                                        <input type="number" name="discountPer" value="${promotion.discountPer}"
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" name="condition" value="${promotion.condition}"
-                                                    </td>
-                                                    <td>
-                                                        <select name="status" class="form-control">
-                                                            <option value="0" ${promotion.status == 0 ? 'selected' : ''}>Unavailable</option>
-                                                            <option value="1" ${promotion.status == 1 ? 'selected' : ''}>Available</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="submit" name="action" value="UpdatePromotion" class="btn btn-sm btn-primary">
-                                                        <input type="hidden" name="action" value="ViewPromotion"/>
-                                                    </td>
-                                                    
                                                 </tr>
-                                            </form>
-                                        </c:forEach>
+
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

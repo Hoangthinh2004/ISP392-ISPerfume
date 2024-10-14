@@ -200,7 +200,6 @@
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Decription</label>
                                         <div class="col-sm-10">
-<!--                                            <input type="text" name="description" class="form-control">-->
                                             <textarea name="description" class="form-control"></textarea>
                                         </div>
                                     </div>
@@ -229,12 +228,12 @@
                                             <input type="file" name="brandImage" class="form-control" required="">
                                         </div>
                                     </div>
-                                    Brand <select name="brandID" class="form-select mb-3" aria-label="Default select example" required="">
+                                    Brand <select name="brandID" class="form-select mb-3 form-control" aria-label="Default select example" required="">
                                         <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
                                             <option value="${brand.brandID}">${brand.name}</option>
                                         </c:forEach>
                                     </select>
-                                    Category <select name="categoryID" class="form-select mb-3" aria-label="Default select example" required="">
+                                    Category <select name="categoryID" class="form-select mb-3 form-control" aria-label="Default select example" required="">
                                         <c:forEach var="cate" items="${sessionScope.CATEGORY_LIST_MANAGER}">
                                             <c:if test="${cate.categoryID!=4}">
                                                 <option value="${cate.categoryID}">${cate.name}</option>

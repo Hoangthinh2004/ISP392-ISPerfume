@@ -35,7 +35,26 @@
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/bootstrap.min2.css" rel="stylesheet">
 
+        <style>
+            .text-container {
+                max-height: 50px; 
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+            }
 
+            .text-container.expanded {
+                max-height: 500px; 
+            }
+            #toggle-btn {
+                transition: transform 0.3s ease; 
+                cursor: pointer;
+            }
+
+            #toggle-btn.expanded {
+                transform: rotate(180deg);
+            }
+
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -101,7 +120,6 @@
         </div>
         <!-- Topbar End -->
 
-
         <!-- Navbar Start -->
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
@@ -155,8 +173,6 @@
         </div>
         <!-- Navbar End -->
 
-
-
         <!-- Breadcrumb Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
@@ -174,6 +190,34 @@
         </div>
         <!-- Breadcrumb End -->
 
+        <!--Banner Start-->
+        <div class="container-fluid">
+            <div class="row px-xl-5 mb-5">
+                <div class="col-lg-12 bg-transparent">
+                    <div class="justify-content-center align-content-center d-flex">
+                        <img src="https://file.hstatic.net/1000340570/article/gucci-banner_c59f167049a347b18b67abacf37d71b8.jpg" style="width: auto; height: 490px;">
+                    </div>
+                </div>
+                <div class="col-lg-12 bg-transparent">
+                    <div class="description-box bg-transparent p-4">
+                        <div class="description-header d-flex justify-content-center align-items-center">
+                            <img id="toggle-btn" class="icon-down-black" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" style="cursor: pointer;">
+                        </div>
+                        <div id="description-content" class="mt-2 text-container bg-transparent">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, 
+                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Vestibulum tincidunt est vel ipsum consectetur, sit amet vehicula magna gravida. Phasellus aliquet nisi non nisl accumsan, a posuere erat venenatis. Cras in orci est. Ut vulputate semper magna, eget tempus eros dapibus non.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Banner End-->
 
         <!-- Shop Start -->
         <div class="container-fluid">
@@ -203,7 +247,6 @@
                     <!-- Filter By Size End -->
                 </div>
                 <!-- Shop Sidebar End -->
-
 
                 <!-- Shop Product Start -->
                 <div class="col-lg-9 col-md-8">
@@ -361,5 +404,20 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script>
+            const toggleBtn = document.getElementById("toggle-btn");
+            const descriptionContent = document.getElementById("description-content");
+
+            toggleBtn.addEventListener("click", function () {
+                if (descriptionContent.classList.contains("expanded")) {
+                    descriptionContent.classList.remove("expanded");
+                    toggleBtn.classList.remove("expanded");
+                } else {
+                    descriptionContent.classList.add("expanded");
+                    toggleBtn.classList.add("expanded");
+                }
+            });
+
+        </script>
     </body>
 </html>

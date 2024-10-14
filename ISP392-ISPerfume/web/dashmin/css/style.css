@@ -290,7 +290,7 @@
     background-color: white ; /* Màu nền mặc định */
     color: black; /* Màu chữ mặc định */
     border: 1px solid #F3F6F9 ;  //Đường viền mặc định 
-    
+
 }
 
 .btn.btn-primary:hover {
@@ -303,4 +303,14 @@
     outline: none; 
     border-color: #FE980F; /* Viền màu xanh khi nhấp vào */
     box-shadow: 0 0 5px #FE980F; /* Tạo hiệu ứng đổ bóng màu xanh */
+}
+/*CSS Number format*/
+.input_field::-webkit-outer-spin-button,
+.input_field::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input_field[type="number"] {
+    -moz-appearance: textfield;
 }

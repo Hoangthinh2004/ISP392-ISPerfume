@@ -225,19 +225,19 @@
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Discount Percent</label> ${requestScope.PROMOTION_ERROR.discountPerError}
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="discountPer" required="" min="0" max="100">
+                                            <input type="number" class="form-control input_field" name="discountPer" required="" min="0" max="100">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Condition</label> ${requestScope.PROMOTION_ERROR.conditionError}
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="condition" required="" min="0">
+                                            <input type="number" class="form-control input_field" name="condition" required="" min="0">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="statusSelect" class="col-sm-2 col-form-label">Status</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="statusSelect" name="status"> ${requestScope.PROMOTION_ERROR.statusError}
+                                            <select class="form-control bg-light" id="statusSelect" name="status"> ${requestScope.PROMOTION_ERROR.statusError}
                                                 <!-- Kiểm tra nếu status là 1 thì chọn Available -->
                                                 <option value="1" ${status == 1 ? 'selected' : ''}>Available</option>
                                                 <!-- Kiểm tra nếu status là 0 thì chọn Unavailable -->
