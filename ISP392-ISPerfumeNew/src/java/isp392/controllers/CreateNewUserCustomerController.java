@@ -55,27 +55,27 @@ public class CreateNewUserCustomerController extends HttpServlet {
             int roleID = 1; // role: customer
             //Validation
             if (userName.length() < 5) {
-                userErr.setNameErr("User name must have more than 5 characters!");
+                userErr.setNameError("User name must have more than 5 characters!");
                 checkValidation = false;
             }
             if (!email.matches(EMAIL_REGEX)) {
-                userErr.setEmailErr("This email is invalid!");
+                userErr.setEmailError("This email is invalid!");
                 checkValidation = false;
             }
             if (dao.checkEmailExisted(email)) {
-                userErr.setEmailErr("This email has already existed!");
+                userErr.setEmailError("This email has already existed!");
                 checkValidation = false;
             }
             if (!phoneNum.matches(PHONE_REGEX)) {
-                userErr.setPhoneErr("This phone number is invalid!");
+                userErr.setPhoneError("This phone number is invalid!");
                 checkValidation = false;
             }
             if (dao.checkPhoneNumExisted(phoneNum)) {
-                userErr.setPhoneErr("This phone number has already existed!");
+                userErr.setPhoneError("This phone number has already existed!");
                 checkValidation = false;
             }
             if (!confirm.equals(password)) {
-                userErr.setConfirmPasswordErr("Confirmation does not match password!");
+                userErr.setConfirmPasswordError("Confirmation does not match password!");
                 checkValidation = false;
             }
             if (checkValidation) {
