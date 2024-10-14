@@ -49,7 +49,6 @@
             </div>
             <!-- Spinner End -->
 
-
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
@@ -71,29 +70,15 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Product Management</a>
-                                <a href="MGR_BrandManagement.jsp" class="dropdown-item active">Brand Management</a>
-                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
-                            </div>
-                        </div>
-                        <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                        <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                        <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                        <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="signin.html" class="dropdown-item">Sign In</a>
-                                <a href="signup.html" class="dropdown-item">Sign Up</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                                <a href="blank.html" class="dropdown-item">Blank Page</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item active">Brand Management</a>
+                                <a href="MainController?action=ViewPromotion" class="dropdown-item">Promotion Management</a>
                             </div>
                         </div>
                     </div>
                 </nav>
             </div>
             <!-- Sidebar End -->
-
 
             <!-- Content Start -->
             <div class="content">
@@ -105,11 +90,9 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-
-                    <form action="ShowAllBrandManager" method="GET" class="d-none d-md-flex ms-4">
+                    <form action="MainController" method="GET" class="d-none d-md-flex ms-4">
                         <input class="form-control border-0" type="search" placeholder="Search" name="search">
                         <input type="submit" name="action" value="Search" class="btn btn-sm btn-primary">
-
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
@@ -193,7 +176,7 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0">
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important">
                         <!--                                                <div class="col-md-6 text-center">
                                                  Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
@@ -208,50 +191,83 @@
                                             <tr class="text-dark">
                                                 <th scope="col">BrandID</th>
                                                 <th scope="col">BrandName</th>
-                                                <th scope="col">Description</th>
                                                 <th scope="col">Image</th>
                                                 <th scope="col">Status</th>
+                                                <th scope="col">Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach var="brand" items="${requestScope.LIST_BRAND_MANAGER}">
-                                            <form action="MainController" method="get">
                                                 <tr>
                                                     <td>${brand.brandID}</td>
                                                     <td>
-                                                        <input type="text" name="brandName" value="${brand.name}">
+                                                        ${brand.name}
                                                     </td>
+
                                                     <td>
-                                                        <input type="text" name="brandDes" value="${brand.description}">
-                                                    </td>
-                                                    <td>
-                                                        <img src="${brand.image}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                                        <img src="${brand.image}" style="width: 80px; height: 80px; margin-right: 10px;">
                                                     </td>
                                                     <td>
                                                         <!-- Hiển thị dropdown trạng thái hiện tại -->
                                                         <div class="row mb-3">
                                                             <div class="col-sm-12">
-                                                                <select class="form-control" id="statusSelect" name="status">
-                                                                    <option value="true" ${brand.status == true ? 'selected="selected"' : ''}>Available</option>
-                                                                    <option value="false" ${brand.status == false ? 'selected="selected"' : ''}>Unavailable</option>
-                                                                </select>
+                                                                ${brand.status == true ? "Available" : "Unavailable"}
+                                                            </div>
+                                                        </div>
+                                                    </td>                                                   
+                                                    <td>
+
+                                                        <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${brand.brandID}">
+
+                                                            <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                            </svg>
+
+                                                        </a>
+                                                        <!-- Modal Update -->
+                                                        <div class="modal fade" id="updateModal-${brand.brandID}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" >
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content" style="border-radius: 24px;">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="updateModalLabel">Brand Information</h1>
+                                                                        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <form action="MainController" method="GET">
+                                                                        <input type="hidden" value="${brand.brandID}" name ="brandID">
+                                                                        <div class="modal-body">
+
+                                                                            <div class="mb-3">
+                                                                                <label  class="form-label">Brand Name</label>
+                                                                                <input type="text" class="form-control" value="${brand.name}" name="brandName">                                                                   
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="formFileMultiple" class="form-label">Image</label>
+                                                                                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                                                                            </div>
+                                                                            <div class="form-floating mb-3">
+                                                                                <textarea class="form-control" style="height: 100px;"
+                                                                                          id="floatingTextarea" name="brandDes">${brand.description}</textarea>
+                                                                                <label for="floatingTextarea">Description</label>
+
+                                                                            </div>
+                                                                            <select name="status" class="form-select mb-3 form-control bg-transparent" aria-label="Default select example">
+                                                                                <option value="true" ${brand.status == true ? 'selected="selected"' : ''}>Available</option>
+                                                                                <option value="false" ${brand.status == false ? 'selected="selected"' : ''}>Unavailable</option>
+                                                                            </select> 
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn" name="action" value="Update Brand">Update</button>
+
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <!-- Nút để cập nhật -->
-                                                        <input type="submit" name="action" value="Update Brand" style="background-color: #00BFFF; color: white; border: none; padding: 5px 10px; border-radius: 5px;">
-                                                        <input type="hidden" name="search" value="${param.search}"/>
-                                                        <input type="hidden" name="brandID" value="${brand.brandID}"/>
-                                                    </td>
                                                 </tr>
-                                            </form>
-                                        </c:forEach>
-                                        </tbody>
-
-
-                                        </tbody>                            
-
+                                            </c:forEach>
+                                        </tbody>                          
                                     </table>
                                 </div>
                             </div>

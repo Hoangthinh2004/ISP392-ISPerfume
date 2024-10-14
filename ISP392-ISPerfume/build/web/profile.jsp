@@ -197,9 +197,9 @@
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput1" class="form-label">Username</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="floatingInput1" value="username" placeholder="Enter username" readonly>
-                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput1')">
-                                                    <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <input type="text" class="form-control bg-transparent" style="border-right: none" id="floatingInput1" value="username" placeholder="Enter username" readonly>
+                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-left:   none" onclick="enableEdit('floatingInput1')">
+                                                    <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
                                                 </span>
@@ -209,8 +209,8 @@
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput2" class="form-label">Email</label>
                                             <div class="input-group">
-                                                <input type="email" class="form-control" id="floatingInput2" value="abc@skkd" placeholder="Enter email" readonly>
-                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput2')">
+                                                <input type="email" class="form-control bg-transparent" id="floatingInput2" value="abc@skkd" placeholder="Enter email" readonly>
+                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-style:  none" onclick="enableEdit('floatingInput2')">
                                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
@@ -224,8 +224,8 @@
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput3" class="form-label">Address</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="floatingInput3" value="Address" placeholder="Enter address" readonly>
-                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput3')">
+                                                <input type="text" class="form-control bg-transparent" id="floatingInput3" value="Address" placeholder="Enter address" readonly>
+                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-style:  none" onclick="enableEdit('floatingInput3')">
                                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
@@ -236,8 +236,8 @@
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput4" class="form-label">Birthday</label>
                                             <div class="input-group">
-                                                <input type="date" class="form-control" id="floatingInput4" value="" placeholder="Enter birthday" readonly>
-                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput4')">
+                                                <input type="date" class="form-control bg-transparent" id="floatingInput4" value="" placeholder="Enter birthday" readonly>
+                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-style:  none" onclick="enableEdit('floatingInput4')">
                                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
@@ -251,8 +251,8 @@
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput3" class="form-label">Address</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="floatingInput3" value="Address" placeholder="Enter address" readonly>
-                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput3')">
+                                                <input type="text" class="form-control bg-transparent" id="floatingInput3" value="Address" placeholder="Enter address" readonly>
+                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-style:  none" onclick="enableEdit('floatingInput3')">
                                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>

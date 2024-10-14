@@ -33,6 +33,56 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
               rel="stylesheet">
         <link href="css/styleOrderStatus.css" rel="stylesheet">
+        <style>
+            /* Vùng chứa thanh tiến trình */
+            .progress {
+                width: 100%;
+                height: 20px;
+                background-color: #e9ecef;
+                border-radius: 5px;
+                overflow: hidden;
+                margin-top: 20px;
+            }
+
+            /* Thanh tiến trình bên trong */
+            .progress-bar {
+                background-color: #007bff;
+                transition: width 2s ease; /* Thời gian chuyển động của thanh tiến trình */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                font-weight: bold;
+            }
+
+            /* Dải sọc */
+            .progress-bar-striped {
+                background-image: linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.15) 25%,
+                    transparent 25%, transparent 50%,
+                    rgba(255, 255, 255, 0.15) 50%,
+                    rgba(255, 255, 255, 0.15) 75%,
+                    transparent 75%, transparent
+                    );
+                background-size: 1rem 1rem;
+            }
+
+            /* Hoạt ảnh cho dải sọc */
+            .progress-bar-animated {
+                animation: progress-bar-stripes 1s linear infinite;
+            }
+
+            @keyframes progress-bar-stripes {
+                0% {
+                    background-position: 1rem 0;
+                }
+                100% {
+                    background-position: 0 0;
+                }
+            }
+
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -183,5 +233,24 @@
                 </li>
             </ul>
         </section>
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100">
+                
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var progressBar = document.getElementById("progress-bar");
+                var progressValue = progressBar.getAttribute("aria-valuenow");
+
+                // Đặt chiều rộng ban đầu của thanh tiến trình là 0%
+                progressBar.style.width = "0%";
+
+                // Sau đó, thay đổi chiều rộng tới giá trị đã đặt (progressValue)
+                setTimeout(function () {
+                    progressBar.style.width = progressValue + "%";
+                }, 100); // Delay 100ms để bắt đầu hiệu ứng chuyển động
+            });
+        </script>
     </body>
 </html>
