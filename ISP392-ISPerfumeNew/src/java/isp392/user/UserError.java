@@ -10,6 +10,7 @@ package isp392.user;
  * @author anhng
  */
 public class UserError {
+
     private String userIDError;
     private String nameError;
     private String emailError;
@@ -17,12 +18,13 @@ public class UserError {
     private String phoneError;
     private String statusError;
     private String roleIDError;
+    private String confirmPasswordError;
     private String error;
 
     public UserError() {
     }
 
-    public UserError(String userIDError, String nameError, String emailError, String passwordError, String phoneError, String statusError, String roleIDError, String error) {
+    public UserError(String userIDError, String nameError, String emailError, String passwordError, String phoneError, String statusError, String roleIDError, String confirmPasswordError, String error) {
         this.userIDError = userIDError;
         this.nameError = nameError;
         this.emailError = emailError;
@@ -30,6 +32,7 @@ public class UserError {
         this.phoneError = phoneError;
         this.statusError = statusError;
         this.roleIDError = roleIDError;
+        this.confirmPasswordError = confirmPasswordError;
         this.error = error;
     }
 
@@ -89,6 +92,14 @@ public class UserError {
         this.roleIDError = roleIDError;
     }
 
+    public String getConfirmPasswordError() {
+        return confirmPasswordError;
+    }
+
+    public void setConfirmPasswordError(String confirmPasswordError) {
+        this.confirmPasswordError = confirmPasswordError;
+    }
+
     public String getError() {
         return error;
     }
@@ -98,4 +109,5 @@ public class UserError {
     }
 
     
+
 }
