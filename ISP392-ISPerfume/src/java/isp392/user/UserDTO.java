@@ -15,8 +15,8 @@ public class UserDTO {
     private String email;
     private String password;
     private String phone;
+    private int status;
     private int roleID;
-    private boolean status;
 
     public UserDTO() {
         this.userID = 0;
@@ -25,10 +25,10 @@ public class UserDTO {
         this.password = "";
         this.phone = "";
         this.roleID = 0;
-        this.status = true;
+        this.status = 0;
     }
 
-    public UserDTO(int userID, String name, String email, String password, String phone, int roleID, boolean status) {
+    public UserDTO(int userID, String name, String email, String password, String phone, int status, int roleID) {
         this.userID = userID;
         this.name = name;
         this.email = email;
@@ -86,12 +86,13 @@ public class UserDTO {
         this.roleID = roleID;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
-    
+
+   
 }

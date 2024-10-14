@@ -103,9 +103,9 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
+                    <form class="d-none d-md-flex ms-4" action="MainController" method="GET">
                         <input class="form-control border-0" type="search" placeholder="Search">
-                        <button class="btn btn-primary" type="submit" name="action" value="" style="margin-left: 10px;">
+                        <button class="btn btn-primary" type="submit" name="action" value="ViewPromotion" style="margin-left: 10px;">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -202,9 +202,9 @@
                                     <h6 class="mb-0">Promotion Management</h6>
                                     <a href="MGR_CreatePromotion.jsp" class="btn btn-primary">Create new Promotion</a>
                                 </div>
-                                <form action="MainController">
+                                <!--<form action="MainController">
                                     <input type="submit" name="action" value="ViewPromotion" class="btn btn-sm btn-primary">
-                                </form>
+                                </form> -->
                                 <div class="table-responsive" style="height: auto">
                                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                                         <thead>
