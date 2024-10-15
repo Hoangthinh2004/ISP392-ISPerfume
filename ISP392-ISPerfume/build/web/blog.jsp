@@ -47,14 +47,29 @@
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
-                            </div>
-                        </div>                                            
+                        <div class="d-inline-flex align-items-center">
+
+                            <div class="btn-group">
+                                <!-- Display when not logged in. -->
+                                <c:choose>
+                                    <c:when test="${sessionScope.LOGIN_USER == null}">
+                                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.LOGIN_USER.name}</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                            </div>
+                                    </c:when>
+                                    <!-- Display when logged in. -->
+                                    <c:otherwise>
+                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>                                            
+
+                        </div>
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">

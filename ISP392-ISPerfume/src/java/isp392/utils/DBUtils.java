@@ -24,4 +24,8 @@ public class DBUtils {
         conn= DriverManager.getConnection(url, USER_NAME, PASSWORD);
         return conn;
     }
+
+    public static Connection getConnection(String UPDATE_PASSWORD) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

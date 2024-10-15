@@ -56,6 +56,30 @@
         <servlet-name>CreateBrandManager</servlet-name>
         <servlet-class>isp392.controllers.CreateBrandManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserError</servlet-name>
+        <servlet-class>isp392.user.UserError</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SigninEmployee</servlet-name>
+        <servlet-class>isp392.controllers.SigninEmployee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateEmployee</servlet-name>
+        <servlet-class>isp392.controllers.UpdateEmployee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCustomerProfile</servlet-name>
+        <servlet-class>isp392.controllers.UpdateCustomerProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserProfile</servlet-name>
+        <servlet-class>isp392.controllers.UpdateUserProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>isp392.controllers.ChangePasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -111,6 +135,30 @@
     <servlet-mapping>
         <servlet-name>CreateBrandManager</servlet-name>
         <url-pattern>/CreateBrandManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserError</servlet-name>
+        <url-pattern>/UserError</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SigninEmployee</servlet-name>
+        <url-pattern>/SigninEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateEmployee</servlet-name>
+        <url-pattern>/UpdateEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCustomerProfile</servlet-name>
+        <url-pattern>/UpdateCustomerProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserProfile</servlet-name>
+        <url-pattern>/UpdateUserProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
