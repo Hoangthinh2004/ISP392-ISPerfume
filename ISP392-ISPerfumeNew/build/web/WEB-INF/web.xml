@@ -61,12 +61,20 @@
         <servlet-class>isp392.controllers.CreateBrandManager</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>FilterByCustomerController</servlet-name>
+        <servlet-class>isp392.controllers.FilterByCustomerController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>FilterByEmployeeController</servlet-name>
         <servlet-class>isp392.controllers.FilterByEmployeeController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FilterByCustomerController</servlet-name>
-        <servlet-class>isp392.controllers.FilterByCustomerController</servlet-class>
+        <servlet-name>SearchUserController</servlet-name>
+        <servlet-class>isp392.controllers.SearchUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserController</servlet-name>
+        <servlet-class>isp392.controllers.UpdateUserController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateUserStatusController</servlet-name>
@@ -133,12 +141,20 @@
         <url-pattern>/CreateBrandManager</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>FilterByCustomerController</servlet-name>
+        <url-pattern>/FilterByCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>FilterByEmployeeController</servlet-name>
         <url-pattern>/FilterByEmployeeController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>FilterByCustomerController</servlet-name>
-        <url-pattern>/FilterByCustomerController</url-pattern>
+        <servlet-name>SearchUserController</servlet-name>
+        <url-pattern>/SearchUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserController</servlet-name>
+        <url-pattern>/UpdateUserController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateUserStatusController</servlet-name>
