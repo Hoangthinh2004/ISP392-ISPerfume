@@ -60,6 +60,26 @@
         <servlet-name>CreateBrandManager</servlet-name>
         <servlet-class>isp392.controllers.CreateBrandManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FilterByCustomerController</servlet-name>
+        <servlet-class>isp392.controllers.FilterByCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterByEmployeeController</servlet-name>
+        <servlet-class>isp392.controllers.FilterByEmployeeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchUserController</servlet-name>
+        <servlet-class>isp392.controllers.SearchUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserController</servlet-name>
+        <servlet-class>isp392.controllers.UpdateUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserStatusController</servlet-name>
+        <servlet-class>isp392.controllers.UpdateUserStatusController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -119,6 +139,26 @@
     <servlet-mapping>
         <servlet-name>CreateBrandManager</servlet-name>
         <url-pattern>/CreateBrandManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterByCustomerController</servlet-name>
+        <url-pattern>/FilterByCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterByEmployeeController</servlet-name>
+        <url-pattern>/FilterByEmployeeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUserController</servlet-name>
+        <url-pattern>/SearchUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserController</servlet-name>
+        <url-pattern>/UpdateUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserStatusController</servlet-name>
+        <url-pattern>/UpdateUserStatusController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

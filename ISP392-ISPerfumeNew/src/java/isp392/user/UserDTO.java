@@ -15,13 +15,20 @@ public class UserDTO {
     private String email;
     private String password;
     private String phone;
-    private int roleID;
     private int status;
+    private int roleID;
 
     public UserDTO() {
+        this.userID = 0;
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.phone = "";
+        this.roleID = 0;
+        this.status = 0;
     }
 
-    public UserDTO(int userID, String name, String email, String password, String phone, int roleID, int status) {
+    public UserDTO(int userID, String name, String email, String password, String phone, int status, int roleID) {
         this.userID = userID;
         this.name = name;
         this.email = email;
@@ -87,5 +94,5 @@ public class UserDTO {
         this.status = status;
     }
 
-        
+   
 }

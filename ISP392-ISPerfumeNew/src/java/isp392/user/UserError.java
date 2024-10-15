@@ -7,96 +7,97 @@ package isp392.user;
 
 /**
  *
- * @author duyhc
+ * @author anhng
  */
 public class UserError {
-    private String userIDErr;
-    private String nameErr;
-    private String emailErr;
-    private String passwordErr;
-    private String phoneErr;
-    private String statusErr;
-    private String roleIDErr;
-    private String confirmPasswordErr;
+
+    private String userIDError;
+    private String nameError;
+    private String emailError;
+    private String passwordError;
+    private String phoneError;
+    private String statusError;
+    private String roleIDError;
+    private String confirmPasswordError;
     private String error;
 
     public UserError() {
     }
 
-    public UserError(String userIDErr, String nameErr, String emailErr, String passwordErr, String phoneErr, String statusErr, String roleIDErr, String confirmPasswordErr, String error) {
-        this.userIDErr = userIDErr;
-        this.nameErr = nameErr;
-        this.emailErr = emailErr;
-        this.passwordErr = passwordErr;
-        this.phoneErr = phoneErr;
-        this.statusErr = statusErr;
-        this.roleIDErr = roleIDErr;
-        this.confirmPasswordErr = confirmPasswordErr;
+    public UserError(String userIDError, String nameError, String emailError, String passwordError, String phoneError, String statusError, String roleIDError, String confirmPasswordError, String error) {
+        this.userIDError = userIDError;
+        this.nameError = nameError;
+        this.emailError = emailError;
+        this.passwordError = passwordError;
+        this.phoneError = phoneError;
+        this.statusError = statusError;
+        this.roleIDError = roleIDError;
+        this.confirmPasswordError = confirmPasswordError;
         this.error = error;
     }
 
-    public String getUserIDErr() {
-        return userIDErr;
+    public String getUserIDError() {
+        return userIDError;
     }
 
-    public void setUserIDErr(String userIDErr) {
-        this.userIDErr = userIDErr;
+    public void setUserIDError(String userIDError) {
+        this.userIDError = userIDError;
     }
 
-    public String getNameErr() {
-        return nameErr;
+    public String getNameError() {
+        return nameError;
     }
 
-    public void setNameErr(String nameErr) {
-        this.nameErr = nameErr;
+    public void setNameError(String nameError) {
+        this.nameError = nameError;
     }
 
-    public String getEmailErr() {
-        return emailErr;
+    public String getEmailError() {
+        return emailError;
     }
 
-    public void setEmailErr(String emailErr) {
-        this.emailErr = emailErr;
+    public void setEmailError(String emailError) {
+        this.emailError = emailError;
     }
 
-    public String getPasswordErr() {
-        return passwordErr;
+    public String getPasswordError() {
+        return passwordError;
     }
 
-    public void setPasswordErr(String passwordErr) {
-        this.passwordErr = passwordErr;
+    public void setPasswordError(String passwordError) {
+        this.passwordError = passwordError;
     }
 
-    public String getPhoneErr() {
-        return phoneErr;
+    public String getPhoneError() {
+        return phoneError;
     }
 
-    public void setPhoneErr(String phoneErr) {
-        this.phoneErr = phoneErr;
+    public void setPhoneError(String phoneError) {
+        this.phoneError = phoneError;
     }
 
-    public String getStatusErr() {
-        return statusErr;
+    public String getStatusError() {
+        return statusError;
     }
 
-    public void setStatusErr(String statusErr) {
-        this.statusErr = statusErr;
+    public void setStatusError(String statusError) {
+        this.statusError = statusError;
     }
 
-    public String getRoleIDErr() {
-        return roleIDErr;
+    public String getRoleIDError() {
+        return roleIDError;
     }
 
-    public void setRoleIDErr(String roleIDErr) {
-        this.roleIDErr = roleIDErr;
+    public void setRoleIDError(String roleIDError) {
+        this.roleIDError = roleIDError;
     }
 
-    public String getConfirmPasswordErr() {
-        return confirmPasswordErr;
+    public String getConfirmPasswordError() {
+        return confirmPasswordError;
     }
 
-    public void setConfirmPasswordErr(String confirmPasswordErr) {
-        this.confirmPasswordErr = confirmPasswordErr;
+    public void setConfirmPasswordError(String confirmPasswordError) {
+        this.confirmPasswordError = confirmPasswordError;
     }
 
     public String getError() {
@@ -106,6 +107,7 @@ public class UserError {
     public void setError(String error) {
         this.error = error;
     }
+
     
-    
+
 }

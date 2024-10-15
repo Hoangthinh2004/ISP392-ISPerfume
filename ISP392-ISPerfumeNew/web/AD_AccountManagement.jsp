@@ -4,6 +4,9 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.List"%>
+<%@page import="isp392.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -65,7 +68,15 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Management</a>                     
+                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-plus me-2"></i>Create Account</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Create Manager</a>
+                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Create Staff</a>
+                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Create Shipper</a>
+                            </div>
+                        </div>
 
                     </div>
                 </nav>
@@ -83,9 +94,9 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4" action="MainController" method="get">
-                        <input class="form-control border-0" type="search" placeholder="Search" name="">
-                        <button class="btn btn-primary" type="submit" name="action" value="" style="margin-left: 10px;">
+                    <form class="d-none d-md-flex ms-4" action="MainController" method="GET">
+                        <input class="form-control border-0" type="search" placeholder="SearchUser" name="">
+                        <button class="btn btn-primary" type="submit" name="action" value="SearchUser" style="margin-left: 10px;">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -134,7 +145,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="fa fa-bell me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Notificatin</span>
+                                <span class="d-none d-lg-inline-flex">Notification</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">
@@ -176,38 +187,102 @@
                         <div class="table-responsive">
                             <div class="col-sm-12 col-xl-12">
                                 <div class="bg-light rounded h-100 p-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-0">Account Management</h6>
-                                        <a href="AD_CreateAccount.jsp">Create Account</a>
+                                    <h6 class="mb-4">User Management</h6>
+
+                                    <div class="nav-item dropdown" style="width: 150px;">
+                                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                            <span class="d-none d-lg-inline-flex">Filter</span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="MainController?action=FilterByEmployee" class="dropdown-item">Employee</a>
+                                            <a href="MainController?action=FilterByCustomer" class="dropdown-item">Customer</a>
+                                        </div>
                                     </div>
 
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First Name</th>
-                                                <th scope="col">Last Name</th>
-                                                <th scope="col">Last Name</th>
-                                                <th scope="col">Last Name</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Email</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <c:if test="${requestScope.LIST_USER != null}">
+                                        <c:if test="${!empty requestScope.LIST_USER}"> 
+                                            <table class="table table-hover">
+                                                <thead>
 
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>Thornton</td>
-                                                <td>Thornton</td>
-                                                <td>jacob@email.com</td>
-                                                <td>jacob@email.com</td>
-                                                <td>jacob@email.com</td>
-                                            </tr>                                         
-                                        </tbody>
-                                    </table>
+                                                    <tr>
+                                                        <th scope="col">User ID</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Phone</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Role</th>
+
+                                                        <!--                                                        <th scope="col">Update</th>-->
+
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach var="user" varStatus="counter" items="${requestScope.LIST_USER}">
+                                                    <form action="MainController" method="POST">
+                                                        <tr>
+                                                            <td>
+                                                                <input name="userID" value="${user.userID}" readonly="">
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="name" value="${user.name}"
+                                                                       <c:if test="${user.roleID == 1}">
+                                                                           readonly="readonly"
+                                                                       </c:if>>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="email" value="${user.email}"
+                                                                       <c:if test="${user.roleID == 1}">
+                                                                           readonly="readonly"
+                                                                       </c:if>>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="phone" value="${user.phone}" 
+                                                                       <c:if test="${user.roleID == 1}">
+                                                                           readonly="readonly"
+                                                                       </c:if>>
+                                                            </td>
+                                                            <td>
+                                                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                                    <span class="d-none d-lg-inline-flex"></span>
+                                                                </a>
+                                                                <div class="dropdown-menu" >
+                                                                    <a href="MainController?action=UpdateUserStatus&status=1&userID=${user.userID}" class="dropdown-item">Available</a>
+                                                                    <a href="MainController?action=UpdateUserStatus&status=0&userID=${user.userID}" class="dropdown-item">Unavailable</a>
+                                                                </div> 
+                                                            </td>
+                                                            <!--                                                                                                                              <select name="status" class="form-control">
+                                                                                                                                                                                                <option value="0" ${user.status == 0 ? 'selected' : ''}>Unavailable</option>
+                                                                                                                                                                                                <option value="1" ${user.status == 1 ? 'selected' : ''}>Available</option>
+                                                                                                                                                                                            </select>-->
+
+                                                            <td>
+                                                                <c:forEach var="role" items="${requestScope.LIST_ROLE}">
+                                                                    <c:if test="${role.roleID == user.roleID}">    
+                                                                        ${role.name}
+                                                                        <input type="hidden" name="roleID" value="${role.roleID}">
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </td>
+                                                            <c:if test="${user.roleID > 1}">
+                                                                <td>
+                                                                    <input type="submit" name="action" value="UpdateUser" class="btn btn-sm btn-primary">
+                                                                    <input type="hidden" name="search" value=""/>
+                                                                </td>
+                                                            </c:if>
+                                                        </tr>
+                                                    </form>
+                                                </c:forEach>
+                                                ${requestScope.UPDATE_USER_ERROR.nameError}
+                                                ${requestScope.UPDATE_USER_ERROR.emailError}
+                                                ${requestScope.UPDATE_USER_ERROR.phoneError}
+                                                </tbody>
+                                            </table>
+                                        </c:if>
+                                    </c:if>
+
+
+
                                 </div>
                             </div>
                         </div>
