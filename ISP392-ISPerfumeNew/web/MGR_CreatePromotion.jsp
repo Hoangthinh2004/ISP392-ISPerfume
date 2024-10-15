@@ -107,13 +107,8 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4" action="MainController" method="GET">
+                    <form class="d-none d-md-flex ms-4">
                         <input class="form-control border-0" type="search" placeholder="Search">
-                        <button class="btn btn-primary" type="submit" name="action" value="ViewPromotion" style="margin-left: 10px;">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </button>
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
@@ -197,77 +192,63 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important" >
-                        <!--                        <div class="col-md-6 text-center">-->
-                        <!-- Recent Sales Start -->
-                        <div class="container-fluid pt-4 px-4">
-                            <div class="bg-light text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4" >
-                                    <h6 class="mb-0">Promotion Management</h6>
-                                    <a href="MGR_CreatePromotion.jsp" class="btn btn-primary">Create new Promotion</a>
-                                </div>
-                                <!--<form action="MainController">
-                                    <input type="submit" name="action" value="ViewPromotion" class="btn btn-sm btn-primary">
-                                </form> -->
-                                <div class="table-responsive" style="height: auto">
-                                    <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                        <thead>
-                                            <tr class="text-dark">
-                                                <th scope="col">No</th>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Description</th>
-                                                <th scope="col">Start Date</th>
-                                                <th scope="col">End Date</th>
-                                                <th scope="col">Discount Per</th>
-                                                <th scope="col">Condition</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Update</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="promotion" varStatus="counter" items="${requestScope.LIST_PROMOTION}">
-                                            <form action="MainController" method="GET"> 
-                                                <tr>
-                                                    <td>${counter.count}</td>
-                                                    <td>
-                                                        <input name="promotionID" value="${promotion.promotionID}" readonly="">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="promotionName" value="${promotion.promotionName}"
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="description" value="${promotion.description}"
-                                                    </td>
-                                                    <td>
-                                                        <input type="date" name="startDate" value="${promotion.startDate}"
-                                                    </td>
-                                                    <td>
-                                                        <input type="date" name="endDate" value="${promotion.endDate}"
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" name="discountPer" value="${promotion.discountPer}"
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" name="condition" value="${promotion.condition}"
-                                                    </td>
-                                                    <td>
-                                                        <select name="status" class="form-control">
-                                                            <option value="0" ${promotion.status == 0 ? 'selected' : ''}>Unavailable</option>
-                                                            <option value="1" ${promotion.status == 1 ? 'selected' : ''}>Available</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="submit" name="action" value="UpdatePromotion" class="btn btn-sm btn-primary">
-                                                        <input type="hidden" name="action" value="ViewPromotion"/>
-                                                    </td>
-                                                    
-                                                </tr>
-                                            </form>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0">
+                        <div class="col-sm-12 col-xl-6">
+                            <div class="bg-light rounded h-100 p-4">
+                                <h6 class="mb-4 text-center">Create A Promotion</h6>
+                                <c:set var="promotionError" value="${requestScope.PROMOTION_ERROR}" />
+                                <form action="MainController" method="GET">
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Promotion Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="promotionName" required=""> ${requestScope.PROMOTION_ERROR.promotionNameError}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" name="description" required=""> ${requestScope.PROMOTION_ERROR.descriptionError}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Start Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" name="startDate" required="" min="<%= todayStr%>"> ${requestScope.PROMOTION_ERROR.startDateError}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">End Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" name="endDate" required="" min="<%= todayStr%>"> ${requestScope.PROMOTION_ERROR.endDateError}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Discount Percent</label> ${requestScope.PROMOTION_ERROR.discountPerError}
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" name="discountPer" required="" min="0" max="100">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Condition</label> ${requestScope.PROMOTION_ERROR.conditionError}
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" name="condition" required="" min="0">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="statusSelect" class="col-sm-2 col-form-label">Status</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="statusSelect" name="status"> ${requestScope.PROMOTION_ERROR.statusError}
+                                                <!-- Kiểm tra nếu status là 1 thì chọn Available -->
+                                                <option value="1" ${status == 1 ? 'selected' : ''}>Available</option>
+                                                <!-- Kiểm tra nếu status là 0 thì chọn Unavailable -->
+                                                <option value="0" ${status == 0 ? 'selected' : ''}>Unavailable</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" name="action" value="CreatePromotion">CREATE</button>
+                                    ${requestScope.PROMOTION_ERROR.error}
+                                </form>
                             </div>
                         </div>
                     </div>
