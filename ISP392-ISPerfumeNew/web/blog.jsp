@@ -30,8 +30,6 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <!--<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">-->
-        <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/blogs/blog-4/assets/css/blog-4.css">
     </head>
     <body>
         <!-- Topbar Start -->
@@ -96,7 +94,6 @@
             </div>
         </div>
         <!-- Topbar End -->
-
 
         <!-- Navbar Start -->
         <form action="MainController">
@@ -174,10 +171,67 @@
         </div>
         <!-- Breadcrumb End -->
 
+        <!-- Blog Posts -->
+        <div class="container">
+            <div class="row">
+                <!-- Blog Start -->
+                <div class="container mb-3">
+                    <div class="row justify-content-md-center">
+                        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                            <h2 class="mb-4 display-5 text-center">Our Blog</h2>
+                            <p class="text-secondary mb-5 text-center lead fs-4 text-dark">
+                                From innovative product launches to groundbreaking collaborations, here's a glimpse of what's been going on.
+                            </p>
+                            <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Blog Start -->
-        
-        <!-- Blog END -->
+        <div class="container">
+            <div class="row">
+                <!-- Blog Post 1 -->
+                <div class="col-12 mb-4">
+                    <div class="card h-100 shadow-sm flex-row p-3">
+                        <img src="img/blog/blog-one.jpg" class="card-img-left" 
+                             style="width: 500px; height: 240px; object-fit: contain;" 
+                             alt="Blog Image 1">
+                        <div class="card-body">
+                            <h4><a class="card-title" href="#">Blog Post Title 2</a></h4>
+                            <p class="card-text">A brief description of the blog post content. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <a href="#" class="btn btn-outline-info">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Blog Post 2 -->
+                <div class="col-12 mb-4">
+                    <div class="card shadow-sm flex-row">
+                        <img src="img/blog/blog-two.jpg" class="card-img-left" style="width: 200px; object-fit: cover;" alt="Blog Image 2">
+                        <div class="card-body">
+                            <h4><a class="card-title" href="#">Blog Post Title 2</a></h4>
+                            <p class="card-text">A brief description of the blog post content. Duis aute irure dolor in reprehenderit in voluptate velit.</p>
+                            <a href="#" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="col-12 mb-4">
+                    <div class="card h-100 shadow-sm flex-row">
+                        <img src="img/blog/blog-three.jpg" class="card-img-left" style="width: 200px; object-fit: cover;" alt="Blog Image 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Blog Post Title 3</h5>
+                            <p class="card-text">A brief description of the blog post content. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                            <a href="#" class="btn btn-outline-secondary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Blog End -->
 
 
 
