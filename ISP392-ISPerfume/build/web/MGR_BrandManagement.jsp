@@ -106,7 +106,7 @@
                         <i class="fa fa-bars"></i>
                     </a>
 
-                    <form action="ShowAllBrandManager" method="GET" class="d-none d-md-flex ms-4">
+                    <form action="MainController" method="GET" class="d-none d-md-flex ms-4">
                         <input class="form-control border-0" type="search" placeholder="Search" name="search">
                         <input type="submit" name="action" value="Search" class="btn btn-sm btn-primary">
 

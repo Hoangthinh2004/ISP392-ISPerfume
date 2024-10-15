@@ -181,23 +181,23 @@
                                     </a>
                                     <h3>Sign In</h3>
                                 </div>
-                                <div class="form-floating mb-3">
-                                    <label for="floatingInput">Username</label>
-                                    <input type="email" class="form-control" id="floatingInput"
-                                           placeholder="Enter username">
-
-                                </div>
-                                <div class="form-floating mb-4">
-                                    <label for="floatingPassword">Password</label>
-                                    <input type="password" class="form-control" id="floatingPassword"
-                                           placeholder="Password">
-
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-
-                                    <a href="forgotPassword.jsp">Forgot Password</a>
-                                </div>
-                                <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+                                <form action="MainController" method="get">
+                                    <div class="form-floating mb-3">
+                                        <label for="floatingInput">Email</label>
+                                        <input type="text" class="form-control" placeholder="Email" name="Email" required="">
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <label for="floatingPassword">Password</label>
+                                        <input type="password" class="form-control" placeholder="Password" name="Password" required="">
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <a href="forgotPassword.jsp">Forgot Password</a>
+                                    </div>
+                                    <!--<button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>-->
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit" name="action" value="Sign In">Sign In</button>
+                                    </div>
+                                </form>
                                 <p class="text-center mb-0">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
                                 <div class="d-flex align-items-center justify-content-between mb-4" style="margin: 28px 0 0 32px;">
                                     <button class="button-signin text-center" style="width: 310px; padding-left: 68px; ">

@@ -46,7 +46,7 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.CUSTOMER.name}</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
                                 <button class="dropdown-item" type="button">Sign up</button>
@@ -125,12 +125,6 @@
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
                                 </c:forEach>
-                                <!--                            <div class="nav-item dropdown dropright"> 
-                                                                <a href="MainController?action=ViewAllBrand" class="nav-link dropdown-toggle" data-toggle="dropdown">Brand <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                                                    <a type="submit" name="action" value="NavigateBrand" class="dropdown-item">name</a>
-                                                                </div>
-                                                            </div>-->
                             </div>
                         </nav>
                     </div>
@@ -178,10 +172,8 @@
         <div class="container-fluid">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sign
                     In</span></h2>
-            <form action="MainController" method="POST">
+            <form action="MainController" method="get">
                 <div class="row px-xl-5">
-
-
                     <div class="col-lg-12 mb-5">
                         <div class="row h-100 align-items-center justify-content-center">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
@@ -191,30 +183,29 @@
                                     </div>
                                     <div class="form-floating mb-3">
                                         <label for="floatingInput">Current Password</label>
-                                        <input type="password" class="form-control" id="floatingInput"
+                                        <input type="password" name="currentPass" class="form-control" id="floatingInput"
                                                placeholder="Enter your current password">
                                     </div>
                                     <div class="form-floating mb-3">
                                         <label for="floatingInput">New Password</label>
-                                        <input type="password" class="form-control" id="floatingInput"
+                                        <input name="newPass" type="password" class="form-control" id="floatingInput"
                                                placeholder="Enter your new password">
                                     </div>
                                     <div class="form-floating mb-3">
                                         <label for="floatingInput">Confirm password</label>
-                                        <input type="password" class="form-control" id="floatingInput"
+                                        <input name="confirmPass" type="password" class="form-control" id="floatingInput"
                                                placeholder="Confirm your password">
                                     </div>
-                                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Change</button>
+                                    <button type="submit" value="ChangePassword" name="action" class="btn btn-primary py-3 w-100 mb-4">Change</button>
                                     <p class="text-center mb-0">
                                         <a href="signup.jsp">Continue login</a> OR
                                         <a href="signup.jsp">Login Again</a>
                                     </p>
+                                    ${requestScope.ERROR}
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </form>
         </div>

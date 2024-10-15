@@ -10,25 +10,19 @@ package isp392.user;
  * @author ThinhHoang
  */
 public class UserDTO {
+
     private int userID;
     private String name;
     private String email;
     private String password;
     private String phone;
     private int roleID;
-    private boolean status;
+    private int status;
 
     public UserDTO() {
-        this.userID = 0;
-        this.name = "";
-        this.email = "";
-        this.password = "";
-        this.phone = "";
-        this.roleID = 0;
-        this.status = true;
     }
 
-    public UserDTO(int userID, String name, String email, String password, String phone, int roleID, boolean status) {
+    public UserDTO(int userID, String name, String email, String password, String phone, int roleID, int status) {
         this.userID = userID;
         this.name = name;
         this.email = email;
@@ -86,12 +80,12 @@ public class UserDTO {
         this.roleID = roleID;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
-    
+
 }
