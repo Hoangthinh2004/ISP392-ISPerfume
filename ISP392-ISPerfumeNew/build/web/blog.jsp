@@ -30,6 +30,11 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            .text-muted {
+                color: rgba(0, 0, 0, 0.3) !important;
+            }
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -172,65 +177,51 @@
         <!-- Breadcrumb End -->
 
         <!-- Blog Posts -->
-        <div class="container">
+        <div class="container d-flex justify-content-between">
             <div class="row">
                 <!-- Blog Start -->
-                <div class="container mb-3">
-                    <div class="row justify-content-md-center">
-                        <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-                            <h2 class="mb-4 display-5 text-center">Our Blog</h2>
-                            <p class="text-secondary mb-5 text-center lead fs-4 text-dark">
-                                From innovative product launches to groundbreaking collaborations, here's a glimpse of what's been going on.
-                            </p>
-                            <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-                        </div>
+                <div class="col-lg-8">
+                    <div class="blog-post mb-5">
+                        <img src="img/blog/blog-one.jpg" class="img-fluid" alt="Blog Post Image">
+                        <h2 class="mt-3">Blog Title 1</h2>
+                        <p class="text-muted">Ngày 16 tháng 10, 2024 bởi <a href="#">Tác giả</a></p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. 
+                            Sed feugiat, nisl ut facilisis facilisis, est arcu consequat neque, a tempus neque ligula at lorem. 
+                            Curabitur placerat sapien vel orci bibendum, at dignissim libero cursus.</p>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div>
+
+                    <div class="blog-post mb-5">
+                        <img src="img/blog/blog-two.jpg" class="img-fluid" alt="Blog Post Image">
+                        <h2 class="mt-3">Blog title 2</h2>
+                        <p class="text-muted">Ngày 15 tháng 10, 2024 bởi <a href="#">Tác giả</a></p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. 
+                            Sed feugiat, nisl ut facilisis facilisis, est arcu consequat neque, a tempus neque ligula at lorem. 
+                            Curabitur placerat sapien vel orci bibendum, at dignissim libero cursus.</p>
+                        <a href="#" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
+                <!-- Blog End -->
+
+                <!-- Sidebar Start -->
+                <div class="col-lg-4">
+                    <h4 class="mb-4">New</h4>
+                    <div class="list-group mb-5">
+                        <a href="#" class="list-group-item list-group-item-action">1</a>
+                        <a href="#" class="list-group-item list-group-item-action">2</a>
+                        <a href="#" class="list-group-item list-group-item-action">3</a>
+                    </div>
+                    <h4 class="mb-4">Danh mục</h4>
+                    <div class="list-group mb-5">
+                        <a href="#" class="list-group-item list-group-item-action">Danh mục 1</a>
+                        <a href="#" class="list-group-item list-group-item-action">Danh mục 2</a>
+                        <a href="#" class="list-group-item list-group-item-action">Danh mục 3</a>
+                    </div>
+                </div>
+                <!-- Sidebar End -->
             </div>
         </div>
 
-        <div class="container">
-            <div class="row">
-                <!-- Blog Post 1 -->
-                <div class="col-12 mb-4">
-                    <div class="card h-100 shadow-sm flex-row p-3">
-                        <img src="img/blog/blog-one.jpg" class="card-img-left" 
-                             style="width: 500px; height: 240px; object-fit: contain;" 
-                             alt="Blog Image 1">
-                        <div class="card-body">
-                            <h4><a class="card-title" href="#">Blog Post Title 2</a></h4>
-                            <p class="card-text">A brief description of the blog post content. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <a href="#" class="btn btn-outline-info">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Blog Post 2 -->
-                <div class="col-12 mb-4">
-                    <div class="card shadow-sm flex-row">
-                        <img src="img/blog/blog-two.jpg" class="card-img-left" style="width: 200px; object-fit: cover;" alt="Blog Image 2">
-                        <div class="card-body">
-                            <h4><a class="card-title" href="#">Blog Post Title 2</a></h4>
-                            <p class="card-text">A brief description of the blog post content. Duis aute irure dolor in reprehenderit in voluptate velit.</p>
-                            <a href="#" class="btn btn-outline-primary">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Blog Post 3 -->
-                <div class="col-12 mb-4">
-                    <div class="card h-100 shadow-sm flex-row">
-                        <img src="img/blog/blog-three.jpg" class="card-img-left" style="width: 200px; object-fit: cover;" alt="Blog Image 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Blog Post Title 3</h5>
-                            <p class="card-text">A brief description of the blog post content. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                            <a href="#" class="btn btn-outline-secondary">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Blog End -->
 
 
@@ -302,7 +293,7 @@
                 <div class="col-md-6 px-xl-0 text-center text-md-right">
                     <img class="img-fluid" src="img/payments.png" alt="">
                 </div>
-            </div>
+            </div>           
         </div>
         <!-- Footer End -->
 
@@ -325,3 +316,4 @@
         <script src="js/main.js"></script>
     </body>
 </html>
+
