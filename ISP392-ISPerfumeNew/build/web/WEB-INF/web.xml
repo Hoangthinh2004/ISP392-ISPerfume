@@ -188,6 +188,26 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/ChangePasswordController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterByCustomerController</servlet-name>
+        <url-pattern>/FilterByCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterByEmployeeController</servlet-name>
+        <url-pattern>/FilterByEmployeeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUserController</servlet-name>
+        <url-pattern>/SearchUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserController</servlet-name>
+        <url-pattern>/UpdateUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserStatusController</servlet-name>
+        <url-pattern>/UpdateUserStatusController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

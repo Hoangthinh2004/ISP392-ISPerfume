@@ -43,14 +43,14 @@ public class ChangePasswordController extends HttpServlet {
         UserDAO dao = new UserDAO();
         HttpSession ses = request.getSession();
         boolean checkValid = true;
-        
+
         try {
             CustomerViewProfileDTO cust = (CustomerViewProfileDTO) ses.getAttribute("CUSTOMER");
             int userID = cust.getId();
             String currentPass = request.getParameter("currentPass");
             String newPass = request.getParameter("newPass");
             String confirm = request.getParameter("confirmPass");
-            
+
             if (!currentPass.equals(dao.getPasswordByID(userID))) {
                 // gui loi // request.setA("ten cua loi","noi dung");
                 request.setAttribute("ERROR", "THE CURRENT PASSWORD IS NOT MATCHED!!");
