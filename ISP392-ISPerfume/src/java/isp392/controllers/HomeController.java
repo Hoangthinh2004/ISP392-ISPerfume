@@ -37,7 +37,17 @@ public class HomeController extends HttpServlet {
             HttpSession session = request.getSession();
             
             Map<String, Integer> ids = new HashMap<>();
-            session.setAttribute("CURRENT_IDS", ids);
+            session.setAttribute("CURRENT_IDS", ids); //set attribute to Category Controller
+            
+            Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
+            if (sizeIDS != null && !sizeIDS.isEmpty()) {
+                session.removeAttribute("SIZE_IDS");
+            }
+            
+            Map<String, Integer> brandIDS = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID");
+            if (brandIDS != null && !brandIDS.isEmpty()) {
+                session.removeAttribute("CURRENT_BRANDID");
+            }
             
             CategoryDAO categoryDAO = new CategoryDAO();
             BrandDAO brandDAO = new BrandDAO();
@@ -46,6 +56,9 @@ public class HomeController extends HttpServlet {
             List<CategoryDTO> listCategory = categoryDAO.getListCategory();
             List<BrandDTO> listBrand = brandDAO.getListBrand();
             List<SizeDTO> listSize = sizeDAO.getListSize();
+            
+            Map<String, Integer> IDs = new HashMap<>();   
+            session.setAttribute("SIZE_IDS", IDs); //  storing sizeID 
             
             session.setAttribute("LIST_SIZE", listSize);
             session.setAttribute("LIST_CATEGORY", listCategory);

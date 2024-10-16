@@ -11,11 +11,9 @@ import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
 import isp392.product.ProductDetailDAO;
 import isp392.product.ProductDetailDTO;
-import isp392.product.ViewProductDetailDTO;
 import isp392.size.SizeDAO;
 import isp392.size.SizeDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +46,7 @@ public class NavigateProductDetailController extends HttpServlet {
             url = ERROR;
         }      
         try {
-            
+            int productDetailID = Integer.parseInt(request.getParameter("productDetailID"));
             int productID = Integer.parseInt(request.getParameter("productID"));
             int sizeID = Integer.parseInt(request.getParameter("sizeID"));
             
@@ -75,7 +73,7 @@ public class NavigateProductDetailController extends HttpServlet {
             ProductDetailDAO productDetailDAO = new ProductDetailDAO();
             List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);           
             if (listPriceBySize.size() > 0) {
-                request.setAttribute("PRICE_BY_SIZE", listPriceBySize);
+                session.setAttribute("PRICE_BY_SIZE", listPriceBySize);
             }
                          
             List<ProductDetailDTO> listImage = productDetailDAO.getListImage(productID);

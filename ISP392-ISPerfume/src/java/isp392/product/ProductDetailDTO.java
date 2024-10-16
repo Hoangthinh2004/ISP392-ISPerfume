@@ -12,6 +12,7 @@ import java.sql.Date;
  * @author ThinhHoang
  */
 public class ProductDetailDTO {
+    private int productDetailID;
     private int productID;
     private int sizeID;
     private int price;
@@ -24,7 +25,8 @@ public class ProductDetailDTO {
     public ProductDetailDTO() {
     }
 
-    public ProductDetailDTO(int productID, int sizeID, int price, int stockQuantity, int numberOfPurchasing, Date importDate, String image, int status) {
+    public ProductDetailDTO(int productDetailID, int productID, int sizeID, int price, int stockQuantity, int numberOfPurchasing, Date importDate, String image, int status) {
+        this.productDetailID = productDetailID;
         this.productID = productID;
         this.sizeID = sizeID;
         this.price = price;
@@ -33,6 +35,14 @@ public class ProductDetailDTO {
         this.importDate = importDate;
         this.image = image;
         this.status = status;
+    }
+
+    public int getProductDetailID() {
+        return productDetailID;
+    }
+
+    public void setProductDetailID(int productDetailID) {
+        this.productDetailID = productDetailID;
     }
 
     public int getProductID() {
@@ -99,5 +109,5 @@ public class ProductDetailDTO {
         this.status = status;
     }
 
-    
+     
 }
