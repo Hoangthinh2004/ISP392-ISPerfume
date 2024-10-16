@@ -104,6 +104,14 @@
         <servlet-name>UpdateUserStatusController</servlet-name>
         <servlet-class>isp392.controllers.UpdateUserStatusController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <servlet-class>isp392.controllers.LoginGoogleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendEmailController</servlet-name>
+        <servlet-class>isp392.controllers.SendEmailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -207,6 +215,14 @@
     <servlet-mapping>
         <servlet-name>UpdateUserStatusController</servlet-name>
         <url-pattern>/UpdateUserStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendEmailController</servlet-name>
+        <url-pattern>/SendEmailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
