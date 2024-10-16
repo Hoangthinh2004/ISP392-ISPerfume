@@ -1,6 +1,6 @@
 <%-- 
-    Document   : STAFF_OrderManagement
-    Created on : Oct 8, 2024, 3:31:41 PM
+    Document   : STAFF_BlogManagement
+    Created on : Oct 16, 2024, 12:36:23 PM
     Author     : User
 --%>
 
@@ -65,8 +65,8 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                         <a href="STAFF_OrderManagement.jsp" class="nav-item nav-link active"><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
-                        <a href="STAFF_BlogManagement.jsp" class="nav-item nav-link "><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>                     
+                        <a href="STAFF_OrderManagement.jsp" class="nav-item nav-link "><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
+                        <a href="STAFF_BlogManagement.jsp" class="nav-item nav-link active"><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>                     
                     </div>
                 </nav>
             </div>
@@ -178,8 +178,6 @@
                                 <div class="bg-light rounded h-100 p-4">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <h6 class="mb-0">Order Management</h6>
-                                        <h6 class="mb-0">Order Management</h6>
-
                                     </div>
 
                                     <table class="table table-hover">

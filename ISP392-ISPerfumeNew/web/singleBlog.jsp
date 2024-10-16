@@ -1,6 +1,6 @@
 <%-- 
-    Document   : blog
-    Created on : Sep 27, 2024, 9:03:58 PM
+    Document   : singleBlog
+    Created on : Oct 16, 2024, 2:43:34 PM
     Author     : User
 --%>
 
@@ -177,54 +177,8 @@
         <!-- Breadcrumb End -->
 
         <!-- Blog Posts -->
-        <div class="container d-flex justify-content-between">
-            <div class="row">
-                <!-- Blog Start -->
-                <div class="col-lg-8">
-                    <div class="blog-post mb-5">
-                        <img src="img/blog/blog-one.jpg" class="img-fluid" alt="Blog Post Image">
-                        <h2 class="mt-3">Blog Title 1</h2>
-                        <p class="text-muted">Ngày 16 tháng 10, 2024 bởi <a href="#">Tác giả</a></p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. 
-                            Sed feugiat, nisl ut facilisis facilisis, est arcu consequat neque, a tempus neque ligula at lorem. 
-                            Curabitur placerat sapien vel orci bibendum, at dignissim libero cursus.</p>
-                        <a href="#" class="btn btn-primary">Read more</a>
-                    </div>
-
-                    <div class="blog-post mb-5">
-                        <img src="img/blog/blog-two.jpg" class="img-fluid" alt="Blog Post Image">
-                        <h2 class="mt-3">Blog title 2</h2>
-                        <p class="text-muted">Ngày 15 tháng 10, 2024 bởi <a href="#">Tác giả</a></p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. 
-                            Sed feugiat, nisl ut facilisis facilisis, est arcu consequat neque, a tempus neque ligula at lorem. 
-                            Curabitur placerat sapien vel orci bibendum, at dignissim libero cursus.</p>
-                        <a href="#" class="btn btn-primary">Read more</a>
-                    </div>
-                </div>
-                <!-- Blog End -->
-
-                <!-- Sidebar Start -->
-                <div class="col-lg-4">
-                    <h4 class="mb-4">New</h4>
-                    <div class="list-group mb-5">
-                        <a href="#" class="list-group-item list-group-item-action">1</a>
-                        <a href="#" class="list-group-item list-group-item-action">2</a>
-                        <a href="#" class="list-group-item list-group-item-action">3</a>
-                    </div>
-                    <h4 class="mb-4">Danh mục</h4>
-                    <div class="list-group mb-5">
-                        <a href="#" class="list-group-item list-group-item-action">Danh mục 1</a>
-                        <a href="#" class="list-group-item list-group-item-action">Danh mục 2</a>
-                        <a href="#" class="list-group-item list-group-item-action">Danh mục 3</a>
-                    </div>
-                </div>
-                <!-- Sidebar End -->
-            </div>
-        </div>
-
+       
         <!-- Blog End -->
-
-
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
@@ -316,4 +270,3 @@
         <script src="js/main.js"></script>
     </body>
 </html>
-

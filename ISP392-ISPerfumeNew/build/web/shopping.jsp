@@ -201,7 +201,7 @@
                 <div class="col-lg-12 bg-transparent">
                     <div class="description-box bg-transparent p-4">
                         <div class="description-header d-flex justify-content-center align-items-center">
-                            <img id="toggle-btn" class="icon-down-black" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" style="cursor: pointer;">
+                            <img id="toggle-btn" class="icon-down-black" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" style="cursor: pointer; border-top-right-radius: 15px;  border-bottom-left-radius: 15px; ">
                         </div>
                         <div id="description-content" class="mt-2 text-container bg-transparent">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, 

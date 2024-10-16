@@ -623,24 +623,23 @@
                                                 event.preventDefault();
                                                 deleteButtonRef = button; // Store the reference to the delete button
 
-                                                // Show the modal
                                                 document.getElementById('deleteConfirmation').style.display = 'block';
                                                 document.getElementById('modalOverlay').style.display = 'block';
                                             }
 
                                             function cancelDelete() {
-                                                // Hide the modal and overlay
+                                             
                                                 document.getElementById('deleteConfirmation').style.display = 'none';
                                                 document.getElementById('modalOverlay').style.display = 'none';
                                             }
 
                                             function proceedDelete() {
                                                 if (deleteButtonRef) {
-                                                    // Pass the stored button to removeProduct
+                                                   
                                                     removeProduct(deleteButtonRef, event);
                                                 }
 
-                                                // Hide modal and overlay after action
+                                               
                                                 document.getElementById('deleteConfirmation').style.display = 'none';
                                                 document.getElementById('modalOverlay').style.display = 'none';
                                             }
