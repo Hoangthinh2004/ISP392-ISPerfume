@@ -44,6 +44,7 @@ public class SigninEmployee extends HttpServlet {
             UserDTO loginUser = dao.checkLogin(email, password);
             if (loginUser != null) {
                 HttpSession ses = request.getSession();
+                int roleID = loginUser.getRoleID();
                 if (loginUser.getRoleID() == 1) { // customer
                     cust = dao.getCustInfoByUserID(loginUser.getUserID());
                     if (cust != null) {
@@ -67,57 +68,6 @@ public class SigninEmployee extends HttpServlet {
         }
     }
 
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//        throws ServletException, IOException {
-//    response.setContentType("text/html;charset=UTF-8");
-//    String url = ERROR; // Trang lỗi mặc định
-//    UserDAO dao = new UserDAO(); // Tạo đối tượng DAO
-//    try {
-//        // Lấy thông tin từ form đăng nhập
-//        String email = request.getParameter("Email");
-//        String password = request.getParameter("Password");
-//
-//        // Kiểm tra đăng nhập với email và mật khẩu
-//        UserDTO loginUser = dao.checkLogin(email, password);
-//        if (loginUser != null) {
-//            // Nếu thông tin đăng nhập hợp lệ, lưu đối tượng người dùng vào session
-//            HttpSession ses = request.getSession();
-//            ses.setAttribute("LOGIN_USER", loginUser);
-//
-//            // Kiểm tra quyền của người dùng dựa trên roleID
-//            if (loginUser.getRoleID() == 1) { // Nếu là customer
-//                // Tìm thông tin khách hàng dựa trên userID
-//                CustomerDTO cust = dao.getCustInfoByUserID(loginUser.getUserID());
-//                if (cust != null) {
-//                    // Nếu tìm thấy thông tin khách hàng, thêm vào session
-//                    ses.setAttribute("CUSTOMER", cust);
-//                    url = CUS_PAGE; // Điều hướng tới trang customer
-//                } else {
-//                    // Không tìm thấy thông tin khách hàng, báo lỗi
-//                    request.setAttribute("ERROR_MESSAGE", "Customer information not found.");
-//                    url = ERROR; // Hoặc điều hướng tới trang lỗi khác
-//                }
-//            } else if (loginUser.getRoleID() == 2) { // Shipper
-//                url = MGR_PAGE; // Điều hướng tới trang shipper
-//            } else if (loginUser.getRoleID() == 3) { // Staff
-//                url = MGR_PAGE; // Điều hướng tới trang staff
-//            } else if (loginUser.getRoleID() == 4) { // Manager
-//                url = MGR_PAGE; // Điều hướng tới trang manager
-//            } else if (loginUser.getRoleID() == 5) { // Admin
-//                url = AD_PAGE; // Điều hướng tới trang admin
-//            }
-//        } else {
-//            // Nếu loginUser là null, nghĩa là đăng nhập thất bại
-//            request.setAttribute("ERROR_MESSAGE", "Invalid email or password.");
-//        }
-//    } catch (Exception e) {
-//        log("Error at SigninEmployee: " + e.toString());
-//        request.setAttribute("ERROR_MESSAGE", "An error occurred: " + e.getMessage());
-//    } finally {
-//        // Điều hướng tới trang xác định dựa trên roleID
-//        request.getRequestDispatcher(url).forward(request, response);
-//    }
-//}
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -108,13 +108,16 @@ public class MainController extends HttpServlet {
 
     private static final String UPDATE_USER_STATUS = "UpdateUserStatus";
     private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatusController";
-
+    
+    private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
+    private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
     
     private static final String UPDATE_PROFILE = "UpdateProfile";
     private static final String UPDATE_PROFILE_CONTROLLER = "UpdateUserProfile";
 
     private static final String CREATE_NEW_USER_CUSTOMER = "registerNewUser";
     private static final String CREATE_NEW_USER_CUSTOMER_CONTROLLER = "CreateNewUserCustomerController";
+   
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
