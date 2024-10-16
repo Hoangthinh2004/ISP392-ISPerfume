@@ -52,13 +52,24 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
-                            </div>
-                        </div>                                            
+                            <!-- Display when not logged in.-->
+                            <c:choose>
+                                <c:when test="${sessionScope.LOGIN_USER == null}">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.LOGIN_USER.name}</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                        </div>
+                                    </c:when>
+                                    <!-- Display when logged in. -->
+                                    <c:otherwise>
+                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>                                                   
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -163,9 +174,6 @@
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
                         <h3>We have ${requestScope.SEARCH_RESULT_SIZE} Perfume bottles</h3>
-<!--                        <a class="breadcrumb-item text-dark" href="MainController?action=HomeController">Home</a>
-                        <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                        <span class="breadcrumb-item active">Shop List</span>-->
                     </nav>
                 </div>
             </div>
@@ -178,7 +186,7 @@
             <div class="row px-xl-5">
                 <!-- Shop Sidebar Start -->
                 <div class="col-lg-3 col-md-4">
-                    
+
 
                     <!-- Filter By Size Start -->
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>

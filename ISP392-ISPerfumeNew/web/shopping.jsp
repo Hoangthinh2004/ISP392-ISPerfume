@@ -71,11 +71,16 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.LOGIN_USER.name}</button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
+                                <c:if test="${sessionScope.CUSTOMER.name == null}">
+                                    <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                    <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                </c:if>
+                                <c:if test="${sessionScope.CUSTOMER.name != null}">
+                                    <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                    <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                </c:if>
                             </div>
                         </div>                                            
                     </div>

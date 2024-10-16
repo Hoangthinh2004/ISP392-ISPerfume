@@ -78,15 +78,21 @@ public class MainController extends HttpServlet {
 
     private static final String SORT_BY_PURCHASING = "SortByPurchasing";
     private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
-
-    private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
-    private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
-
+    
     private static final String SEARCH_BRAND = "Search";
     private static final String SEARCH_BRAND_CONTROLLER = "ShowAllBrandManager";
 
     private static final String UPDATE_BRAND = "Update Brand";
     private static final String UPDATE_BRAND_CONTROLLER = "UpdateBrandManager";
+
+    private static final String SIGNIN_EMPLOYEE = "Sign In";
+    private static final String SIGNIN_EMPLOYEE_CONTROLLER = "SigninEmployee";
+
+    private static final String SIGNOUT_EMPLOYEE = "Sign out";
+    private static final String SIGNOUT_EMPLOYEE_CONTROLLER = "SignoutEmployee";
+
+    private static final String CHANGE_PASSWORD = "ChangePassword";
+    private static final String CHANGE_PASSWORD_CONTROLLER = "ChangePasswordController";
 
     private static final String SEARCH_USER = "SearchUser";
     private static final String SEARCH_USER_CONTROLLER = "SearchUserController";
@@ -102,10 +108,16 @@ public class MainController extends HttpServlet {
 
     private static final String UPDATE_USER_STATUS = "UpdateUserStatus";
     private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatusController";
-
     
+    private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
+    private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
+    
+    private static final String UPDATE_PROFILE = "UpdateProfile";
+    private static final String UPDATE_PROFILE_CONTROLLER = "UpdateUserProfile";
+
     private static final String CREATE_NEW_USER_CUSTOMER = "registerNewUser";
     private static final String CREATE_NEW_USER_CUSTOMER_CONTROLLER = "CreateNewUserCustomerController";
+   
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -159,6 +171,16 @@ public class MainController extends HttpServlet {
                 url = SEARCH_BRAND_CONTROLLER;
             } else if (UPDATE_BRAND.equals(action)) {
                 url = UPDATE_BRAND_CONTROLLER;
+            } else if (SHOW_ALL_PRODUCT_MANAGER.equals(action)) {
+                url = SHOW_ALL_PRODUCT_MANAGER_CONTROLLER;
+            } else if (SIGNIN_EMPLOYEE.equals(action)) {
+                url = SIGNIN_EMPLOYEE_CONTROLLER;
+            } else if (SIGNOUT_EMPLOYEE.equals(action)) {
+                url = SIGNOUT_EMPLOYEE_CONTROLLER;
+            } else if (CHANGE_PASSWORD.equals(action)) {
+                url = CHANGE_PASSWORD_CONTROLLER;
+            } else if (UPDATE_PROFILE.equals(action)) {
+                url = UPDATE_PROFILE_CONTROLLER;
             } else if (SEARCH_USER.equals(action)) {
                 url = SEARCH_USER_CONTROLLER;
             } else if (UPDATE_USER.equals(action)) {

@@ -64,13 +64,22 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
-                            </div>
-                        </div>                                            
+                            <c:choose>
+                                <c:when test="${sessionScope.CUSTOMER == null}">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.CUSTOMER.name}</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                        </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                    <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>                                                  
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -185,32 +194,30 @@
         <!--Profile form Start-->
         <div class="container-fluid">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Profile</span></h2>
-            <form action="MainController" method="POST">
+            <form action="MainController" method="get">
                 <div class="row px-xl-5">
-
                     <div class="container mb-5"> 
-                        <div class="row h-100 align-items-center justify-content-center">
+                        <div class="row h-100 align-items-center justify-content-between">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
                                 <div class="bg-light rounded p-4 my-4">
                                     <div class="row justify-content-around">
-
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput1" class="form-label">Username</label>
+
                                             <div class="input-group">
-                                                <input type="text" class="form-control bg-transparent" style="border-right: none" id="floatingInput1" value="username" placeholder="Enter username" readonly>
-                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-left:   none" onclick="enableEdit('floatingInput1')">
-                                                    <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <input type="text" class="form-control" id="floatingInput1" value="${sessionScope.CUSTOMER.name}" placeholder="Enter username" name="userName">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput1')">
+                                                    <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
                                                 </span>
                                             </div>
                                         </div>
-
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput2" class="form-label">Email</label>
                                             <div class="input-group">
-                                                <input type="email" class="form-control bg-transparent" id="floatingInput2" value="abc@skkd" placeholder="Enter email" readonly>
-                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-style:  none" onclick="enableEdit('floatingInput2')">
+                                                <input type="email" class="form-control" id="floatingInput2" value="${sessionScope.CUSTOMER.email}" placeholder="Enter email" name="email">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput2')">
                                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
@@ -222,22 +229,55 @@
                                     <div class="row justify-content-around">
 
                                         <div class="col-lg-5 col-md-5 col-sm-12">
-                                            <label for="floatingInput3" class="form-label">Address</label>
+                                            <label for="floatingInput3" class="form-label">Address</label> 
                                             <div class="input-group">
-                                                <input type="text" class="form-control bg-transparent" id="floatingInput3" value="Address" placeholder="Enter address" readonly>
-                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-style:  none" onclick="enableEdit('floatingInput3')">
+                                                <input type="text" class="form-control" id="floatingInput3" value="${sessionScope.CUSTOMER.detailAddress}" placeholder="Enter address" name="address">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput3')">
                                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
                                                 </span>
                                             </div>
-                                        </div>
+                                        </div>  
+                                        <div class="col-lg-5 col-md-5 col-sm-12">
+                                            <label for="floatingInput3" class="form-label">Area</label> 
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="floatingInput3" value="${sessionScope.CUSTOMER.area}" placeholder="Enter area" name="area">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput3')">
+                                                    <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>  
+                                        <div class="col-lg-5 col-md-5 col-sm-12">
+                                            <label for="floatingInput3" class="form-label">District</label> 
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="floatingInput3" value="${sessionScope.CUSTOMER.district}" placeholder="Enter district" name="district">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput3')">
+                                                    <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>  
+                                        <div class="col-lg-5 col-md-5 col-sm-12">
+                                            <label for="floatingInput3" class="form-label">Ward</label> 
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="floatingInput3" value="${sessionScope.CUSTOMER.ward}" placeholder="Enter ward" name="ward">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput3')">
+                                                    <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>  
 
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput4" class="form-label">Birthday</label>
                                             <div class="input-group">
-                                                <input type="date" class="form-control bg-transparent" id="floatingInput4" value="" placeholder="Enter birthday" readonly>
-                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-style:  none" onclick="enableEdit('floatingInput4')">
+                                                <input type="date" class="form-control" id="floatingInput4" value="${sessionScope.CUSTOMER.dayOfBirth}" placeholder="Enter birthday" name="birthday">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput4')">
                                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
@@ -249,32 +289,30 @@
                                     <div class="row justify-content-around">
 
                                         <div class="col-lg-5 col-md-5 col-sm-12">
-                                            <label for="floatingInput3" class="form-label">Address</label>
+                                            <label for="floatingInput3" class="form-label">Phone</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control bg-transparent" id="floatingInput3" value="Address" placeholder="Enter address" readonly>
-                                                <span class="input-group-text bg-transparent" style="cursor: pointer; border-style:  none" onclick="enableEdit('floatingInput3')">
+                                                <input type="text" class="form-control" id="floatingInput3" value="${sessionScope.CUSTOMER.phone}" placeholder="Enter phone" name="phone">
+                                                <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput3')">
                                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                     </svg>
                                                 </span>
                                             </div>
                                         </div>
-
+                                        ${requestScope.MESSAGE}
                                         <div class="col-lg-5 col-md-5 col-sm-12 position-relative">
                                             <a href="changePassword.jsp" class="change-password-link">Change Password</a>
                                         </div>
-
                                     </div>
                                     <div class="d-flex justify-content-between mt-4">
+                                        <input type="hidden" name="userID" value="${sessionScope.CUSTOMER.id}">
                                         <button type="submit" name="action" value="Signout" class="btn btn-primary py-3 w-20 h-6"style="border-radius: 10px; padding: 5px 20px;">Sign out</button>
                                         <button type="submit" name="action" value="UpdateProfile" class="btn btn-primary py-3 w-20" style="border-radius: 10px; padding: 5px 20px;">Update</button>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </form>
             <!--Pròile in form End-->
@@ -365,8 +403,8 @@
             <script>
                                                     function enableEdit(inputId) {
                                                         var inputElement = document.getElementById(inputId);
-                                                        inputElement.removeAttribute('readonly'); 
-                                                        inputElement.focus(); 
+                                                        inputElement.removeAttribute('readonly');
+                                                        inputElement.focus();
                                                     }
             </script>
     </body>

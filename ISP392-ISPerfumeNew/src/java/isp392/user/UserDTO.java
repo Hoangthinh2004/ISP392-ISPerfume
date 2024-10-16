@@ -10,6 +10,7 @@ package isp392.user;
  * @author ThinhHoang
  */
 public class UserDTO {
+
     private int userID;
     private String name;
     private String email;
@@ -93,6 +94,5 @@ public class UserDTO {
     public void setStatus(int status) {
         this.status = status;
     }
-
-   
+    
 }
