@@ -24,27 +24,36 @@ import javax.servlet.http.HttpSession;
  */
 public class SearchProductController extends HttpServlet {
 
-    private static final String ERROR ="HomeController";
+    private static final String HOME ="HomeController";
+    private static final String CATEGORY ="shopping.jsp";
     private static final String SUCCESS = "shoppingSearch.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = "";
+        HttpSession session = request.getSession();
+        Object category = session.getAttribute("CURRENT_IDS");
+        if (category != null) {
+            url = CATEGORY;
+        } else {
+            url = HOME;
+        }
         try {
-            HttpSession session = request.getSession();
             String search = request.getParameter("search");
-            session.setAttribute("CURRENT_SEARCH", search);
+            session.setAttribute("CURRENT_SEARCH", search); //Store search key and send to size filter and sort function
             
             ProductDAO productDAO = new ProductDAO();
             List<ViewProductDTO> listProduct = productDAO.getListProduct(search);
             int listSize = listProduct.size();
             
-            request.setAttribute("SEARCH_RESULT_SIZE", listSize); // show number of perfume
-            request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
+            Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
+            if (sizeIDS != null && !sizeIDS.isEmpty()) {
+                session.removeAttribute("SIZE_IDS");
+            }
             
-            Map<String, Integer> listProductID = new HashMap<>();
-            session.setAttribute("SEARCH_IDS", listProductID); //  storing search key to filter by size of search result
-            
+            session.setAttribute("SEARCH_RESULT_SIZE", listSize); // show number of perfume
+            session.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
+                       
             url = SUCCESS;     
         } catch (Exception e) {
             log("Error at SearchProductController: " + e.toString());

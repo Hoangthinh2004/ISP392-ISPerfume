@@ -3,7 +3,8 @@
     Created on : Sep 26, 2024, 3:39:52 PM
     Author     : User
 --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -190,84 +191,38 @@
                             </tr>
                         </thead>
                         <tbody class="align-middle">
-                            <tr>
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
-                                    Product
-                                    Name</td>
-                                <td class="align-middle price">$12</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
+                            <c:forEach var="cart" items="${requestScope.CART}">
+                            <form action="MainController">
+                                <input type="hidden" value="${cart.productDetailID}" name="productDetailID"/>
+                                <c:set var="unitTotal" value="${cart.price * cart.totalQuantity}"/>
+                                <c:set var="total" value="${total + unitTotal}"/>
+                                <tr>
+                                    <td class="align-middle"><img src="${cart.image}" alt="" style="width: 50px;">
+                                        ${cart.productName} ${cart.sizeName}</td>
+                                    <td class="align-middle price amount"><fmt:formatNumber type="number" value="${cart.price}"/> VND</td>
+                                    <td class="align-middle">
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-minus" onclick="updateQuantity(this, -1, event)">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" readonly=""
+                                                   class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
+                                                   value="${cart.totalQuantity}">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-plus" onclick="updateQuantity(this, 1, event)">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <input type="text" readonly=""
-                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                               value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle total">$12</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                            class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;">
-                                    Product
-                                    Name</td>
-                                <td class="align-middle price">$40</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" readonly=""
-                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                               value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle total">$40</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                            class="fa fa-times"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;">
-                                    Product
-                                    Name</td>
-                                <td class="align-middle price">$30</td>
-                                <td class="align-middle">
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-minus">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text"
-                                               class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                               value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary btn-plus">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle total">$30</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                            class="fa fa-times"></i></button></td>
-                            </tr>
+                                    </td>
+                                    <td class="align-middle total"><fmt:formatNumber type="number" value="${unitTotal}"/> VND</td>
+                                    <td class="align-middle"><button name="action" value="DeleteCart" class="btn btn-sm btn-danger"><i
+                                                class="fa fa-times"></i></button></td>
+                                </tr>
+                            </form>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -288,7 +243,7 @@
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Total</h5>
-                                <h5 id="total-cart">$160</h5> 
+                                <h5 id="total-cart"><fmt:formatNumber type="number" value="${total}"/> VND</h5> 
                             </div>
                             <button  type="submit" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
                                 Checkout</button>
@@ -390,87 +345,93 @@
         <!--<script src="js/main.js"></script>-->
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const shippingCost = 10; // Giá vận chuyển cố định
-                let subtotalElement = document.getElementById('subtotal');
-                let totalCartElement = document.getElementById('total-cart');
+                                                    window.onload = function () {
+                                                        updateCartTotal();
+                                                        updateAllProductTotals();
+                                                    };
 
-                console.log(subtotalElement);  // Kiểm tra phần tử subtotal
-                console.log(totalCartElement);
-                // Hàm tính tổng giỏ hàng và cập nhật subtotal, total
-                function updateCartTotals() {
-                    let subtotal = 0;
-                    // Duyệt qua tất cả các hàng sản phẩm để tính tổng
-                    document.querySelectorAll('tr').forEach(function (row) {
-                        const totalElement = row.querySelector('.total');
-                        if (totalElement) {
-                            // Chuyển đổi chuỗi '$xxx' thành số
-                            let total = parseFloat(totalElement.innerText.replace('$', '')) || 0;
-                            subtotal += total; // Cộng dồn vào subtotal
-                        }
-                    });
+                                                    function updateQuantity(button, change, event) {
+                                                        event.preventDefault();
 
-                    // Kiểm tra và cập nhật Subtotal
+                                                        const row = button.closest('tr');
+                                                        const quantityInput = row.querySelector('.quantity-input');
+                                                        const priceText = row.querySelector('.amount').innerText;
+                                                        console.log(priceText);
+                                                        const price = parseFloat(priceText);
 
-                    if (subtotalElement) {
-                        subtotalElement.innerText = `$${subtotal.toFixed()}`; // Cập nhật giá trị hiển thị với 2 chữ số thập phân
-                    }
+                                                        let quantity = parseInt(quantityInput.value) + change;
+                                                        if (quantity < 1) {
+                                                            quantity = 1;
+                                                        }
+                                                        quantityInput.value = quantity;
+                                                        const total = (quantity * price).toFixed();
+                                                        row.querySelector('.total .amount').innerText = total;
+                                                        updateCartTotal();
+                                                    }
 
-                    // Kiểm tra và cập nhật Total (Subtotal + Shipping)
+                                                    function removeProduct(button, event) {
+                                                        event.preventDefault();
 
-                    if (totalCartElement) {
-                        let total = subtotal + shippingCost;
-                        totalCartElement.innerText = `$${total.toFixed(0)}`; // Cập nhật giá trị hiển thị với 2 chữ số thập phân
-                    }
-                }
+                                                        const row = button.closest('tr');
+                                                        row.remove();
 
-                // Event delegation cho nút tăng/giảm số lượng và xóa
-                document.body.addEventListener('click', function (e) {
-                    if (e.target.closest('.btn-plus') || e.target.closest('.btn-minus')) {
-                        e.preventDefault(); // Ngăn form bị gửi đi
+                                                        updateCartTotal();
+                                                    }
 
-                        const row = e.target.closest('tr');
-                        const quantityInput = row.querySelector('.quantity-input');
-                        const priceElement = row.querySelector('.price');
-                        const totalElement = row.querySelector('.total');
-                        let price = parseFloat(priceElement.innerText.replace('$', '')) || 0;
-                        let quantity = parseInt(quantityInput.value);
-                        // Tăng/giảm số lượng
-                        if (e.target.closest('.btn-plus')) {
-                            quantity++;
-                        } else if (e.target.closest('.btn-minus') && quantity > 1) {
-                            quantity--;
-                        }
+                                                    function updateCartTotal() {
+                                                        const totals = document.querySelectorAll('.total .amount');
+                                                        let subtotal = 0;
+                                                        totals.forEach((total) => {
+                                                            subtotal += parseFloat(total.innerText);
+                                                        });
 
-                        quantityInput.value = quantity; // Cập nhật số lượng
-                        let total = price * quantity; // Tính toán tổng tiền của sản phẩm
-                        totalElement.innerText = `$${total.toFixed()}`; // Cập nhật lại total với định dạng 2 chữ số thập phân
+                                                        document.getElementById('subtotal').innerText = subtotal.toFixed();
 
-                        // Thêm log để kiểm tra phần tử trước khi tính toán
-                        console.log(subtotalElement);  // Kiểm tra phần tử subtotal
-                        console.log(totalCartElement); // Kiểm tra phần tử total cart
-                        console.log(totalElement); // Kiểm tra phần tử total cart
+                                                        const shipping = 10;
+                                                        const totalCart = subtotal + shipping;
+                                                        document.getElementById('total-cart').innerText = totalCart.toFixed();
+                                                    }
 
-                        // Cập nhật lại tổng số tiền của giỏ hàng
-                        updateCartTotals();
-                    }
+                                                    function updateAllProductTotals() {
+                                                        const rows = document.querySelectorAll('tr');
+                                                        rows.forEach((row) => {
+                                                            const quantityInput = row.querySelector('.quantity-input');
+                                                            const priceText = row.querySelector('.amount') ? row.querySelector('.amount').innerText : null;
 
-                    // Xử lý xóa sản phẩm
-                    if (e.target.closest('.btn-danger')) {
-                        e.preventDefault(); // Ngăn form bị gửi đi
+                                                            if (quantityInput && priceText) {
+                                                                const price = parseFloat(priceText);
+                                                                const quantity = parseInt(quantityInput.value);
+                                                                const total = (quantity * price).toFixed();
+                                                                row.querySelector('.total .amount').innerText = total;
+                                                            }
+                                                        });
+                                                    }
+                                                    function openDeleteModal(button, event) {
+                                                        event.preventDefault();
+                                                        deleteButtonRef = button; // Store the reference to the delete button
 
-                        const row = e.target.closest('tr');
-                        if (row) {
-                            row.remove(); // Xóa dòng sản phẩm
-                        }
+                                                        // Show the modal
+                                                        document.getElementById('deleteConfirmation').style.display = 'block';
+                                                        document.getElementById('modalOverlay').style.display = 'block';
+                                                    }
 
-                        updateCartTotals(); // Cập nhật lại tổng số tiền
-                    }
-                });
+                                                    function cancelDelete() {
+                                                        // Hide the modal and overlay
+                                                        document.getElementById('deleteConfirmation').style.display = 'none';
+                                                        document.getElementById('modalOverlay').style.display = 'none';
+                                                    }
 
-                // Gọi hàm updateCartTotals khi tải trang để cập nhật subtotal và total-cart ngay từ đầu
-                updateCartTotals();
-            });
+                                                    function proceedDelete() {
+                                                        if (deleteButtonRef) {
+                                                            // Pass the stored button to removeProduct
+                                                            removeProduct(deleteButtonRef, event);
+                                                        }
+
+                                                        // Hide modal and overlay after action
+                                                        document.getElementById('deleteConfirmation').style.display = 'none';
+                                                        document.getElementById('modalOverlay').style.display = 'none';
+                                                    }
+
         </script>
     </body>
 </html>
