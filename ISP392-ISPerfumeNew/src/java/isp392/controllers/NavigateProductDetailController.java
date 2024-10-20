@@ -11,8 +11,8 @@ import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
 import isp392.product.ProductDetailDAO;
 import isp392.product.ProductDetailDTO;
+import isp392.product.ViewProductDTO;
 import isp392.size.SizeDAO;
-import isp392.size.SizeDTO;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +32,7 @@ public class NavigateProductDetailController extends HttpServlet {
     private static final String ERROR = "shopping.jsp";
     private static final String ERROR_SEARCH = "shoppingSearch.jsp";
     private static final String SUCCESS = "productDetail.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -44,53 +44,62 @@ public class NavigateProductDetailController extends HttpServlet {
             url = ERROR_SEARCH;
         } else if (category != null) {
             url = ERROR;
-        }      
+        } else {
+            url = SUCCESS;
+        }
         try {
-            int productDetailID = Integer.parseInt(request.getParameter("productDetailID"));
+            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+
             int productID = Integer.parseInt(request.getParameter("productID"));
             int sizeID = Integer.parseInt(request.getParameter("sizeID"));
-            
-            Map<String, Integer> listProIDs = new HashMap<>();
-            listProIDs.put("productID", productID);
-            session.setAttribute("CURRENT_PRODUCT_ID", listProIDs); // Storing productID for PriceBySizeController
-            
+            int categoryID = ids.get("categoryID");
+
             SizeDAO sizeDAO = new SizeDAO();
-            List<SizeDTO> sizeAvailable =  sizeDAO.getAvailableSize(productID);
+            List<ViewProductDTO> sizeAvailable = sizeDAO.getAvailableSize(productID);
             if (sizeAvailable.size() > 0) {
                 session.setAttribute("AVAILABLE_SIZE", sizeAvailable);
             }
-            
+
             BrandDAO brandDAO = new BrandDAO();
             List<BrandDTO> brand = brandDAO.getBrandByProduct(productID);
             if (brand.size() > 0) {
                 int brandID = brand.get(0).getBrandID();
                 request.setAttribute("CURRENT_BRAND_ID", brandID);
-                
+
                 String brandName = brand.get(0).getName();
                 session.setAttribute("BRAND_BY_PRODUCT", brandName);
             }
-            
+
             ProductDetailDAO productDetailDAO = new ProductDetailDAO();
-            List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);           
+            List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);
             if (listPriceBySize.size() > 0) {
                 session.setAttribute("PRICE_BY_SIZE", listPriceBySize);
             }
-                         
+
             List<ProductDetailDTO> listImage = productDetailDAO.getListImage(productID);
             if (listImage.size() > 0) {
                 session.setAttribute("LIST_IMAGE", listImage);
             }
-            
+
             ProductDAO productDAO = new ProductDAO();
             List<ProductDTO> productInformation = productDAO.getProductInformation(productID);
             if (productInformation.size() > 0) {
                 session.setAttribute("PRODUCT_INFORMATION", productInformation);
-                
+
                 String productName = productInformation.get(0).getName();
                 session.setAttribute("PRODUCT_NAME", productName);
-                
             }
-            url = SUCCESS;            
+
+            List<ViewProductDTO> listProduct = productDAO.suggestListProduct(categoryID, productID, sizeID);
+            if (listProduct.size() > 0) {
+                session.setAttribute("SUGGEST_PRODUCT", listProduct);
+            }
+            if (search != null) {
+                session.removeAttribute("CURRENT_SEARCH");
+            } else if (category != null) {
+                session.removeAttribute("CURRENT_IDS");
+            }
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at NavigateProductDetailController" + e.toString());
         } finally {

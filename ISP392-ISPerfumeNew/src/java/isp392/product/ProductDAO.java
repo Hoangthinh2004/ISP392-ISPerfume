@@ -32,50 +32,8 @@ public class ProductDAO {
     private static final String CHECK_DUPLICATE_PRODUCT_BY_NAME = "SELECT ProductID FROM Products WHERE ProName LIKE ?";
     private static final String DELETE_PRODUCT_MANAGER = "DELETE FROM Products WHERE ProductID = ? ";
     private static final String PRODUCT_INFORMATION = "SELECT P.ProductID, P.BrandID, P.ProName, P.Description, P.Country, P.ReleaseDate, P.FragranceFamilies FROM Products P "
-                                                    + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-                                                    + "WHERE P.ProductID = ?";
-    private static final String SORT_BY_PURCHASING = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
-            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
             + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-            + "WHERE PC.CategoryID = ? AND P.Status = 1 AND PD.Status = 1 AND P.BrandID = ? AND PD.SizeID = ? "
-            + "ORDER BY PD.NumberOfPurchasing DESC";
-    private static final String SORT_BY_PURCHASING_2 = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
-            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-            + "WHERE PC.CategoryID = ? AND P.BrandID = ? AND P.Status = 1 AND PD.Status = 1 "
-            + "ORDER BY PD.NumberOfPurchasing DESC";
-    private static final String SORT_BY_PURCHASING_3 = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
-            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-            + "WHERE PC.CategoryID = ? AND PD.SizeID = ? AND P.Status = 1 AND PD.Status = 1 "
-            + "ORDER BY PD.NumberOfPurchasing DESC";
-    private static final String SORT_BY_PURCHASING_ALL = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
-            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-            + "WHERE PC.CategoryID = ? AND P.Status = 1 AND PD.Status = 1 "
-            + "ORDER BY PD.NumberOfPurchasing DESC";
-    private static final String SORT_SEARCH_RESULT_BY_PURCHASING_2 = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
-            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-            + "WHERE P.ProName LIKE ? AND PC.CategoryID = 4 AND P.Status = 1 AND PD.Status = 1 "
-            + "ORDER BY PD.NumberOfPurchasing DESC";
-    private static final String SORT_SEARCH_RESULT_BY_PURCHASING_1 = "SELECT P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
-            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-            + "WHERE P.ProName LIKE ? AND PD.SizeID = ? AND PC.CategoryID = 4 AND P.Status = 1 AND PD.Status = 1"
-            + "ORDER BY PD.NumberOfPurchasing DESC";
+            + "WHERE P.ProductID = ?";
 
     public List<ViewProductDTO> getListProduct(String search) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
@@ -98,7 +56,7 @@ public class ProductDAO {
                     String productName = rs.getString("ProName");
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
-                    listProduct.add(new ViewProductDTO(productDetailID, 0, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
+                    listProduct.add(new ViewProductDTO(0, productDetailID, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {
@@ -312,35 +270,42 @@ public class ProductDAO {
         }
         return productInformation;
     }
-    
+
     private static final String SEARCH_RESULT = "SELECT PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name, PD.Image, PD.Price, P.ProName FROM Products P "
-                                                      + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-                                                      + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-                                                      + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-                                                      + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-                                                      + "WHERE P.ProName LIKE ? AND P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4 ";
+            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+            + "WHERE P.ProName LIKE ? AND P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4 ";
     private static final String SIZE_FILTER_DESC = " AND PD.SizeID IN (%s) ORDER BY PD.Price DESC";
+    private static final String PUR_FILTER_DESC = " AND PD.SizeID IN (%s) ORDER BY PD.NumberOfPurchasing DESC";
     private static final String SIZE_FILTER_ASC = " AND PD.SizeID IN (%s) ORDER BY PD.Price ASC";
     private static final String SIZE_FILTER = " AND PD.SizeID IN (%s)";
-    
+
     private static final String CATEGORIZE_PRODUCT = "SELECT PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name, PD.Image, PD.Price, P.ProName FROM Products P "
-                                                      + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-                                                      + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-                                                      + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-                                                      + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-                                                      + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? ";
+            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+            + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? ";
+    private static final String SUGGEST_PRODUCT = "SELECT PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name, PD.Image, PD.Price, P.ProName FROM Products P "
+                                                + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+                                                + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+                                                + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+                                                + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+                                                + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? AND P.ProductID != ? AND PD.SizeID = ?";
     private static final String FILTER_PRODUCT_BY_BRAND = "SELECT PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
-                                                        + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-                                                        + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-                                                        + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-                                                        + "INNER JOIN Brands B ON B.BrandID = P.BrandID " 
-                                                        + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? AND P.BrandID = ?";
-    
+            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+            + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? AND P.BrandID = ?";
+
     public List<ViewProductDTO> descendingProductByPrice(String search, List<Integer> sizeIDList) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
-        ResultSet rs = null;   
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -374,9 +339,15 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
@@ -385,7 +356,7 @@ public class ProductDAO {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
-        ResultSet rs = null;   
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -417,9 +388,15 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
@@ -428,7 +405,7 @@ public class ProductDAO {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
-        ResultSet rs = null;   
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -437,16 +414,16 @@ public class ProductDAO {
                     String sizeParams = sizeList.stream().map(s -> "?").collect(Collectors.joining(","));
                     query += String.format(SIZE_FILTER, sizeParams);
                 }
-                
+
                 ptm = conn.prepareStatement(query);
                 ptm.setInt(1, categoryID);
-                
+
                 if (sizeList != null && !sizeList.isEmpty()) {
                     for (int i = 0; i < sizeList.size(); i++) {
                         ptm.setInt(i + 2, sizeList.get(i)); // Bắt đầu từ vị trí thứ 2 vì vị trí 1 là search key
                     }
                 }
-                
+
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int productDetailID = rs.getInt("ProductDetailID");
@@ -461,9 +438,15 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
@@ -472,7 +455,7 @@ public class ProductDAO {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
-        ResultSet rs = null;   
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -485,13 +468,13 @@ public class ProductDAO {
                 ptm = conn.prepareStatement(query);
                 ptm.setInt(1, categoryID);
                 ptm.setInt(2, brandID);
-                
+
                 if (sizeList != null && !sizeList.isEmpty()) {
                     for (int i = 0; i < sizeList.size(); i++) {
                         ptm.setInt(i + 3, sizeList.get(i)); // Bắt đầu từ vị trí thứ 2 vì vị trí 1 là search key
                     }
                 }
-                
+
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int productDetailID = rs.getInt("ProductDetailID");
@@ -505,9 +488,15 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
@@ -516,7 +505,7 @@ public class ProductDAO {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
-        ResultSet rs = null;   
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -561,9 +550,15 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
@@ -593,9 +588,15 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if(rs!=null) rs.close();
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProductByCategory;
     }
@@ -625,9 +626,15 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if(rs!=null) rs.close();
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProductByBrand;
     }
@@ -636,7 +643,7 @@ public class ProductDAO {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
-        ResultSet rs = null;   
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -670,9 +677,15 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
@@ -681,7 +694,7 @@ public class ProductDAO {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
-        ResultSet rs = null;   
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -726,15 +739,170 @@ public class ProductDAO {
                 }
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
 
-    
+    public List<ViewProductDTO> suggestListProduct(int categoryID, int productID, int sizeID) throws ClassNotFoundException, SQLException {
+        List<ViewProductDTO> listProductByCategory = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SUGGEST_PRODUCT);
+                ptm.setInt(1, categoryID);
+                ptm.setInt(2, productID);
+                ptm.setInt(3, sizeID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productDetailID = rs.getInt("ProductDetailID");
+                    int productIDrela = rs.getInt("ProductID");
+                    int sizeIDrela = rs.getInt("SizeID");
+                    int brandID = rs.getInt("BrandID");
+                    String sizeName = rs.getString("Name");
+                    String brandName = rs.getString("BrandName");
+                    String productName = rs.getString("ProName");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    listProductByCategory.add(new ViewProductDTO(categoryID, productDetailID, brandID, productIDrela, sizeIDrela, sizeName, brandName, productName, price, image));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listProductByCategory;
+    }
 
-    
+    public List<ViewProductDTO> sortCategorizeProductByPur(int categoryID, List<Integer> brandID, List<Integer> sizeIDList) throws ClassNotFoundException, SQLException {
+        List<ViewProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = CATEGORIZE_PRODUCT;
+                if ((brandID != null && !brandID.isEmpty()) && (sizeIDList != null && !sizeIDList.isEmpty())) {
+                    query += "AND P.BrandID = ?";
+                    String sizeParams = sizeIDList.stream().map(s -> "?").collect(Collectors.joining(","));
+                    query += String.format(PUR_FILTER_DESC, sizeParams);
+                } else if (brandID != null && !brandID.isEmpty()) {
+                    query += "AND P.BrandID = ? ORDER BY PD.NumberOfPurchasing DESC";
+                } else if (sizeIDList != null && !sizeIDList.isEmpty()) {
+                    String sizeParams = sizeIDList.stream().map(s -> "?").collect(Collectors.joining(","));
+                    query += String.format(PUR_FILTER_DESC, sizeParams);
+                } else {
+                    query += " ORDER BY PD.NumberOfPurchasing DESC";
+                }
+
+                ptm = conn.prepareStatement(query);
+                ptm.setInt(1, categoryID);
+                if ((brandID != null && !brandID.isEmpty()) && (sizeIDList != null && !sizeIDList.isEmpty())) {
+                    ptm.setInt(2, brandID.get(0));
+                    for (int i = 0; i < sizeIDList.size(); i++) {
+                        ptm.setInt(i + 3, sizeIDList.get(i)); // Bắt đầu từ vị trí thứ 3
+                    }
+                } else if (brandID != null && !brandID.isEmpty()) {
+                    ptm.setInt(2, brandID.get(0));
+                } else if (sizeIDList != null && !sizeIDList.isEmpty()) {
+                    for (int i = 0; i < sizeIDList.size(); i++) {
+                        ptm.setInt(i + 2, sizeIDList.get(i)); // Bắt đầu từ vị trí thứ 2
+                    }
+                }
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productDetailID = rs.getInt("ProductDetailID");
+                    int productID = rs.getInt("ProductID");
+                    String sizeName = rs.getString("Name");
+                    String brandName = rs.getString("BrandName");
+                    String productName = rs.getString("ProName");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    listProduct.add(new ViewProductDTO(productDetailID, 0, 0, productID, 0, sizeName, brandName, productName, price, image));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listProduct;
+    }
+
+    public List<ViewProductDTO> sortSearchResultByPur(String search, List<Integer> sizeIDList) throws ClassNotFoundException, SQLException {
+        List<ViewProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String query = SEARCH_RESULT;
+                if (sizeIDList != null && !sizeIDList.isEmpty()) {
+                    String sizeParams = sizeIDList.stream().map(s -> "?").collect(Collectors.joining(","));
+                    query += String.format(PUR_FILTER_DESC, sizeParams);
+                } else {
+                    query += " ORDER BY PD.NumberOfPurchasing DESC";
+                }
+
+                ptm = conn.prepareStatement(query);
+                ptm.setString(1, "%" + search + "%");
+
+                if (sizeIDList != null && !sizeIDList.isEmpty()) {
+                    for (int i = 0; i < sizeIDList.size(); i++) {
+                        ptm.setInt(i + 2, sizeIDList.get(i)); // Bắt đầu từ vị trí thứ 2 vì vị trí 1 là search key
+                    }
+                }
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productDetailID = rs.getInt("ProductDetailID");
+                    int productID = rs.getInt("ProductID");
+                    int brandID = rs.getInt("BrandID");
+                    String sizeName = rs.getString("Name");
+                    String brandName = rs.getString("BrandName");
+                    String productName = rs.getString("ProName");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    listProduct.add(new ViewProductDTO(productDetailID, 0, brandID, productID, 0, sizeName, brandName, productName, price, image));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listProduct;
+    }
 
 }

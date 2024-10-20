@@ -9,10 +9,12 @@ import isp392.cart.CartDAO;
 import isp392.cart.ViewCartDTO;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,11 +30,14 @@ public class NavigateToCartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             CartDAO dao = new CartDAO();           
-            int customerID = 5;           
+            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
+            
+            int customerID = CustomerIDS.get("customerID");            
             List<ViewCartDTO> cartList = dao.getProductDetailID(customerID);
             if (cartList.size() > 0) {
-                request.setAttribute("CART", cartList);
+                session.setAttribute("CART", cartList);
                 url = SUCCESS;
             } else {
                 request.setAttribute("MESSAGE", "Your cart is empty ! /n Please select more products to buy");

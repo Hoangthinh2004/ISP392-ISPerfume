@@ -7,6 +7,7 @@ package isp392.controllers;
 
 import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
+import isp392.cart.CartDAO;
 import isp392.category.CategoryDAO;
 import isp392.category.CategoryDTO;
 import isp392.size.SizeDAO;
@@ -35,6 +36,10 @@ public class HomeController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
+            CategoryDAO categoryDAO = new CategoryDAO();
+            BrandDAO brandDAO = new BrandDAO();
+            SizeDAO sizeDAO = new SizeDAO();
+            CartDAO cartDAO = new CartDAO();
             
             Map<String, Integer> ids = new HashMap<>();
             session.setAttribute("CURRENT_IDS", ids); //set attribute to Category Controller
@@ -49,9 +54,12 @@ public class HomeController extends HttpServlet {
                 session.removeAttribute("CURRENT_BRANDID");
             }
             
-            CategoryDAO categoryDAO = new CategoryDAO();
-            BrandDAO brandDAO = new BrandDAO();
-            SizeDAO sizeDAO = new SizeDAO();
+            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID"); 
+            if (CustomerIDS != null && !CustomerIDS.isEmpty()) {
+                int customerID = CustomerIDS.get("customerID");
+                int cartSize = cartDAO.getCartSize(customerID);
+                session.setAttribute("CART_SIZE", cartSize);
+            }
             
             List<CategoryDTO> listCategory = categoryDAO.getListCategory();
             List<BrandDTO> listBrand = brandDAO.getListBrand();

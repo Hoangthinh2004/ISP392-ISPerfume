@@ -168,17 +168,22 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.CUSTOMER.name}</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <c:if test="${sessionScope.CUSTOMER.name == null}">
-                                    <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                    <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                </c:if>
-                                <c:if test="${sessionScope.CUSTOMER.name != null}">
-                                    <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                    <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                </c:if>
-                            </div>
+                            <c:choose>
+                                <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Account</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                        <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.CUSTOMER.name}</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="btn-group mx-2">
                             <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
@@ -211,7 +216,7 @@
             </div>
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-between">
                 <div class="col-lg-6">
-                    <a href="home.jsp" class="text-decoration-none">
+                    <a href="MainController?action=HomeController" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
@@ -220,13 +225,13 @@
                     <form action="MainController">
                         <div class="input-group">
                             <div class="input-wrapper">
-                                <button class="icon" style="outline: none" type="submit" name="action" value=""> 
+                                <button class="icon" style="outline: none" type="submit" name="action" value="SeacrhProduct"> 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25px" width="25px">
                                     <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000" d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"></path>
                                     <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000" d="M22 22L20 20"></path>
                                     </svg>
                                 </button>
-                                <input placeholder="search.." class="input" name="" type="text" style="color: black">
+                                <input placeholder="search.." class="input" name="search" type="text" style="color: black">
                             </div>
                         </div>
                     </form>
@@ -251,14 +256,6 @@
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
                                 </c:forEach>
-                                <!--                            <div class="nav-item dropdown dropright">
-                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Baby's Dresses</a>
-                                                                </div>
-                                                            </div>-->
                             </div>
                         </nav>
                     </div>
@@ -279,22 +276,58 @@
                                     <div class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
+                                            <a href="MainController?action=NavigateToCart" class="dropdown-item">Shopping Cart</a>
                                             <a href="checkout.jsp" class="dropdown-item">Checkout</a>
                                         </div>
                                     </div>
                                     <a href="blog.jsp" class="nav-item nav-link">Blog</a>
                                     <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
-                                </div>                              
+                                </div>
+                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                            <a href="MainController?action=NavigateToCart" class="btn px-0 ml-3">
+                                                <i class="fas fa-shopping-cart text-primary"></i>
+                                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="btn px-0 ml-3" onclick="openDeleteModal(this, event)">
+                                                <i class="fas fa-shopping-cart text-primary"></i>
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
                             </div>
-
+                        </nav>
                     </div>
-                    </nav>
                 </div>
             </div>
         </div>
     </form>
     <!-- Navbar End -->
+
+    <!--Pop-up start-->
+    <div id="modalOverlay" class="modal-overlay" style="display: none;">
+        <div id="deleteConfirmation" class="card">
+            <div class="card-content">
+                <p class="card-heading">ISPerfume</p>
+                <p class="card-description">Please sign in to buy perfume</p>
+            </div>
+            <div class="card-button-wrapper">
+                <a href="signup.jsp" class="card-button secondary">Sign up</a>
+                <a href="signin.jsp" class="card-button primary">Sign in</a>
+            </div> 
+            <button class="exit-button" onclick="cancelDelete()">
+                <svg height="20px" viewBox="0 0 384 512">
+                <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                </path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <!--Pop-up End-->
 
 
     <!-- Carousel Start -->
@@ -1022,5 +1055,21 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+                function openDeleteModal(button, event) {
+                    event.preventDefault();
+                    deleteButtonRef = button; // Store the reference to the delete button
+
+                    // Show the modal
+                    document.getElementById('deleteConfirmation').style.display = 'block';
+                    document.getElementById('modalOverlay').style.display = 'block';
+                }
+
+                function cancelDelete() {
+                    // Hide the modal and overlay
+                    document.getElementById('deleteConfirmation').style.display = 'none';
+                    document.getElementById('modalOverlay').style.display = 'none';
+                }
+    </script>
 </body>
 </html>

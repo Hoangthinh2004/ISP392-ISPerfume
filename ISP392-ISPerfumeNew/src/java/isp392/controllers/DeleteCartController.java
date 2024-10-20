@@ -7,11 +7,12 @@ package isp392.controllers;
 
 import isp392.cart.CartDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,9 +28,14 @@ public class DeleteCartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int productDetailID = Integer.parseInt(request.getParameter("productDetailID"));
+            HttpSession session = request.getSession();
             CartDAO dao = new CartDAO();
-            boolean check = dao.deleteCart(productDetailID);
+            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
+            
+            int customerID = CustomerIDS.get("customerID");          
+            int productDetailID = Integer.parseInt(request.getParameter("productDetailID"));
+                      
+            boolean check = dao.deleteCart(productDetailID, customerID);
             if (check) {
                 url = SUCCESS;
             }

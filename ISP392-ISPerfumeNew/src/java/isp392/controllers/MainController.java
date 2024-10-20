@@ -124,15 +124,20 @@ public class MainController extends HttpServlet {
     private static final String DELETE_CART = "DeleteCart";
     private static final String DELETE_CART_CONTROLLER = "DeleteCartController";
     
-    private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
-    private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
-    
     private static final String UPDATE_PROFILE = "UpdateProfile";
     private static final String UPDATE_PROFILE_CONTROLLER = "UpdateUserProfile";
 
     private static final String CREATE_NEW_USER_CUSTOMER = "registerNewUser";
     private static final String CREATE_NEW_USER_CUSTOMER_CONTROLLER = "CreateNewUserCustomerController";
-   
+    
+    private static final String NAVIGATE_SIGN_IN = "Sign in";
+    private static final String NAVIGATE_SIGN_IN_CONTROLLER = "signin.jsp";
+    
+    private static final String NAVIGATE_SIGN_UP = "Sign up";
+    private static final String NAVIGATE_SIGN_UP_CONTROLLER = "signup.jsp";
+    
+    private static final String NAVIGATE_RELATED_PRODUCT_DETAIL = "NavigateRelatedProductDetail";
+    private static final String NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER = "NavigateRelatedProductDetailController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -216,6 +221,12 @@ public class MainController extends HttpServlet {
                 url = UPDATE_USER_STATUS_CONTROLLER;
             } else if(CREATE_NEW_USER_CUSTOMER.equals(action)){
                 url = CREATE_NEW_USER_CUSTOMER_CONTROLLER;
+            } else if (NAVIGATE_SIGN_IN.equals(action)) {
+                url = NAVIGATE_SIGN_IN_CONTROLLER;
+            } else if(NAVIGATE_SIGN_UP.equals(action)){
+                url = NAVIGATE_SIGN_UP_CONTROLLER;
+            } else if(NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)){
+                url = NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

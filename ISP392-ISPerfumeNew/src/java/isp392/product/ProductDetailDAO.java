@@ -31,7 +31,7 @@ public class ProductDetailDAO {
                                                     + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
                                                     + "WHERE PD.ProductID = ? AND P.BrandID = 4";
     private static final String GET_PRICE_BY_SIZE = "SELECT PD.ProductDetailID, PD.Price, PD.StockQuantity FROM ProductDetail PD "
-                                                  + "WHERE PD.ProductID = ? AND PD.SizeID = ?";
+                                                  + "WHERE ProductID = ? AND SizeID = ?";
     private static final String GET_LIST_IMAGE = "SELECT PD.Image FROM ProductDetail PD "
                                                + "WHERE PD.ProductID = ?";
     private static final String CHECK_PRODUCT_DETAIL_EXISTED = "SELECT * FROM ProductDetail WHERE ProductID =? AND SizeID = ?";
@@ -139,7 +139,7 @@ public class ProductDetailDAO {
                 ptm.setInt(2, sizeID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    int productDetailID = rs.getInt("productDetailID");
+                    int productDetailID = rs.getInt("ProductDetailID");
                     int price = rs.getInt("Price");
                     int stockquantity = rs.getInt("StockQuantity");
                     list.add(new ProductDetailDTO( productDetailID ,productID, sizeID, price, stockquantity, 0, null, "", 0));
