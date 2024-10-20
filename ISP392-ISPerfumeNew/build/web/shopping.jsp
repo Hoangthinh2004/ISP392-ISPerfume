@@ -235,30 +235,25 @@
 
             <!--Banner Start-->
             <div class="container-fluid">
-                <div class="row px-xl-5 mb-5">
-                    <div class="col-lg-12 bg-transparent">
-                        <div class="justify-content-center align-content-center d-flex">
-                            <img src="https://file.hstatic.net/1000340570/article/gucci-banner_c59f167049a347b18b67abacf37d71b8.jpg" style="width: auto; height: 490px;">
-                        </div>
-                    </div>
-                    <div class="col-lg-12 bg-transparent">
-                        <div class="description-box bg-transparent p-4">
-                            <div class="description-header d-flex justify-content-center align-items-center">
-                                <img id="toggle-btn" class="icon-down-black" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" style="cursor: pointer;">
+                <c:forEach var="brand" items="${sessionScope.BRAND_INFOR}">
+                    <div class="row px-xl-5 mb-5">
+                        <div class="col-lg-12 bg-transparent">
+                            <div class="justify-content-center align-content-center d-flex">
+                                <img src="${brand.image}" style="width: auto; height: 490px;">
                             </div>
-                            <div id="description-content" class="mt-2 text-container bg-transparent">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, 
-                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Vestibulum tincidunt est vel ipsum consectetur, sit amet vehicula magna gravida. Phasellus aliquet nisi non nisl accumsan, a posuere erat venenatis. Cras in orci est. Ut vulputate semper magna, eget tempus eros dapibus non.</p>
+                        </div>
+                        <div class="col-lg-12 bg-transparent">
+                            <div class="description-box bg-transparent p-4">
+                                <div class="description-header d-flex justify-content-center align-items-center">
+                                    <img id="toggle-btn" class="icon-down-black" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" style="cursor: pointer;">
+                                </div>
+                                <div id="description-content" class="mt-2 text-container bg-transparent">
+                                    <p>${brand.description}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </c:forEach>
             </div>
             <!--Banner End-->
 
