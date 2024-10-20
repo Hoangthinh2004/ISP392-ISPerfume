@@ -54,6 +54,7 @@ public class CategoryController extends HttpServlet {
             List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
                        
             session.setAttribute("LIST_PRODUCT", listProduct);
+            session.removeAttribute("BRAND_INFOR");
             url = SUCCESS;
                 
         } catch (Exception e) {

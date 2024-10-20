@@ -5,12 +5,15 @@
  */
 package isp392.controllers;
 
+import isp392.brand.BrandDAO;
+import isp392.brand.BrandDTO;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.faces.flow.builder.ViewBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +34,7 @@ public class BrandFilterController extends HttpServlet {
         String url = ERROR;
         try {
             ProductDAO productDAO = new ProductDAO();
+            BrandDAO brandDAO = new BrandDAO();
             HttpSession session = request.getSession();
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
             int categoryID = ids.get("categoryID");
@@ -50,6 +54,10 @@ public class BrandFilterController extends HttpServlet {
             if (categoryID != 0 && brandID != 0) {
                 List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
                 session.setAttribute("LIST_PRODUCT", listProduct);
+                
+                List<BrandDTO> brandInfor = brandDAO.showBrandInfor(brandID);
+                session.setAttribute("BRAND_INFOR", brandInfor);
+                
             }
             url = SUCCESS;
         } catch (Exception e) {

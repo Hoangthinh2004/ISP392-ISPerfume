@@ -29,6 +29,7 @@ public class BrandDAO {
             + "INNER JOIN Products P ON P.BrandID = B.BrandID "
             + "WHERE P.ProductID = ?";
     private static final String UPDATE_BRAND = "UPDATE Brands SET  BrandName = ?, Description = ?, Status = ? WHERE BrandID = ?";
+    private static final String BRAND_INFORMATION = "SELECT * FROM Brands WHERE BrandID = ?";
 
     public List<BrandDTO> getListBrandManager(String search) throws SQLException, ClassNotFoundException {
 
@@ -220,6 +221,38 @@ public class BrandDAO {
             }
         }
         return check;
+    }
+
+    public List<BrandDTO> showBrandInfor(int brandID) throws ClassNotFoundException, SQLException {
+        List<BrandDTO> listBrand = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(BRAND_INFORMATION);
+                ptm.setInt(1, brandID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String brandName = rs.getString("BrandName");
+                    String image = rs.getString("Image");
+                    String description = rs.getString("Description");
+                    listBrand.add(new BrandDTO(brandID, 0, brandName, description, image, true));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listBrand;
     }
 
 }
