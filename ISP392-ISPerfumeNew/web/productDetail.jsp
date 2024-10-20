@@ -47,17 +47,22 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.LOGIN_USER.name}</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <c:if test="${sessionScope.CUSTOMER.name == null}">
-                                    <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                    <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                </c:if>
-                                <c:if test="${sessionScope.CUSTOMER.name != null}">
-                                    <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                    <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                </c:if>
-                            </div>
+                            <c:choose>
+                                <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Account</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                        <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.CUSTOMER.name}</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>                                            
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
@@ -116,14 +121,6 @@
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
                                 </c:forEach>
-                                <!--                            <div class="nav-item dropdown dropright">
-                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Baby's Dresses</a>
-                                                                </div>
-                                                            </div>-->
                             </div>
                         </nav>
                     </div>
@@ -152,10 +149,19 @@
                                     <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>
                                 <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                    <a href="cart.jsp" class="btn px-0 ml-3">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                    </a>
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                            <a href="MainController?action=NavigateToCart" class="btn px-0 ml-3">
+                                                <i class="fas fa-shopping-cart text-primary"></i>
+                                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="btn px-0 ml-3" onclick="openDeleteModal(this, event)">
+                                                <i class="fas fa-shopping-cart text-primary"></i>
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </nav>
@@ -164,6 +170,28 @@
             </div>
         </form>
         <!-- Navbar End -->
+
+        <!--Pop-up start-->
+        <div id="modalOverlay" class="modal-overlay" style="display: none;">
+            <div id="deleteConfirmation" class="card">
+                <div class="card-content">
+                    <p class="card-heading">ISPerfume</p>
+                    <p class="card-description">Please sign in to buy perfume</p>
+                </div>
+                <div class="card-button-wrapper">
+                    <a href="signup.jsp" class="card-button secondary">Sign up</a>
+                    <a href="signin.jsp" class="card-button primary">Sign in</a>
+                </div> 
+                <button class="exit-button" onclick="cancelDelete()">
+                    <svg height="20px" viewBox="0 0 384 512">
+                    <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                    </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!--Pop-up End-->
 
 
         <!-- Breadcrumb Start -->
@@ -207,7 +235,6 @@
 
                         <div class="col-lg-7 h-auto mb-30">
                             <div class="h-100 bg-light p-30">
-
                                 <h3>${product.name}</h3>
                                 <div class="d-flex mb-3">
                                     <div class="text-primary mr-2">
@@ -221,28 +248,18 @@
                                 </div>
                                 <c:forEach var="price" items="${sessionScope.PRICE_BY_SIZE}">
                                     <input type="hidden" name="productDetailID" value="${price.productDetailID}"/>
-                                    <span>Quantity in sotck: ${price.stockQuantity}</span>
+                                    <span>Quantity in stock: ${price.stockQuantity}</span>
                                     <input type="hidden" name="sizeID" value="${price.sizeID}">
                                     <h3 class="font-weight-semi-bold mb-4"><fmt:formatNumber type="number" value="${price.price}"/>  VND</h3>
                                 </c:forEach>
                                 <div class="d-flex mb-3">
                                     <strong class="text-dark mr-3">Sizes:</strong>
                                     <c:forEach var="size" items="${sessionScope.AVAILABLE_SIZE}">
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" class="custom-control-input" id="${size.sizeID}" name="selectedSize" value="${size.sizeID}"
-                                                   onclick="redirectToController(${size.sizeID})">
-                                            <label class="custom-control-label" for="${size.sizeID}">${size.name}</label>
-                                        </div>                                       
+                                        <input type="hidden" name="productID" value="${size.productID}"/>
+                                        <a href="MainController?action=PriceBySize&sizeID=${size.sizeID}&productID=${size.productID}">${size.sizeName}</a>
                                     </c:forEach>
-                                    <script>
-                                        function redirectToController(sizeID) {
-                                            window.location.href = 'MainController?action=PriceBySize&sizeID=' + sizeID;
-                                        }
-                                    </script>
                                 </div>
                                 <div class="d-flex align-items-center mb-4 pt-2">
-
-
                                     <div class="input-group quantity mr-3" style="width: 130px;">
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary btn-minus" type="button">
@@ -257,7 +274,6 @@
                                         </div>
                                     </div>
                                     <script>
-                                        // Lắng nghe sự kiện khi nhấn nút "-"
                                         document.querySelector('.btn-minus').addEventListener('click', function () {
                                             let input = document.getElementById('quantityInput');
                                             let currentValue = parseInt(input.value);
@@ -266,17 +282,24 @@
                                             }
                                         });
 
-                                        // Lắng nghe sự kiện khi nhấn nút "+"
                                         document.querySelector('.btn-plus').addEventListener('click', function () {
                                             let input = document.getElementById('quantityInput');
                                             let currentValue = parseInt(input.value);
                                             input.value = currentValue + 1;
                                         });
-                                    </script>
-                                                                       
-                                    <i class="fa fa-shopping-cart mr-1"></i>
-                                    <input type="submit" name="action" value="AddToCart" class="btn btn-primary px-3" >
-                                    ${requestScope.MESSAGE}
+                                    </script>                                  
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                            <i class="fa fa-shopping-cart mr-1"></i>
+                                            <input type="submit" name="action" value="AddToCart" class="btn btn-primary px-3"/>
+                                            ${requestScope.MESSAGE}
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="btn btn-primary px-3" onclick="openDeleteModal(this, event)">
+                                                <i class="fa fa-shopping-cart mr-1">Add To Cart</i>
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <div class="d-flex pt-2">
                                     <strong class="text-dark mr-2">Share on:</strong>
@@ -316,40 +339,6 @@
                                         <h5 class="mb-3">Country: ${product.country}</h5>
                                         <h5 class="mb-3">Release Date:  ${product.releaseDate}</h5>
                                         <h5 class="mb-3">Fragrance Families: ${product.fragranceFamilies}</h5>
-                                        <!--                                    <div class="row">
-                                                                                <div class="col-md-6">
-                                                                                    <ul class="list-group list-group-flush">
-                                                                                        <li class="list-group-item px-0">
-                                                                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                                                                        </li>
-                                                                                        <li class="list-group-item px-0">
-                                                                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                                                                        </li>
-                                                                                        <li class="list-group-item px-0">
-                                                                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                                                                        </li>
-                                                                                        <li class="list-group-item px-0">
-                                                                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                                                                        </li>
-                                                                                    </ul> 
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <ul class="list-group list-group-flush">
-                                                                                        <li class="list-group-item px-0">
-                                                                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                                                                        </li>
-                                                                                        <li class="list-group-item px-0">
-                                                                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                                                                        </li>
-                                                                                        <li class="list-group-item px-0">
-                                                                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                                                                        </li>
-                                                                                        <li class="list-group-item px-0">
-                                                                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                                                                        </li>
-                                                                                    </ul> 
-                                                                                </div>
-                                                                            </div>-->
                                     </div>
                                     <div class="tab-pane fade" id="tab-pane-3">
                                         <div class="row">
@@ -382,24 +371,22 @@
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                     </div>
+                                                </div>                                                
+                                                <div class="form-group">
+                                                    <label for="message">Your Review *</label>
+                                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
                                                 </div>
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="message">Your Review *</label>
-                                                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="name">Your Name *</label>
-                                                        <input type="text" class="form-control" id="name">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email">Your Email *</label>
-                                                        <input type="email" class="form-control" id="email">
-                                                    </div>
-                                                    <div class="form-group mb-0">
-                                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
-                                                    </div>
-                                                </form>
+                                                <div class="form-group">
+                                                    <label for="name">Your Name *</label>
+                                                    <input type="text" class="form-control" id="name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">Your Email *</label>
+                                                    <input type="email" class="form-control" id="email">
+                                                </div>
+                                                <div class="form-group mb-0">
+                                                    <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -410,7 +397,6 @@
                 </div>
             </c:forEach>
         </form>
-
         <!-- Shop Detail End -->
 
 
@@ -420,131 +406,33 @@
             <div class="row px-xl-5">
                 <div class="col">
                     <div class="owl-carousel related-carousel">
-                        <div class="product-item bg-light">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                        <c:forEach var="product" items="${sessionScope.SUGGEST_PRODUCT}">
+                            <div class="product-item bg-light">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src="${product.image}" alt="">
+                                    <div class="product-action">
+                                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateRelatedProductDetail&productID=${product.productID}&sizeID=${product.sizeID}&categoryID=${product.categoryID}"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="">${product.productName} ${product.sizeName}</a>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5><fmt:formatNumber type="number" value="${product.price}"/>  VND</h5>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small>(99)</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item bg-light">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item bg-light">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="img/product-3.jpg" alt="">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item bg-light">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="img/product-4.jpg" alt="">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item bg-light">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="img/product-5.jpg" alt="">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
@@ -641,15 +529,30 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script>
-                                            function updateQuantity(change, event) {
-                                                event.preventDefault();
-                                                const quantityInput = document.getElementById('quantity-input');
-                                                let quantity = parseInt(quantityInput.value) + change;
-                                                if (quantity < 1) {
-                                                    quantity = 1;
+                                                function updateQuantity(change, event) {
+                                                    event.preventDefault();
+                                                    const quantityInput = document.getElementById('quantity-input');
+                                                    let quantity = parseInt(quantityInput.value) + change;
+                                                    if (quantity < 1) {
+                                                        quantity = 1;
+                                                    }
+                                                    quantityInput.value = quantity;
                                                 }
-                                                quantityInput.value = quantity;
-                                            }
+                                                function openDeleteModal(button, event) {
+                                                    event.preventDefault();
+                                                    deleteButtonRef = button; // Store the reference to the delete button
+
+                                                    // Show the modal
+                                                    document.getElementById('deleteConfirmation').style.display = 'block';
+                                                    document.getElementById('modalOverlay').style.display = 'block';
+                                                }
+
+                                                function cancelDelete() {
+                                                    // Hide the modal and overlay
+                                                    document.getElementById('deleteConfirmation').style.display = 'none';
+                                                    document.getElementById('modalOverlay').style.display = 'none';
+                                                }
+
         </script>
 
     </body>

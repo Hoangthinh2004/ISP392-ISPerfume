@@ -71,17 +71,22 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.LOGIN_USER.name}</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <c:if test="${sessionScope.CUSTOMER.name == null}">
-                                    <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                    <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                </c:if>
-                                <c:if test="${sessionScope.CUSTOMER.name != null}">
-                                    <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                    <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                </c:if>
-                            </div>
+                            <c:choose>
+                                <c:when test="${empty sessionScope.CUSTOMER_ID}"> 
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Account</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                        <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.CUSTOMER.name}</button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>                                            
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
@@ -166,11 +171,20 @@
                                     <a href="blog.jsp" class="nav-item nav-link">Blog</a>
                                     <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>
-                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                    <a href="cart.jsp" class="btn px-0 ml-3">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                    </a>
+                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                            <a href="MainController?action=NavigateToCart" class="btn px-0 ml-3">
+                                                <i class="fas fa-shopping-cart text-primary"></i>
+                                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="btn px-0 ml-3" onclick="openDeleteModal(this, event)">
+                                                <i class="fas fa-shopping-cart text-primary"></i>
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </nav>
@@ -179,6 +193,27 @@
             </div>
             <!-- Navbar End -->
 
+            <!--Pop-up start-->
+            <div id="modalOverlay" class="modal-overlay" style="display: none;">
+                <div id="deleteConfirmation" class="card">
+                    <div class="card-content">
+                        <p class="card-heading">ISPerfume</p>
+                        <p class="card-description">Please sign in to buy perfume</p>
+                    </div>
+                    <div class="card-button-wrapper">
+                        <a href="signup.jsp" class="card-button secondary">Sign up</a>
+                        <a href="signin.jsp" class="card-button primary">Sign in</a>
+                    </div> 
+                    <button class="exit-button" onclick="cancelDelete()">
+                        <svg height="20px" viewBox="0 0 384 512">
+                        <path
+                            d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                        </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!--Pop-up End-->
 
 
             <!-- Breadcrumb Start -->
@@ -198,34 +233,34 @@
             </div>
             <!-- Breadcrumb End -->
 
-        <!--Banner Start-->
-        <div class="container-fluid">
-            <div class="row px-xl-5 mb-5">
-                <div class="col-lg-12 bg-transparent">
-                    <div class="justify-content-center align-content-center d-flex">
-                        <img src="https://file.hstatic.net/1000340570/article/gucci-banner_c59f167049a347b18b67abacf37d71b8.jpg" style="width: auto; height: 490px;">
-                    </div>
-                </div>
-                <div class="col-lg-12 bg-transparent">
-                    <div class="description-box bg-transparent p-4">
-                        <div class="description-header d-flex justify-content-center align-items-center">
-                            <img id="toggle-btn" class="icon-down-black" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" style="cursor: pointer;">
+            <!--Banner Start-->
+            <div class="container-fluid">
+                <div class="row px-xl-5 mb-5">
+                    <div class="col-lg-12 bg-transparent">
+                        <div class="justify-content-center align-content-center d-flex">
+                            <img src="https://file.hstatic.net/1000340570/article/gucci-banner_c59f167049a347b18b67abacf37d71b8.jpg" style="width: auto; height: 490px;">
                         </div>
-                        <div id="description-content" class="mt-2 text-container bg-transparent">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, 
-                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Vestibulum tincidunt est vel ipsum consectetur, sit amet vehicula magna gravida. Phasellus aliquet nisi non nisl accumsan, a posuere erat venenatis. Cras in orci est. Ut vulputate semper magna, eget tempus eros dapibus non.</p>
+                    </div>
+                    <div class="col-lg-12 bg-transparent">
+                        <div class="description-box bg-transparent p-4">
+                            <div class="description-header d-flex justify-content-center align-items-center">
+                                <img id="toggle-btn" class="icon-down-black" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" style="cursor: pointer;">
+                            </div>
+                            <div id="description-content" class="mt-2 text-container bg-transparent">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, 
+                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vel iLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Vestibulum tincidunt est vel ipsum consectetur, sit amet vehicula magna gravida. Phasellus aliquet nisi non nisl accumsan, a posuere erat venenatis. Cras in orci est. Ut vulputate semper magna, eget tempus eros dapibus non.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--Banner End-->
+            <!--Banner End-->
 
             <!-- Shop Start -->
             <div class="container-fluid">
@@ -250,7 +285,7 @@
                             <c:forEach var="size" items="${sessionScope.LIST_SIZE}">
                                 <div custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3>
                                     <input type="checkbox" name="sizeID[]" value="${size.sizeID}" /> ${size.name}
- 
+
                                 </div>
                             </c:forEach>
                             <button type="submit" name="action" value="ViewResultInShopping">View Result</button>
@@ -301,7 +336,7 @@
                                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}&productDetailID=${Product.productDetailID}"><i class="fa fa-search"></i></a>
+                                                <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}"><i class="fa fa-search"></i></a>
                                             </div>
                                         </div>
                                         <div class="text-center py-4">
@@ -420,19 +455,32 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script>
-            const toggleBtn = document.getElementById("toggle-btn");
-            const descriptionContent = document.getElementById("description-content");
+                        const toggleBtn = document.getElementById("toggle-btn");
+                        const descriptionContent = document.getElementById("description-content");
 
-            toggleBtn.addEventListener("click", function () {
-                if (descriptionContent.classList.contains("expanded")) {
-                    descriptionContent.classList.remove("expanded");
-                    toggleBtn.classList.remove("expanded");
-                } else {
-                    descriptionContent.classList.add("expanded");
-                    toggleBtn.classList.add("expanded");
-                }
-            });
+                        toggleBtn.addEventListener("click", function () {
+                            if (descriptionContent.classList.contains("expanded")) {
+                                descriptionContent.classList.remove("expanded");
+                                toggleBtn.classList.remove("expanded");
+                            } else {
+                                descriptionContent.classList.add("expanded");
+                                toggleBtn.classList.add("expanded");
+                            }
+                        });
+                        function openDeleteModal(button, event) {
+                            event.preventDefault();
+                            deleteButtonRef = button; // Store the reference to the delete button
 
+                            // Show the modal
+                            document.getElementById('deleteConfirmation').style.display = 'block';
+                            document.getElementById('modalOverlay').style.display = 'block';
+                        }
+
+                        function cancelDelete() {
+                            // Hide the modal and overlay
+                            document.getElementById('deleteConfirmation').style.display = 'none';
+                            document.getElementById('modalOverlay').style.display = 'none';
+                        }
         </script>
     </body>
 </html>

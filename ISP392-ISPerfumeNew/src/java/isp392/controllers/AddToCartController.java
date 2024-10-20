@@ -10,10 +10,12 @@ import isp392.cart.CartDTO;
 import isp392.cart.CartDetailDTO;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,34 +31,43 @@ public class AddToCartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             CartDAO dao = new CartDAO();
-            
-            int productDetailID = Integer.parseInt(request.getParameter("productDetailID"));
-            int customerID = 5;
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            int cartID = dao.getCarID(customerID);
+            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
+            if (CustomerIDS != null && !CustomerIDS.isEmpty()) {
+                int customerID = CustomerIDS.get("customerID");
+                int productDetailID = Integer.parseInt(request.getParameter("productDetailID"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                int cartID = dao.getCarID(customerID);
 
-            List<CartDTO> list = dao.checkExistProduct(productDetailID, customerID);
-            if (list.size() > 0) {
-                int existQuan = dao.getQuantity(productDetailID, customerID);
-                int newQuantity = quantity + existQuan;
-                
-                CartDetailDTO cartDetail = new CartDetailDTO(cartID, productDetailID, newQuantity);
-                boolean check = dao.updateQuantity(cartDetail, productDetailID);
-                if (check) {
-                    url = SUCCESS;
+                List<CartDTO> list = dao.checkExistProduct(productDetailID, customerID);
+                if (list.size() > 0) {
+                    int existQuan = dao.getQuantity(productDetailID, customerID);
+                    int newQuantity = quantity + existQuan;
+
+                    CartDetailDTO cartDetail = new CartDetailDTO(cartID, productDetailID, newQuantity);
+                    boolean check = dao.updateQuantity(cartDetail, productDetailID);
+                    if (check) {
+                        int cartSize = dao.getCartSize(customerID);
+                        session.setAttribute("CART_SIZE", cartSize);
+                        url = SUCCESS;
+                    } else {
+                        request.setAttribute("MESSAGE", "Add to cart fail");
+                    }
                 } else {
-                    request.setAttribute("MESSAGE", "Add to cart fail");
-                }
-            } else {
-                CartDetailDTO cartDetail = new CartDetailDTO(cartID, productDetailID, quantity);
-                boolean check = dao.addToCart(cartDetail);
-                if (check) {
+                    CartDetailDTO cartDetail = new CartDetailDTO(cartID, productDetailID, quantity);
+                    boolean check = dao.addToCart(cartDetail);
+                    if (check) {
+                        request.setAttribute("MESSAGE", "Add to cart successfully");
+                    } else {
+                        request.setAttribute("MESSAGE", "Add to cart fail");
+                    }
+                    int cartSize = dao.getCartSize(customerID);
+                        session.setAttribute("CART_SIZE", cartSize);
                     url = SUCCESS;
-                } else {
-                    request.setAttribute("MESSAGE", "Add to cart fail");
                 }
             }
+
         } catch (Exception e) {
             log("Error at AddToCartController" + e.toString());
         } finally {
