@@ -7,6 +7,7 @@ package isp392.controllers;
 
 import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
+import isp392.brand.ViewBrandByCateDTO;
 import isp392.cart.CartDAO;
 import isp392.category.CategoryDAO;
 import isp392.category.CategoryDTO;
@@ -64,6 +65,7 @@ public class HomeController extends HttpServlet {
             List<CategoryDTO> listCategory = categoryDAO.getListCategory();
             List<BrandDTO> listBrand = brandDAO.getListBrand();
             List<SizeDTO> listSize = sizeDAO.getListSize();
+            List<ViewBrandByCateDTO> listBrandByCate = brandDAO.getBrandByCate();
             
             Map<String, Integer> IDs = new HashMap<>();   
             session.setAttribute("SIZE_IDS", IDs); //  storing sizeID 
@@ -71,6 +73,7 @@ public class HomeController extends HttpServlet {
             session.setAttribute("LIST_SIZE", listSize);
             session.setAttribute("LIST_CATEGORY", listCategory);
             session.setAttribute("LIST_BRAND", listBrand);
+            session.setAttribute("LIST_BRAND_BY_CATE", listBrandByCate);
             
             url = HOME;
         } catch (Exception e) {
