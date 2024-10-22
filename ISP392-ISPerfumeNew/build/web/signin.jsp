@@ -121,10 +121,10 @@
 
                                         <a href="forgotPassword.jsp">Forgot Password</a>
                                     </div>
-                                    <!--                                <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>-->
-                                    <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="action" value="Sign In">Sign In</button>
+<!--                                    <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" name="action" value="Sign In">Sign In</button>
-                                    </div>
+                                    </div>-->
                                 </form>
                                 <p class="text-center mb-4">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
                                 <div class="d-flex align-items-center justify-content-center mb-4">

@@ -30,11 +30,8 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <style>
-            .text-muted {
-                color: rgba(0, 0, 0, 0.3) !important;
-            }
-        </style>
+        <link href="css/styleSingleBlog.css" rel="stylesheet">
+        
     </head>
     <body>
         <!-- Topbar Start -->
@@ -177,8 +174,115 @@
         <!-- Breadcrumb End -->
 
         <!-- Blog Posts -->
-       
+        <div class="container p-0">
+            <div class="row">
+                <!-- Blog Content Start -->
+                <div class="col-lg-8">
+                    <div class="blog-post">
+                        <img src="img/blog/blog-one.jpg" alt="Blog Post Image" class="img-fluid">
+                        <h2 class="mt-4">Blog Title 1</h2>
+                        <p class="text-muted">16/11/2024 by <a href="#">Author</a></p>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. 
+                            Sed feugiat, nisl ut facilisis facilisis, est arcu consequat neque, a tempus neque ligula at lorem. 
+                            Curabitur placerat sapien vel orci bibendum, at dignissim libero cursus. Phasellus aliquam felis ut
+                            nisi congue fermentum. Vestibulum euismod, eros at sollicitudin sollicitudin, ipsum urna laoreet nibh, 
+                            eget viverra massa nunc ac lorem.</p>
+
+                        <h4>Subheading</h4>
+                        <p>Curabitur vitae dolor sit amet felis venenatis pharetra. Integer molestie enim at quam congue, vel ultricies 
+                            risus ullamcorper. Praesent bibendum justo sapien, at pretium tortor volutpat a. Nullam ac metus vel arcu 
+                            tincidunt varius.</p>
+
+                        <p>Quisque vitae velit nec augue vehicula viverra id eu lorem. Etiam non dui ut lorem fermentum 
+                            pharetra nec at risus. Suspendisse malesuada, nulla ac venenatis fringilla, dolor purus malesuada nunc, 
+                            a condimentum justo lacus sed sapien. Phasellus fermentum nec magna et vulputate. Cras auctor, felis id
+                            efficitur eleifend, lectus sem hendrerit elit, ut congue metus ante in risus.</p>
+
+                        <blockquote class="blockquote">
+                            <p class="mb-0">"This is a sample blockquote, to highlight a quote or a key message within the article."</p>
+                            <footer class="blockquote-footer">Source or Author</footer>
+                        </blockquote>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fringilla enim vitae dui efficitur scelerisque. 
+                            Nulla facilisi. Mauris vestibulum dui non arcu fermentum gravida.</p>
+
+                        <h4>Conclusion</h4>
+                        <p>In conclusion, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae 
+                            vestibulum. Vivamus laoreet justo nec nisi efficitur, ut pretium dui condimentum.</p>
+
+                        <div class="back-to-blog">
+                            <a href="index.html" class="btn btn-primary">Back to Blog</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog Content End -->
+
+                <!-- Sidebar Start -->
+                <div class="col-lg-4 sidebar">
+                    <!-- Recent Posts Section -->
+                    <div class="recent-posts mb-5">
+                        <h4 class="sidebar-title mb-4">Recent Posts</h4>
+                        <div class="recent-post d-flex align-items-center mb-3">
+                            <img src="img/cat-1.jpg" alt="Recent Post" class="img-thumbnail mr-3" style="width: 70px; height: 70px;">
+                            <div>
+                                <h6 class="post-title mb-1"><a href="#">How to Stay Productive Working From Home</a></h6>
+                                <small class="text-muted">16/11/2024</small>
+                            </div>
+                        </div>
+                        <div class="recent-post d-flex align-items-center mb-3">
+                            <img src="img/cat-2.jpg" alt="Recent Post" class="img-thumbnail mr-3" style="width: 70px; height: 70px;">
+                            <div>
+                                <h6 class="post-title mb-1"><a href="#">The Future of Artificial Intelligence</a></h6>
+                                <small class="text-muted">15/11/2024</small>
+                            </div>
+                        </div>
+                        <div class="recent-post d-flex align-items-center mb-3">
+                            <img src="img/cat-4.jpg" alt="Recent Post" class="img-thumbnail mr-3" style="width: 70px; height: 70px;">
+                            <div>
+                                <h6 class="post-title mb-1"><a href="#">Innovative Startups to Watch in 2024</a></h6>
+                                <small class="text-muted">14/11/2024</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categories Section -->
+                    <div class="categories mb-5">
+                        <h4 class="sidebar-title mb-4">Popular Categories</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="#">Technology</a> <span class="badge badge-primary float-right">10</span>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Business</a> <span class="badge badge-primary float-right">8</span>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Lifestyle</a> <span class="badge badge-primary float-right">5</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tag Cloud Section -->
+                    <div class="tag-cloud mb-5">
+                        <h4 class="sidebar-title mb-4">Tag Cloud</h4>
+                        <div class="tags d-flex flex-wrap">
+                            <a href="#" class="tag-item">Technology</a>
+                            <a href="#" class="tag-item">Business</a>
+                            <a href="#" class="tag-item">Marketing</a>
+                            <a href="#" class="tag-item">AI</a>
+                            <a href="#" class="tag-item">Startups</a>
+                            <a href="#" class="tag-item">Development</a>
+                            <a href="#" class="tag-item">Innovation</a>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Sidebar End -->
+
+            </div>
+        </div>
         <!-- Blog End -->
+
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">

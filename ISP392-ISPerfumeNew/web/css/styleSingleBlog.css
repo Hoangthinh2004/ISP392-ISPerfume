@@ -1,0 +1,109 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 21, 2024, 7:47:34 AM
+    Author     : User
+*/
+
+.blog-post {
+    background-color: #fff;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+}
+
+img {
+    border-radius: 8px; 
+}
+
+.blog-post p {
+    margin-bottom: 15px;
+}
+
+blockquote {
+    padding: 15px;
+    background-color: #e9ecef;
+    border-left: 5px solid #007bff;
+    margin-bottom: 30px;
+}
+.sidebar .list-group-item {
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .list-group-item:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* Sidebar Title Styling */
+.sidebar-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #343a40;
+    border-bottom: 2px solid orange;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+
+.recent-post img {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-post .post-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #007bff;
+}
+
+.recent-post:hover .post-title {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+
+.tag-cloud {
+    padding: 15px;
+    background-color: transparent;
+    border-radius: 10px; /* Bo góc cho khối tag cloud */
+
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px; 
+}
+
+.tag-item {
+    font-size: 14px;
+    color: orange;
+    background-color: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.tag-item:hover {
+    background-color: orange; 
+    color: #fff; 
+}
