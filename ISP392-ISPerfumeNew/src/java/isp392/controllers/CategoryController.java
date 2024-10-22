@@ -8,7 +8,6 @@ package isp392.controllers;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -33,17 +32,31 @@ public class CategoryController extends HttpServlet {
             int categoryID = Integer.parseInt(request.getParameter("Category"));
             
             HttpSession session = request.getSession();
-            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            ids.put("categoryID", categoryID);
-            //session.setAttribute("CURRENT_IDS", ids);
-            //session.setAttribute("CURRENT_CATEGORY", categoryID); //Store categoryID into attribute for DescendingProductByPrice Controller
+            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS"); 
+            ids.put("categoryID", categoryID); //store current categoryID and send to Brand & Size filter controller
+            
+            Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
+            if (sizeIDS != null && !sizeIDS.isEmpty()) {
+                session.removeAttribute("SIZE_IDS");
+            }
+            
+            Map<String, Integer> brandIDS = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID");
+            if (brandIDS != null && !brandIDS.isEmpty()) {
+                session.removeAttribute("CURRENT_BRANDID");
+            }
+            
+            Object searchContent = session.getAttribute("CURRENT_SEARCH");
+            if (searchContent != null) {
+                session.removeAttribute("CURRENT_SEARCH");
+            }
             
             ProductDAO productDAO = new ProductDAO();           
             List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
                        
-            request.setAttribute("LIST_PRODUCT", listProduct);
+            session.setAttribute("LIST_PRODUCT", listProduct);
+            session.removeAttribute("BRAND_INFOR");
             url = SUCCESS;
-            
+                
         } catch (Exception e) {
             log("Error at CategoryController: " + e.toString());
         } finally {

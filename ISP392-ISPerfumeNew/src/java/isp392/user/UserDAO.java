@@ -33,13 +33,14 @@ public class UserDAO {
     private static final String FILTER_CUSTOMER = "SELECT UserID, Name, Email, Phone, Status, RoleID FROM Users where RoleID =1";
     private static final String UPDATE_USER_STATUS = "UPDATE Users SET Status=? WHERE UserID=?";
     private static final String LOGIN = "SELECT * FROM dbo.Users WHERE Email LIKE ? AND Password LIKE ?";
-    private static final String GET_CUSTOMER_BY_USERID_01 = "SELECT    u.UserID, u.Name, u.Email, u.Password, u.Phone, u.Status, u.RoleID, c.CustomerID, c.Area, c.District, c.Ward, c.DetailAddress, c.DayOfBirth\n" +
-"FROM      Users AS u INNER JOIN Customer AS c ON u.UserID = c.CustomerID\n" +
-"WHERE     u.UserID = 6";
+    private static final String GET_CUSTOMER_BY_USERID_01 = "SELECT    u.UserID, u.Name, u.Email, u.Password, u.Phone, u.Status, u.RoleID, c.CustomerID, c.Area, c.District, c.Ward, c.DetailAddress, c.DayOfBirth "
+            + "FROM      Users AS u INNER JOIN Customer AS c ON u.UserID = c.CustomerID "
+            + "WHERE     u.UserID = ?";
     private static final String UPDATE_PASSWORD = "UPDATE dbo.Users SET Password=? WHERE UserID=?";
     private static final String UPDATE_PROFILE_USER = "UPDATE dbo.Users SET Name=?, Email=?, Phone=? WHERE UserID=?";
     private static final String UPDATE_PROFILE_CUSTOMER = "UPDATE dbo.Customer SET DetailAddress=?, Area=?, District=?, Ward=?, DayOfBirth=? WHERE customerID=?";
     private static final String GET_PASSWORD_BY_ID = "SELECT Password FROM Users WHERE UserID = ?";
+    private static final String GET_CUSTOMER_ID = "SELECT UserID FROM Users WHERE Phone LIKE ?";
 
     public boolean checkEmailExisted(String email) throws ClassNotFoundException, SQLException {
         boolean check = false;
@@ -516,5 +517,32 @@ public class UserDAO {
         }
 
         return check;
+    }
+
+    public int getCusID(String phoneNum) throws ClassNotFoundException, SQLException {
+        int userID = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(GET_CUSTOMER_ID);
+            ps.setString(1,"%" + phoneNum + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                userID = rs.getInt("UserID");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return userID;
     }
 }
