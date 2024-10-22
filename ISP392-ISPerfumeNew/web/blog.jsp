@@ -34,6 +34,37 @@
             .text-muted {
                 color: rgba(0, 0, 0, 0.3) !important;
             }
+            img {
+                border-radius: 10px;
+            }
+
+            .blog-post {
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                background-color: #fff;
+            }           
+
+            .list-group-item-blog {
+                margin-bottom: 10px;
+                padding: 15px;
+            }
+            .blog-post, .list-group-item-blog {
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Hiệu ứng bóng nhẹ */
+            }
+
+            .blog-post:hover, .list-group-item-blog:hover {
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            }
+            img, .btn, .list-group-item-blog {
+                transition: all 0.3s ease;
+            }
+
+            img:hover, .btn:hover, .list-group-item-blog:hover {
+                transform: scale(1.05); 
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+            }
+
         </style>
     </head>
     <body>
@@ -94,18 +125,18 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
-                    <form action="">
-                        <div class="input-group">
-                            <form action="MainController" method="POST">
-                                <input type="text" class="form-control" placeholder="Search for products" name="search">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </form>
+                    <div class="input-group">
+                        <form action="MainController" method="POST" class="w-100">
+                            <div class="input-group-append">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search" 
+                                       style="border-radius: 20px 0 0 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding: 10px; height: 100%;">
+                                <button name="action" value="SearchProduct" type="submit" class="btn" 
+                                        style="border-radius: 0 20px 20px 0; background-color:orange; color: white; padding: 7.5px 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); height: 100%;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-lg-4 col-6 text-right">
                     <p class="m-0">Customer Service</p>
@@ -199,21 +230,21 @@
                     <div class="blog-post mb-5">
                         <img src="img/blog/blog-one.jpg" class="img-fluid" alt="Blog Post Image">
                         <h2 class="mt-3">Blog Title 1</h2>
-                        <p class="text-muted">Ngày 16 tháng 10, 2024 bởi <a href="#">Tác giả</a></p>
+                        <p class="text-muted">16/11/2024 by <a href="#">Author</a></p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. 
                             Sed feugiat, nisl ut facilisis facilisis, est arcu consequat neque, a tempus neque ligula at lorem. 
                             Curabitur placerat sapien vel orci bibendum, at dignissim libero cursus.</p>
-                        <a href="#" class="btn btn-primary">Read more</a>
+                        <a href="singleBlog.jsp" class="btn btn-primary">Read more</a>
                     </div>
 
                     <div class="blog-post mb-5">
                         <img src="img/blog/blog-two.jpg" class="img-fluid" alt="Blog Post Image">
                         <h2 class="mt-3">Blog title 2</h2>
-                        <p class="text-muted">Ngày 15 tháng 10, 2024 bởi <a href="#">Tác giả</a></p>
+                        <p class="text-muted">16/11/2024 by <a href="#">Author</a></p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. 
                             Sed feugiat, nisl ut facilisis facilisis, est arcu consequat neque, a tempus neque ligula at lorem. 
                             Curabitur placerat sapien vel orci bibendum, at dignissim libero cursus.</p>
-                        <a href="#" class="btn btn-primary">Read more</a>
+                        <a href="singleBlog.jsp" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
                 <!-- Blog End -->
@@ -222,18 +253,53 @@
                 <div class="col-lg-4">
                     <h4 class="mb-4">New</h4>
                     <div class="list-group mb-5">
-                        <a href="#" class="list-group-item list-group-item-action">1</a>
-                        <a href="#" class="list-group-item list-group-item-action">2</a>
-                        <a href="#" class="list-group-item list-group-item-action">3</a>
+                        <a href="#" class="list-group-item-blog list-group-item-action d-flex">
+                            <img src="img/blog/blog-one.jpg" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Blog Post Image">
+                            <div class="ml-3">
+                                <h5>Blog Title 1</h5>
+                                <p class="text-muted">16/11/2024</p>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item-blog list-group-item-action d-flex">
+                            <img src="img/blog/blog-two.jpg" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Blog Post Image">
+                            <div class="ml-3">
+                                <h5>Blog Title 2</h5>
+                                <p class="text-muted">16/11/2024</p>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item-blog list-group-item-action d-flex">
+                            <img src="img/blog/blog-three.jpg" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Blog Post Image">
+                            <div class="ml-3">
+                                <h5>Blog Title 3</h5>
+                                <p class="text-muted">16/11/2024</p>
+                            </div>
+                        </a>
                     </div>
+
                     <h4 class="mb-4">Danh mục</h4>
                     <div class="list-group mb-5">
-                        <a href="#" class="list-group-item list-group-item-action">Danh mục 1</a>
-                        <a href="#" class="list-group-item list-group-item-action">Danh mục 2</a>
-                        <a href="#" class="list-group-item list-group-item-action">Danh mục 3</a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex">
+                            <img src="img/carousel-1.jpg" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Category Image">
+                            <div class="ml-3">
+                                <h5>Danh mục 1</h5>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex">
+                            <img src="img/category/category-two.jpg" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Category Image">
+                            <div class="ml-3">
+                                <h5>Danh mục 2</h5>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex">
+                            <img src="img/category/category-three.jpg" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Category Image">
+                            <div class="ml-3">
+                                <h5>Danh mục 3</h5>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <!-- Sidebar End -->
+
             </div>
         </div>
 

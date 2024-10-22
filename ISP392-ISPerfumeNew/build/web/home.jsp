@@ -216,20 +216,19 @@
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
                 </div>
-                <div class="col-lg-2 col-3 d-flex justify-content-center">
-                    <form action="MainController">
-                        <div class="input-group">
-                            <div class="input-wrapper">
-                                <button class="icon" style="outline: none" type="submit" name="action" value=""> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25px" width="25px">
-                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000" d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"></path>
-                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000" d="M22 22L20 20"></path>
-                                    </svg>
+                <div class="col-lg-4 col-6 text-left">
+                    <div class="input-group">
+                        <form action="MainController" method="POST" class="w-100">
+                            <div class="input-group-append">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search" 
+                                       style="border-radius: 20px 0 0 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding: 10px; height: 100%;">
+                                <button name="action" value="SearchProduct" type="submit" class="btn" 
+                                        style="border-radius: 0 20px 20px 0; background-color:orange; color: white; padding: 7.5px 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); height: 100%;">
+                                    <i class="fa fa-search"></i>
                                 </button>
-                                <input placeholder="search.." class="input" name="" type="text" style="color: black">
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
 
             </div>
