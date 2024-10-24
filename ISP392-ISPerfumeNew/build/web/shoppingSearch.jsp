@@ -34,7 +34,65 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/bootstrap.min2.css" rel="stylesheet">
+        <link href="css/stylePopup.css" rel="stylesheet">
+        <style>
+            .custom-control-input {
+                display: none;
+            }
 
+            .checkbox-wrapper {
+                position: relative;
+            }
+
+            .btn-checkbox {
+                display: inline-block;
+                padding: 5px 5px;
+                border: 1px solid #e5e7eb; 
+                border-radius: 12px;
+                cursor: pointer;
+                background-color: #f3f4f6;
+                transition: border-color 0.3s;
+            }
+
+            .custom-control-input:checked + .btn-checkbox {
+                border: 2px solid #FE980F; 
+                border-color: orange; 
+                background: #FE980F;
+                color: white;
+            }
+
+            .btn-checkbox:hover {
+                transform: scale(1.05); 
+                transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease; 
+                border: 1px solid #FE980F;
+            }
+
+            .custom-control-input:focus + .btn-checkbox {
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+            .product-img {
+                height: 300px; 
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: transparent; 
+            }
+
+            .product-image {
+                height: 100%;
+                width: auto; 
+                object-fit: cover; 
+                transition: transform 0.3s ease-in-out; 
+            }
+
+            .product-img:hover .product-image {
+                transform: scale(1.1); 
+            }
+
+        </style>
 
     </head>
     <body>
@@ -44,127 +102,141 @@
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
                         <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
-                        <a class="text-body mr-3" href="">Contact</a>
-                        <a class="text-body mr-3" href="">Help</a>
-                        <a class="text-body mr-3" href="">FAQs</a>
+                        <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
+                        <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
+                        <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center text-lg-right">
-                    <div class="d-inline-flex align-items-center">
-                        <div class="btn-group">
+                <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
+                    <div class="d-inline-flex align-items-center justify-content-between">  
+                        <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
+                            <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                                <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="d-inline-flex align-items-center d-block d-lg-none">
                             <c:choose>
                                 <c:when test="${empty sessionScope.CUSTOMER_ID}">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Account</button>
+                                    <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-1 text-primary">Account</span>
+                                    </button>                                        
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
                                         <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.CUSTOMER.name}</button>
+                                    <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-2"> ${sessionScope.CUSTOMER.name}</span>
+                                    </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
                                         <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
                                     </div>
                                 </c:otherwise>
                             </c:choose>
-                        </div>
-                        <div class="d-inline-flex align-items-center d-block d-lg-none">
-                            <a href="" class="btn px-0 ml-2">
-                                <i class="fas fa-heart text-dark"></i>
-                                <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
-                            <a href="" class="btn px-0 ml-2">
-                                <i class="fas fa-shopping-cart text-dark"></i>
-                                <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                    <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="badge text-primary border border-primary rounded-circle ml-1" style="padding-bottom: 2px; top: 0">${sessionScope.CART_SIZE}</span>
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-sm d-flex align-items-center" onclick="openDeleteModal(this, event)">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="ml-1 text-primary">Cart</span>
+                                    </button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-flex d-lg-flex">
-                <div class="col-lg-4">
-                    <a href="home.jsp" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-6 text-left">
-                    <form action="MainController" method="POST">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for products" name="search">
-                            <div class="input-group-append">
-                                <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px">
-                                    <button name="action" value="SearchProduct" type="submit" class="btn btn-block" style="padding: 0">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-lg-4 col-6 text-right">
-                    <p class="m-0">Customer Service</p>
-                    <h5 class="m-0">+012 345 6789</h5>
-                </div>
-            </div>
+            </div>          
         </div>
         <!-- Topbar End -->
 
-
-
         <!-- Navbar Start -->
-        <form action="MainController">      
+        <form action="MainController" >      
             <div class="container-fluid bg-dark mb-30">
                 <div class="row px-xl-5">
-                    <div class="col-lg-3 d-none d-lg-block">
-                        <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                            <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
-                            <i class="fa fa-angle-down text-dark"></i>
+                    <div class="col-lg-3 d-none d-lg-block mt-2">
+                        <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
+                            <i class="fa fa-leaf"></i>
+                            <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
+                            <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                         </a>
-                        <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                            <div class="navbar-nav w-100">
-                                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
-                                    <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
-                                </c:forEach>                                
-                            </div>
-                        </nav>
                     </div>
-                    <div class="col-lg-9">
-                        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                            <a href="" class="text-decoration-none d-block d-lg-none">
-                                <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                                <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
-                            </a>
+                    <div class="col-lg-9 ml-auto">
+                        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">                           
                             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                 <div class="navbar-nav mr-auto py-0">
-                                    <a href="home.jsp" class="nav-item nav-link active">Home</a>
-                                    <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
-                                    <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
-                                    <div class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
-                                            <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                                    <a href="MainController?action=HomeController" class="nav-item nav-link">Home</a>
+                                    <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
+                                        <div class="nav-item dropdown">
+                                            <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
+                                            <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                                <a href="MainController?action=Category&Category=${Category.categoryID}" class="dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
+                                                <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
+                                                    <c:if test="${Category.categoryID == brand.categoryID}">
+                                                        <a href="MainController?action=FilterByBrand" class="dropdown-item">${brand.brandName}</a>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </c:forEach>
                                     <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
+                                    <c:if test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                    </c:if>                                </div>
+                                <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
+                                    <input type="text" class="form-control" placeholder="Search for products" name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                    <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
-                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
+                                <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
+                                    <c:choose>
+                                        <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                            <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                                <i class="fas fa fa-user text-primary"></i>
+                                                <span class="ml-1 text-primary">Account</span>
+                                            </button>                                        
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                                <i class="fas fa fa-user text-primary"></i>
+                                                <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                                <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <c:choose>
                                         <c:when test="${not empty sessionScope.CUSTOMER_ID}">
-                                            <a href="MainController?action=NavigateToCart" class="btn px-0 ml-3">
+                                            <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
                                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                                <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
                                             </a>
                                         </c:when>
                                         <c:otherwise>
-                                            <button class="btn px-0 ml-3" onclick="openDeleteModal(this, event)">
+                                            <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
                                                 <i class="fas fa-shopping-cart text-primary"></i>
+                                                <span class="ml-1 text-primary">Cart</span>
                                             </button>
                                         </c:otherwise>
                                     </c:choose>
@@ -184,8 +256,8 @@
                         <p class="card-description">Please sign in to buy perfume</p>
                     </div>
                     <div class="card-button-wrapper">
-                        <a href="signup.jsp" class="card-button secondary">Sign up</a>
-                        <a href="signin.jsp" class="card-button primary">Sign in</a>
+                        <a href="signup.jsp" class="card-button secondary btn">Sign up</a>
+                        <a href="signin.jsp" class="card-button primary btn">Sign in</a>
                     </div> 
                     <button class="exit-button" onclick="cancelDelete()">
                         <svg height="20px" viewBox="0 0 384 512">
@@ -220,18 +292,19 @@
                     <!-- Shop Sidebar Start -->
                     <div class="col-lg-3 col-md-4">
 
-
                         <!-- Filter By Size Start -->
                         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
-                        <div class="bg-light p-4 mb-30 panel-group">
+                        <div class="bg-light p-4 mb-30 panel-group m-auto">
                             <c:forEach var="size" items="${sessionScope.LIST_SIZE}">
-                                <div custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3>
-                                    <input type="checkbox" name="sizeID[]" value="${size.sizeID}" /> ${size.name}
-                                    <input type="hidden" name="sizeID" value="${size.sizeID}"/>
+                                <div class="checkbox-wrapper mb-3 d-flex align-items-center justify-content-between">
+                                    <input type="checkbox" class="custom-control-input" name="sizeID[]" value="${size.sizeID}" id="size-${size.sizeID}"/>
+                                    <label class="btn-checkbox" for="size-${size.sizeID}">
+                                        ${size.name}
+                                    </label>
                                 </div>
                             </c:forEach>
-                            <button type="submit" name="action" value="ViewResultInShoppingSearch">View Result</button>
-                            ${requestScope.MESSAGE}
+                            <button type="submit" name="action" value="ViewResultInShopping" class="btn btn-primary mt-3">View Result</button>
+                            <div class="text-danger mt-2">${requestScope.MESSAGE}</div>
                         </div>
                         <!-- Filter By Size End -->
                     </div>
@@ -399,15 +472,12 @@
         <script>
                         function openDeleteModal(button, event) {
                             event.preventDefault();
-                            deleteButtonRef = button; // Store the reference to the delete button
-
-                            // Show the modal
+                            deleteButtonRef = button;
                             document.getElementById('deleteConfirmation').style.display = 'block';
                             document.getElementById('modalOverlay').style.display = 'block';
                         }
 
                         function cancelDelete() {
-                            // Hide the modal and overlay
                             document.getElementById('deleteConfirmation').style.display = 'none';
                             document.getElementById('modalOverlay').style.display = 'none';
                         }

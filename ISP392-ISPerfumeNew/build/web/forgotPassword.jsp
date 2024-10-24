@@ -39,77 +39,63 @@
                     <div class="d-inline-flex align-items-center h-100">
                         <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
                         <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
-                        <a class="text-body mr-3" href="">Help</a>
-                        <a class="text-body mr-3" href="">FAQs</a>
+                        <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
+                        <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center text-lg-right">
-                    <div class="d-inline-flex align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <button class="dropdown-item" type="button">Sign up</button>
-                            </div>
-                        </div>
-                        <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">EUR</button>
-                                <button class="dropdown-item" type="button">GBP</button>
-                                <button class="dropdown-item" type="button">CAD</button>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">FR</button>
-                                <button class="dropdown-item" type="button">AR</button>
-                                <button class="dropdown-item" type="button">RU</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-inline-flex align-items-center d-block d-lg-none">
-                        <a href="" class="btn px-0 ml-2">
-                            <i class="fas fa-heart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
-                        <a href="" class="btn px-0 ml-2">
-                            <i class="fas fa-shopping-cart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-                <div class="col-lg-4">
-                    <a href="home.jsp" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-6 text-left">
-                    <form action="">
-                        <div class="input-group">
-                            <form action="MainController" method="POST">
-                                <input type="text" class="form-control" placeholder="Search for products" name="search">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
+                <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
+                    <div class="d-inline-flex align-items-center justify-content-between">  
+                        <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
+                            <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                                <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </form>
                         </div>
-                    </form>
+                        <div class="d-inline-flex align-items-center d-block d-lg-none">
+                            <c:choose>
+                                <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                    <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-1 text-primary">Account</span>
+                                    </button>                                        
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                        <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-2"> ${sessionScope.CUSTOMER.name}</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                    <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="badge text-primary border border-primary rounded-circle ml-1" style="padding-bottom: 2px; top: 0">${sessionScope.CART_SIZE}</span>
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-sm d-flex align-items-center" onclick="openDeleteModal(this, event)">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="ml-1 text-primary">Cart</span>
+                                    </button>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-4 col-6 text-right">
-                    <p class="m-0">Customer Service</p>
-                    <h5 class="m-0">+012 345 6789</h5>
-                </div>
-            </div>
+            </div>          
         </div>
         <!-- Topbar End -->
-
 
         <!-- Navbar Start -->
         <form action="MainController">

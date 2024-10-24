@@ -32,126 +32,7 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <style>
-            .input-wrapper {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 15px;
-                position: relative;
-            }
-
-            .input {
-                border-style: none;
-                height: 50px;
-                width: 50px;
-                padding: 10px;
-                outline: none;
-                border-radius: 50%;
-                transition: .5s ease-in-out;
-                background-color: orange;
-                box-shadow: 0px 0px 3px #f3f3f3;
-                padding-right: 40px;
-                color: #fff;
-            }
-
-            .input::placeholder,
-            .input {
-                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-                font-size: 17px;
-            }
-
-            .input::placeholder {
-                color: #8f8f8f;
-            }
-
-            .icon {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: absolute;
-                right: 0px;
-                cursor: pointer;
-                width: 50px;
-                height: 50px;
-                outline: none;
-                border-style: none;
-                border-radius: 50%;
-                pointer-events: painted;
-                background-color: transparent;
-                transition: .2s linear;
-            }
-
-            .icon:focus ~ .input,
-            .input:focus {
-                box-shadow: none;
-                outline: none;
-                border: none;
-                border-style: none;
-                width: 250px;
-                border-radius: 0px;
-                background-color: transparent;
-                border-bottom: 3px solid orange;
-                transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
-            }
-
-            .icon svg {
-                stroke: #000; 
-            }
-
-
-
-            #navbody {
-                width: 300px;
-                height: 60px;
-                background-color: rgb(255, 255, 255);
-                border-radius: 40px;
-                box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.041);
-                align-items: center;
-                justify-content: center;
-                display: flex;
-            }
-
-            .ul {
-                list-style: none;
-                width: 100%;
-                background-color: transparent;
-                display: flex;
-                justify-content: space-between;
-                margin-top: 5px;
-            }
-
-            .ul .li {
-                display: inline-block;
-            }
-
-            .radio {
-                display: none;
-            }
-
-            .svg {
-                width: 70px;
-                height: 70px;
-                opacity: 80%;
-                cursor: pointer;
-                padding: 13px 20px;
-                transition: 0.2s;
-            }
-
-            .ul .li .svg:hover {
-                transition: 0.1s;
-                color: rgb(235, 40, 176);
-                position: relative;
-                margin-top: -4px;
-                opacity: 100%;
-            }
-
-            .radio:checked + label .li .svg {
-                color: rgb(235, 40, 176);
-                fill-rule: evenodd;
-            }
-
-        </style>
+        <link href="css/stylePopup.css" rel="stylesheet">
     </head>
     <body>
         <!-- Topbar Start -->
@@ -164,106 +45,150 @@
                         <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
                         <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
                     </div>
-                </div>               
-            </div>
-        </div>
-        <!-- Topbar End -->
-
-
-        <!-- Navbar Start -->
-        <div class="container-fluid bg-dark mb-30">
-            <div class="row px-xl-0">
-                <div class="col-lg-12 d-flex">
-
-                    <div class="col-lg-3 m-auto">
-                        <a href="MainController?action=HomeController" class="text-decoration-none d-flex">
-                            <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
-                            <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
-                        </a>
-                    </div>
-
-                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-0 py-lg-0 px-0">
-                        <div class="collapse navbar-collapse justify-content-between col-lg-5" id="navbarCollapse">
-                            <!-- Phần navbar chứa các liên kết điều hướng -->
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
-                                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
-                                    <div class="nav-item dropdown">
-                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
-                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="MainController?action=Category&Category=${Category.categoryID}" class="dropdown-item">All ${Category.name}</a>
-                                            <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
-                                                <c:if test="${Category.categoryID == brand.categoryID}">
-                                                    <a href="MainController?action=FilterByBrand" class="dropdown-item">${brand.brandName}</a>
-                                                </c:if>                               
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                <a href="orderStatus.jsp" class="nav-item nav-link">Order</a>
-                            </div>
-                        </div>
-                    </nav>
-                    <!-- Phần tìm kiếm -->
-                    <div class="col-lg-3 col-md-5 col-sm-6 text-left m-auto">
-                        <div class="input-group">
-                            <form action="MainController" method="POST" class="w-100">
-                                <div class="input-group-append">
-                                    <input type="text" class="form-control" placeholder="Search for products" name="search" 
-                                           style="border-radius: 20px 0 0 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding: 10px; height: 100%;">
-                                    <button name="action" value="SearchProduct" type="submit" class="btn" 
-                                            style="border-radius: 0 20px 20px 0; background-color: orange; color: white; padding: 7.5px 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); height: auto;">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
+                </div>
+                <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
+                    <div class="d-inline-flex align-items-center justify-content-between">  
+                        <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
+                            <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                                <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </form>
                         </div>
-                    </div>
-
-                    <!-- Phần tài khoản -->
-                    <div class="col-lg-1 d-flex m-auto" >
-                        <div class="m-auto">
+                        <div class="d-inline-flex align-items-center d-block d-lg-none">
                             <c:choose>
                                 <c:when test="${empty sessionScope.CUSTOMER_ID}">
-                                    <button class="btn btn-sm d-flex " data-toggle="dropdown"><i class="fas fa fa-user text-primary m-auto">  Account</i></button>
+                                    <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-1 text-primary">Account</span>
+                                    </button>                                        
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
                                         <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
-                                    <button class="btn btn-sm d-flex " data-toggle="dropdown"><i class="fas fa fa-user text-primary m-auto">  ${sessionScope.CUSTOMER.name}</i></button>
+                                    <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-2"> ${sessionScope.CUSTOMER.name}</span>
+                                    </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
                                         <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
                                     </div>
                                 </c:otherwise>
                             </c:choose>
-                        </div>
-
-                        <!-- Phần giỏ hàng -->
-                        <div class="m-auto">
                             <c:choose>
                                 <c:when test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="MainController?action=NavigateToCart" class="btn px-0 ml-3">
+                                    <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center justify-content-center">
                                         <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                        <span class="badge text-primary border border-primary rounded-circle ml-1" style="padding-bottom: 2px; top: 0">${sessionScope.CART_SIZE}</span>
                                     </a>
                                 </c:when>
                                 <c:otherwise>
-                                    <button class="btn px-0 ml-3" onclick="openDeleteModal(this, event)">
-                                        <i class="fas fa-shopping-cart text-primary"> Cart</i>
+                                    <button class="btn btn-sm d-flex align-items-center" onclick="openDeleteModal(this, event)">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="ml-1 text-primary">Cart</span>
                                     </button>
                                 </c:otherwise>
                             </c:choose>
                         </div>
                     </div>
                 </div>
+            </div>          
+        </div>
+        <!-- Topbar End -->
+
+
+
+        <!-- Navbar Start -->
+        <div class="container-fluid bg-dark mb-30">
+            <div class="row px-xl-5">
+                <div class="col-lg-3 d-none d-lg-block mt-2">
+                    <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
+                        <i class="fa fa-leaf"></i>
+                        <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
+                    </a>
+                </div>
+                <div class="col-lg-9 ml-auto">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">                           
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto py-0">
+                                <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
+                                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
+                                    <div class="nav-item dropdown">
+                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
+                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                            <a href="MainController?action=Category&Category=${Category.categoryID}" class="dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
+                                            <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
+                                                <c:if test="${Category.categoryID == brand.categoryID}">
+                                                    <a href="MainController?action=FilterByBrand" class="dropdown-item">${brand.brandName}</a>
+                                                </c:if>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                <c:if test="${not empty sessionScope.CUSTOMER_ID}">
+                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                </c:if>
+                            </div>
+                            <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
+                                <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                                    <input type="text" class="form-control" placeholder="Search for products" name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                    <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">Account</span>
+                                        </button>                                        
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                            <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="ml-1 text-primary">Cart</span>
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
             </div>
         </div>
-
-
         <!-- Navbar End -->
 
         <!--Pop-up start-->
@@ -274,8 +199,8 @@
                     <p class="card-description">Please sign in to buy perfume</p>
                 </div>
                 <div class="card-button-wrapper">
-                    <a href="signup.jsp" class="card-button secondary">Sign up</a>
-                    <a href="signin.jsp" class="card-button primary">Sign in</a>
+                    <a href="signup.jsp" class="card-button secondary btn">Sign up</a>
+                    <a href="signin.jsp" class="card-button primary btn">Sign in</a>
                 </div> 
                 <button class="exit-button" onclick="cancelDelete()">
                     <svg height="20px" viewBox="0 0 384 512">
@@ -287,7 +212,6 @@
             </div>
         </div>
         <!--Pop-up End-->
-
 
         <!-- Carousel Start -->
         <div class="container-fluid mb-3">
