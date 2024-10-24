@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -93,7 +94,7 @@
                                             </button>
                                         </form>-->
                     <div class="navbar-nav align-items-center ms-auto">
-                        <div class="nav-item dropdown">
+<!--                        <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="fa fa-envelope me-lg-2"></i>
                                 <span class="d-none d-lg-inline-flex">Message</span>
@@ -131,38 +132,14 @@
                                 <hr class="dropdown-divider">
                                 <a href="#" class="dropdown-item text-center">See all message</a>
                             </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-bell me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Notificatin</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Profile updated</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">New user added</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Password changed</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all notifications</a>
-                            </div>
-                        </div>
+                        </div>-->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
                                 <span class="d-none d-lg-inline-flex">John Doe</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
+                                <a /href="#" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
                                 <!--                                <a href="#" class="dropdown-item">Log Out</a>-->
                                 <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
@@ -173,6 +150,79 @@
                 <!-- Navbar End -->
 
                 <!-- Blank Start -->
+                <div class="container-fluid">
+                    <form action="MainController" method="get">
+                        <div class="row px-xl-5">
+                            <div class="container mb-5"> 
+                                <div class="row h-100 align-items-center justify-content-between">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+                                        <div class="bg-light rounded p-4 my-4">
+                                            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span>Profile</span></h2>
+                                            <div class="row justify-content-around">
+                                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                                    <label for="floatingInput1" class="form-label">Username</label>
+                                                    <div class="input-group">
+                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
+                                                                <input type="text" class="form-control" id="floatingInput1" value="${user.name}" readonly="">
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                                    <label for="floatingInput2" class="form-label">Email</label>
+                                                    <div class="input-group">
+                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
+                                                                <input type="text" class="form-control" id="floatingInput1" value="${user.email}" readonly="">
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-around">
+                                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                                    <label for="floatingInput3" class="form-label">Address</label> 
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="floatingInput1" value="${ORDER.address}" readonly="">
+                                                    </div>
+                                                </div>  
+                                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                                    <label for="floatingInput3" class="form-label">City</label> 
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="floatingInput1" value="${ORDER.city}" readonly="">
+                                                    </div>
+                                                </div>  
+                                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                                    <label for="floatingInput3" class="form-label">District</label> 
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="floatingInput1" value="${ORDER.district}" readonly="">
+                                                    </div>
+                                                </div>  
+                                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                                    <label for="floatingInput3" class="form-label">Ward</label> 
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="floatingInput1" value="${ORDER.ward}" readonly="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-sm-12">
+                                                    <label for="floatingInput3" class="form-label">Phone</label>
+                                                    <div class="input-group">
+                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
+                                                                <input type="text" class="form-control" id="floatingInput1" value="${user.phone}" readonly="">
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>       
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0 " style="height: auto !important">
                         <div class="table-responsive">
@@ -180,122 +230,50 @@
                                 <div class="bg-light rounded h-100 p-4">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <h6 class="mb-0">Order Management</h6>
-
                                     </div>
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Staff</th>
-                                                <th scope="col">Customer</th>
-                                                <th scope="col">Order Date</th>
-                                                <th scope="col">OrderStatus</th>
-                                                <th scope="col">Shipper</th>
+                                                <th scope="col">Product Detail</th>
+                                                <th scope="col">Size</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Unit Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="order" items="${requestScope.ORDER_LIST_STAFF}">
+                                            <c:forEach var="orderDetail" items="${requestScope.LIST_ORDER_DETAIL_STAFF}">
                                                 <tr>
-                                                    <!--                                                staff-->
+                                                    <!--                                                    productName-->
                                                     <td>
-                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
-                                                            <c:if test="${order.staffID == user.userID}">
-                                                                ${user.name}
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <!--                                                    customer-->
-                                                    <td>
-                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
-                                                            <c:if test="${order.customerID == user.userID}">
-                                                                ${user.name}
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <!--                                                    order date-->
-                                                    <td>
-                                                        ${order.orderDate}
-                                                    </td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${order.orderStatus == 1}">
-                                                                PROCESSING
-                                                            </c:when>
-                                                            <c:when test="${order.orderStatus == 2}">
-                                                                APPROVED
-                                                            </c:when>
-                                                            <c:when test="${order.orderStatus == 3}">
-                                                                SHIPPING
-                                                            </c:when>
-                                                            <c:when test="${order.orderStatus == 4}">
-                                                                COMPLETED
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                Trạng thái không xác định
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </td>
-                                                    <c:choose>
-                                                        <c:when test="${order.shipperID != 0}">
-                                                            <td>
-                                                                <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
-                                                                    <c:if test="${order.shipperID == user.userID}">
-                                                                        ${user.name}
+                                                        <c:forEach var="productDetail" items="${sessionScope.LIST_PRODUCT_DETAIL_STAFF}">
+                                                            <c:if test="${orderDetail.productDetailID == productDetail.productDetailID}">
+                                                                <c:forEach var="product" items="${sessionScope.LIST_PRODUCT_STAFF}">
+                                                                    <c:if test="${product.productID == productDetail.productID}">
+                                                                        ${product.name}
                                                                     </c:if>
                                                                 </c:forEach>
-                                                            </td>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <td>
-                                                                No shipper assigned yet!
-                                                            </td>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <td>
-                                                        <form action="MainController" method="get" class="d-flex justify-content-around">
-                                                            <input type="hidden" name="orderID" value="${order.orderID}">
-                                                            <button type="submit" name="action" value="OrderDetailPage" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
-                                                        </form>
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </td>
-                                                    <c:if test="${order.shipperID == 0}">
-                                                        <td>
-                                                            <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${counter.count}">
-                                                                <i class="fa fa-check"></i>
-                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
-                                                            </a>
-                                                            <!-- Modal Update -->
-                                                            <div class="modal fade" id="updateModal-${counter.count}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" >
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content" style="border-radius: 24px;">
-                                                                        <div class="modal-header">
-                                                                            <h1 class="modal-title fs-5" id="updateModalLabel">Promotion Information</h1>
-                                                                            <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <form action="MainController" method="get">
-                                                                            <div class="modal-body">
-                                                                                <div class="mb-3">
-                                                                                    <label  class="form-label">Shipper</label>
-                                                                                    <c:forEach var="shipper" items="${sessionScope.LIST_USER_STAFF}">
-                                                                                        <c:if test="${shipper.roleID == 2}">
-                                                                                            <div>
-                                                                                                <input type="radio" name="shipperID" value="${shipper.userID}" id="${shipper.userID}" checked="">
-                                                                                                <label for="${shipper.userID}">${shipper.name}</label>
-                                                                                            </div>
-                                                                                        </c:if>
-                                                                                    </c:forEach>
-                                                                                </div>
-                                                                                <!--                                                                                <input type="text" name="productName" value="" class="form-control">                                                                   -->
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <input type="hidden" name="orderID" value="${order.orderID}" >
-                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                                                <button type="submit" class="btn" name="action" value="AssignShipperStaff">Approve</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </c:if>
+                                                    <!--                                                    size-->
+                                                    <td>
+                                                        <c:forEach var="productDetail" items="${sessionScope.LIST_PRODUCT_DETAIL_STAFF}">
+                                                            <c:if test="${orderDetail.productDetailID == productDetail.productDetailID}">
+                                                                <c:forEach var="size" items="${sessionScope.LIST_SIZE_STAFF}">
+                                                                    <c:if test="${size.sizeID == productDetail.sizeID}">
+                                                                        ${size.name}
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <!--                                                    Quantity-->
+                                                    <td>
+                                                        ${orderDetail.quantity}
+                                                    </td>
+                                                    <td>
+                                                        <fmt:formatNumber type="number" value="${orderDetail.unitPrice}"/>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

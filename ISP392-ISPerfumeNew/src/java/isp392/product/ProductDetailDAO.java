@@ -36,6 +36,7 @@ public class ProductDetailDAO {
             + "WHERE PD.ProductID = ?";
     private static final String CHECK_PRODUCT_DETAIL_EXISTED = "SELECT * FROM ProductDetail WHERE ProductID =? AND SizeID = ?";
     private static final String INSERT_PRODUCT_DETAIL = "INSERT INTO ProductDetail(ProductID,SizeID,Price,StockQuantity,NumberOfPurchasing,ImportDate,Image,Status) VALUES (?,?,?,?,?,?,?,?)";
+    private static final String GET_LIST_PRODUCT_DETAIL_STAFF = "SELECT * FROM ProductDetail";
 
     public List<ProductDetailDTO> getListProductDetail(int productID) throws SQLException, ClassNotFoundException {
         Connection conn = null;
@@ -49,6 +50,7 @@ public class ProductDetailDAO {
                 ptm.setInt(1, productID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+                    int productDetailID = rs.getInt("ProductDetailID");
                     int sizeID = rs.getInt("SizeID");
                     int price = rs.getInt("Price");
                     int stockQuantity = rs.getInt("StockQuantity");
@@ -56,7 +58,7 @@ public class ProductDetailDAO {
                     Date importDate = rs.getDate("ImportDate");
                     String image = rs.getString("Image");
                     int status = rs.getInt("Status");
-                    ProductDetailDTO newProDe = new ProductDetailDTO(productID, sizeID, price, stockQuantity, numOfPur, importDate, image, status);
+                    ProductDetailDTO newProDe = new ProductDetailDTO(productDetailID, productID, sizeID, price, stockQuantity, numOfPur, importDate, image, status);
                     list.add(newProDe);
                 }
             }
@@ -74,7 +76,7 @@ public class ProductDetailDAO {
         return list;
     }
 
-    public boolean updateProductDetail(int productID, int sizeID, int price, int stockQuantity, String image ,int status) throws SQLException, ClassNotFoundException {
+    public boolean updateProductDetail(int productID, int sizeID, int price, int stockQuantity, String image, int status) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         PreparedStatement ptm = null;
         boolean check = false;
@@ -140,7 +142,7 @@ public class ProductDetailDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int price = rs.getInt("Price");
-                    list.add(new ProductDetailDTO(productID, sizeID, price, 0, 0, null, "", 0));
+                    list.add(new ProductDetailDTO(0, productID, sizeID, price, 0, 0, null, "", 0));
                 }
             }
         } finally {
@@ -170,7 +172,7 @@ public class ProductDetailDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     String image = rs.getString("Image");
-                    list.add(new ProductDetailDTO(productID, 0, 0, 0, 0, null, image, 0));
+                    list.add(new ProductDetailDTO(0, productID, 0, 0, 0, 0, null, image, 0));
                 }
             }
         } finally {
@@ -234,7 +236,7 @@ public class ProductDetailDAO {
             ptm.setTimestamp(6, Timestamp.valueOf(importDate));
             ptm.setString(7, imagePath);
             ptm.setInt(8, status);
-            check = ptm.executeUpdate()>0;
+            check = ptm.executeUpdate() > 0;
         } finally {
             if (ptm != null) {
                 ptm.close();
@@ -246,4 +248,33 @@ public class ProductDetailDAO {
         return check;
     }
 
+    public List<ProductDetailDTO> getListAllProductDetail() throws ClassNotFoundException, SQLException {
+        List<ProductDetailDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_LIST_PRODUCT_DETAIL_STAFF);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productDetailID = rs.getInt("ProductDetailID");
+                    int productID = rs.getInt("ProductID");
+                    int sizeID = rs.getInt("SizeID");
+                    int price = rs.getInt("Price");
+                    int stockQuantity = rs.getInt("StockQuantity");
+                    int numberOfPur = rs.getInt("NumberOfPurchasing");
+                    Date importDate = rs.getDate("ImportDate");
+                    String image = rs.getString("Image");
+                    int status = rs.getInt("Status");
+                    ProductDetailDTO proDe = new ProductDetailDTO(productDetailID, productID, sizeID, price, stockQuantity, numberOfPur, importDate, image, status);
+                    list.add(proDe);
+                }
+            }
+        } finally {
+            DBUtils.closeConnection3(conn, ptm, rs);
+        }
+        return list;
+    }
 }

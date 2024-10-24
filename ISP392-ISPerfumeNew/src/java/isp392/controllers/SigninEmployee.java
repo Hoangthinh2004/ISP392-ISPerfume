@@ -38,7 +38,7 @@ public class SigninEmployee extends HttpServlet {
         UserDAO dao = new UserDAO();
         CustomerViewProfileDTO cust = null;
         try {
-
+            
             String email = request.getParameter("Email");
             String password = request.getParameter("Password");
             UserDTO loginUser = dao.checkLogin(email, password);

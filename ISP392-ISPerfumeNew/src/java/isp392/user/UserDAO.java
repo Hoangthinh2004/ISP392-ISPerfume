@@ -35,7 +35,7 @@ public class UserDAO {
     private static final String LOGIN = "SELECT * FROM dbo.Users WHERE Email LIKE ? AND Password LIKE ?";
     private static final String GET_CUSTOMER_BY_USERID_01 = "SELECT    u.UserID, u.Name, u.Email, u.Password, u.Phone, u.Status, u.RoleID, c.CustomerID, c.Area, c.District, c.Ward, c.DetailAddress, c.DayOfBirth\n" +
 "FROM      Users AS u INNER JOIN Customer AS c ON u.UserID = c.CustomerID\n" +
-"WHERE     u.UserID = 6";
+"WHERE     u.UserID = ?";
     private static final String UPDATE_PASSWORD = "UPDATE dbo.Users SET Password=? WHERE UserID=?";
     private static final String UPDATE_PROFILE_USER = "UPDATE dbo.Users SET Name=?, Email=?, Phone=? WHERE UserID=?";
     private static final String UPDATE_PROFILE_CUSTOMER = "UPDATE dbo.Customer SET DetailAddress=?, Area=?, District=?, Ward=?, DayOfBirth=? WHERE customerID=?";
