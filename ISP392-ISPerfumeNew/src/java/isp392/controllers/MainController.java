@@ -78,7 +78,7 @@ public class MainController extends HttpServlet {
 
     private static final String SORT_BY_PURCHASING = "SortByPurchasing";
     private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
-    
+
     private static final String SEARCH_BRAND = "Search";
     private static final String SEARCH_BRAND_CONTROLLER = "ShowAllBrandManager";
 
@@ -108,17 +108,37 @@ public class MainController extends HttpServlet {
 
     private static final String UPDATE_USER_STATUS = "UpdateUserStatus";
     private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatusController";
-    
+
     private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
     private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
-    
+
     private static final String UPDATE_PROFILE = "UpdateProfile";
     private static final String UPDATE_PROFILE_CONTROLLER = "UpdateUserProfile";
 
     private static final String CREATE_NEW_USER_CUSTOMER = "registerNewUser";
     private static final String CREATE_NEW_USER_CUSTOMER_CONTROLLER = "CreateNewUserCustomerController";
-   
+
+    private static final String SHOW_ALL_ORDERS_STAFF = "ShowAllOrder";
+    private static final String SHOW_ALL_ORDERS_STAFF_CONTROLLER = "ShowAllOrderStaffController";
+
+    private static final String ORDER_PAGE = "ManageOrderPage";
+    private static final String ORDER_PAGE_VIEW = "GetAllInfoForOrder";
+
+    private static final String ORDER_DETAIL_PAGE = "OrderDetailPage";
+    private static final String ORDER_DETAIL_PAGE_VIEW = "ShowOrderDetailStaff";
+
+    private static final String ASSIGN_SHIPPER_STAFF = "AssignShipperStaff";
+    private static final String ASSIGN_SHIPPER_STAFF_CONTROLLER = "AssignShipperStaffController";
     
+    private static final String FORGOT_PASSWORD = "ForgetPassword";
+    private static final String FORGET_PASSWORD_CONTROLLER = "ForgetPasswordController";
+    
+    private static final String VERIFY_TOKEN_FORGOT_PASSWORD = "VerifyOTP";
+    private static final String VERIFY_TOKEN_FORGOT_PASSWORD_CONTROLLER = "VerifyOTPController";
+    
+    private static final String CHANGE_FORGOT_PASSWORD = "ChangePasswordForgot";
+    private static final String CHANGE_FORGOT_PASSWORD_CONTROLLER = "ChangePasswordForgotController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -191,8 +211,22 @@ public class MainController extends HttpServlet {
                 url = FILTER_BY_CUSTOMER_CONTROLLER;
             } else if (UPDATE_USER_STATUS.equals(action)) {
                 url = UPDATE_USER_STATUS_CONTROLLER;
-            } else if(CREATE_NEW_USER_CUSTOMER.equals(action)){
+            } else if (CREATE_NEW_USER_CUSTOMER.equals(action)) {
                 url = CREATE_NEW_USER_CUSTOMER_CONTROLLER;
+            } else if (SHOW_ALL_ORDERS_STAFF.equals(action)) {
+                url = SHOW_ALL_ORDERS_STAFF_CONTROLLER;
+            } else if (ORDER_PAGE.equals(action)) {
+                url = ORDER_PAGE_VIEW;
+            } else if (ORDER_DETAIL_PAGE.equals(action)) {
+                url = ORDER_DETAIL_PAGE_VIEW;
+            } else if (ASSIGN_SHIPPER_STAFF.equals(action)) {
+                url = ASSIGN_SHIPPER_STAFF_CONTROLLER;
+            } else if(FORGOT_PASSWORD.equals(action)){
+                url = FORGET_PASSWORD_CONTROLLER;
+            } else if(VERIFY_TOKEN_FORGOT_PASSWORD.equals(action)){
+                url = VERIFY_TOKEN_FORGOT_PASSWORD_CONTROLLER;
+            } else if(CHANGE_FORGOT_PASSWORD.equals(action)){
+                url = CHANGE_FORGOT_PASSWORD_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : forgetPassword
-    Created on : Oct 5, 2024, 9:48:46 AM
+    Document   : changePassword
+    Created on : Oct 5, 2024, 12:16:41 PM
     Author     : User
 --%>
 
@@ -46,7 +46,7 @@
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.CUSTOMER.name}</button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
                                 <button class="dropdown-item" type="button">Sign up</button>
@@ -81,8 +81,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
-                <div class="col-lg-4 d-flex justify-content-center">
+            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+                <div class="col-lg-4">
                     <a href="home.jsp" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
@@ -95,36 +95,43 @@
 
         <!-- Navbar Start -->
 
-
         <!-- Navbar End -->
 
 
-        <!--Sigin in form Start-->
+        <!--Change passwword form Start-->
         <div class="container-fluid">
-            <div class="row px-xl-5">
-                <div class="col-lg-12 mb-5">
-                    <div class="row h-100 align-items-center justify-content-center">
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3" style="padding-bottom: 15px !important; width: 455px;">
-                                <form action="MainController" method="get">
+            <form action="MainController" method="get">
+                <div class="row px-xl-5">
+                    <div class="col-lg-12 mb-5">
+                        <div class="row h-100 align-items-center justify-content-center">
+                            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3" style="padding-bottom: 15px !important; width: 455px;">
                                     <div class="d-flex align-items-center justify-content-between mb-3">
                                         <h3 class="text-primary"></i>Forgot Password</h3>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <label for="floatingInput">Email</label>
-                                        <input type="email" class="form-control" id="floatingInput"
-                                               placeholder="Enter your email" name="emailReset">
+                                        <label for="floatingInput">New Password</label>
+                                        <input name="newPass" type="password" class="form-control" id="floatingInput"
+                                               placeholder="" required="">
                                     </div>
-                                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="action" value="ForgetPassword">Send OTP</button>
-                                    <p class="text-left mb-0">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
-                                    <p class="text-left mb-0">Do you already have an Account? <a href="signup.jsp">Sign In</a></p>
-                                </form>
+                                    <div class="form-floating mb-3">
+                                        <label for="floatingInput">Confirm password</label>
+                                        <input name="confirmPass" type="password" class="form-control" id="floatingInput"
+                                               placeholder="${requestScope.ERROR_CHANGE_FORGOT_PASSWORD.confirmPasswordError}" required="">
+                                    </div>
+                                    <input type="hidden" name="userID" value="${sessionScope.USERID}">
+                                    <button type="submit" value="ChangePasswordForgot" name="action" class="btn btn-primary py-3 w-100 mb-4">Change Password</button>
+                                    <p class="text-center mb-0">
+                                        <a href="signup.jsp">Continue login</a> OR
+                                        <a href="signup.jsp">Login Again</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-        <!--Sigin in form End-->
+        <!--Change password form End-->
     </body>
 </html>

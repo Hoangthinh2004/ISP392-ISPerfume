@@ -5,53 +5,56 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
-import isp392.category.CategoryDAO;
-import isp392.category.CategoryDTO;
-import isp392.size.SizeDAO;
-import isp392.size.SizeDTO;
+import isp392.forgotpassword.ForgotPasswordDAO;
+import isp392.forgotpassword.ForgotPasswordDTO;
+import isp392.user.UserDAO;
+import isp392.user.UserDTO;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author duyhc
  */
-@WebServlet(name = "GetBrandCategoriesManager", urlPatterns = {"/GetBrandCategoriesManager"})
-public class GetBrandCategoriesManager extends HttpServlet {
+@WebServlet(name = "ForgetPasswordController", urlPatterns = {"/ForgetPasswordController"})
+public class ForgetPasswordController extends HttpServlet {
 
-    private static final String ERROR = "ShowAllOrderStaffController";
-    private static final String SUCCESS = "MGR_ProductManagement.jsp";
+    private static final String SUCCESS = "verifyOTP.jsp";
+    private static final String ERROR = "forgotPassword.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        BrandDAO brandDAO = new BrandDAO();
-        CategoryDAO cateDAO = new CategoryDAO();
-        SizeDAO sizeDAO = new SizeDAO();
+        UserDAO userDAO = new UserDAO();
+        ForgotPasswordDAO forPasDAO = new ForgotPasswordDAO();
         try {
-            List<BrandDTO> brandList = brandDAO.getListBrand();
-            List<CategoryDTO> cateList = cateDAO.getListCategory();
-            List<SizeDTO> sizeList = sizeDAO.getListSize();
-            if (brandList != null || cateList!=null ||sizeList!=null) {
-                HttpSession ses = request.getSession();
-                ses.setAttribute("BRAND_LIST_MANAGER", brandList);
-                ses.setAttribute("CATEGORY_LIST_MANAGER", cateList);
-                ses.setAttribute("SIZE_LIST_MANAGER", sizeList);
-                url = SUCCESS;
+            String email = request.getParameter("emailReset");
+            boolean checkExisted = userDAO.checkEmailExisted(email);
+            if(checkExisted){
+                UserDTO user = userDAO.getUserByGoogleEmail(email);
+                int userID = user.getUserID();
+                request.setAttribute("USERID_FORGOTPASSWORD", userID);
+                boolean checkAdd = forPasDAO.insertToken(userID);
+                if(checkAdd){
+                    ForgotPasswordDTO forgotPassword = forPasDAO.getInforByUserID(userID);
+                    if(forgotPassword!=null){
+                       url = "SendEmailController?email="+email+"&token="+forgotPassword.getToken()+"&action=ForgotPasswordEmail";
+                       request.getRequestDispatcher(url).include(request, response);
+                       url = SUCCESS;
+                    }
+                }
+            }else{
+                request.setAttribute("ERROR_FORGOT_PASSWORD", "Email not exist!!");
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            log("Error at GetBrandControllerManager: " + e.toString());
-        } finally {
+        } catch (Exception e) {
+            log("Error at ForgotPasswordController: "+e.toString());
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

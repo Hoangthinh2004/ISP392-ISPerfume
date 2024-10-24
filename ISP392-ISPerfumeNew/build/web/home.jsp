@@ -161,7 +161,7 @@
                     <div class="d-inline-flex align-items-center h-100">
                         <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
                         <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
-                        <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
+                        <a class="text-body mr-3" href="MainController?action=ManageOrderPage">STAFF</a>
                         <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
                     </div>
                 </div>

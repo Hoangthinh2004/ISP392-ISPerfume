@@ -203,7 +203,6 @@
                                     <div class="row justify-content-around">
                                         <div class="col-lg-5 col-md-5 col-sm-12">
                                             <label for="floatingInput1" class="form-label">Username</label>
-
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="floatingInput1" value="${sessionScope.CUSTOMER.name}" placeholder="Enter username" name="userName">
                                                 <span class="input-group-text" style="cursor: pointer;" onclick="enableEdit('floatingInput1')">

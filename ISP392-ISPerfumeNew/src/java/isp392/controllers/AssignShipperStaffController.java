@@ -5,53 +5,41 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
-import isp392.category.CategoryDAO;
-import isp392.category.CategoryDTO;
-import isp392.size.SizeDAO;
-import isp392.size.SizeDTO;
+import isp392.order.OrderDAO;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author duyhc
  */
-@WebServlet(name = "GetBrandCategoriesManager", urlPatterns = {"/GetBrandCategoriesManager"})
-public class GetBrandCategoriesManager extends HttpServlet {
+@WebServlet(name = "AssignShipperStaffController", urlPatterns = {"/AssignShipperStaffController"})
+public class AssignShipperStaffController extends HttpServlet {
 
     private static final String ERROR = "ShowAllOrderStaffController";
-    private static final String SUCCESS = "MGR_ProductManagement.jsp";
+    private static final String SUCCESS = "ShowAllOrderStaffController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        BrandDAO brandDAO = new BrandDAO();
-        CategoryDAO cateDAO = new CategoryDAO();
-        SizeDAO sizeDAO = new SizeDAO();
+        OrderDAO dao = new OrderDAO();
         try {
-            List<BrandDTO> brandList = brandDAO.getListBrand();
-            List<CategoryDTO> cateList = cateDAO.getListCategory();
-            List<SizeDTO> sizeList = sizeDAO.getListSize();
-            if (brandList != null || cateList!=null ||sizeList!=null) {
-                HttpSession ses = request.getSession();
-                ses.setAttribute("BRAND_LIST_MANAGER", brandList);
-                ses.setAttribute("CATEGORY_LIST_MANAGER", cateList);
-                ses.setAttribute("SIZE_LIST_MANAGER", sizeList);
+            int shipperID = Integer.parseInt(request.getParameter("shipperID"));
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            boolean checkAssign = dao.assignShipper(orderID,shipperID);
+            if(checkAssign){
+                request.setAttribute("ASSIGN_SUCCESS", "ASSIGNED ORDER SUCCESSFULLY!");
                 url = SUCCESS;
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            log("Error at GetBrandControllerManager: " + e.toString());
-        } finally {
+        } catch (Exception e) {
+            log("Error at AssignShipperStaffController: "+e.toString());
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
