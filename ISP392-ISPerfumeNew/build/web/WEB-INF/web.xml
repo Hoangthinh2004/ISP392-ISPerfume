@@ -61,6 +61,22 @@
         <servlet-class>isp392.controllers.CreateBrandManager</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>NavigateToCartController</servlet-name>
+        <servlet-class>isp392.controllers.NavigateToCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCartController</servlet-name>
+        <servlet-class>isp392.controllers.AddToCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SizeFilterSearchController</servlet-name>
+        <servlet-class>isp392.controllers.SizeFilterSearchController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCartController</servlet-name>
+        <servlet-class>isp392.controllers.DeleteCartController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UserError</servlet-name>
         <servlet-class>isp392.user.UserError</servlet-class>
     </servlet>
@@ -111,6 +127,10 @@
     <servlet>
         <servlet-name>SendEmailController</servlet-name>
         <servlet-class>isp392.controllers.SendEmailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NavigateRelatedProductDetailController</servlet-name>
+        <servlet-class>isp392.controllers.NavigateRelatedProductDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -173,6 +193,22 @@
         <url-pattern>/CreateBrandManager</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>NavigateToCartController</servlet-name>
+        <url-pattern>/NavigateToCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartController</servlet-name>
+        <url-pattern>/AddToCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SizeFilterSearchController</servlet-name>
+        <url-pattern>/SizeFilterSearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCartController</servlet-name>
+        <url-pattern>/DeleteCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserError</servlet-name>
         <url-pattern>/UserError</url-pattern>
     </servlet-mapping>
@@ -223,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>SendEmailController</servlet-name>
         <url-pattern>/SendEmailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NavigateRelatedProductDetailController</servlet-name>
+        <url-pattern>/NavigateRelatedProductDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -4,7 +4,9 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,6 +32,8 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/stylePopup.css" rel="stylesheet">
+
     </head>
     <body>
         <!-- Topbar Start -->
@@ -38,138 +42,154 @@
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
                         <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
-                        <a class="text-body mr-3" href="">Contact</a>
-                        <a class="text-body mr-3" href="">Help</a>
-                        <a class="text-body mr-3" href="">FAQs</a>
+                        <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
+                        <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
+                        <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center text-lg-right">
-                    <div class="d-inline-flex align-items-center">
-                        <div class="btn-group">
-                            <!-- Display when not logged in. -->
+                <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
+                    <div class="d-inline-flex align-items-center justify-content-between">  
+                        <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
+                            <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                                <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="d-inline-flex align-items-center d-block d-lg-none">
                             <c:choose>
-                                <c:when test="${sessionScope.LOGIN_USER == null}">
-                                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.LOGIN_USER.name}</button>
+                                <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                    <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-1 text-primary">Account</span>
+                                    </button>                                        
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                        </div>
+                                        <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                        <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                    </div>
                                 </c:when>
-                                <!-- Display when logged in. -->
                                 <c:otherwise>
-                                    <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                    <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                    <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-2"> ${sessionScope.CUSTOMER.name}</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
                                     </div>
                                 </c:otherwise>
                             </c:choose>
-                        </div>                                                     
-                    </div>
-                    <div class="d-inline-flex align-items-center d-block d-lg-none">
-                        <a href="" class="btn px-0 ml-2">
-                            <i class="fas fa-heart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
-                        <a href="" class="btn px-0 ml-2">
-                            <i class="fas fa-shopping-cart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-                <div class="col-lg-4">
-                    <a href="home.jsp" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-6 text-left">
-                    <form action="">
-                        <div class="input-group">
-                            <form action="MainController" method="POST">
-                                <input type="text" class="form-control" placeholder="Search for products" name="search">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
-                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
-                            </form>
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                    <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="badge text-primary border border-primary rounded-circle ml-1" style="padding-bottom: 2px; top: 0">${sessionScope.CART_SIZE}</span>
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-sm d-flex align-items-center" onclick="openDeleteModal(this, event)">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="ml-1 text-primary">Cart</span>
+                                    </button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <div class="col-lg-4 col-6 text-right">
-                    <p class="m-0">Customer Service</p>
-                    <h5 class="m-0">+012 345 6789</h5>
-                </div>
-            </div>
+            </div>          
         </div>
         <!-- Topbar End -->
 
 
         <!-- Navbar Start -->
-        <form action="MainController">
-            <div class="container-fluid bg-dark mb-30">
-                <div class="row px-xl-5">
-                    <div class="col-lg-3 d-none d-lg-block">
-                        <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
-                            <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Category</h6>
-                            <i class="fa fa-angle-down text-dark"></i>
-                        </a>
-                        <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                            <div class="navbar-nav w-100">
+        <div class="container-fluid bg-dark mb-30">
+            <div class="row px-xl-5">
+                <div class="col-lg-3 d-none d-lg-block mt-2">
+                    <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
+                        <i class="fa fa-leaf"></i>
+                        <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
+                    </a>
+                </div>
+                <div class="col-lg-9 ml-auto">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">                           
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto py-0">
+                                <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
-                                    <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
-                                </c:forEach>
-                                <!--                            <div class="nav-item dropdown dropright">
-                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Baby's Dresses</a>
-                                                                </div>
-                                                            </div>-->
-                            </div>
-                        </nav>
-                    </div>
-                    <div class="col-lg-9">
-                        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                            <a href="" class="text-decoration-none d-block d-lg-none">
-                                <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                                <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
-                            </a>
-                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                                <div class="navbar-nav mr-auto py-0">
-                                    <a href="home.jsp" class="nav-item nav-link ">Home</a>
-                                    <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
-                                    <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
                                     <div class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
-                                            <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                                            <a href="MainController?action=Category&Category=${Category.categoryID}" class="dropdown-item">All ${Category.name}</a>
+                                            <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
+                                                <c:if test="${Category.categoryID == brand.categoryID}">
+                                                    <a href="MainController?action=FilterByBrand" class="dropdown-item">${brand.brandName}</a>
+                                                </c:if>
+                                            </c:forEach>
                                         </div>
                                     </div>
-                                    <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
-                                </div>
-                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                    <a href="cart.jsp" class="btn px-0 ml-3">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                    </a>
-                                </div>
+                                </c:forEach>
+                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                <c:if test="${not empty sessionScope.CUSTOMER_ID}">
+                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                </c:if>
                             </div>
-                        </nav>
-                    </div>
+                            <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
+                                <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                                    <input type="text" class="form-control" placeholder="Search for products" name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                    <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">Account</span>
+                                        </button>                                        
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                            <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="ml-1 text-primary">Cart</span>
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </div>
-        </form>
+        </div>
         <!-- Navbar End -->
-
 
         <!-- Breadcrumb Start -->
         <div class="container-fluid">
@@ -185,154 +205,102 @@
         </div>
         <!-- Breadcrumb End -->
 
-
-        <!-- Cart Start -->
-        <!--Pop-up start-->
+        <!-- Pop-up start -->
         <div id="modalOverlay" class="modal-overlay" style="display: none;">
             <div id="deleteConfirmation" class="card">
                 <div class="card-content">
-                    <p class="card-heading">Delete Product</p>
-                    <p class="card-description">Are you sure you want to delete this product?</p>
+                    <p class="card-heading">Delete product?</p>
+                    <p class="card-description">Are you sure you want to delete this Product?</p>
                 </div>
                 <div class="card-button-wrapper">
                     <button class="card-button secondary" onclick="cancelDelete()">Cancel</button>
-                    <button class="card-button primary" onclick="proceedDelete()">Delete</button>
+                    <a class="card-button primary btn" href="#">Delete</a> 
                 </div>
                 <button class="exit-button" onclick="cancelDelete()">
                     <svg height="20px" viewBox="0 0 384 512">
-                    <path
-                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                    </path>
+                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path>
                     </svg>
                 </button>
             </div>
         </div>
-        <!--Pop-up End-->
+        <!-- Pop-up End -->
+
+
+        <!-- Cart Start -->
         <form action="MainController">
             <div class="container-fluid">
                 <div class="row px-xl-5">
-
                     <div class="col-lg-8 table-responsive mb-5">
                         <table class="table table-light table-borderless table-hover text-center mb-0">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAll" style="height: 16px; width: 16px;"/>  
+                                    </th>
+                                    <th></th>
                                     <th>Products</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th>Unit Total</th>
                                     <th>Remove</th>
                                 </tr>
                             </thead>
-                            <tbody class="align-middle">                      
-                                <tr>
-                                    <td class="align-middle">
-                                        <img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name
-                                    </td>
-                                    <td class="align-middle price">
-                                        <span class="currency">$</span><span class="amount">12</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="input-group quantity mx-auto" style="width: 100px;">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-primary btn-minus"
-                                                        onclick="updateQuantity(this, -1, event)">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
+                            <tbody class="align-middle">
+                                <c:forEach var="cart" items="${sessionScope.CART}">
+                                    <c:set var="unitTotal" value="${cart.price * cart.totalQuantity}"/>
+                                    <c:set var="Total" value="${unitTotal + Total}"/>
+                                    <tr>
+                                        <td class="align-middle m-auto">
+                                            <input type="checkbox" name=""  style="height: 16px; width: 16px;"/>
+                                        </td>
+                                        <td class="align-middle">
+                                            <img src="${cart.image}" alt="" style="width: 50px;"> 
+                                        </td>
+                                        <td class="align-middle">
+                                            ${cart.productName} ${cart.sizeName}
+                                        </td>
+                                        <td class="align-middle price">
+                                            <span class="amount"><fmt:formatNumber type="number" value="${cart.price}"/></span><span class="currency"></span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="input-group quantity mx-auto" style="width: 100px;">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-sm btn-primary btn-minus"
+                                                            onclick="updateQuantity(this, -1, event)">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" readonly
+                                                       class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
+                                                       value="${cart.totalQuantity}">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-sm btn-primary btn-plus"
+                                                            onclick="updateQuantity(this, 1, event)">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <input type="text" readonly
-                                                   class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                                   value="1">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-primary btn-plus"
-                                                        onclick="updateQuantity(this, 1, event)">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span class="currency">$</span><span class="amount">12</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event)">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle">
-                                        <img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name
-                                    </td>
-                                    <td class="align-middle price">
-                                        <span class="currency">$</span><span class="amount">11</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="input-group quantity mx-auto" style="width: 100px;">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-primary btn-minus"
-                                                        onclick="updateQuantity(this, -1, event)">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <input type="text" readonly
-                                                   class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                                   value="1">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-primary btn-plus"
-                                                        onclick="updateQuantity(this, 1, event)">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span class="currency">$</span><span class="amount">11</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event)">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle">
-                                        <img src="img/product-3.jpg" alt="" style="width: 50px;"> Product Name
-                                    </td>
-                                    <td class="align-middle price">
-                                        <span class="currency">$</span><span class="amount">30</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="input-group quantity mx-auto" style="width: 100px;">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-primary btn-minus"
-                                                        onclick="updateQuantity(this, -1, event)">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <input type="text" readonly
-                                                   class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
-                                                   value="1">
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-primary btn-plus"
-                                                        onclick="updateQuantity(this, 1, event)">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span class="currency">$</span><span class="amount">30</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event)">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td class="align-middle total">
+                                            <span class="amount"><fmt:formatNumber type="number" value="${unitTotal}"/></span><span class="currency"></span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <button type="submit" name="action" class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event, ${cart.productDetailID})">                                               
+                                                <i class="fa fa-times" id=""></i>
+                                            </button>                                       
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
                     <div class="col-lg-4">
+                        <div class="input-group mb-30">
+                            <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary">Apply Coupon</button>
+                            </div>
+                        </div>
                         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
                                 Summary</span></h5>
                         <div class="bg-light p-30 mb-5">
@@ -340,30 +308,28 @@
                                 <div class="d-flex justify-content-between mb-3">
                                     <h6>Subtotal</h6>
                                     <h6>
-                                        <span>$</span>
-                                        <span id="subtotal">72</span>
+                                        <span></span>
+                                        <span id="subtotal"></span>
                                     </h6>
 
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <h6 class="font-weight-medium">Shipping</h6>
-                                    <h6 class="font-weight-medium">$10</h6>
+                                    <h6 class="font-weight-medium">Voucher</h6>
+                                    <h6 class="font-weight-medium"></h6>
                                 </div>
                             </div>
                             <div class="pt-2">
                                 <div class="d-flex justify-content-between mt-2">
                                     <h5>Total</h5>
                                     <h5 >
-                                        <span>$</span>
-                                        <span id="total-cart">82</span>
+                                        <span></span>
+                                        <span id="total-cart"><fmt:formatNumber type="number" value="${Total}"/></span>
                                     </h5> 
                                 </div>
-                                <button  type="submit" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
-                                    Checkout</button>
+                                <button  type="submit" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </form>
@@ -459,92 +425,111 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script>
-                                            window.onload = function () {
-                                                updateCartTotal();
-                                                updateAllProductTotals();
-                                            };
-
-                                            function updateQuantity(button, change, event) {
-                                                event.preventDefault();
-
-                                                const row = button.closest('tr');
-                                                const quantityInput = row.querySelector('.quantity-input');
-                                                const priceText = row.querySelector('.amount').innerText;
-
-                                                const price = parseFloat(priceText);
-
-                                                let quantity = parseInt(quantityInput.value) + change;
-                                                if (quantity < 1) {
-                                                    quantity = 1;
+                                                window.onload = function () {
+                                                    updateCartTotal();
+                                                    updateAllProductTotals();
+                                                    const selectAllCheckbox = document.getElementById('selectAll');
+                                                    selectAllCheckbox.addEventListener('change', function () {
+                                                        const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+                                                        checkboxes.forEach((checkbox) => {
+                                                            checkbox.checked = selectAllCheckbox.checked;
+                                                        });
+                                                        updateCartTotal();
+                                                    });
+                                                    const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+                                                    checkboxes.forEach((checkbox) => {
+                                                        checkbox.addEventListener('change', function () {
+                                                            updateCartTotal();
+                                                        });
+                                                    });
+                                                };
+                                                function formatCurrency(value) {
+                                                    return new Intl.NumberFormat('vi-VN', {
+                                                        style: 'decimal',
+                                                        minimumFractionDigits: 0,
+                                                        maximumFractionDigits: 2
+                                                    }).format(value).replace(/\./g, ',');
                                                 }
-                                                quantityInput.value = quantity;
-                                                const total = (quantity * price).toFixed();
-                                                row.querySelector('.total .amount').innerText = total;
-                                                updateCartTotal();
-                                            }
 
-                                            function removeProduct(button, event) {
-                                                event.preventDefault();
+                                                function updateQuantity(button, change, event) {
+                                                    event.preventDefault();
 
-                                                const row = button.closest('tr');
-                                                row.remove();
-
-                                                updateCartTotal();
-                                            }
-
-                                            function updateCartTotal() {
-                                                const totals = document.querySelectorAll('.total .amount');
-                                                let subtotal = 0;
-                                                totals.forEach((total) => {
-                                                    subtotal += parseFloat(total.innerText);
-                                                });
-
-                                                document.getElementById('subtotal').innerText = subtotal.toFixed();
-
-                                                const shipping = 10;
-                                                const totalCart = subtotal + shipping;
-                                                document.getElementById('total-cart').innerText = totalCart.toFixed();
-                                            }
-
-                                            function updateAllProductTotals() {
-                                                const rows = document.querySelectorAll('tr');
-                                                rows.forEach((row) => {
+                                                    const row = button.closest('tr');
                                                     const quantityInput = row.querySelector('.quantity-input');
-                                                    const priceText = row.querySelector('.amount') ? row.querySelector('.amount').innerText : null;
 
-                                                    if (quantityInput && priceText) {
-                                                        const price = parseFloat(priceText);
-                                                        const quantity = parseInt(quantityInput.value);
-                                                        const total = (quantity * price).toFixed();
-                                                        row.querySelector('.total .amount').innerText = total;
+                                                    const price = parseFloat(row.querySelector('.price .amount').innerText.replace(/[^0-9.-]+/g, ""));
+                                                    let quantity = parseInt(quantityInput.value) + change;
+                                                    if (quantity < 1) {
+                                                        quantity = 1;
                                                     }
-                                                });
-                                            }
-                                            function openDeleteModal(button, event) {
-                                                event.preventDefault();
-                                                deleteButtonRef = button; // Store the reference to the delete button
+                                                    quantityInput.value = quantity;
 
-                                                // Show the modal
-                                                document.getElementById('deleteConfirmation').style.display = 'block';
-                                                document.getElementById('modalOverlay').style.display = 'block';
-                                            }
+                                                    const total = (quantity * price).toFixed(2);
+                                                    row.querySelector('.total .amount').innerText = formatCurrency(total);
 
-                                            function cancelDelete() {
-                                                // Hide the modal and overlay
-                                                document.getElementById('deleteConfirmation').style.display = 'none';
-                                                document.getElementById('modalOverlay').style.display = 'none';
-                                            }
-
-                                            function proceedDelete() {
-                                                if (deleteButtonRef) {
-                                                    // Pass the stored button to removeProduct
-                                                    removeProduct(deleteButtonRef, event);
+                                                    updateCartTotal();
                                                 }
 
-                                                // Hide modal and overlay after action
-                                                document.getElementById('deleteConfirmation').style.display = 'none';
-                                                document.getElementById('modalOverlay').style.display = 'none';
-                                            }
+                                                function updateCartTotal() {
+                                                    const rows = document.querySelectorAll('tbody tr');
+                                                    let subtotal = 0;
+
+                                                    rows.forEach((row) => {
+                                                        const checkbox = row.querySelector('input[type="checkbox"]');
+                                                        if (checkbox && checkbox.checked) {
+                                                            const totalText = row.querySelector('.total .amount').innerText;
+                                                            const total = parseFloat(totalText.replace(/[^0-9.-]+/g, ""));
+                                                            subtotal += total;
+                                                        }
+                                                    });
+                                                    document.getElementById('subtotal').innerText = formatCurrency(subtotal.toFixed());
+                                                    const shipping = 0;
+                                                    const totalCart = subtotal + shipping;
+                                                    document.getElementById('total-cart').innerText = formatCurrency(totalCart.toFixed());
+                                                }
+
+
+                                                function removeProduct(button, event) {
+                                                    event.preventDefault();
+                                                    const row = button.closest('tr');
+                                                    row.remove();
+                                                    updateCartTotal();
+                                                }
+                                                function updateAllProductTotals() {
+                                                    const rows = document.querySelectorAll('tr');
+                                                    rows.forEach((row) => {
+                                                        const quantityInput = row.querySelector('.quantity-input');
+                                                        const priceText = row.querySelector('.price .amount') ? row.querySelector('.price .amount').innerText : null;
+                                                        if (quantityInput && priceText) {
+                                                            const price = parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
+                                                            const quantity = parseInt(quantityInput.value);
+                                                            const total = (quantity * price).toFixed(2);
+                                                            row.querySelector('.total .amount').innerText = formatCurrency(total);
+                                                        }
+                                                    });
+                                                }
+                                                function openDeleteModal(button, event, productDetailID) {
+                                                    event.preventDefault();
+                                                    document.getElementById('deleteConfirmation').style.display = 'block';
+                                                    document.getElementById('modalOverlay').style.display = 'block';
+
+                                                    const deleteLink = document.querySelector('#deleteConfirmation .card-button.primary');
+                                                    deleteLink.href = `MainController?action=DeleteCart&productDetailID=` + productDetailID;
+                                                }
+
+                                                function cancelDelete() {
+                                                    document.getElementById('deleteConfirmation').style.display = 'none';
+                                                    document.getElementById('modalOverlay').style.display = 'none';
+                                                }
+
+
+                                                function proceedDelete() {
+                                                    if (deleteButtonRef) {
+                                                        removeProduct(deleteButtonRef, event);
+                                                    }
+                                                    document.getElementById('deleteConfirmation').style.display = 'none';
+                                                    document.getElementById('modalOverlay').style.display = 'none';
+                                                }
 
 
         </script>

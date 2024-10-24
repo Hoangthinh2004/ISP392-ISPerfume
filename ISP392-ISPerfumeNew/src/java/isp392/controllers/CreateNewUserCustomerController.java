@@ -5,6 +5,8 @@
  */
 package isp392.controllers;
 
+import isp392.cart.CartDAO;
+import isp392.cart.CartDTO;
 import isp392.user.CustomerDTO;
 import isp392.user.UserDAO;
 import isp392.user.UserDTO;
@@ -24,15 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CreateNewUserCustomerController", urlPatterns = {"/CreateNewUserCustomerController"})
 public class CreateNewUserCustomerController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private static final String ERROR = "signup.jsp";
     private static final String SUCCESS = "signin.jsp";
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -44,6 +37,7 @@ public class CreateNewUserCustomerController extends HttpServlet {
         String url = ERROR;
         UserError userErr = new UserError();
         UserDAO dao = new UserDAO();
+        CartDAO cartDao = new CartDAO();
         boolean checkValidation = true;
         try {
             String userName = request.getParameter("userName");
@@ -79,11 +73,18 @@ public class CreateNewUserCustomerController extends HttpServlet {
                 checkValidation = false;
             }
             if (checkValidation) {
-                    UserDTO user = new UserDTO(0, userName, email, password, phoneNum, roleID, status);
+                UserDTO user = new UserDTO(0, userName, email, password, phoneNum, roleID, status);
                 CustomerDTO cust = new CustomerDTO(0, "", "", "", "", null);
                 boolean checkAdd = dao.addNewUser(user, cust);
                 if (checkAdd) {
-                    url = SUCCESS;
+                    if (roleID == 1) {
+                        int customerID = dao.getCusID(phoneNum);
+                        CartDTO cart = new CartDTO(0, customerID);                        
+                        boolean checkInsertToCart = cartDao.createCart(cart);
+                        if (checkInsertToCart) {
+                            url = SUCCESS;
+                        }
+                    }   
                 } else {
                     userErr.setError("Insert failed!");
                 }

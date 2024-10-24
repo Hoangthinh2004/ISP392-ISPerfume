@@ -27,13 +27,13 @@ public class ProductDetailDAO {
     private static final String DELETE_PRODUCT_DETAIL = "DELETE FROM ProductDetail WHERE ProductID = ? AND SizeID = ?";
     private static final String LIST_PRODUCT_DETAIL = "SELECT * FROM ProductDetail WHERE ProductID = ?";
     private static final String VIEW_PRODUCT_DETAIL = "SELECT P.ProductID, S.SizeID, P.ProName, P.Description, PD.Price ,S.Name, PD.NumberOfPurchasing, PD.Country, PD.ReleaseDate, PD.FragranceFamilies, PD.Image FROM ProductDetail PD "
-            + "INNER JOIN Products P ON PD.ProductID = P.ProductID "
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-            + "WHERE PD.ProductID = ? AND P.BrandID = 4";
-    private static final String GET_PRICE_BY_SIZE = "SELECT PD.Price FROM ProductDetail PD "
-            + "WHERE PD.ProductID = ? AND PD.SizeID = ?";
+                                                    + "INNER JOIN Products P ON PD.ProductID = P.ProductID "
+                                                    + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+                                                    + "WHERE PD.ProductID = ? AND P.BrandID = 4";
+    private static final String GET_PRICE_BY_SIZE = "SELECT PD.ProductDetailID, PD.Price, PD.StockQuantity FROM ProductDetail PD "
+                                                  + "WHERE ProductID = ? AND SizeID = ?";
     private static final String GET_LIST_IMAGE = "SELECT PD.Image FROM ProductDetail PD "
-            + "WHERE PD.ProductID = ?";
+                                               + "WHERE PD.ProductID = ?";
     private static final String CHECK_PRODUCT_DETAIL_EXISTED = "SELECT * FROM ProductDetail WHERE ProductID =? AND SizeID = ?";
     private static final String INSERT_PRODUCT_DETAIL = "INSERT INTO ProductDetail(ProductID,SizeID,Price,StockQuantity,NumberOfPurchasing,ImportDate,Image,Status) VALUES (?,?,?,?,?,?,?,?)";
     private static final String GET_LIST_PRODUCT_DETAIL_STAFF = "SELECT * FROM ProductDetail";
@@ -141,6 +141,7 @@ public class ProductDetailDAO {
                 ptm.setInt(2, sizeID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+                    int productDetailID = rs.getInt("ProductDetailID");
                     int price = rs.getInt("Price");
                     list.add(new ProductDetailDTO(0, productID, sizeID, price, 0, 0, null, "", 0));
                 }

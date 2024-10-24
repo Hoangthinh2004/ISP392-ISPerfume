@@ -9,6 +9,7 @@ import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -23,55 +24,96 @@ import javax.servlet.http.HttpSession;
  */
 public class SortByPurchasingController extends HttpServlet {
 
-    private static final String ERROR = "shopping.jsp";
-    private static final String SUCCESS_CATE = "shopping.jsp";
-    private static final String SUCCESS_SEARCH = "shoppingSearch.jsp";
+    private static final String CATEGORY = "shopping.jsp";
+    private static final String SEARCH = "shoppingSearch.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = "";
+        HttpSession session = request.getSession();
+        Object searchContent = session.getAttribute("CURRENT_SEARCH");
+        Object category = session.getAttribute("CURRENT_IDS");
+        if (searchContent != null) {
+            url = SEARCH;
+        } else if (category != null) {
+            url = CATEGORY;
+        }
         try {
-            ProductDAO productDAO = new ProductDAO();
-            HttpSession session = request.getSession();
             Map<String, Integer> categoryIDs = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            Map<String, Integer> searchIDs = (Map<String, Integer>) session.getAttribute("SEARCH_IDS");
-
-            if (categoryIDs != null) { // Sort in Category
+            Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
+            Map<String, Integer> currentBrandID = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID");
+            ProductDAO productDAO = new ProductDAO();
+            List<Integer> sizeIDList = new ArrayList<>();
+            List<Integer> brandID = new ArrayList<>();
+            
+            if (category != null) { //Sort in Shopping
                 int categoryID = categoryIDs.get("categoryID");
-                
-                if (categoryIDs.containsKey("brandID") && categoryIDs.containsKey("sizeID")) {
-                    int brandID = categoryIDs.get("brandID");
-                    int sizeID = categoryIDs.get("sizeID");
-                    List<ViewProductDTO> listProduct = productDAO.sortByPurchasing(categoryID, brandID, sizeID);
-                    request.setAttribute("LIST_PRODUCT", listProduct);
-                } else if (categoryIDs.containsKey("brandID")) {
-                    int brandID = categoryIDs.get("brandID");
-                    List<ViewProductDTO> listProduct = productDAO.sortbyPurchasing2(categoryID, brandID);
-                    request.setAttribute("LIST_PRODUCT", listProduct);
-                } else if (categoryIDs.containsKey("sizeID")) {
-                    int sizeID = categoryIDs.get("sizeID");
-                    List<ViewProductDTO> listProduct = productDAO.sortbyPurchasing3(categoryID, sizeID);
-                    request.setAttribute("LIST_PRODUCT", listProduct);
-                } else {
-                    List<ViewProductDTO> listProduct = productDAO.sortByPurchasingAll(categoryID);
-                    request.setAttribute("LIST_PRODUCT", listProduct);
+                if (currentBrandID != null) {
+                    brandID.add(currentBrandID.get("brandID"));
+                } if (!sizeIDList.isEmpty()) {
+                    int sizeIDLength = sizeIDS.get("sizeID_length");
+                    if (sizeIDLength == 2) {
+                        sizeIDList.add(sizeIDS.get("sizeID1"));
+                        sizeIDList.add(sizeIDS.get("sizeID2"));
+                    } else if (sizeIDLength == 1) {
+                        sizeIDList.add(sizeIDS.get("sizeID"));
+                    }
                 }
-                url = SUCCESS_CATE;
-            } else { //sort in Search result
-                String search = (String) session.getAttribute("CURRENT_SEARCH");
-                if (searchIDs.containsKey("sizeID")) {
-                    int sizeID = searchIDs.get("sizeID");                    
-                    List<ViewProductDTO> listProduct = productDAO.sortSearchResultByPurChasing1(search, sizeID);
-                    request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);               
-                } else {
-                    List<ViewProductDTO> listProduct = productDAO.sortSearchResultByPurChasing2(search);
-                    if (listProduct.size() > 0) {
-                        request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
-                        url = SUCCESS_SEARCH;
-                    }    
+                List<ViewProductDTO> listProduct = productDAO.sortCategorizeProductByPur(categoryID, brandID, sizeIDList);
+                session.setAttribute("LIST_PRODUCT", listProduct);
+                url = CATEGORY;
+            } else {
+                String search = (String) session.getAttribute("CURRENT_SEARCH");               
+                if (sizeIDS != null && !sizeIDS.isEmpty()) {
+                    int sizeIDLength = sizeIDS.get("sizeID_length");
+                    if (sizeIDLength == 2) {
+                        sizeIDList.add(sizeIDS.get("sizeID1"));
+                        sizeIDList.add(sizeIDS.get("sizeID2"));
+                    } else if (sizeIDLength == 1) {
+                        sizeIDList.add(sizeIDS.get("sizeID"));
+                    }
                 }               
+                List<ViewProductDTO> listProduct = productDAO.sortSearchResultByPur(search, sizeIDList);
+                session.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
+                url = SEARCH;
             }
+
+//            if (categoryIDs != null) { // Sort in Category
+//                int categoryID = categoryIDs.get("categoryID");
+//                
+//                if (categoryIDs.containsKey("brandID") && categoryIDs.containsKey("sizeID")) {
+//                    int brandID = categoryIDs.get("brandID");
+//                    int sizeID = categoryIDs.get("sizeID");
+//                    List<ViewProductDTO> listProduct = productDAO.sortByPurchasing(categoryID, brandID, sizeID);
+//                    request.setAttribute("LIST_PRODUCT", listProduct);
+//                } else if (categoryIDs.containsKey("brandID")) {
+//                    int brandID = categoryIDs.get("brandID");
+//                    List<ViewProductDTO> listProduct = productDAO.sortbyPurchasing2(categoryID, brandID);
+//                    request.setAttribute("LIST_PRODUCT", listProduct);
+//                } else if (categoryIDs.containsKey("sizeID")) {
+//                    int sizeID = categoryIDs.get("sizeID");
+//                    List<ViewProductDTO> listProduct = productDAO.sortbyPurchasing3(categoryID, sizeID);
+//                    request.setAttribute("LIST_PRODUCT", listProduct);
+//                } else {
+//                    List<ViewProductDTO> listProduct = productDAO.sortByPurchasingAll(categoryID);
+//                    request.setAttribute("LIST_PRODUCT", listProduct);
+//                }
+//                url = SUCCESS_CATE;
+//            } else { //sort in Search result
+//                String search = (String) session.getAttribute("CURRENT_SEARCH");
+//                if (searchIDs.containsKey("sizeID")) {
+//                    int sizeID = searchIDs.get("sizeID");                    
+//                    List<ViewProductDTO> listProduct = productDAO.sortSearchResultByPurChasing1(search, sizeID);
+//                    request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);               
+//                } else {
+//                    List<ViewProductDTO> listProduct = productDAO.sortSearchResultByPurChasing2(search);
+//                    if (listProduct.size() > 0) {
+//                        request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
+//                        url = SUCCESS_SEARCH;
+//                    }    
+//                }               
+//            }
         } catch (Exception e) {
             log("Error at SortByPurchasingController: " + e.toString());
         } finally {

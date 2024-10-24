@@ -38,17 +38,19 @@ public class SigninEmployee extends HttpServlet {
         UserDAO dao = new UserDAO();
         CustomerViewProfileDTO cust = null;
         try {
+            HttpSession session = request.getSession();
+            Map<String, Integer> CustomerIDS = new HashMap<>();
+            session.setAttribute("CUSTOMER_ID", CustomerIDS);           
             
             String email = request.getParameter("Email");
             String password = request.getParameter("Password");
-            UserDTO loginUser = dao.checkLogin(email, password);
+            UserDTO loginUser = dao.checkLogin(email, password);           
             if (loginUser != null) {
-                HttpSession ses = request.getSession();
-                int roleID = loginUser.getRoleID();
+                CustomerIDS.put("customerID", loginUser.getUserID());
                 if (loginUser.getRoleID() == 1) { // customer
                     cust = dao.getCustInfoByUserID(loginUser.getUserID());
                     if (cust != null) {
-                        ses.setAttribute("CUSTOMER", cust);
+                        session.setAttribute("CUSTOMER", cust);
                         url = CUS_PAGE;
                     }
                 } else if (loginUser.getRoleID() == 2) { // shipper

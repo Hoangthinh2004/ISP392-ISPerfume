@@ -49,8 +49,11 @@ public class MainController extends HttpServlet {
     private static final String PRODUCT_DETAIL_PAGE = "ProductDetailPage";
     private static final String PRODUCT_DETAIL_PAGE_VIEW = "SearchProductDetailManager";
 
-    private static final String FILTER_BY_SIZE = "FilterBySize";
-    private static final String FILTER_BY_SIZE_CONTROLLER = "SizeFilterController";
+    private static final String FILTER_BY_SIZE = "ViewResultInShopping";
+    private static final String FILTER_BY_SIZE_CONTROLLER = "SizeFilterController"; 
+    
+    private static final String FILTER_BY_SIZE_2 = "ViewResultInShoppingSearch";
+    private static final String FILTER_BY_SIZE_CONTROLLER_2 = "SizeFilterSearchController";
 
     private static final String SEARCH_PRODUCT = "SeacrhProduct";
     private static final String SEARCH_PRODUCT_CONTROLLER = "SearchProductController";
@@ -79,6 +82,10 @@ public class MainController extends HttpServlet {
     private static final String SORT_BY_PURCHASING = "SortByPurchasing";
     private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
 
+  
+    private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
+    private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
+    
     private static final String SEARCH_BRAND = "Search";
     private static final String SEARCH_BRAND_CONTROLLER = "ShowAllBrandManager";
 
@@ -112,6 +119,16 @@ public class MainController extends HttpServlet {
     private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
     private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
 
+    
+    private static final String ADD_TO_CART = "AddToCart";
+    private static final String ADD_TO_CART_CONTROLLER = "AddToCartController";
+    
+    private static final String NAVIGATE_DETAIL_TO_CART = "NavigateToCart";
+    private static final String NAVIGATE_DETAIL_TO_CART_CONTROLLER = "NavigateToCartController";
+    
+    private static final String DELETE_CART = "DeleteCart";
+    private static final String DELETE_CART_CONTROLLER = "DeleteCartController";
+    
     private static final String UPDATE_PROFILE = "UpdateProfile";
     private static final String UPDATE_PROFILE_CONTROLLER = "UpdateUserProfile";
 
@@ -139,6 +156,15 @@ public class MainController extends HttpServlet {
     private static final String CHANGE_FORGOT_PASSWORD = "ChangePasswordForgot";
     private static final String CHANGE_FORGOT_PASSWORD_CONTROLLER = "ChangePasswordForgotController";
 
+    private static final String NAVIGATE_SIGN_IN = "Sign in";
+    private static final String NAVIGATE_SIGN_IN_CONTROLLER = "signin.jsp";
+    
+    private static final String NAVIGATE_SIGN_UP = "Sign up";
+    private static final String NAVIGATE_SIGN_UP_CONTROLLER = "signup.jsp";
+    
+    private static final String NAVIGATE_RELATED_PRODUCT_DETAIL = "NavigateRelatedProductDetail";
+    private static final String NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER = "NavigateRelatedProductDetailController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -167,6 +193,8 @@ public class MainController extends HttpServlet {
                 url = PRODUCT_DETAIL_PAGE_VIEW;
             } else if (FILTER_BY_SIZE.equals(action)) {
                 url = FILTER_BY_SIZE_CONTROLLER;
+            } else if (FILTER_BY_SIZE_2.equals(action)) {
+                url = FILTER_BY_SIZE_CONTROLLER_2;
             } else if (SEARCH_PRODUCT.equals(action)) {
                 url = SEARCH_PRODUCT_CONTROLLER;
             } else if (VIEW_PROMOTION.equals(action)) {
@@ -174,7 +202,7 @@ public class MainController extends HttpServlet {
             } else if (CREATE_PROMOTION.equals(action)) {
                 url = CREATE_PROMOTION_CONTROLLER;
             } else if (UPDATE_PROMOTION.equals(action)) {
-                url = UPDATE_PROMOTION_CONTROLLER;
+                url = UPDATE_PROMOTION_CONTROLLER; 
             } else if (NAVIGATE_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_PRODUCT_DETAIL_CONTROLLER;
             } else if (SHOW_PRICE_BY_SIZE.equals(action)) {
@@ -191,6 +219,12 @@ public class MainController extends HttpServlet {
                 url = SEARCH_BRAND_CONTROLLER;
             } else if (UPDATE_BRAND.equals(action)) {
                 url = UPDATE_BRAND_CONTROLLER;
+            } else if (ADD_TO_CART.equals(action)) {
+                url = ADD_TO_CART_CONTROLLER;
+            } else if (NAVIGATE_DETAIL_TO_CART.equals(action)) {
+                url = NAVIGATE_DETAIL_TO_CART_CONTROLLER;
+            } else if (DELETE_CART.equals(action)) {
+                url = DELETE_CART_CONTROLLER;
             } else if (SHOW_ALL_PRODUCT_MANAGER.equals(action)) {
                 url = SHOW_ALL_PRODUCT_MANAGER_CONTROLLER;
             } else if (SIGNIN_EMPLOYEE.equals(action)) {
@@ -227,6 +261,12 @@ public class MainController extends HttpServlet {
                 url = VERIFY_TOKEN_FORGOT_PASSWORD_CONTROLLER;
             } else if(CHANGE_FORGOT_PASSWORD.equals(action)){
                 url = CHANGE_FORGOT_PASSWORD_CONTROLLER;
+            } else if (NAVIGATE_SIGN_IN.equals(action)) {
+                url = NAVIGATE_SIGN_IN_CONTROLLER;
+            } else if(NAVIGATE_SIGN_UP.equals(action)){
+                url = NAVIGATE_SIGN_UP_CONTROLLER;
+            } else if(NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)){
+                url = NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

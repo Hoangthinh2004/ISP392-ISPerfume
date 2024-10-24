@@ -8,6 +8,8 @@ package isp392.controllers;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -23,53 +25,60 @@ import javax.servlet.http.HttpSession;
 public class SizeFilterController extends HttpServlet {
 
     private static final String ERROR = "shopping.jsp";
-    private static final String SUCCESS_CATEGORY = "shopping.jsp";
-    private static final String SUCCESS_SEARCH = "shoppingSearch.jsp";
+    private static final String SUCCESS = "shopping.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
         try {
-            int sizeID = Integer.parseInt(request.getParameter("sizeID"));
-            ProductDAO productDAO = new ProductDAO();
-
             HttpSession session = request.getSession();
-            Map<String, Integer> categoryIDs = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            Map<String, Integer> searchIDs = (Map<String, Integer>) session.getAttribute("SEARCH_IDS"); // Get attribute from searchProductController
+            ProductDAO productDAO = new ProductDAO();
+            Map<String, Integer> listProductID = new HashMap<>();
 
-            if (categoryIDs != null) { // Filter by size from Category 
-                int categoryID = categoryIDs.get("categoryID");
-                categoryIDs.put("sizeID", sizeID);
-                if (session.getAttribute("CURRENT_SEARCH") != null) { // Categorize -> Search -> Filter by size
-                    String search = (String) session.getAttribute("CURRENT_SEARCH");
-                    searchIDs.put("sizeID", sizeID);
-                    List<ViewProductDTO> listProduct = productDAO.filterSearchResultBySize(search, sizeID);
-                    int listSize = listProduct.size();
-                    request.setAttribute("SEARCH_RESULT_SIZE", listSize);
-                    request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
-                    url = SUCCESS_SEARCH;
-                } else {
-                    if (categoryIDs.containsKey("brandID")) { // Filter by size after filtering by brand
-                        int brandID = categoryIDs.get("brandID");
-                        List<ViewProductDTO> listProduct = productDAO.filterProductByChildSize(categoryID, brandID, sizeID);
-                        request.setAttribute("LIST_PRODUCT", listProduct);
-                        //session.removeAttribute("CURRENT_IDS");
-                    } else { //Filter by size after categorizing
-                        List<ViewProductDTO> listProduct = productDAO.filterProductBySize(sizeID, categoryID);
-                        request.setAttribute("LIST_PRODUCT", listProduct);
-                    }
-                    url = SUCCESS_CATEGORY;
+            session.setAttribute("SIZE_IDS", listProductID); //  storing sizeID for sort by function 
+            Map<String, Integer> currentCategoryID = (Map<String, Integer>) session.getAttribute("CURRENT_IDS"); // get categoryID exist or not
+            Map<String, Integer> currentBrandID = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID"); // // check brandID exist or not
+            Map<String, Integer> currentSizeID = (Map<String, Integer>) session.getAttribute("SIZE_IDS"); //get sizeID and move to sort function
+
+            String[] sizeIDs = request.getParameterValues("sizeID[]");
+            int categoryID = currentCategoryID.get("categoryID");
+
+            currentSizeID.put("sizeID_length", sizeIDs.length); //send length of sizeID to sort by  function
+
+            List<Integer> sizeList = new ArrayList<>();
+            int sizeIDLength = sizeIDs.length;
+
+            if (currentBrandID == null) {
+                if (sizeIDLength == 2) {
+                    sizeList.add(Integer.parseInt(sizeIDs[0]));
+                    sizeList.add(Integer.parseInt(sizeIDs[1]));
+
+                    currentSizeID.put("sizeID1", Integer.parseInt(sizeIDs[0]));
+                    currentSizeID.put("sizeID2", Integer.parseInt(sizeIDs[1]));
+                } else if (sizeIDLength == 1) {
+                    sizeList.add(Integer.parseInt(sizeIDs[0]));
+
+                    currentSizeID.put("sizeID", Integer.parseInt(sizeIDs[0]));
                 }
-            } else { // Filter by Size from Search result                
-                String search = (String) session.getAttribute("CURRENT_SEARCH");
-                searchIDs.put("sizeID", sizeID);
-                List<ViewProductDTO> listProduct = productDAO.filterSearchResultBySize(search, sizeID);
-                int listSize = listProduct.size();
-                request.setAttribute("SEARCH_RESULT_SIZE", listSize);
-                request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
-                url = SUCCESS_SEARCH;
+                List<ViewProductDTO> listProduct = productDAO.filterListProduct(categoryID, sizeList);
+                session.setAttribute("LIST_PRODUCT", listProduct);
+            } else {
+                int brandID = currentBrandID.get("brandID");
+                if (sizeIDLength == 2) {
+                    sizeList.add(Integer.parseInt(sizeIDs[0]));
+                    sizeList.add(Integer.parseInt(sizeIDs[1]));
+
+                    currentSizeID.put("sizeID1", Integer.parseInt(sizeIDs[0]));
+                    currentSizeID.put("sizeID2", Integer.parseInt(sizeIDs[1]));
+                } else if (sizeIDLength == 1) {
+                    sizeList.add(Integer.parseInt(sizeIDs[0]));
+                    
+                    currentSizeID.put("sizeID", Integer.parseInt(sizeIDs[0]));
+                }
+                List<ViewProductDTO> listProduct = productDAO.filterListProductBrandID(categoryID, brandID, sizeList);
+                session.setAttribute("LIST_PRODUCT", listProduct);
             }
-            //session.setAttribute("CURRENT_IDS", ids); //Store sizeID & categoryID into attribute for DescendingProductByPrice Controller                     
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at BrandFilterController: " + e.toString());
         } finally {

@@ -30,6 +30,19 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">     
+        <link href="css/styleOrderStatus.css" rel="stylesheet">    
+        <style>
+            .order-info {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                background: #fff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            #order-info {
+                display: none; /* Ẩn phần order info ban đầu */
+            }
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -164,119 +177,160 @@
         <!-- Breadcrumb End -->
 
 
-        <!--Sigin in form Start-->
         <div class="container-fluid">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">History</span></h2>
-            <div class="row px-xl-5">
-                <div class="col-lg-12 mb-5">
-                    <div class="col-lg-12 table-responsive mb-5">
-                        <table class="table table-light table-borderless table-hover text-center mb-0 justify-content-between">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Order</th>
-                                    <th>Order Date</th>
-                                    <th>Note</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>View</th>
-                                </tr>
-                            </thead>
-                            <tbody class="align-middle">                      
-                                <tr>
-                                    <td class="align-middle">
-                                        <a href="">
-                                            <img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name
-                                        </a>
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+                <span class="bg-secondary pr-3">History</span>
+            </h2>
+            <div class="row">
+                <!-- Order List -->
+                <div id="order-list" class="col-lg-12">
+                    <div class="order-list">
+                        <!-- Individual Order Item -->
+                        <div class="order-item border p-4 mb-3 d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="order-item-image">
+                                    <img src="product-image-1.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                </div>
+                                <div class="order-item-details flex-grow-1 mx-3">
+                                    <h6 class="mb-1"><strong>Order #123456</strong></h6>
+                                    <p class="mb-1"><strong>Product:</strong> Product 1</p>
+                                    <p class="mb-1"><strong>Date:</strong> 2024-10-15 10:45 AM</p>
+                                    <p class="mb-1"><strong>Total:</strong> $120.50</p>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="showOrderInfo('123456')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
 
-                                    </td>
-                                    <td class="align-middle price">
-                                        <span>21/02/2024</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <span>
-                                            Note
-                                        </span>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span>
-                                            $1000
-                                        </span>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span>Success</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle">
-                                        <a href="">
-                                            <img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name
-                                        </a>
+                        <!-- Another Order Item -->
+                        <div class="order-item border p-4 mb-3 d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="order-item-image">
+                                    <img src="product-image-2.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                </div>
+                                <div class="order-item-details flex-grow-1 mx-3">
+                                    <h6 class="mb-1"><strong>Order #123457</strong></h6>
+                                    <p class="mb-1"><strong>Product:</strong> Product 2</p>
+                                    <p class="mb-1"><strong>Date:</strong> 2024-10-12 02:30 PM</p>
+                                    <p class="mb-1"><strong>Total:</strong> $85.00</p>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="showOrderInfo('123457')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-item border p-4 mb-3 d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="order-item-image">
+                                    <img src="product-image-2.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                </div>
+                                <div class="order-item-details flex-grow-1 mx-3">
+                                    <h6 class="mb-1"><strong>Order #123457</strong></h6>
+                                    <p class="mb-1"><strong>Product:</strong> Product 2</p>
+                                    <p class="mb-1"><strong>Date:</strong> 2024-10-12 02:30 PM</p>
+                                    <p class="mb-1"><strong>Total:</strong> $85.00</p>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="showOrderInfo('123457')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-item border p-4 mb-3 d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="order-item-image">
+                                    <img src="product-image-2.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                </div>
+                                <div class="order-item-details flex-grow-1 mx-3">
+                                    <h6 class="mb-1"><strong>Order #123457</strong></h6>
+                                    <p class="mb-1"><strong>Product:</strong> Product 2</p>
+                                    <p class="mb-1"><strong>Date:</strong> 2024-10-12 02:30 PM</p>
+                                    <p class="mb-1"><strong>Total:</strong> $85.00</p>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="showOrderInfo('123457')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-item border p-4 mb-3 d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="order-item-image">
+                                    <img src="product-image-2.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                </div>
+                                <div class="order-item-details flex-grow-1 mx-3">
+                                    <h6 class="mb-1"><strong>Order #123457</strong></h6>
+                                    <p class="mb-1"><strong>Product:</strong> Product 2</p>
+                                    <p class="mb-1"><strong>Date:</strong> 2024-10-12 02:30 PM</p>
+                                    <p class="mb-1"><strong>Total:</strong> $85.00</p>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="showOrderInfo('123457')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-item border p-4 mb-3 d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="order-item-image">
+                                    <img src="product-image-2.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                </div>
+                                <div class="order-item-details flex-grow-1 mx-3">
+                                    <h6 class="mb-1"><strong>Order #123457</strong></h6>
+                                    <p class="mb-1"><strong>Product:</strong> Product 2</p>
+                                    <p class="mb-1"><strong>Date:</strong> 2024-10-12 02:30 PM</p>
+                                    <p class="mb-1"><strong>Total:</strong> $85.00</p>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="showOrderInfo('123457')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
 
-                                    </td>
-                                    <td class="align-middle price">
-                                        <span>21/02/2024</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <span>
-                                            Note
-                                        </span>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span>
-                                            $1000
-                                        </span>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span>Success</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary" onclick="openDeleteModal(this, event)">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle">
-                                        <a href="">
-                                            <img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name
-                                        </a>
+                        <!-- Add more order items as needed -->
+                    </div>
+                </div>
 
-                                    </td>
-                                    <td class="align-middle price">
-                                        <span>21/02/2024</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <span>
-                                            Note
-                                        </span>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span>
-                                            $1000
-                                        </span>
-                                    </td>
-                                    <td class="align-middle total">
-                                        <span>Success</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary" onclick="openDeleteModal(this, event)">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                <!-- Order Status and Order Info -->
+                <div id="order-info" class="col-lg-7 fixed-info mt-4" style="display: none;">
+                    <div class="order-status mb-4">
+                        <section class="step-wizard">
+                            <ul class="step-wizard-list">
+                                <li class="step-wizard-item">
+                                    <span class="progress-count">1</span>
+                                    <span class="progress-label">Billing Info</span>
+                                </li>
+                                <li class="step-wizard-item">
+                                    <span class="progress-count">2</span>
+                                    <span class="progress-label">Payment Method</span>
+                                </li>
+                                <li class="step-wizard-item current-item">
+                                    <span class="progress-count">3</span>
+                                    <span class="progress-label">Checkout</span>
+                                </li>
+                                <li class="step-wizard-item">
+                                    <span class="progress-count">4</span>
+                                    <span class="progress-label">Success</span>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+
+                    <!-- Order Info -->
+                    <div class="order-info border p-4">
+                        <h4>Order #<span id="order-id">123456</span> Details</h4>
+                        <p><strong>Date:</strong> <span id="order-date">2024-10-15 10:45 AM</span></p>
+                        <p><strong>Status:</strong> <span id="order-status">Shipped</span></p>
+
+                        <h5>Items in Order</h5>
+                        <ul id="order-items">
+                            <li>Product 1 - Quantity: 2 - Price: $50.00 each</li>
+                            <li>Product 2 - Quantity: 1 - Price: $30.50</li>
+                        </ul>
+                        <p><strong>Total Price:</strong> <span id="total-price">$130.50</span></p>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Sigin in form End-->
+
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
             <div class="row px-xl-5 pt-5">
@@ -360,5 +414,39 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script>
+                                        function showOrderInfo(orderId) {
+                                            // Chỉ hiển thị order info cho đơn hàng đã chọn
+                                            document.getElementById('order-info').style.display = 'block';
+                                            document.getElementById('order-list').classList.remove('col-lg-12');
+                                            document.getElementById('order-list').classList.add('col-lg-5');
+
+                                            // Cập nhật thông tin cho order-info
+                                            document.getElementById('order-id').textContent = orderId;
+
+                                            // Bạn có thể thay đổi dữ liệu này dựa trên orderId
+                                            if (orderId === '123456') {
+                                                document.getElementById('order-date').textContent = '2024-10-15 10:45 AM';
+                                                document.getElementById('order-status').textContent = 'Shipped';
+                                                document.getElementById('order-items').innerHTML = `
+                 <li>Product 1 - Quantity: 2 - Price: $50.00 each</li>
+                 <li>Product 2 - Quantity: 1 - Price: $30.50</li>
+             `;
+                                                document.getElementById('total-price').textContent = '$130.50';
+                                            } else if (orderId === '123457') {
+                                                document.getElementById('order-date').textContent = '2024-10-12 02:30 PM';
+                                                document.getElementById('order-status').textContent = 'Processing';
+                                                document.getElementById('order-items').innerHTML = `
+                 <li>Product 2 - Quantity: 1 - Price: $85.00 each</li>
+             `;
+                                                document.getElementById('total-price').textContent = '$85.00';
+                                            }
+                                        }
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     </body>
 </html>
