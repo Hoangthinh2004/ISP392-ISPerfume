@@ -50,8 +50,8 @@ public class MainController extends HttpServlet {
     private static final String PRODUCT_DETAIL_PAGE_VIEW = "SearchProductDetailManager";
 
     private static final String FILTER_BY_SIZE = "ViewResultInShopping";
-    private static final String FILTER_BY_SIZE_CONTROLLER = "SizeFilterController"; 
-    
+    private static final String FILTER_BY_SIZE_CONTROLLER = "SizeFilterController";
+
     private static final String FILTER_BY_SIZE_2 = "ViewResultInShoppingSearch";
     private static final String FILTER_BY_SIZE_CONTROLLER_2 = "SizeFilterSearchController";
 
@@ -82,10 +82,9 @@ public class MainController extends HttpServlet {
     private static final String SORT_BY_PURCHASING = "SortByPurchasing";
     private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
 
-  
     private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
     private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
-    
+
     private static final String SEARCH_BRAND = "Search";
     private static final String SEARCH_BRAND_CONTROLLER = "ShowAllBrandManager";
 
@@ -116,19 +115,15 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_USER_STATUS = "UpdateUserStatus";
     private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatusController";
 
-    private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
-    private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
-
-    
     private static final String ADD_TO_CART = "AddToCart";
     private static final String ADD_TO_CART_CONTROLLER = "AddToCartController";
-    
+
     private static final String NAVIGATE_DETAIL_TO_CART = "NavigateToCart";
     private static final String NAVIGATE_DETAIL_TO_CART_CONTROLLER = "NavigateToCartController";
-    
+
     private static final String DELETE_CART = "DeleteCart";
     private static final String DELETE_CART_CONTROLLER = "DeleteCartController";
-    
+
     private static final String UPDATE_PROFILE = "UpdateProfile";
     private static final String UPDATE_PROFILE_CONTROLLER = "UpdateUserProfile";
 
@@ -146,25 +141,25 @@ public class MainController extends HttpServlet {
 
     private static final String ASSIGN_SHIPPER_STAFF = "AssignShipperStaff";
     private static final String ASSIGN_SHIPPER_STAFF_CONTROLLER = "AssignShipperStaffController";
-    
+
     private static final String FORGOT_PASSWORD = "ForgetPassword";
     private static final String FORGET_PASSWORD_CONTROLLER = "ForgetPasswordController";
-    
+
     private static final String VERIFY_TOKEN_FORGOT_PASSWORD = "VerifyOTP";
     private static final String VERIFY_TOKEN_FORGOT_PASSWORD_CONTROLLER = "VerifyOTPController";
-    
+
     private static final String CHANGE_FORGOT_PASSWORD = "ChangePasswordForgot";
     private static final String CHANGE_FORGOT_PASSWORD_CONTROLLER = "ChangePasswordForgotController";
 
     private static final String NAVIGATE_SIGN_IN = "Sign in";
     private static final String NAVIGATE_SIGN_IN_CONTROLLER = "signin.jsp";
-    
+
     private static final String NAVIGATE_SIGN_UP = "Sign up";
     private static final String NAVIGATE_SIGN_UP_CONTROLLER = "signup.jsp";
-    
+
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL = "NavigateRelatedProductDetail";
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER = "NavigateRelatedProductDetailController";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -202,7 +197,7 @@ public class MainController extends HttpServlet {
             } else if (CREATE_PROMOTION.equals(action)) {
                 url = CREATE_PROMOTION_CONTROLLER;
             } else if (UPDATE_PROMOTION.equals(action)) {
-                url = UPDATE_PROMOTION_CONTROLLER; 
+                url = UPDATE_PROMOTION_CONTROLLER;
             } else if (NAVIGATE_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_PRODUCT_DETAIL_CONTROLLER;
             } else if (SHOW_PRICE_BY_SIZE.equals(action)) {
@@ -255,17 +250,17 @@ public class MainController extends HttpServlet {
                 url = ORDER_DETAIL_PAGE_VIEW;
             } else if (ASSIGN_SHIPPER_STAFF.equals(action)) {
                 url = ASSIGN_SHIPPER_STAFF_CONTROLLER;
-            } else if(FORGOT_PASSWORD.equals(action)){
+            } else if (FORGOT_PASSWORD.equals(action)) {
                 url = FORGET_PASSWORD_CONTROLLER;
-            } else if(VERIFY_TOKEN_FORGOT_PASSWORD.equals(action)){
+            } else if (VERIFY_TOKEN_FORGOT_PASSWORD.equals(action)) {
                 url = VERIFY_TOKEN_FORGOT_PASSWORD_CONTROLLER;
-            } else if(CHANGE_FORGOT_PASSWORD.equals(action)){
+            } else if (CHANGE_FORGOT_PASSWORD.equals(action)) {
                 url = CHANGE_FORGOT_PASSWORD_CONTROLLER;
             } else if (NAVIGATE_SIGN_IN.equals(action)) {
                 url = NAVIGATE_SIGN_IN_CONTROLLER;
-            } else if(NAVIGATE_SIGN_UP.equals(action)){
+            } else if (NAVIGATE_SIGN_UP.equals(action)) {
                 url = NAVIGATE_SIGN_UP_CONTROLLER;
-            } else if(NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)){
+            } else if (NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER;
             }
         } catch (Exception e) {

@@ -143,7 +143,8 @@ public class ProductDetailDAO {
                 while (rs.next()) {
                     int productDetailID = rs.getInt("ProductDetailID");
                     int price = rs.getInt("Price");
-                    list.add(new ProductDetailDTO(0, productID, sizeID, price, 0, 0, null, "", 0));
+                    list.add(new ProductDetailDTO(productDetailID, productID, sizeID, price, 0, 0, null, "", 0));
+                
                 }
             }
         } finally {
