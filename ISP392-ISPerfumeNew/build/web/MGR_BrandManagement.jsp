@@ -176,7 +176,7 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important">
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important; min-height: 540px;">
                         <!--                                                <div class="col-md-6 text-center">
                                                  Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
@@ -205,10 +205,10 @@
                                                     </td>
 
                                                     <td>
-                                                        <img src="${brand.image}" style="width: 80px; height: 80px; margin-right: 10px;">
+                                                        <img src="${brand.image}" style="width: 80px; height: 80px; margin-right: 10px; object-fit: contain;">
+
                                                     </td>
                                                     <td>
-                                                        <!-- Hiển thị dropdown trạng thái hiện tại -->
                                                         <div class="row mb-3">
                                                             <div class="col-sm-12">
                                                                 ${brand.status == true ? "Available" : "Unavailable"}

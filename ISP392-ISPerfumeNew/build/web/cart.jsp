@@ -33,7 +33,38 @@
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/stylePopup.css" rel="stylesheet">
+        <style>
+            /* Ẩn checkbox mặc định */
+            input[type="checkbox"] {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                width: 16px;
+                height: 16px;
+                border: 2px solid #ccc;
+                border-radius: 3px;
+                position: relative;
+            }
 
+            /* Tạo hiệu ứng khi checkbox được chọn */
+            input[type="checkbox"]:checked {
+                background-color: orange;
+                border-color: orange;
+            }
+
+            /* Tạo dấu tích (checkmark) khi checkbox được chọn */
+            input[type="checkbox"]:checked::after {
+                content: "";
+                position: absolute;
+                top: 2px;
+                left: 4px;
+                width: 4px;
+                height: 8px;
+                border: solid white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->

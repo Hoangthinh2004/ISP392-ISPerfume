@@ -166,7 +166,7 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0">
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important; min-height: 540px;">
                         <div class="col-md-12 col-lg-11 text-start">
                             <div class="bg-light rounded h-100 p-4">
                                 <h6 class="mb-4">Create Form</h6>

@@ -180,7 +180,7 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important" >
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important; min-height: 540px;">
                         <!--                        <div class="col-md-6 text-center">-->
                         <!-- Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">

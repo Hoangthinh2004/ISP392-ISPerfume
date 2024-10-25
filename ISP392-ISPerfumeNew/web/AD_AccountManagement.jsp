@@ -157,8 +157,8 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <a href="AD_AccountManagement.jsp" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>Name Admin</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -300,7 +300,7 @@
                     <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0 " style="height: auto !important;">
                         <div class="table-responsive">
                             <div class="col-sm-12 col-xl-12">
-                                <div class="bg-light rounded h-100 p-4" style=" min-height: 150px;">
+                                <div class="bg-light rounded h-100 p-4" style=" min-height: 540px;">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <h6 class="mb-4">User Management</h6>
                                         <div class="nav-item dropdown" style="width: 150px;">
@@ -426,9 +426,6 @@
                                             </table>
                                         </c:if>
                                     </c:if>
-
-
-
                                 </div>
                             </div>
                         </div>

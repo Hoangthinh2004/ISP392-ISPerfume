@@ -32,6 +32,129 @@
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/stylePopup.css" rel="stylesheet">
+        <style>
+            /* Nút close (x) */
+            .btn-close {
+                background: none;
+                border: none;
+                font-size: 1.5rem; /* Tăng kích thước font cho nút close */
+                color: #6c757d; 
+                transition: color 0.2s ease;
+                position: absolute;
+                right: 15px; /* Tăng khoảng cách sang phải */
+                top: 50%;
+                transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+                cursor: pointer;
+            }
+
+            .btn-close:hover {
+                color: #000;
+            }
+
+            .fade-out {
+                opacity: 1;
+                transition: opacity 0.3s ease-out;
+            }
+
+            .fade-out.hide {
+                opacity: 0;
+            }
+
+            .alert {
+                padding: 20px 30px;
+                font-size: 18px;
+                max-width: 400px; 
+                position: fixed; 
+                top 20px; 
+                right: 20px;
+                z-index: 1050; 
+                border: 1px solid transparent;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #d4edda;
+                border-color: #c3e6cb;
+                color: #155724;
+            }
+
+            /* Thanh progress bar bên trong alert */
+            .progress-bar-timer {
+                border-radius: 24px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 8px;
+                width: 100%;
+                background-color: #28a745;
+                transition: width linear;
+            }
+
+            .alert-dismissible {
+                padding-right: 60px; 
+            }
+
+            .size-button {
+                display: inline-block; 
+                border: 2px solid orange;
+                padding: 5px 10px; 
+                background-color: transparent; 
+                color: orange; 
+                text-decoration: none; 
+                border-radius: 5px; 
+                transition: background-color 0.3s; 
+            }
+
+            .size-button:hover {
+                transform: scale(1.1);
+                transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.3s ease; 
+            }
+
+            .size-button.active {
+                background-color: orange; 
+                color: white
+            }
+           
+
+            .product-img {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                height: 300px; 
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .product-img img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover; 
+            }
+
+            .product-action {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+            }
+
+            .product-item:hover .product-action {
+                opacity: 1;
+            }
+
+            .text-truncate {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+            }
+
+            h5, .d-flex {
+                margin: 0;
+            }
+
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -209,7 +332,19 @@
                 </button>
             </div>
         </div>
+        <c:if test="${not empty requestScope.MESSAGE}">
+            <div class="alert alert-success alert-dismissible fade show fade-out" role="alert" id="autoDismissAlert" >
+                <i class="fa fa-check-circle me-2"></i> ${requestScope.MESSAGE}
+                <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="progress-bar-timer bg-success" id="progressBar"></div>
+            </div>
+        </c:if>
+
         <!--Pop-up End-->
+
+
 
 
         <!-- Breadcrumb Start -->
@@ -271,10 +406,11 @@
                                     <h3 class="font-weight-semi-bold mb-4"><fmt:formatNumber type="number" value="${price.price}"/>  VND</h3>
                                 </c:forEach>
                                 <div class="d-flex mb-3">
-                                    <strong class="text-dark mr-3">Sizes:</strong>
+                                    <strong class="text-dark mr-2 mt-1">Sizes:</strong>
                                     <c:forEach var="size" items="${sessionScope.AVAILABLE_SIZE}">
                                         <input type="hidden" name="productID" value="${size.productID}"/>
-                                        <a href="MainController?action=PriceBySize&sizeID=${size.sizeID}&productID=${size.productID}">${size.sizeName}</a>
+                                        <a href="MainController?action=PriceBySize&sizeID=${size.sizeID}&productID=${size.productID}" 
+                                           class="size-button ml-2 ${size.sizeID == param.sizeID ? "active" : ""}">${size.sizeName}</a>
                                     </c:forEach>
                                 </div>
                                 <div class="d-flex align-items-center mb-4 pt-2">
@@ -310,7 +446,6 @@
                                         <c:when test="${not empty sessionScope.CUSTOMER_ID}">
                                             <i class="fa fa-shopping-cart mr-1"></i>
                                             <input type="submit" name="action" value="AddToCart" class="btn btn-primary px-3"/>
-                                            ${requestScope.MESSAGE}
                                         </c:when>
                                         <c:otherwise>
                                             <button class="btn btn-primary px-3" onclick="openDeleteModal(this, event)">
@@ -546,6 +681,8 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
         <script>
                                                 function updateQuantity(change, event) {
                                                     event.preventDefault();
@@ -570,6 +707,21 @@
                                                     document.getElementById('deleteConfirmation').style.display = 'none';
                                                     document.getElementById('modalOverlay').style.display = 'none';
                                                 }
+
+                                                var duration = 5000;
+                                                var progressBar = document.getElementById('progressBar');
+                                                var alertElement = document.getElementById('autoDismissAlert');
+
+                                                progressBar.style.transitionDuration = duration + 'ms';
+                                                progressBar.style.width = '0%';
+
+                                                setTimeout(function () {
+                                                    alertElement.classList.add('hide');
+                                                    setTimeout(function () {
+                                                        alertElement.remove();
+                                                    }, 200);
+                                                }, duration);
+
 
         </script>
 

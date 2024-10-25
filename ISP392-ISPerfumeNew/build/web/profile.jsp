@@ -31,9 +31,7 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">    
-        <style>
-
-        </style>
+     
     </head>
     <body>
         <!-- Topbar Start -->
@@ -118,7 +116,7 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
+                                <a href="MainController?action=HomeController" class="nav-item nav-link">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <div class="nav-item dropdown">
                                         <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
@@ -148,7 +146,7 @@
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
                                 <c:choose>
                                     <c:when test="${empty sessionScope.CUSTOMER_ID}">
-                                        <button class="btn btn-sm d-flex align-items-center flex-column" data-toggle="dropdown">
+                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
                                             <i class="fas fa fa-user text-primary"></i>
                                             <span class="ml-auto text-primary">Account</span>
                                         </button>                                        
@@ -158,9 +156,9 @@
                                         </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <button class="btn btn-sm align-items-center d-flex flex-column" data-toggle="dropdown">
+                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
                                             <i class="fas fa fa-user text-primary"></i>
-                                            <span class="ml-auto text-primary">${sessionScope.CUSTOMER.name}</span>
+                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
