@@ -90,7 +90,21 @@
                 outline: none;
                 box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
             }
+            .product-img {
+                height: 300px; 
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: transparent; 
+            }
 
+            .product-image {
+                height: 100%;
+                width: auto; 
+                object-fit: cover; 
+                transition: transform 0.3s ease-in-out; 
+            }
         </style>
     </head>
     <body>
