@@ -107,7 +107,5 @@ public class ProductDetailDTO {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-     
+    }   
 }

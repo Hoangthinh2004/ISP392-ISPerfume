@@ -5,14 +5,16 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
-import isp392.category.CategoryDAO;
-import isp392.category.CategoryDTO;
+import isp392.product.ProductDAO;
+import isp392.product.ProductDTO;
+import isp392.product.ProductDetailDAO;
+import isp392.product.ProductDetailDTO;
 import isp392.size.SizeDAO;
 import isp392.size.SizeDTO;
+import isp392.user.UserDAO;
+import isp392.user.UserDTO;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,35 +27,48 @@ import javax.servlet.http.HttpSession;
  *
  * @author duyhc
  */
-@WebServlet(name = "GetBrandCategoriesManager", urlPatterns = {"/GetBrandCategoriesManager"})
-public class GetBrandCategoriesManager extends HttpServlet {
+@WebServlet(name = "GetAllInfoForOrder", urlPatterns = {"/GetAllInfoForOrder"})
+public class GetAllInfoForOrder extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     private static final String ERROR = "ShowAllOrderStaffController";
-    private static final String SUCCESS = "MGR_ProductManagement.jsp";
+    private static final String SUCCESS = "ShowAllOrderStaffController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession ses =request.getSession();
         String url = ERROR;
-        BrandDAO brandDAO = new BrandDAO();
-        CategoryDAO cateDAO = new CategoryDAO();
+        UserDAO dao = new UserDAO();
+        ProductDetailDAO proDeDAO = new ProductDetailDAO();
+        ProductDAO proDAO = new ProductDAO();
         SizeDAO sizeDAO = new SizeDAO();
-        try {
-            List<BrandDTO> brandList = brandDAO.getListBrand();
-            List<CategoryDTO> cateList = cateDAO.getListCategory();
-            List<SizeDTO> sizeList = sizeDAO.getListSize();
-            if (brandList != null || cateList!=null ||sizeList!=null) {
-                HttpSession ses = request.getSession();
-                ses.setAttribute("BRAND_LIST_MANAGER", brandList);
-                ses.setAttribute("CATEGORY_LIST_MANAGER", cateList);
-                ses.setAttribute("SIZE_LIST_MANAGER", sizeList);
+        try {      
+            List<UserDTO> listUser = dao.getListUser();
+            List<ProductDetailDTO> listProDe = proDeDAO.getListAllProductDetail();
+            List<ProductDTO> listPro = proDAO.getListProductManager("");
+            List<SizeDTO> listSize = sizeDAO.getListSize();
+            if (listUser != null || listProDe!=null || listPro!=null || listSize!=null) {
+                ses.setAttribute("LIST_USER_STAFF", listUser);
+                ses.setAttribute("LIST_PRODUCT_DETAIL_STAFF", listProDe);
+                ses.setAttribute("LIST_PRODUCT_STAFF", listPro);
+                ses.setAttribute("LIST_SIZE_STAFF", listSize);
                 url = SUCCESS;
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            log("Error at GetBrandControllerManager: " + e.toString());
+        } catch (Exception e) {
+            log("Error at GetAllInfoForOrder: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

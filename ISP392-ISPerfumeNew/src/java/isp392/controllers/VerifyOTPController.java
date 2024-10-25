@@ -5,15 +5,11 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
-import isp392.category.CategoryDAO;
-import isp392.category.CategoryDTO;
-import isp392.size.SizeDAO;
-import isp392.size.SizeDTO;
+import isp392.forgotpassword.ForgotPasswordDAO;
+import isp392.forgotpassword.ForgotPasswordDTO;
+import isp392.forgotpassword.ForgotPasswordError;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,33 +21,36 @@ import javax.servlet.http.HttpSession;
  *
  * @author duyhc
  */
-@WebServlet(name = "GetBrandCategoriesManager", urlPatterns = {"/GetBrandCategoriesManager"})
-public class GetBrandCategoriesManager extends HttpServlet {
+@WebServlet(name = "VerifyOTPController", urlPatterns = {"/VerifyOTPController"})
+public class VerifyOTPController extends HttpServlet {
 
-    private static final String ERROR = "ShowAllOrderStaffController";
-    private static final String SUCCESS = "MGR_ProductManagement.jsp";
-
+    private static final String ERROR ="verifyOTP.jsp";
+    private static final String SUCCESS = "changePasswordForgot.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        BrandDAO brandDAO = new BrandDAO();
-        CategoryDAO cateDAO = new CategoryDAO();
-        SizeDAO sizeDAO = new SizeDAO();
+        ForgotPasswordDAO dao = new ForgotPasswordDAO();
+        ForgotPasswordError err = new ForgotPasswordError();
+        HttpSession ses = request.getSession();
         try {
-            List<BrandDTO> brandList = brandDAO.getListBrand();
-            List<CategoryDTO> cateList = cateDAO.getListCategory();
-            List<SizeDTO> sizeList = sizeDAO.getListSize();
-            if (brandList != null || cateList!=null ||sizeList!=null) {
-                HttpSession ses = request.getSession();
-                ses.setAttribute("BRAND_LIST_MANAGER", brandList);
-                ses.setAttribute("CATEGORY_LIST_MANAGER", cateList);
-                ses.setAttribute("SIZE_LIST_MANAGER", sizeList);
-                url = SUCCESS;
+            String otp = request.getParameter("otp");
+            ForgotPasswordDTO forgotPasswordDTO = dao.checkExist(otp);
+            if(forgotPasswordDTO!=null){
+                int userID = forgotPasswordDTO.getUserID();
+                ses.setAttribute("USERID", userID);
+                boolean checkDel = dao.deleteOTP(otp, userID);
+                if(checkDel){
+                    url = SUCCESS;
+                }
+            }else{
+                err.setTokenError("Wrong OTP !!!");
+                request.setAttribute("ERROR_FORGOT_PASSWORD", err);
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            log("Error at GetBrandControllerManager: " + e.toString());
-        } finally {
+        } catch (Exception e) {
+            log("Error at VerifyOTPController: "+e.toString());
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
