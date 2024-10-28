@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author duyhc
+ * @author GIGABYTE
  */
 public class CustomerDTO {
     private int customerID;
@@ -31,6 +31,7 @@ public class CustomerDTO {
         this.dayOfBirth = dayOfBirth;
     }
 
+  
     public int getCustomerID() {
         return customerID;
     }
@@ -78,7 +79,6 @@ public class CustomerDTO {
     public void setDayOfBirth(Date dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
     }
-    
     
     
 }

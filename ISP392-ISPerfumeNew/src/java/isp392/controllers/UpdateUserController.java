@@ -24,13 +24,12 @@ import javax.servlet.http.HttpSession;
 public class UpdateUserController extends HttpServlet {
 
     private static final String ERROR = "SearchUserController";
-    private static final String SUCCESS = "SearchUserController";
-
+    private static final String SUCCESS = "FilterByEmployeeController";
+    
     private static final String EMAIL_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final String NAME_REGEX = "^[a-zA-Z]+$";
     private static final String PHONE_REGEX = "^(0[1-9]{1}[0-9]{8})$";
-    private static final String NUMBER_EMAIL_REGEX = "^\\d+@gmail.com$";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -57,11 +56,7 @@ public class UpdateUserController extends HttpServlet {
                 userError.setEmailError("Not be empty");
                 checkValidation = false;
             }
-            if (email.matches(NUMBER_EMAIL_REGEX)) {
-                userError.setEmailError("Not available email");
-                checkValidation = false;
-            }
-            if (!email.matches(EMAIL_REGEX)) {
+            if(!email.matches(EMAIL_REGEX)){
                 userError.setEmailError("Not available email");
                 checkValidation = false;
             }

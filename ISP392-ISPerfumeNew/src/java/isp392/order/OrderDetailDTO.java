@@ -7,50 +7,22 @@ package isp392.order;
 
 /**
  *
- * @author anhng
+ * @author duyhc
  */
 public class OrderDetailDTO {
-    private String productName;
-    private int quantity;
-    private int price;
     private int orderID;
+    private int productDetailID;
+    private int quantity;
+    private int unitPrice;
 
     public OrderDetailDTO() {
-        this.productName = "";
-        this.quantity = 0;
-        this.price = 0;
-        this.orderID = 0;
     }
 
-    public OrderDetailDTO( int orderID,String productName, int quantity, int price) {
-        this.productName = productName;
-        this.quantity = quantity;
-        this.price = price;
+    public OrderDetailDTO(int orderID, int productDetailID, int quantity, int unitPrice) {
         this.orderID = orderID;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
+        this.productDetailID = productDetailID;
         this.quantity = quantity;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+        this.unitPrice = unitPrice;
     }
 
     public int getOrderID() {
@@ -61,5 +33,27 @@ public class OrderDetailDTO {
         this.orderID = orderID;
     }
 
-    
+    public int getProductDetailID() {
+        return productDetailID;
+    }
+
+    public void setProductDetailID(int productDetailID) {
+        this.productDetailID = productDetailID;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(int unitPrice) {
+        this.unitPrice = unitPrice;
+    }
 }

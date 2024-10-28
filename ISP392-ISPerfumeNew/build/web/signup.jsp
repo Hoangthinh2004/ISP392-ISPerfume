@@ -1,4 +1,4 @@
-<%-- 
+  <%-- 
     Document   : signup
     Created on : Sep 28, 2024, 4:02:06 PM
     Author     : User
@@ -172,19 +172,19 @@
                                     <div class="form-floating mb-3">
                                         <label for="floatingInput">Username*</label>
                                         <input type="text" class="form-control" id="floatingInput"
-                                               placeholder="${requestScope.INSERT_USER_CUST_ERROR.nameErr}" name="userName" required="" >
+                                               placeholder="${requestScope.INSERT_USER_CUST_ERROR.nameError}" name="userName" required="" >
                                     </div>
 
                                     <div class="form-floating mb-3">
                                         <label for="floatingInput">Email*</label>
                                         <input type="email" class="form-control" id="floatingInput"
-                                               placeholder="${requestScope.INSERT_USER_CUST_ERROR.emailErr}" name="email" required="">
+                                               placeholder="${requestScope.INSERT_USER_CUST_ERROR.emailError}" name="email" required="">
                                     </div>
 
                                     <div class="form-floating mb-3">
                                         <label for="floatingInput">Phone number*</label>
                                         <input type="text" class="form-control" id="floatingInput"
-                                               placeholder="${requestScope.INSERT_USER_CUST_ERROR.phoneErr}" name="phoneNum" required="">
+                                               placeholder="${requestScope.INSERT_USER_CUST_ERROR.phoneError}" name="phoneNum" required="">
                                     </div>
 
                                     <div class="form-floating mb-4">
@@ -196,7 +196,7 @@
                                     <div class="form-floating mb-4">
                                         <label for="floatingPassword">Confirm password*</label>
                                         <input type="password" class="form-control" id="floatingPassword"
-                                               placeholder="${requestScope.INSERT_USER_CUST_ERROR.confirmPasswordErr}" name="confirmPassword" required="">
+                                               placeholder="${requestScope.INSERT_USER_CUST_ERROR.confirmPasswordError}" name="confirmPassword" required="">
                                     </div>
 
                                     <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="action" value="registerNewUser">Register</button>
@@ -205,7 +205,7 @@
 
                                     </div>
                                 </form>
-                                <p class="text-center mb-0">Do you already have an account ? <a href="signin.jsp">Sign In</a></p>
+<!--                                <p class="text-center mb-0">Do you already have an account ? <a href="signin.jsp">Sign In</a></p>-->
                                 <div class="d-flex align-items-center justify-content-between mb-4" style="margin: 28px 0 0 32px;">
                                     <button class="button-signin text-center" style="width: 310px; padding-left: 68px; ">
                                         <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" class="svg">

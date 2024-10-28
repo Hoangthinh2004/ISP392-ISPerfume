@@ -5,45 +5,46 @@
  */
 package isp392.order;
 
+import java.sql.Date;
+
 /**
  *
  * @author ThinhHoang
  */
 public class OrderDTO {
-    private int shipperID;
     private int orderID;
-    private String customerName;
-    private String phone;
-    private String address;
-    private String note;
+    private int cartID;
+    private int staffID;
+    private int shipperID;
+    private int promotionID;
+    private int customerID;
+    private Date orderDate;
     private int orderStatus;
+    private String city;
+    private String district;
+    private String ward;
+    private String address;
+    private String phone;
+    private String note;
 
-    public OrderDTO() {   
-        this.shipperID = 0;
-        this.orderID = 0;
-        this.customerName = "";
-        this.phone = "";
-        this.address = "";
-        this.note = "";
-        this.orderStatus = 0;
+    public OrderDTO() {
     }
 
-    public OrderDTO(int shipperID, int orderID, String customerName, String phone, String address, String note, int orderStatus) {
-        this.shipperID = shipperID;
+    public OrderDTO(int orderID, int cartID, int staffID, int shipperID, int promotionID, int customerID, Date orderDate, int orderStatus, String city, String district, String ward, String address, String phone, String note) {
         this.orderID = orderID;
-        this.customerName = customerName;
-        this.phone = phone;
-        this.address = address;
-        this.note = note;
-        this.orderStatus = orderStatus;
-    }
-
-    public int getShipperID() {
-        return shipperID;
-    }
-
-    public void setShipperID(int shipperID) {
+        this.cartID = cartID;
+        this.staffID = staffID;
         this.shipperID = shipperID;
+        this.promotionID = promotionID;
+        this.customerID = customerID;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.city = city;
+        this.district = district;
+        this.ward = ward;
+        this.address = address;
+        this.phone = phone;
+        this.note = note;
     }
 
     public int getOrderID() {
@@ -54,20 +55,84 @@ public class OrderDTO {
         this.orderID = orderID;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public int getCartID() {
+        return cartID;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCartID(int cartID) {
+        this.cartID = cartID;
     }
 
-    public String getPhone() {
-        return phone;
+    public int getStaffID() {
+        return staffID;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setStaffID(int staffID) {
+        this.staffID = staffID;
+    }
+
+    public int getShipperID() {
+        return shipperID;
+    }
+
+    public void setShipperID(int shipperID) {
+        this.shipperID = shipperID;
+    }
+
+    public int getPromotionID() {
+        return promotionID;
+    }
+
+    public void setPromotionID(int promotionID) {
+        this.promotionID = promotionID;
+    }
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
     }
 
     public String getAddress() {
@@ -78,20 +143,20 @@ public class OrderDTO {
         this.address = address;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getNote() {
         return note;
     }
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public int getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(int orderStatus) {
-        this.orderStatus = orderStatus;
     }
     
 }

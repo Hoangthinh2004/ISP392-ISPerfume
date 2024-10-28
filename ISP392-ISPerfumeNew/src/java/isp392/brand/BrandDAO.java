@@ -31,6 +31,11 @@ public class BrandDAO {
             + "WHERE P.ProductID = ?";
     private static final String UPDATE_BRAND = "UPDATE Brands SET  BrandName = ?, Description = ?, Status = ? WHERE BrandID = ?";
     private static final String COUNT = "SELECT  COUNT(BrandID) as BrandID FROM Brands";
+    private static final String BRAND_INFORMATION = "SELECT * FROM Brands WHERE BrandID = ?";
+    private static final String BRAND_BY_CATE = "SELECT C.CategoryID, B.BrandID, C.CategoryName, B.BrandName, B.Image, B.Description, B.Status FROM Brands B "
+                                            +   "INNER JOIN Categories_Brands CB ON CB.BrandID = B.BrandID "
+                                            +   "INNER JOIN Categories C ON C.CategoryID = CB.CategoryID "
+                                            +   "WHERE B.Status = 1";
 
     public List<BrandDTO> getListBrandManager(String search) throws SQLException, ClassNotFoundException {
 
@@ -252,5 +257,74 @@ public class BrandDAO {
         }
         return listBrand;
     }
+
+    public List<BrandDTO> showBrandInfor(int brandID) throws ClassNotFoundException, SQLException {
+        List<BrandDTO> listBrand = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(BRAND_INFORMATION);
+                ptm.setInt(1, brandID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String brandName = rs.getString("BrandName");
+                    String image = rs.getString("Image");
+                    String description = rs.getString("Description");
+                    listBrand.add(new BrandDTO(brandID, 0, brandName, description, image, true));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listBrand;
+    }
+
+    public List<ViewBrandByCateDTO> getBrandByCate() throws ClassNotFoundException, SQLException {
+        
+        List<ViewBrandByCateDTO> listBrand = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(BRAND_BY_CATE);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int categoryID = rs.getInt("CategoryID");
+                    int brandID = rs.getInt("BrandID");
+                    String cateName = rs.getString("CategoryName");
+                    String brandName = rs.getString("BrandName");
+                    String image = rs.getString("Image");
+                    String description = rs.getString("Description");
+                    boolean brandStatus = rs.getBoolean("Status");
+                    listBrand.add(new ViewBrandByCateDTO(categoryID, brandID, cateName, brandName, image, description, brandStatus));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listBrand;
+    }
+
 
 }

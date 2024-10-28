@@ -8,6 +8,7 @@ package isp392.controllers;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -38,51 +39,47 @@ public class DescendingProductByPriceController extends HttpServlet {
         }
         try {
             Map<String, Integer> categoryIDs = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            Map<String, Integer> searchIDS = (Map<String, Integer>) session.getAttribute("SEARCH_IDS");
+            Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
+            Map<String, Integer> currentBrandID = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID");
             ProductDAO productDAO = new ProductDAO();
-
-            if (searchContent != null) { //Descending in shoppingSearch
-                String search = (String) session.getAttribute("CURRENT_SEARCH");
-                if (searchIDS.containsKey("sizeID")) {
-                    int sizeID = searchIDS.get("sizeID");
-                    List<ViewProductDTO> listProduct = productDAO.DescendingChildSearchResultByPrice(search, sizeID);
-                    request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
-                } else {
-                    List<ViewProductDTO> listProduct = productDAO.DescendingSearchResultByPrice(search);
-                    request.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
-                }
+            List<Integer> sizeIDList = new ArrayList<>();
+            List<Integer> brandID = new ArrayList<>();
+            
+            //Descending in shoppingSearch
+            if (searchContent != null) {
+                String search = (String) session.getAttribute("CURRENT_SEARCH");               
+                if (sizeIDS != null && !sizeIDS.isEmpty()) {
+                    int sizeIDLength = sizeIDS.get("sizeID_length");
+                    if (sizeIDLength == 2) {
+                        sizeIDList.add(sizeIDS.get("sizeID1"));
+                        sizeIDList.add(sizeIDS.get("sizeID2"));
+                    } else if (sizeIDLength == 1) {
+                        sizeIDList.add(sizeIDS.get("sizeID"));
+                    }
+                }               
+                List<ViewProductDTO> listProduct = productDAO.descendingProductByPrice(search, sizeIDList);
+                session.setAttribute("LIST_PRODUCT_SEARCH", listProduct);
                 url = SEARCH;
+                //session.removeAttribute("SIZE_IDS");
             } else { //Descending in Shopping
                 int categoryID = categoryIDs.get("categoryID");
-                if (categoryIDs.containsKey("brandID") && categoryIDs.containsKey("sizeID")) {// CategoryID & BrandID & SizeID                                                                           
-                    int brandID = categoryIDs.get("brandID");
-                    int sizeID = categoryIDs.get("sizeID");
-                    List<ViewProductDTO> listProduct = productDAO.DescendingAllListProductByPrice(categoryID, brandID, sizeID);
-                    if (listProduct.size() > 0) {
-                        request.setAttribute("LIST_PRODUCT", listProduct);
-                    }
-
-                } else if (categoryIDs.containsKey("brandID")) { //CategoryID & brandID
-                    int brandID = categoryIDs.get("brandID");
-                    List<ViewProductDTO> listProduct = productDAO.DescendingListChildProductByPrice(categoryID, brandID);
-                    if (listProduct.size() > 0) {
-                        request.setAttribute("LIST_PRODUCT", listProduct);
-                    }
-                } else if (categoryIDs.containsKey("sizeID")) { // CategoryID & sizeID
-                    int sizeID = categoryIDs.get("sizeID");
-                    List<ViewProductDTO> listProduct = productDAO.DescendingListChildProductByPrice2(categoryID, sizeID);
-                    if (listProduct.size() > 0) {
-                        request.setAttribute("LIST_PRODUCT", listProduct);
-                    }
-                } else { //CategoryID 
-                    List<ViewProductDTO> listProduct = productDAO.DescendingListProductByPrice(categoryID);
-                    if (listProduct.size() > 0) {
-                        request.setAttribute("LIST_PRODUCT", listProduct);
+                if (currentBrandID != null) {
+                    brandID.add(currentBrandID.get("brandID"));
+                } if (sizeIDS != null && !sizeIDS.isEmpty()) {
+                    int sizeIDLength = sizeIDS.get("sizeID_length");
+                    if (sizeIDLength == 2) {
+                        sizeIDList.add(sizeIDS.get("sizeID1"));
+                        sizeIDList.add(sizeIDS.get("sizeID2"));
+                    } else if (sizeIDLength == 1) {
+                        sizeIDList.add(sizeIDS.get("sizeID"));
                     }
                 }
+                
+                List<ViewProductDTO> listProduct = productDAO.descendingCategorizeProduct(categoryID, brandID, sizeIDList);
+                session.setAttribute("LIST_PRODUCT", listProduct);
                 url = CATEGORY;
+                //session.removeAttribute("SIZE_IDS");
             }
-            
         } catch (Exception e) {
             log("Error at DescendingProductByPriceController: " + e.toString());
         } finally {

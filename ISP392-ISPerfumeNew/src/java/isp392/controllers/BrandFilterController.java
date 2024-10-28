@@ -5,11 +5,15 @@
  */
 package isp392.controllers;
 
+import isp392.brand.BrandDAO;
+import isp392.brand.BrandDTO;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.faces.flow.builder.ViewBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,38 +26,46 @@ import javax.servlet.http.HttpSession;
  */
 public class BrandFilterController extends HttpServlet {
 
-    private static final String ERROR="shopping.jsp";
-    private static final String SUCCESS="shopping.jsp";
-    
+    private static final String ERROR = "shopping.jsp";
+    private static final String SUCCESS = "shopping.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
         try {
-            int brandID = Integer.parseInt(request.getParameter("brandID"));
-            
             ProductDAO productDAO = new ProductDAO();
+            BrandDAO brandDAO = new BrandDAO();
             HttpSession session = request.getSession();
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            
             int categoryID = ids.get("categoryID");
-            ids.put("brandID", brandID);
-            if (ids.containsKey("sizeID")) { // Filter by brand after filtering by size
-                int sizeID = ids.get("sizeID");           
-                List<ViewProductDTO> listProduct = productDAO.filterProductByChildBrand(categoryID, brandID, sizeID);
-                request.setAttribute("LIST_PRODUCT", listProduct);
-                //session.removeAttribute("CURRENT_IDS");
-            } else { // Filter by brand after categorizing
+            
+            Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
+            if (sizeIDS != null && !sizeIDS.isEmpty()) {
+                session.removeAttribute("SIZE_IDS");
+            }
+            
+
+            int brandID = Integer.parseInt(request.getParameter("brandID"));
+            
+            Map<String, Integer> currentBrandID = new HashMap<>();           
+            currentBrandID.put("brandID", brandID);
+            session.setAttribute("CURRENT_BRANDID", currentBrandID); // Store brandID for filter By size controller
+            
+            if (categoryID != 0 && brandID != 0) {
                 List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
-                request.setAttribute("LIST_PRODUCT", listProduct);
-            }            
-            //session.setAttribute("CURRENT_IDS", ids); //Store sizeID & categoryID into attribute for DescendingProductByPrice Controller          
+                session.setAttribute("LIST_PRODUCT", listProduct);
+                
+                List<BrandDTO> brandInfor = brandDAO.showBrandInfor(brandID);
+                session.setAttribute("BRAND_INFOR", brandInfor);
+                
+            }
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at BrandFilterController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-          
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
