@@ -1,12 +1,11 @@
 <%-- 
-   Document   : AD_AccountManagement
-   Created on : Oct 4, 2024, 9:24:31 AM
-   Author     : User
+    Document   : SHIPPER_OrderDetailManagement
+    Created on : Oct 19, 2024, 12:02:36 PM
+    Author     : anhng
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="java.util.List"%>
-<%@page import="isp392.user.UserDTO"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,8 +29,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="dashmin/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="dashmin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="dashmin/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +38,6 @@
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
     </head>
-
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
             <!-- Spinner Start -->
@@ -49,7 +47,6 @@
                 </div>
             </div>
             <!-- Spinner End -->
-
 
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
@@ -68,16 +65,15 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-plus me-2"></i>Create Account</a>
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Create Manager</a>
-                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Create Staff</a>
-                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Create Shipper</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
+                                <a href="MainController?action=ViewPromotion" class="dropdown-item active">Promotion Management</a>
                             </div>
-                        </div>
-
+                        </div>                      
                     </div>
                 </nav>
             </div>
@@ -94,14 +90,6 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4" action="MainController" method="GET">
-                        <input class="form-control border-0" type="search" placeholder="SearchUser" name="">
-                        <button class="btn btn-primary" type="submit" name="action" value="SearchUser" style="margin-left: 10px;">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </button>
-                    </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -145,7 +133,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="fa fa-bell me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Notification</span>
+                                <span class="d-none d-lg-inline-flex">Notificatin</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">
@@ -181,103 +169,63 @@
                 </nav>
                 <!-- Navbar End -->
 
+
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0 " style="height: auto !important">
-                        <div class="table-responsive">
-                            <div class="col-sm-12 col-xl-12">
-                                <div class="bg-light rounded h-100 p-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-4">User Management</h6>
-                                        <a href="AD_CreateAccount.jsp" class="btn btn-primary">Create New User</a>
-                                    </div>
-                                    <div class="nav-item dropdown" style="width: 150px;">
-                                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                            <span class="d-none d-lg-inline-flex">Filter</span>
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <a href="MainController?action=FilterByEmployee" class="dropdown-item">Employee</a>
-                                            <a href="MainController?action=FilterByCustomer" class="dropdown-item">Customer</a>
-                                        </div>
-                                    </div>
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important" >
+                        <!--                        <div class="col-md-6 text-center">-->
+                        <!-- Recent Sales Start -->
+                        <div class="container-fluid pt-4 px-4">
+                            <div class="bg-light text-center rounded p-4">
+                                <div class="d-flex align-items-center justify-content-between mb-4" >
+                                    <h6 class="mb-0">Order's Shipper Detail</h6>
+                                </div>
 
-                                    <c:if test="${requestScope.LIST_USER != null}">
-                                        <c:if test="${!empty requestScope.LIST_USER}"> 
-                                            <table class="table table-hover">
-                                                <thead>
-
-                                                    <tr>
-                                                        <th scope="col">User ID</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Email</th>
-                                                        <th scope="col">Phone</th>
-                                                        <th scope="col">Status</th>
-                                                        <th scope="col">Role</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach var="user" varStatus="counter" items="${requestScope.LIST_USER}">
-                                                    <form action="MainController" method="POST">
-                                                        <tr>
-                                                            <td>
-                                                                <input name="userID" value="${user.userID}" readonly="">
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" name="name" value="${user.name}"
-                                                                       <c:if test="${user.roleID == 1}">
-                                                                           readonly="readonly"
-                                                                       </c:if>>
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" name="email" value="${user.email}"
-                                                                       <c:if test="${user.roleID == 1}"> readonly="readonly"
-                                                                       </c:if>
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" name="phone" value="${user.phone}" 
-                                                                       <c:if test="${user.roleID == 1}">
-                                                                           readonly="readonly"
-                                                                       </c:if>>
-                                                            </td>
-                                                            <td>
-                                                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                                                    <span class="d-none d-lg-inline-flex"></span>
-                                                                </a>
-                                                                <div class="dropdown-menu" >
-                                                                    <a href="MainController?action=UpdateUserStatus&status=1&userID=${user.userID}" class="dropdown-item">Available</a>
-                                                                    <a href="MainController?action=UpdateUserStatus&status=0&userID=${user.userID}" class="dropdown-item">Unavailable</a>
-                                                                </div> 
-                                                            </td>
-                                                            <td>
-                                                                <c:forEach var="role" items="${requestScope.LIST_ROLE}">
-                                                                    <c:if test="${role.roleID == user.roleID}">    
-                                                                        ${role.name}
-                                                                        <input type="hidden" name="roleID" value="${role.roleID}">
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </td>
-                                                            <c:if test="${user.roleID > 1}">
-                                                                <td>
-                                                                    <input type="submit" name="action" value="UpdateUser" class="btn btn-sm btn-primary">
-                                                                    <input type="hidden" name="search" value=""/>
-                                                                </td>
-                                                            </c:if>
-                                                        </tr>
-                                                    </form>
-                                                </c:forEach>
-                                                ${requestScope.UPDATE_USER_ERROR.nameError}
-                                                ${requestScope.UPDATE_USER_ERROR.emailError}
-                                                ${requestScope.UPDATE_USER_ERROR.phoneError}
-                                                </tbody>
-                                            </table>
-                                        </c:if>
-                                    </c:if>
-
-
-
+                                <div class="table-responsive" style="height: auto">
+                                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                        <thead>
+                                            <tr class="text-dark">
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Total Unit Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="shipper" items="${sessionScope.LIST_ORDER_DETAIL}">
+                                            <form action="MainController" method="POST">
+                                                <tr>
+                                                    <td>${shipper.productName}</td>
+                                                    <td>${shipper.quantity}</td>
+                                                    <td><fmt:formatNumber type="number" value="${shipper.price}" /> VND</td>
+                                                    <td>
+                                                        <c:set var="unitTotal" value="${shipper.quantity * shipper.price}" ></c:set>
+                                                        <c:set var="Total" value="${unitTotal + Total}" ></c:set>
+                                                        <fmt:formatNumber type="number" value="${unitTotal}" /> VND
+                                                        <input type="hidden" name="Total" value="${shipper.quantity * shipper.price}"/>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        </c:forEach>
+                                        <c:forEach var="promotion" items="${sessionScope.LIST_PROMOTION}">
+                                            <c:if test="${Total >= promotion.condition}">s
+                                                <tr>
+                                                    <td colspan="3" style="text-align: right;"><strong>Promotion:</strong></td>
+                                                    <td><strong><c:out value="${promotion.discountPer}%" /></strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+                                                    <td><strong><fmt:formatNumber type="number" value="${Total * ((100-promotion.discountPer)/100)}"/> VND</strong></td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- Recent Sales End -->
+                        <!--</div>-->
                     </div>
                 </div>
                 <!-- Blank End -->

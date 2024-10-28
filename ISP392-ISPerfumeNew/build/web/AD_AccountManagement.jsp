@@ -1,7 +1,7 @@
 <%-- 
-    Document   : AD_AccountManagement
-    Created on : Oct 4, 2024, 9:24:31 AM
-    Author     : User
+   Document   : AD_AccountManagement
+   Created on : Oct 4, 2024, 9:24:31 AM
+   Author     : User
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -187,8 +187,10 @@
                         <div class="table-responsive">
                             <div class="col-sm-12 col-xl-12">
                                 <div class="bg-light rounded h-100 p-4">
-                                    <h6 class="mb-4">User Management</h6>
-
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <h6 class="mb-4">User Management</h6>
+                                        <a href="AD_CreateAccount.jsp" class="btn btn-primary">Create New User</a>
+                                    </div>
                                     <div class="nav-item dropdown" style="width: 150px;">
                                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                             <span class="d-none d-lg-inline-flex">Filter</span>
@@ -211,11 +213,7 @@
                                                         <th scope="col">Phone</th>
                                                         <th scope="col">Status</th>
                                                         <th scope="col">Role</th>
-
-                                                        <!--                                                        <th scope="col">Update</th>-->
-
                                                     </tr>
-
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach var="user" varStatus="counter" items="${requestScope.LIST_USER}">
@@ -232,9 +230,8 @@
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="email" value="${user.email}"
-                                                                       <c:if test="${user.roleID == 1}">
-                                                                           readonly="readonly"
-                                                                       </c:if>>
+                                                                       <c:if test="${user.roleID == 1}"> readonly="readonly"
+                                                                       </c:if>
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="phone" value="${user.phone}" 
@@ -251,11 +248,6 @@
                                                                     <a href="MainController?action=UpdateUserStatus&status=0&userID=${user.userID}" class="dropdown-item">Unavailable</a>
                                                                 </div> 
                                                             </td>
-                                                            <!--                                                                                                                              <select name="status" class="form-control">
-                                                                                                                                                                                                <option value="0" ${user.status == 0 ? 'selected' : ''}>Unavailable</option>
-                                                                                                                                                                                                <option value="1" ${user.status == 1 ? 'selected' : ''}>Available</option>
-                                                                                                                                                                                            </select>-->
-
                                                             <td>
                                                                 <c:forEach var="role" items="${requestScope.LIST_ROLE}">
                                                                     <c:if test="${role.roleID == user.roleID}">    

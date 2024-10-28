@@ -29,6 +29,10 @@ public class ProductDTO {
         this.description = "";
         this.image = "";
         this.status = 0;
+        this.country = "";
+        this.releaseDate = 0;
+        this.fragranceFamilies = "";
+        this.status = 0;
     }
 
     public ProductDTO(int productID, int managerID, int brandID, String name, String description, String image, String country, int releaseDate, String fragranceFamilies, int status) {

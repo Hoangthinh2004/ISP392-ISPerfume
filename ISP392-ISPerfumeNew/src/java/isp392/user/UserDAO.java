@@ -31,6 +31,7 @@ public class UserDAO {
     private static final String FILTER_EMPLOYEE = "SELECT UserID, Name, Email, Phone, Status, RoleID FROM Users where RoleID not like 1";
     private static final String FILTER_CUSTOMER = "SELECT UserID, Name, Email, Phone, Status, RoleID FROM Users where RoleID =1";
     private static final String UPDATE_USER_STATUS = "UPDATE Users SET Status=? WHERE UserID=?";
+    private static final String CREATE_EMPLOYEE_ACCOUNT = "INSERT INTO Users(Name, Email, Password, Phone, Status, RoleID) VALUES(?,?,?,?,?,?)";
 
     public boolean checkEmailExisted(String email) throws ClassNotFoundException, SQLException {
         boolean check = false;
@@ -324,6 +325,34 @@ public class UserDAO {
                 conn.close();
             }
 
+        }
+        return check;
+    }
+    
+    public boolean createEmployeeAccount(String name, String email, String password,String phone, int status, int roleID ) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+//            INSERT INTO Promotion(PromotionName,ManagerID,Description,StartDate,EndDate,DiscountPer,Condition,Status) VALUES(?,?,?,?,?,?,?,?)
+            if (conn != null) {
+                ptm = conn.prepareStatement(CREATE_EMPLOYEE_ACCOUNT);
+                ptm.setString(1, name);
+                ptm.setString(2, email);
+                ptm.setString(3, password);
+                ptm.setString(4, phone);
+                ptm.setInt(5, status);
+                ptm.setInt(6, roleID);
+                check = ptm.executeUpdate() > 0;
+            }
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return check;
     }

@@ -4,6 +4,7 @@
     Author     : User
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page import="java.util.List"%>
 <%@page import="isp392.promotion.PromotionDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

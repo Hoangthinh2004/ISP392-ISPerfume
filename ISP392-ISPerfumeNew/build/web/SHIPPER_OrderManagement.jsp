@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -81,8 +82,14 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
+
+                    <form class="d-none d-md-flex ms-4" action="MainController" method="GET">
                         <input class="form-control border-0" type="search" placeholder="Search">
+                        <button class="btn btn-primary" type="submit" name="action" value="SHIPPER_SearchOrder" style="margin-left: 10px;">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
@@ -169,38 +176,56 @@
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-md-12 col-lg-11 text-start">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Create Form</h6>
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First Name</th>
-                                            <th scope="col">Last Name</th>
-                                            <th scope="col">Email</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>John</td>
-                                            <td>Doe</td>
-                                            <td>jhon@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>mark@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>jacob@email.com</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <h6 class="mb-4">Order's Shipper</h6>
+                                <c:if test="${sessionScope.LIST_ORDER != null}">
+                                    <c:if test="${!empty sessionScope.LIST_ORDER}"> 
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Order ID</th>
+                                                    <th scope="col">Customer Name</th>
+                                                    <th scope="col">Phone</th>
+                                                    <th scope="col">Address</th>
+                                                    <th scope="col">Note</th>
+                                                    <th scope="col">Order Status</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="shipper" items="${sessionScope.LIST_ORDER}">
+                                                <form action="MainController" method="GET">
+                                                    <tr>
+                                                        <td>${shipper.orderID}</td>
+                                                        <td>${shipper.customerName}</td>
+                                                        <td>${shipper.phone}</td>
+                                                        <td>${shipper.address}</td>
+                                                        <td>${shipper.note}</td>
+
+                                                        <td>
+                                                            <form method="POST" action="MainController" id="orderForm">
+                                                                <c:if test="${shipper.orderStatus >= 2}">
+                                                                    <select name="orderStatus" class="form-control bg-transparent" onchange="this.form.submit()">
+                                                                        <c:if test="${shipper.orderStatus == 2}"><option value="2" ${shipper.orderStatus == 2} selected disabled>Choose status</option></c:if>
+                                                                        <option value="3" ${shipper.orderStatus == 3 ? 'selected' : ''}>Are Delivering</option>
+                                                                        <option value="4" ${shipper.orderStatus == 4 ? 'selected' : ''}>Delivered Successfully</option>
+                                                                    </select>
+                                                                    <input type="hidden" name="action" value="SHIPPER_UpdateStatusOrder">
+                                                                    <input type="hidden" name="orderID" value="${shipper.orderID}"/>
+                                                                </c:if>
+                                                            </form>   
+                                                        </td>
+                                                        <td>
+                                                            <form action="MainController" method="GET">
+                                                                <button type="submit" name="action" value="SHIPPER_ViewOrderDetail" class="btn btn-primary">Detail</button>
+                                                                <input type="hidden" name="orderID" value="${shipper.orderID}">
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </c:if>
+                                </c:if>
                             </div>
                         </div>
                     </div>

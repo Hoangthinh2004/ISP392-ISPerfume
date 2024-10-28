@@ -103,10 +103,24 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_USER_STATUS = "UpdateUserStatus";
     private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatusController";
 
-    
     private static final String CREATE_NEW_USER_CUSTOMER = "registerNewUser";
     private static final String CREATE_NEW_USER_CUSTOMER_CONTROLLER = "CreateNewUserCustomerController";
-    
+
+    private static final String SHIPPER_SEARCH_ORDER = "SHIPPER_SearchOrder";
+    private static final String SHIPPER_SEARCH_ORDER_CONTROLLER = "SHIPPER_SearchOrderController";
+
+    private static final String SHIPPER_UPDATE_STATUS_ORDER = "SHIPPER_UpdateStatusOrder";
+    private static final String SHIPPER_UPDATE_STATUS_ORDER_CONTROLLER = "SHIPPER_UpdateStatusOrderController";
+
+    private static final String CREATE_EMPLOYEE_ACCOUNT = "CreateEmployeeAccount";
+    private static final String CREATE_EMPLOYEE_ACCOUNT_CONTROLLER = "CreateEmployeeAccountController";
+
+    private static final String SHIPPER_VIEW_ORDER_DETAIL = "SHIPPER_ViewOrderDetail";
+    private static final String SHIPPER_VIEW_ORDER_DETAIL_CONTROLLER = "SHIPPER_ViewOrderDetailController";
+
+    private static final String LIST_DASHBOARD = "ListDashboard";
+    private static final String LIST_DASHBOARD_CONTROLLER = "ListDashboardController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -169,9 +183,19 @@ public class MainController extends HttpServlet {
                 url = FILTER_BY_CUSTOMER_CONTROLLER;
             } else if (UPDATE_USER_STATUS.equals(action)) {
                 url = UPDATE_USER_STATUS_CONTROLLER;
-            } else if(CREATE_NEW_USER_CUSTOMER.equals(action)){
+            } else if (CREATE_NEW_USER_CUSTOMER.equals(action)) {
                 url = CREATE_NEW_USER_CUSTOMER_CONTROLLER;
-            }
+            } else if (SHIPPER_SEARCH_ORDER.equals(action)) {
+                url = SHIPPER_SEARCH_ORDER_CONTROLLER;
+            } else if (SHIPPER_UPDATE_STATUS_ORDER.equals(action)) {
+                url = SHIPPER_UPDATE_STATUS_ORDER_CONTROLLER;
+            } else if (CREATE_EMPLOYEE_ACCOUNT.equals(action)) {
+                url = CREATE_EMPLOYEE_ACCOUNT_CONTROLLER;
+            } else if (SHIPPER_VIEW_ORDER_DETAIL.equals(action)) {
+                url = SHIPPER_VIEW_ORDER_DETAIL_CONTROLLER;
+            } else if (LIST_DASHBOARD.equals(action)) {
+                url = LIST_DASHBOARD_CONTROLLER;
+            } 
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
