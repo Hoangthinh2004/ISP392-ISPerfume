@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -67,7 +68,7 @@
                         <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
-                            
+
                         </div>                                            
                     </div>
                 </nav>
@@ -171,42 +172,60 @@
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Create Form</h6>
-                                <form action="CreateProductManager" method="post" enctype="multipart/form-data">
+                                <h6 class="mb-4">Create Account Management</h6>
+                                <c:set var="userError" value="${requestScope.USER_ERROR}" />
+
+                                <form action="MainController" method="post">
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productName" required="" class="form-control" placeholder="${requestScope.ERROR.productName}">
+                                            <input type="text" name="name" required="" class="form-control" placeholder="${requestScope.USER_ERROR.nameError}">
                                         </div>
                                     </div>
+
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Decription</label>
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here"
-                                                      id="floatingTextarea" style="height: 150px;"></textarea>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="brandImage"  class="col-sm-2 col-form-label">Image</label>
+                                        <label  class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="file" name="brandImage" class="form-control" required="">
+                                            <input type="text" name="email" required="" class="form-control" placeholder="${requestScope.USER_ERROR.emailError}">
                                         </div>
                                     </div>
-                                    Brand <select name="brandID" class="form-select mb-3" aria-label="Default select example" required="">
-                                        <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
-                                            <option value="${brand.brandID}">${brand.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                    Category <select name="categoryID" class="form-select mb-3" aria-label="Default select example" required="">
-                                        <c:forEach var="cate" items="${sessionScope.CATEGORY_LIST_MANAGER}">
-                                            <c:if test="${cate.categoryID!=4}">
-                                                <option value="${cate.categoryID}">${cate.name}</option>
-                                            </c:if>
-                                        </c:forEach>
-                                    </select>
-                                    <button type="submit"class="btn btn-primary">CREATE</button>
-                                    <input type="hidden" name="search" value="${requestScope.SEARCH}">
+
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Phone</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="phone" required="" class="form-control" placeholder="${requestScope.USER_ERROR.phoneError}" maxlength="10">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="password" required="" class="form-control" placeholder="${requestScope.USER_ERROR.passwordError}">
+                                        </div>
+                                    </div>
+                                        
+                                    <div class="row mb-3">
+                                        <label for="statusSelect" class="col-sm-2 col-form-label">Status</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="statusSelect" name="status"> ${requestScope.USER_ERROR.statusError}
+                                                <option value="1" ${status == 1 ? 'selected' : ''}>Available</option>
+                                                <option value="0" ${status == 0 ? 'selected' : ''}>Unavailable</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="statusSelect" class="col-sm-2 col-form-label">Role</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="statusSelect" name="roleID"> ${requestScope.USER_ERROR.roleIDError}
+                                                <option value="2" ${roleID == 2 ? 'selected' : ''}>Shipper</option>
+                                                <option value="3" ${roleID == 3 ? 'selected' : ''}>Staff</option>
+                                                <option value="4" ${roleID == 4 ? 'selected' : ''}>Manager</option>
+                                                <option value="5" ${roleID == 5 ? 'selected' : ''}>Admin</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button type="submit"class="btn btn-primary" name="action" value="CreateEmployeeAccount">Create</button>
+                                    ${requestScope.USER_ERROR.error}
                                 </form>
                             </div>
                         </div>

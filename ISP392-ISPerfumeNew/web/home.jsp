@@ -159,7 +159,11 @@
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
-                        <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
+                        <form action="MainController" method="POST" id="myForm">
+                            <a class="text-body mr-3" href="MGR_Dashboard.jsp"  onclick="document.getElementById('myForm').submit(); return false;">MANAGER</a>
+                            <input type="hidden" name="action" value="ListDashboard">
+                            
+                        </form>
                         <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
                         <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
                         <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>

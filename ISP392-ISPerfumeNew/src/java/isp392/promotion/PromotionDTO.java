@@ -22,6 +22,15 @@ public class PromotionDTO {
     private int status;
 
     public PromotionDTO() {
+        this.promotionID = 0;
+        this.managerID = 0;
+        this.promotionName = "";
+        this.description = "";
+        this.startDate = null;
+        this.endDate = null;
+        this.discountPer = 0;
+        this.condition = 0;
+        this.status = 0;
     }
 
     public PromotionDTO(int promotionID, int managerID, String promotionName, String description, Date startDate, Date endDate, int discountPer, int condition, int status) {

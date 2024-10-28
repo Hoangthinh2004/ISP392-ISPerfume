@@ -80,6 +80,26 @@
         <servlet-name>UpdateUserStatusController</servlet-name>
         <servlet-class>isp392.controllers.UpdateUserStatusController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SHIPPER_SearchOrderController</servlet-name>
+        <servlet-class>isp392.controllers.SHIPPER_SearchOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SHIPPER_UpdateStatusOrderController</servlet-name>
+        <servlet-class>isp392.controllers.SHIPPER_UpdateStatusOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateEmployeeAccountController</servlet-name>
+        <servlet-class>isp392.controllers.CreateEmployeeAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SHIPPER_ViewOrderDetailController</servlet-name>
+        <servlet-class>isp392.controllers.SHIPPER_ViewOrderDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListDashboardController</servlet-name>
+        <servlet-class>isp392.controllers.ListDashboardController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -159,6 +179,26 @@
     <servlet-mapping>
         <servlet-name>UpdateUserStatusController</servlet-name>
         <url-pattern>/UpdateUserStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SHIPPER_SearchOrderController</servlet-name>
+        <url-pattern>/SHIPPER_SearchOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SHIPPER_UpdateStatusOrderController</servlet-name>
+        <url-pattern>/SHIPPER_UpdateStatusOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateEmployeeAccountController</servlet-name>
+        <url-pattern>/CreateEmployeeAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SHIPPER_ViewOrderDetailController</servlet-name>
+        <url-pattern>/SHIPPER_ViewOrderDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListDashboardController</servlet-name>
+        <url-pattern>/ListDashboardController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

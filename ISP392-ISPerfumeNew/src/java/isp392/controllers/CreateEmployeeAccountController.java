@@ -5,9 +5,7 @@
  */
 package isp392.controllers;
 
-import isp392.role.RoleDTO;
 import isp392.user.UserDAO;
-import isp392.user.UserDTO;
 import isp392.user.UserError;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,15 +13,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author anhng
  */
-public class UpdateUserController extends HttpServlet {
+public class CreateEmployeeAccountController extends HttpServlet {
 
-    private static final String ERROR = "SearchUserController";
+    private static final String ERROR = "AD_CreateAccount.jsp";
     private static final String SUCCESS = "SearchUserController";
 
     private static final String EMAIL_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -39,22 +36,15 @@ public class UpdateUserController extends HttpServlet {
         boolean checkValidation = true;
         UserDAO dao = new UserDAO();
         try {
-            int userID = Integer.parseInt(request.getParameter("userID"));
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            int status = Integer.parseInt(request.getParameter("status"));
             int roleID = Integer.parseInt(request.getParameter("roleID"));
 
-            if (name.isEmpty()) {
-                userError.setNameError("Not be empty");
-                checkValidation = false;
-            }
             if (!name.matches(NAME_REGEX)) {
-                userError.setNameError("Not available name");
-                checkValidation = false;
-            }
-            if (email.isEmpty()) {
-                userError.setEmailError("Not be empty");
+                userError.setNameError("Chi bao gom chu!!!");
                 checkValidation = false;
             }
             if (email.matches(NUMBER_EMAIL_REGEX)) {
@@ -65,28 +55,22 @@ public class UpdateUserController extends HttpServlet {
                 userError.setEmailError("Not available email");
                 checkValidation = false;
             }
-            if (phone.isEmpty()) {
-                userError.setPhoneError("Not be empty");
-                checkValidation = false;
-            }
             if (!phone.matches(PHONE_REGEX)) {
                 userError.setPhoneError("Not available phone");
                 checkValidation = false;
             }
             if (checkValidation) {
-                UserDTO user = new UserDTO(userID, name, email, phone, phone, roleID, roleID);
-                RoleDTO role = new RoleDTO(roleID, name);
-                boolean checkUpdate = dao.update(user);
-                HttpSession session = request.getSession();
-                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                if (checkUpdate) {
+                boolean checkInsert = dao.createEmployeeAccount(name, email, password, phone, status, roleID);
+                if (checkInsert) {
                     url = SUCCESS;
+                } else {
+                    userError.setError("Insert fail, unknow error!");
                 }
             } else {
-                request.setAttribute("UPDATE_USER_ERROR", userError);
+                request.setAttribute("USER_ERROR", userError);
             }
         } catch (Exception e) {
-            log("Error at UpdateUserController: " + e.toString());
+            log("Error at CreateEmployeeAccountController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

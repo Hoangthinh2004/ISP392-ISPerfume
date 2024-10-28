@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.NamingException;
 
 /**
  *
@@ -195,6 +196,7 @@ public class ProductDAO {
                                                                     + "WHERE P.ProName LIKE ? AND PD.SizeID = ? AND PC.CategoryID = 4 AND P.Status = 1 AND PD.Status = 1"
                                                                     + "ORDER BY PD.NumberOfPurchasing DESC";
     
+    private static final String COUNT ="SELECT  COUNT(ProductID) as ProductID FROM Products";
     public List<ViewProductDTO> getListProduct(String search) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
@@ -1142,6 +1144,35 @@ public class ProductDAO {
             if(rs!=null) rs.close();
             if(ptm!=null) ptm.close();
             if(conn!=null) conn.close();
+        }
+        return listProduct;
+    }
+
+    public List<ProductDTO> countAllProduct() throws SQLException, ClassNotFoundException, NamingException {
+        List<ProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if( conn != null){
+                ptm = conn.prepareStatement(COUNT);
+                rs = ptm.executeQuery();
+                while (rs.next()){
+                    int productID = rs.getInt("ProductID");
+                    listProduct.add(new ProductDTO(productID, 0, 0, "", "", "", "", 0, "", 0));
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if(ptm != null){
+                ptm.close();
+            }
+            if( conn != null){
+                conn.close();
+            }
         }
         return listProduct;
     }
