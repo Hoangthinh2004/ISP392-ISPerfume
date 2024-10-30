@@ -7,7 +7,11 @@ package isp392.order;
 
 /**
  *
+<<<<<<< HEAD
  * @author ThinhHoang
+=======
+ * @author duyhc
+>>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
  */
 public class OrderDetailDTO {
     private int orderID;
@@ -16,10 +20,13 @@ public class OrderDetailDTO {
     private int unitPrice;
 
     public OrderDetailDTO() {
+<<<<<<< HEAD
         this.orderID = 0;
         this.productDetailID = 0;
         this.quantity = 0;
         this.unitPrice = 0;
+=======
+>>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
     }
 
     public OrderDetailDTO(int orderID, int productDetailID, int quantity, int unitPrice) {
@@ -60,5 +67,8 @@ public class OrderDetailDTO {
     public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
 }

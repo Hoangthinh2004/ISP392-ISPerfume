@@ -7,6 +7,7 @@ package isp392.product;
 
 import isp392.utils.DBUtils;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -23,11 +23,16 @@ public class OrderDTO {
     private String city;
     private String district;
     private String ward;
+<<<<<<< HEAD
     private String Address;
+=======
+    private String address;
+>>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
     private String phone;
     private String note;
 
     public OrderDTO() {
+<<<<<<< HEAD
         this.orderID = 0;
         this.cartID = 0;
         this.staffID = 0;
@@ -45,6 +50,11 @@ public class OrderDTO {
     }
 
     public OrderDTO(int orderID, int cartID, int staffID, int shipperID, int promotionID, int customerID, Date orderDate, int orderStatus, String city, String district, String ward, String Address, String phone, String note) {
+=======
+    }
+
+    public OrderDTO(int orderID, int cartID, int staffID, int shipperID, int promotionID, int customerID, Date orderDate, int orderStatus, String city, String district, String ward, String address, String phone, String note) {
+>>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
         this.orderID = orderID;
         this.cartID = cartID;
         this.staffID = staffID;
@@ -56,7 +66,11 @@ public class OrderDTO {
         this.city = city;
         this.district = district;
         this.ward = ward;
+<<<<<<< HEAD
         this.Address = Address;
+=======
+        this.address = address;
+>>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
         this.phone = phone;
         this.note = note;
     }
@@ -150,11 +164,19 @@ public class OrderDTO {
     }
 
     public String getAddress() {
+<<<<<<< HEAD
         return Address;
     }
 
     public void setAddress(String Address) {
         this.Address = Address;
+=======
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+>>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
     }
 
     public String getPhone() {
@@ -172,7 +194,10 @@ public class OrderDTO {
     public void setNote(String note) {
         this.note = note;
     }
+<<<<<<< HEAD
 
     
+=======
+>>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
     
 }
