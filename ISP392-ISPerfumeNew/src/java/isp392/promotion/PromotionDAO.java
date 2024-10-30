@@ -20,7 +20,9 @@ import javax.naming.NamingException;
  * @author ThinhHoang
  */
 public class PromotionDAO {
-      private static final String LIST_PROMOTION = "SELECT PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion";
+
+    private static final String LIST_PROMOTION = "SELECT PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion";
+    private static final String PROMOTION_DETAIL = "SELECT PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion WHERE PromotionID = ?";
     private static final String INSERT = "INSERT INTO Promotion(PromotionName,ManagerID,Description,StartDate,EndDate,DiscountPer,Condition,Status) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE Promotion SET PromotionName=?, Description=?, StartDate=?, EndDate=?, DiscountPer=?, Condition=?, Status=?  WHERE PromotionID=?";
     private static final String DUPLICATE = "SELECT PromotionName FROM Promotion WHERE PromotionName=?";
@@ -152,26 +154,41 @@ public class PromotionDAO {
         }
         return check;
     }
-
-//    public boolean delete(int promotionID) throws SQLException, ClassNotFoundException, NamingException {
-//        boolean check = false;
-//        Connection conn = null;
-//        PreparedStatement ptm = null;
-//        try {
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                ptm = conn.prepareStatement(DELETE);
-//                ptm.setInt(1, promotionID);
-//                check = ptm.executeUpdate() > 0 ? true : false;
-//            }
-//        } finally {
-//            if (ptm != null) {
-//                ptm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return check;
-//    }
+    
+    public List<PromotionDTO> getDetail(int promotionID) throws ClassNotFoundException, SQLException {
+        List<PromotionDTO> listPromotion = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PROMOTION_DETAIL);
+                ptm.setInt(1, promotionID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    String promotionName = rs.getString("PromotionName");
+                    int managerID = rs.getInt("ManagerID");
+                    String Description = rs.getString("Description");
+                    Date StartDate = rs.getDate("StartDate");
+                    Date EndDate = rs.getDate("EndDate");
+                    int DiscountPer = rs.getInt("DiscountPer");
+                    int Condition = rs.getInt("Condition");
+                    int Status = rs.getInt("Status");
+                    listPromotion.add(new PromotionDTO(promotionID, managerID, promotionName, Description, StartDate, EndDate, DiscountPer, Condition, Status));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listPromotion;
+    }
 }

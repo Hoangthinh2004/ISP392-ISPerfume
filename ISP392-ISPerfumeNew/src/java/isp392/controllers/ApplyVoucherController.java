@@ -5,9 +5,10 @@
  */
 package isp392.controllers;
 
-import isp392.product.ProductDAO;
-import isp392.product.ViewProductDTO;
+import isp392.promotion.PromotionDAO;
+import isp392.promotion.PromotionDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -20,62 +21,38 @@ import javax.servlet.http.HttpSession;
  *
  * @author ThinhHoang
  */
-public class CategoryController extends HttpServlet {
+public class ApplyVoucherController extends HttpServlet {
 
-    private static final String ERROR = "home.jsp";
-    private static final String SUCCESS = "shopping.jsp";
+    private static final String ERROR = "checkout.jsp";
+    private static final String SUCCESS = "checkout.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int categoryID = Integer.parseInt(request.getParameter("CategoryID"));
-            int brandID = 0;
-            if (request.getParameter("brandID") == null) {
-                brandID = 0;
-            } else {
-                brandID = Integer.parseInt(request.getParameter("brandID"));
-            }
-            
-
-            ProductDAO productDAO = new ProductDAO();
             HttpSession session = request.getSession();
-            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            ids.put("categoryID", categoryID); //store current categoryID and send to Brand & Size filter controller
+            PromotionDAO promotionDAO = new PromotionDAO();
+            Map<String, Integer> promotions = new HashMap<>();
+            session.setAttribute("CUR_PROMOTION", promotions);
 
-            //remove current sizeID
-            Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
-            if (sizeIDS != null && !sizeIDS.isEmpty()) {
-                session.removeAttribute("SIZE_IDS");
-            }
+            int promotionID = Integer.parseInt(request.getParameter("promotionID"));
+            promotions.put("promotionID", promotionID);
+            int finalPrice = 0;
+            List<PromotionDTO> promotion = promotionDAO.getDetail(promotionID);
 
-            //remove current brandID
-            Map<String, Integer> brandIDS = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID");
-            if (brandIDS != null && !brandIDS.isEmpty()) {
-                session.removeAttribute("CURRENT_BRANDID");
-            }
-
-            //remove current search key
-            Object searchContent = session.getAttribute("CURRENT_SEARCH");
-            if (searchContent != null) {
-                session.removeAttribute("CURRENT_SEARCH");
+            Map<String, Integer> total = (Map<String, Integer>) session.getAttribute("TOTAL_PRICE");
+            int price = total.get("total");
+            for (PromotionDTO promo : promotion) {
+                finalPrice = price - (price*promo.getDiscountPer()/100);
             }
             
-            if (brandID == 0) {
-                List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
-                session.setAttribute("LIST_PRODUCT", listProduct);
-            } else {
-                List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
-                session.setAttribute("LIST_PRODUCT", listProduct);
-            }
-            
-
-            
-            session.removeAttribute("BRAND_INFOR");
+            session.setAttribute("CUR_PROMOTION", promotions);
+            request.setAttribute("FINAL_PRICE", finalPrice);
+            session.setAttribute("PROMOTION_DETAIL", promotion);
             url = SUCCESS;
-
         } catch (Exception e) {
-            log("Error at CategoryController: " + e.toString());
+            log("Error at ApplyVoucherController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

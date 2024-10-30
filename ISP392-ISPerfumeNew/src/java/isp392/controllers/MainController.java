@@ -139,6 +139,15 @@ public class MainController extends HttpServlet {
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL = "NavigateRelatedProductDetail";
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER = "NavigateRelatedProductDetailController";
     
+    private static final String NAVIGATE_CHECK_OUT = "NavigateToCheckOut";
+    private static final String NAVIGATE_CHECK_OUT_CONTROLLER = "NavigateToCheckOutController";
+    
+    private static final String CHECK_OUT = "checkOut";
+    private static final String CHECK_OUT_CONTROLLER = "checkOutController";
+    
+    private static final String APPLY_VOUCHER = "ApplyVoucher";
+    private static final String APPLY_VOUCHER_CONTROLLER = "ApplyVoucherController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -227,6 +236,12 @@ public class MainController extends HttpServlet {
                 url = NAVIGATE_SIGN_UP_CONTROLLER;
             } else if(NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)){
                 url = NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER;
+            } else if(NAVIGATE_CHECK_OUT.equals(action)){
+                url = NAVIGATE_CHECK_OUT_CONTROLLER;
+            } else if(CHECK_OUT.equals(action)){
+                url = CHECK_OUT_CONTROLLER;
+            } else if(APPLY_VOUCHER.equals(action)){
+                url = APPLY_VOUCHER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

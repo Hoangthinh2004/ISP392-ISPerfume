@@ -132,6 +132,18 @@
         <servlet-name>NavigateRelatedProductDetailController</servlet-name>
         <servlet-class>isp392.controllers.NavigateRelatedProductDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NavigateToCheckOutController</servlet-name>
+        <servlet-class>isp392.controllers.NavigateToCheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>checkOutController</servlet-name>
+        <servlet-class>isp392.controllers.checkOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplyVoucherController</servlet-name>
+        <servlet-class>isp392.controllers.ApplyVoucherController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -263,6 +275,18 @@
     <servlet-mapping>
         <servlet-name>NavigateRelatedProductDetailController</servlet-name>
         <url-pattern>/NavigateRelatedProductDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NavigateToCheckOutController</servlet-name>
+        <url-pattern>/NavigateToCheckOutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkOutController</servlet-name>
+        <url-pattern>/checkOutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyVoucherController</servlet-name>
+        <url-pattern>/ApplyVoucherController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
