@@ -86,9 +86,6 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                    </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -203,7 +200,7 @@
                                             <input type="text" name="password" required="" class="form-control" placeholder="${requestScope.USER_ERROR.passwordError}">
                                         </div>
                                     </div>
-                                        
+
                                     <div class="row mb-3">
                                         <label for="statusSelect" class="col-sm-2 col-form-label">Status</label>
                                         <div class="col-sm-10">
@@ -223,8 +220,9 @@
                                                 <option value="5" ${roleID == 5 ? 'selected' : ''}>Admin</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <button type="submit"class="btn btn-primary" name="action" value="CreateEmployeeAccount">Create</button>
+                                    </div>                         
+                                        <button type="submit"class="btn btn-primary" name="action" value="CreateEmployeeAccount">Create</button>
+                                        <input type="hidden" name="search" value="${param.search}">
                                     ${requestScope.USER_ERROR.error}
                                 </form>
                             </div>

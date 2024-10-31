@@ -5,15 +5,13 @@
  */
 package isp392.controllers;
 
-import isp392.order.OrderDAO;
-import isp392.order.OrderDTO;
+import isp392.order.ShipperOrderDAO;
+import isp392.order.ShipperOrderDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,19 +27,19 @@ public class SHIPPER_UpdateStatusOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         boolean checkValidation = true;
-        OrderDAO dao = new OrderDAO();
+        ShipperOrderDAO dao = new ShipperOrderDAO();
         try {
             int orderID = Integer.parseInt(request.getParameter("orderID"));
             int orderStatus = Integer.parseInt(request.getParameter("orderStatus"));
             if (checkValidation) {
-                OrderDTO order = new OrderDTO(0, orderID, "", "", "", "", orderStatus);
+                ShipperOrderDTO order = new ShipperOrderDTO(0, orderID, "", "", "", "", orderStatus);
                 boolean checkUpdateS = dao.updateStatusShipperOrder(order);
                 if (checkUpdateS) {
                     url = SUCCESS;
                 }
             }
         } catch (Exception e) {
-            log("Error at UpdateOrderController: " + e.toString());
+            log("Error at SHIPPER_UpdateOrderController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

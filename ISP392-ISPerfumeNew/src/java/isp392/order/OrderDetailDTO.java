@@ -14,15 +14,22 @@ public class OrderDetailDTO {
     private int productDetailID;
     private int quantity;
     private int unitPrice;
+    private String productName;
 
     public OrderDetailDTO() {
+        this.orderID = 0;
+        this.productDetailID = 0;
+        this.quantity = 0;
+        this.unitPrice = 0;
+        this.productName = "";
     }
 
-    public OrderDetailDTO(int orderID, int productDetailID, int quantity, int unitPrice) {
+    public OrderDetailDTO(int orderID, int productDetailID, int quantity, int unitPrice,String productName) {
         this.orderID = orderID;
         this.productDetailID = productDetailID;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
+        this.productName = productName;
     }
 
     public int getOrderID() {
@@ -56,4 +63,13 @@ public class OrderDetailDTO {
     public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
     }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+    
 }

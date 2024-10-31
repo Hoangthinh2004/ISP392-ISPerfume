@@ -278,7 +278,6 @@ public class MainController extends HttpServlet {
                 url = NAVIGATE_SIGN_UP_CONTROLLER;
             } else if (NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER;
-            }
             } else if (SHIPPER_SEARCH_ORDER.equals(action)) {
                 url = SHIPPER_SEARCH_ORDER_CONTROLLER;
             } else if (SHIPPER_UPDATE_STATUS_ORDER.equals(action)) {

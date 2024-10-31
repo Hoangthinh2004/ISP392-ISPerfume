@@ -5,6 +5,7 @@
  */
 package isp392.order;
 
+import isp392.product.ProductDTO;
 import isp392.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,11 +40,11 @@ public class OrderDetailDAO {
                 ptm = conn.prepareStatement(LIST_ORDER_DETAIL);
                 ptm.setInt(1, orderID);
                 rs = ptm.executeQuery();
-                while (rs.next()) {
-                    String productName = rs.getString("ProName");
+                while (rs.next()){
                     int quantity = rs.getInt("Quantity");
-                    int price = rs.getInt("Price");
-                    listOrderDetail.add(new OrderDetailDTO(orderID, productName, quantity, price));
+                    int unitPrice = rs.getInt("Price");
+                    String productName = rs.getString("ProName");
+                    listOrderDetail.add(new OrderDetailDTO(orderID, 0, quantity, unitPrice, productName));
                 }
             }
         } finally {

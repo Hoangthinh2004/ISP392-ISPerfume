@@ -30,7 +30,7 @@ public class BrandDAO {
             + "INNER JOIN Products P ON P.BrandID = B.BrandID "
             + "WHERE P.ProductID = ?";
     private static final String UPDATE_BRAND = "UPDATE Brands SET  BrandName = ?, Description = ?, Status = ? WHERE BrandID = ?";
-    private static final String COUNT = "SELECT  COUNT(BrandID) as BrandID FROM Brands";
+    private static final String COUNT = "SELECT  COUNT(BrandID) as BrandID FROM Brands WHERE Status = 'true'";
     private static final String BRAND_INFORMATION = "SELECT * FROM Brands WHERE BrandID = ?";
     private static final String BRAND_BY_CATE = "SELECT C.CategoryID, B.BrandID, C.CategoryName, B.BrandName, B.Image, B.Description, B.Status FROM Brands B "
                                             +   "INNER JOIN Categories_Brands CB ON CB.BrandID = B.BrandID "

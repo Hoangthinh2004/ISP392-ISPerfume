@@ -197,18 +197,18 @@
                                                 <tr>
                                                     <td>${shipper.productName}</td>
                                                     <td>${shipper.quantity}</td>
-                                                    <td><fmt:formatNumber type="number" value="${shipper.price}" /> VND</td>
+                                                    <td><fmt:formatNumber type="number" value="${shipper.unitPrice}" /> VND</td>
                                                     <td>
-                                                        <c:set var="unitTotal" value="${shipper.quantity * shipper.price}" ></c:set>
+                                                        <c:set var="unitTotal" value="${shipper.quantity * shipper.unitPrice}" ></c:set>
                                                         <c:set var="Total" value="${unitTotal + Total}" ></c:set>
                                                         <fmt:formatNumber type="number" value="${unitTotal}" /> VND
-                                                        <input type="hidden" name="Total" value="${shipper.quantity * shipper.price}"/>
+                                                        <input type="hidden" name="Total" value="${shipper.quantity * shipper.unitPrice}"/>
                                                     </td>
                                                 </tr>
                                             </form>
                                         </c:forEach>
                                         <c:forEach var="promotion" items="${sessionScope.LIST_PROMOTION}">
-                                            <c:if test="${Total >= promotion.condition}">s
+                                            <c:if test="${Total >= promotion.condition}">
                                                 <tr>
                                                     <td colspan="3" style="text-align: right;"><strong>Promotion:</strong></td>
                                                     <td><strong><c:out value="${promotion.discountPer}%" /></strong></td>

@@ -5,12 +5,9 @@
  */
 package isp392.controllers;
 
-import isp392.order.OrderDAO;
-import isp392.order.OrderDTO;
-import isp392.promotion.PromotionDAO;
-import isp392.promotion.PromotionDTO;
+import isp392.order.ShipperOrderDAO;
+import isp392.order.ShipperOrderDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,20 +31,17 @@ public class SHIPPER_SearchOrderController extends HttpServlet {
         try {
             int shipperID = 10;
 //            int shipperID = Integer.parseInt(request.getParameter("shipperID"));
-            OrderDAO orderDao = new OrderDAO();
-            PromotionDAO proDao = new PromotionDAO();
-            List<OrderDTO> listOrder = orderDao.getListOrder(shipperID);
-            List<PromotionDTO> listPromotion = proDao.getListPromotion();
+            ShipperOrderDAO orderDao = new ShipperOrderDAO();
+            List<ShipperOrderDTO> listOrder = orderDao.getListOrder(shipperID);
             //lấy list orderdetail
             if (listOrder.size() > 0) {
 //                request.setAttribute("LIST_ORDER", listOrder);
                 HttpSession session = request.getSession();
                 session.setAttribute("LIST_ORDER", listOrder);
-                session.setAttribute("LIST_PROMOTION", listPromotion);
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at SearchShipperController: " + e.toString());
+            log("Error at SHIPPER_SearchOrderController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -42,6 +42,7 @@ public class UserDAO {
     private static final String GET_PASSWORD_BY_ID = "SELECT Password FROM Users WHERE UserID = ?";
     private static final String GET_CUSTOMER_ID = "SELECT UserID FROM Users WHERE Phone LIKE ?";
     private static final String CREATE_EMPLOYEE_ACCOUNT = "INSERT INTO Users(Name, Email, Password, Phone, Status, RoleID) VALUES(?,?,?,?,?,?)";
+    private static final String LIST_USER_BY_PHONE = "SELECT UserID, Name, Email,Phone, Status, RoleID FROM Users WHERE Phone like ?";
 
     public boolean checkEmailExisted(String email) throws ClassNotFoundException, SQLException {
         boolean check = false;
@@ -573,5 +574,40 @@ public class UserDAO {
             }
         }
         return check;
+    }
+
+    public List<UserDTO> getListUserByPhone(String search) throws SQLException, NamingException, ClassNotFoundException {
+         List<UserDTO> listUser = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_USER_BY_PHONE);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int userID = rs.getInt("UserID");
+                    String name = rs.getString("Name");
+                    String email = rs.getString("Email");
+                    String phone = rs.getString("Phone");
+                    int status = rs.getInt("Status");
+                    int roleID = rs.getInt("RoleID");
+                    listUser.add(new UserDTO(userID, name, email, phone, phone, status, roleID));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listUser;
     }
 }
