@@ -37,7 +37,7 @@ public class ProductDAO {
             + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
             + "WHERE P.ProductID = ?";
 
-    private static final String COUNT ="SELECT  COUNT(ProductID) as ProductID FROM Products";
+    private static final String COUNT ="SELECT  COUNT(ProductID) as ProductID FROM Products WHERE Status = 1";
     public List<ViewProductDTO> getListProduct(String search) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;

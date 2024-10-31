@@ -21,15 +21,16 @@ import javax.naming.NamingException;
  */
 public class PromotionDAO {
 
-    private static final String LIST_PROMOTION = "SELECT P.PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion P \n"
-            + "JOIN Orders O on P.PromotionID = O.PromotionID";
+    private static final String LIST_PROMOTION = "SELECT P.PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion ";
     private static final String INSERT = "INSERT INTO Promotion(PromotionName,ManagerID,Description,StartDate,EndDate,DiscountPer,Condition,Status) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE Promotion SET PromotionName=?, Description=?, StartDate=?, EndDate=?, DiscountPer=?, Condition=?, Status=?  WHERE PromotionID=?";
     private static final String DUPLICATE = "SELECT PromotionName FROM Promotion WHERE PromotionName=?";
-    private static final String COUNT = "SELECT  COUNT(PromotionID) as PromotionID FROM Promotion";
+    private static final String COUNT = "SELECT  COUNT(PromotionID) as PromotionID FROM Promotion WHERE Status = 1";
     private static final String SHIPPER_LIST_PROMOTION = "SELECT P.PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion P \n"
             + "JOIN Orders O on P.PromotionID = O.PromotionID \n"
             + "WHERE O.PromotionID = ?";
+    private static final String GET_PROMOTION_BY_NAME = "SELECT P.PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion P\n"
+            + "			WHERE PromotionName like ?";
 
     public List<PromotionDTO> getListPromotion() throws SQLException, ClassNotFoundException, NamingException {
         List<PromotionDTO> listPromotion = new ArrayList<>();
@@ -187,7 +188,7 @@ public class PromotionDAO {
         return listPromotion;
     }
 
-    public List<PromotionDTO> getShipperListPromotion(int promotionID) throws SQLException, NamingException, ClassNotFoundException{
+    public List<PromotionDTO> getShipperListPromotion(int promotionID) throws SQLException, NamingException, ClassNotFoundException {
         List<PromotionDTO> listPromotion = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -199,6 +200,45 @@ public class PromotionDAO {
                 ptm.setInt(1, promotionID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+                    String promotionName = rs.getString("PromotionName");
+                    int managerID = rs.getInt("ManagerID");
+                    String Description = rs.getString("Description");
+                    Date StartDate = rs.getDate("StartDate");
+                    Date EndDate = rs.getDate("EndDate");
+                    int DiscountPer = rs.getInt("DiscountPer");
+                    int Condition = rs.getInt("Condition");
+                    int Status = rs.getInt("Status");
+                    listPromotion.add(new PromotionDTO(promotionID, managerID, promotionName, Description, StartDate, EndDate, DiscountPer, Condition, Status));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listPromotion;
+
+    }
+
+    public List<PromotionDTO> getListPromotionByName(String search) throws SQLException, NamingException, ClassNotFoundException {
+        List<PromotionDTO> listPromotion = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_PROMOTION_BY_NAME);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int promotionID = rs.getInt("PromotionID");
                     String promotionName = rs.getString("PromotionName");
                     int managerID = rs.getInt("ManagerID");
                     String Description = rs.getString("Description");

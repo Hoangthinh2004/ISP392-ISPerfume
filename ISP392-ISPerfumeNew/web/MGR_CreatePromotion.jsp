@@ -245,7 +245,7 @@
                                             </select>
                                         </div>
                                     </div>
-
+                                            <input type="hidden" name="search" value="${param.search}">
                                     <button type="submit" class="btn btn-primary" name="action" value="CreatePromotion">CREATE</button>
                                     ${requestScope.PROMOTION_ERROR.error}
                                 </form>

@@ -5,8 +5,6 @@
  */
 package isp392.controllers;
 
-import isp392.order.OrderDAO;
-import isp392.order.OrderDTO;
 import isp392.order.OrderDetailDAO;
 import isp392.order.OrderDetailDTO;
 import isp392.promotion.PromotionDAO;
@@ -37,13 +35,15 @@ public class SHIPPER_ViewOrderDetailController extends HttpServlet {
             int orderID = Integer.parseInt(request.getParameter("orderID"));
             OrderDetailDAO odDao = new OrderDetailDAO();
             PromotionDAO pDao = new PromotionDAO();
-            List<OrderDetailDTO> listOrderDetail = odDao.getListOrderDetail(orderID);  
+            List<OrderDetailDTO> listOrderDetail = odDao.getListOrderDetail(orderID);
             List<PromotionDTO> listPromotion = pDao.getShipperListPromotion(promotionID);
             if (listOrderDetail.size() > 0) {
-                HttpSession session = request.getSession();
-                session.setAttribute("LIST_ORDER_DETAIL", listOrderDetail);
-                session.setAttribute("LIST_PROMOTION", listPromotion);
-                url = SUCCESS;
+                if (listPromotion.size() > 0) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("LIST_ORDER_DETAIL", listOrderDetail);
+                    session.setAttribute("LIST_PROMOTION", listPromotion);
+                    url = SUCCESS;
+                }
             }
         } catch (Exception e) {
             log("Error at SHIPPER_ViewOrderDetailController: " + e.toString());

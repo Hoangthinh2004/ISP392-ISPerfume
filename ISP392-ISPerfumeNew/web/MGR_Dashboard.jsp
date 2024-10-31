@@ -76,7 +76,7 @@
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
-                                <a href="MainController?action=ViewPromotion" class="dropdown-item ">Promotion Management</a>
+                                <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
                         </div>
                     </div>

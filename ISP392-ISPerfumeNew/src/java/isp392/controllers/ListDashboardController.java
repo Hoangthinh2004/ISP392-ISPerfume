@@ -7,14 +7,13 @@ package isp392.controllers;
 
 import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
-import isp392.order.OrderDAO;
-import isp392.order.OrderDTO;
+import isp392.order.ShipperOrderDAO;
+import isp392.order.ShipperOrderDTO;
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
 import isp392.promotion.PromotionDAO;
 import isp392.promotion.PromotionDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,11 +37,11 @@ public class ListDashboardController extends HttpServlet {
             PromotionDAO dao = new PromotionDAO();
             ProductDAO pDao = new ProductDAO();
             BrandDAO bDao = new BrandDAO();
-            OrderDAO oDao = new OrderDAO();
+            ShipperOrderDAO oDao = new ShipperOrderDAO();
             List<PromotionDTO> listPromotion = dao.countAllPromotion();
             List<ProductDTO> listProduct = pDao.countAllProduct();
             List<BrandDTO> listBrand = bDao.countAllBrand();
-            List<OrderDTO> listOrder = oDao.countAllOrder();
+            List<ShipperOrderDTO> listOrder = oDao.countAllOrder();
             if (listPromotion.size() > 0) {
                 if (listProduct.size() > 0) {
                     if (listBrand.size() > 0) {
