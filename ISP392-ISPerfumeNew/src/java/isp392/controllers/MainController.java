@@ -78,7 +78,7 @@ public class MainController extends HttpServlet {
 
     private static final String SORT_BY_PURCHASING = "SortByPurchasing";
     private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
-    
+
     private static final String SEARCH_BRAND = "Search";
     private static final String SEARCH_BRAND_CONTROLLER = "ShowAllBrandManager";
 
@@ -108,17 +108,34 @@ public class MainController extends HttpServlet {
 
     private static final String UPDATE_USER_STATUS = "UpdateUserStatus";
     private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatusController";
-    
+
     private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
     private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
-    
+
     private static final String UPDATE_PROFILE = "UpdateProfile";
     private static final String UPDATE_PROFILE_CONTROLLER = "UpdateUserProfile";
 
     private static final String CREATE_NEW_USER_CUSTOMER = "registerNewUser";
     private static final String CREATE_NEW_USER_CUSTOMER_CONTROLLER = "CreateNewUserCustomerController";
-   
+
+    private static final String NAVIGATE_BLOG = "NavigateBlog";
+    private static final String NAVIGATE_BLOG_CONTROLLER = "NavigateBlogController";
+
+    private static final String VIEW_SINGLE_BLOG = "ViewBlogDetail";
+    private static final String VIEW_SINGLE_BLOG_CONTROLLER = "ViewSingleBlogController";
+
+    private static final String CREATE_BLOG_MANAGER = "CreateBlogManager";
+    private static final String CREATE_BLOG_MANAGER_CONTROLLER = "CreateBlogManagerController";
     
+    private static final String UPDATE_BLOG_MANAGER = "UpdateBlogManager";
+    private static final String UPDATE_BLOG_MANAGER_CONTROLLER = "UpdateBlogManagerController";
+    
+    private static final String DELETE_BLOG_MANAGER = "DeleteBlogManager";
+    private static final String DELETE_BLOG_MANAGER_CONTROLLER = "DeleteBlogManagerController";
+    
+    private static final String SHOW_ALL_BLOG_MANAGER = "ShowAllBlogManager";
+    private static final String SHOW_ALL_BLOG_MANAGER_CONTROLLER = "ShowAllBlogManager";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -191,8 +208,22 @@ public class MainController extends HttpServlet {
                 url = FILTER_BY_CUSTOMER_CONTROLLER;
             } else if (UPDATE_USER_STATUS.equals(action)) {
                 url = UPDATE_USER_STATUS_CONTROLLER;
-            } else if(CREATE_NEW_USER_CUSTOMER.equals(action)){
+            } else if (CREATE_NEW_USER_CUSTOMER.equals(action)) {
                 url = CREATE_NEW_USER_CUSTOMER_CONTROLLER;
+
+            } else if (NAVIGATE_BLOG.equals(action)) {
+                url = NAVIGATE_BLOG_CONTROLLER;
+            } else if (VIEW_SINGLE_BLOG.equals(action)) {
+                url = VIEW_SINGLE_BLOG_CONTROLLER;
+
+            } else if (CREATE_BLOG_MANAGER.equals(action)) {
+                url = CREATE_BLOG_MANAGER_CONTROLLER;
+            } else if (UPDATE_BLOG_MANAGER.equals(action)) {
+                url = UPDATE_BLOG_MANAGER_CONTROLLER;
+            } else if (DELETE_BLOG_MANAGER.equals(action)) {
+                url = DELETE_BLOG_MANAGER_CONTROLLER;
+            } else if (SHOW_ALL_BLOG_MANAGER.equals(action)) {
+                url = SHOW_ALL_BLOG_MANAGER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

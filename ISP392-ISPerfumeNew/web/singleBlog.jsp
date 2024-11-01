@@ -1,11 +1,11 @@
 <%-- 
-    Document   : blog
-    Created on : Sep 27, 2024, 9:03:58 PM
+    Document   : singleBlog
+    Created on : Oct 16, 2024, 2:43:34 PM
     Author     : User
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,42 +33,104 @@
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <style>
-            .text-muted {
-                color: rgba(0, 0, 0, 0.3) !important;
-            }
-            img {
-                border-radius: 10px;
-            }
-
-            /*            .btn {
-                            border-radius: 24px;
-                        }*/
-
             .blog-post {
-                border-radius: 15px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 20px;
                 background-color: #fff;
-            }           
+                border-radius: 8px; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+                padding: 20px; 
+            }
 
-            .list-group-item-blog {
-                margin-bottom: 10px;
+            img {
+                border-radius: 8px; 
+            }
+
+            .blog-post p {
+                margin-bottom: 15px;
+            }
+
+            blockquote {
                 padding: 15px;
+                background-color: #e9ecef;
+                border-left: 5px solid #007bff;
+                margin-bottom: 30px;
             }
-            .blog-post, .list-group-item-blog {
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Hiệu ứng bóng nhẹ */
-            }
-
-            .blog-post:hover, .list-group-item-blog:hover {
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            }
-            img, .btn, .list-group-item-blog {
-                transition: all 0.3s ease;
+            .sidebar .list-group-item {
+                border-radius: 8px;
+                margin-bottom: 10px;
+                transition: background-color 0.3s ease;
             }
 
-            img:hover, .btn:hover, .list-group-item-blog:hover {
-                transform: scale(1.05); /* Phóng to nhẹ khi hover */
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng */
+            .sidebar .list-group-item:hover {
+                background-color: #f1f1f1;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            /* Sidebar Title Styling */
+            .sidebar-title {
+                font-size: 18px;
+                font-weight: 600;
+                color: #343a40;
+                border-bottom: 2px solid orange;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+
+
+            .recent-post img {
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .recent-post .post-title {
+                font-size: 16px;
+                font-weight: 500;
+                color: #007bff;
+            }
+
+            .recent-post:hover .post-title {
+                color: #0056b3;
+                text-decoration: none;
+            }
+
+            .list-group-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            .list-group-item:hover {
+                background-color: #f8f9fa;
+            }
+
+
+            .tag-cloud {
+                padding: 15px;
+                background-color: transparent;
+                border-radius: 10px; /* Bo góc cho khối tag cloud */
+
+            }
+
+            .tags {
+                display: flex;
+                flex-wrap: wrap; 
+                gap: 10px; 
+            }
+
+            .tag-item {
+                font-size: 14px;
+                color: orange;
+                background-color: white;
+                padding: 8px 15px;
+                border-radius: 10px;
+                text-decoration: none;
+                transition: background-color 0.3s ease, color 0.3s ease; 
+            }
+
+            .tag-item:hover {
+                background-color: orange; 
+                color: #fff; 
             }
 
         </style>
@@ -87,14 +149,14 @@
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
-                        <div class="d-inline-flex align-items-center">
-
-                            <div class="btn-group">
-                                <!-- Display when not logged in. -->
-
-                            </div>                                            
-
-                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
+                            </div>
+                        </div>                                            
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a href="" class="btn px-0 ml-2">
@@ -151,14 +213,6 @@
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
                                 </c:forEach>
-                                <!--                            <div class="nav-item dropdown dropright">
-                                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                                                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                                                    <a type="submit" name="action" value="men" class="dropdown-item">Men's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                                                    <a href="" class="dropdown-item">Baby's Dresses</a>
-                                                                </div>
-                                                            </div>-->
                             </div>
                         </nav>
                     </div>
@@ -214,44 +268,88 @@
         <!-- Breadcrumb End -->
 
         <!-- Blog Posts -->
-        <div class="container d-flex justify-content-between">
+        <div class="container p-0">
             <div class="row">
-                <!-- Blog Start -->
+                <!-- Blog Content Start -->
 
                 <div class="col-lg-8">
-                    <c:forEach var="blog" items="${requestScope.BLOG_LIST}">
-                        <div class="blog-post mb-5">
-                            <img src="${blog.image}" class="img-fluid" alt="Blog Post Image" style="width: 650px; height: 297px;">
+                    <div class="blog-post">
+                        <img src="${requestScope.BLOG_DETAIL.image}" alt="Blog Post Image" class="img-fluid">
+                        <h2 class="mt-4">${requestScope.BLOG_DETAIL.title}</h2>
+                        <p class="text-muted">${requestScope.BLOG_DETAIL.createDate} by <a href="#"> ${requestScope.BLOG_DETAIL.staffID}</a></p>
+                        <p>${requestScope.BLOG_DETAIL.description}</p>
 
-                            <h2 class="mt-3">${blog.title} </h2>
-                            <p class="text-muted">${blog.createDate} by <a href="#">Staff_${blog.staffID}</a></p>
-<!--                            <p>${blog.description}</p>-->
-                            <a href="MainController?action=ViewBlogDetail&blogID=${blog.blogID}" class="btn btn-primary">Read more</a>
+                        <!--                            <h4>Subheading</h4>
+                                                    <p>Curabitur vitae dolor sit amet felis venenatis pharetra. </p>
+                                                    <p>Quisque vitae velit nec augue vehicula viverra id eu lorem.</p>                   
+                                                    <blockquote class="blockquote">
+                                                        <p class="mb-0">"This is a sample blockquote, to highlight a quote or a key message within the article."</p>
+                                                        <footer class="blockquote-footer">Source or Author</footer>
+                                                    </blockquote>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. .</p>
+
+                                                    <h4>Conclusion</h4>
+                                                    <p>In conclusion, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+
+                        <div class="back-to-blog">
+                            <a href="MainController?action=NavigateBlog" class="btn btn-primary">Back to Blog</a>
                         </div>
-                    </c:forEach>
+                    </div>
                 </div>
-                <!-- Blog End -->
+                <!-- Blog Content End -->
 
                 <!-- Sidebar Start -->
-                <div class="col-lg-4">
-                    <h4 class="mb-4">New</h4>
-                    <c:forEach var="blog" items="${requestScope.BLOG_NEWEST_LIST}">
-                        <div class="list-group mb-5">
-                            <a href="MainController?action=ViewBlogDetail&blogID=${blog.blogID}" class="list-group-item-blog list-group-item-action d-flex">
-                                <img src="${blog.image}" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Blog Post Image">
-                                <div class="ml-3">
-                                    <h5>${blog.title}</h5>
-                                    <p class="text-muted">${blog.createDate}</p>
-                                </div>
-                            </a>
+                <div class="col-lg-4 sidebar">
+                    <!-- Recent Posts Section -->
+                    <div class="recent-posts mb-5">
+                        <h4 class="sidebar-title mb-4">New Posts</h4>
+                        <c:forEach var="blog" items="${requestScope.BLOG_RECENT_LIST}" >
+                            <div class="list-group mb-5">
+                                <a href="MainController?action=ViewBlogDetail&blogID=${blog.blogID}" class="list-group-item-blog list-group-item-action d-flex">
+                                    <img src="${blog.image}" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Blog Post Image">
+                                    <div class="ml-3">
+                                        <h5>${blog.title}</h5>
+                                        <p class="text-muted">${blog.createDate}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </c:forEach>
+                    </div>
+
+                    <!-- Categories Section -->
+                    <div class="categories mb-5">
+                        <h4 class="sidebar-title mb-4">Popular Categories</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="#">Technology</a> <span class="badge badge-primary float-right">10</span>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Business</a> <span class="badge badge-primary float-right">8</span>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="#">Lifestyle</a> <span class="badge badge-primary float-right">5</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tag Cloud Section -->
+                    <div class="tag-cloud mb-5">
+                        <h4 class="sidebar-title mb-4">Tag Cloud</h4>
+                        <div class="tags d-flex flex-wrap">
+                            <a href="#" class="tag-item">Technology</a>
+                            <a href="#" class="tag-item">Business</a>
+                            <a href="#" class="tag-item">Marketing</a>
+                            <a href="#" class="tag-item">AI</a>
+                            <a href="#" class="tag-item">Startups</a>
+                            <a href="#" class="tag-item">Development</a>
+                            <a href="#" class="tag-item">Innovation</a>
                         </div>
-                    </c:forEach>
+                    </div>
+
                 </div>
                 <!-- Sidebar End -->
-
             </div>
         </div>
-
         <!-- Blog End -->
 
         <!-- Footer Start -->

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : AD_CreateAccount
-    Created on : Oct 8, 2024, 1:51:22 PM
-    Author     : User
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -67,8 +63,25 @@
                         <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
-                            
-                        </div>                                            
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a href="MGR_ProductManagement.jsp" class="dropdown-item active">Product Management</a>
+                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
+                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
+                            </div>
+                        </div>
+                        <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
+                        <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
+                        <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
+                        <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a href="signin.html" class="dropdown-item">Sign In</a>
+                                <a href="signup.html" class="dropdown-item">Sign Up</a>
+                                <a href="404.html" class="dropdown-item">404 Error</a>
+                                <a href="blank.html" class="dropdown-item">Blank Page</a>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -166,54 +179,55 @@
                     </div>
                 </nav>
                 <!-- Navbar End -->
+
+
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Create Form</h6>
-                                <form action="CreateProductManager" method="post" enctype="multipart/form-data">
+                                <h6 class="mb-4">Create Blog</h6>
+                                <!-- Update form to include action and method POST -->
+                                <form action="CreateBlogManager" method="POST" enctype="multipart/form-data">
+                                    <!-- Blog Title -->
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Name</label>
+                                        <label class="col-sm-2 col-form-label">Blog Title</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="productName" required="" class="form-control" placeholder="${requestScope.ERROR.productName}">
+                                            <input type="text" name="title" class="form-control" required>
                                         </div>
                                     </div>
+                                    <!-- Blog Description -->
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Decription</label>
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here"
-                                                      id="floatingTextarea" style="height: 150px;"></textarea>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="brandImage"  class="col-sm-2 col-form-label">Image</label>
+                                        <label class="col-sm-2 col-form-label">Description</label>
                                         <div class="col-sm-10">
-                                            <input type="file" name="brandImage" class="form-control" required="">
+                                            <textarea name="description" class="form-control" rows="4" required></textarea>
                                         </div>
                                     </div>
-                                    Brand <select name="brandID" class="form-select mb-3" aria-label="Default select example" required="">
-                                        <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
-                                            <option value="${brand.brandID}">${brand.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                    Category <select name="categoryID" class="form-select mb-3" aria-label="Default select example" required="">
-                                        <c:forEach var="cate" items="${sessionScope.CATEGORY_LIST_MANAGER}">
-                                            <c:if test="${cate.categoryID!=4}">
-                                                <option value="${cate.categoryID}">${cate.name}</option>
-                                            </c:if>
-                                        </c:forEach>
-                                    </select>
-                                    <button type="submit"class="btn btn-primary">CREATE</button>
-                                    <input type="hidden" name="search" value="${requestScope.SEARCH}">
+                                    <!-- Blog Image Upload -->
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Image</label>
+                                        <div class="col-sm-10">
+                                            <!-- Use file input for image uploads -->
+                                            <input type="file" name="blogImage" class="form-control" accept="image/*" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label  class="col-sm-2 col-form-label">Create Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" name="createDate" required="" > 
+                                        </div>
+                                    </div>
+                                    <!-- Submit Button -->
+                                    <input type="hidden" name="staffID" value="3" >
+                                    <button type="submit" name="action" value="CreateBlogManager" class="btn btn-primary">CREATE</button>
+                                    <input type="hidden" name="search" value="${requestScope.SEARCH}"/>                                                                 
+
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Blank End -->
-
 
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
@@ -222,7 +236,8 @@
                             <div class="col-12 col-sm-6 text-center text-sm-start">
                                 &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
                             </div>
-                            <div class="col-12 col-sm-6 text-center text-sm-end">                               
+                            <div class="col-12 col-sm-6 text-center text-sm-end">
+                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                                 Designed By <a href="https://htmlcodex.com">HTML Codex</a>
                             </div>
                         </div>
@@ -237,9 +252,6 @@
             <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </div>
 
-        <!-- JavaScript Libraries -->
-        <!-- JavaScript Libraries -->
-        <!-- JavaScript Libraries -->
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
