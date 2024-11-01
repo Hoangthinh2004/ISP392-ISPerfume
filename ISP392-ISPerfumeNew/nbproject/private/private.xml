@@ -3,6 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/productDetail.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AddToCartController.java</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shoppingSearch.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SearchProductController.java</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/MainController.java</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/css/stylePopup.css</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/home.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/cart.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/css/style.css</file>
+        </group>
+        <group>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/STAFF_BlogManagement.jsp</file>
+            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shoppingSearch.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/google/Iconstant.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/google/GoogleLogin.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/google/GoogleAccount.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/GetBrandCategoriesManager.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/user/UserDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SearchProductController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SigninEmployee.java</file>
+        </group>
+        <group>
             <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_PromotionManagement.jsp</file>
             <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_Dashboard.jsp</file>
             <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/SHIPPER_OrderManagement.jsp</file>
@@ -89,6 +115,68 @@
             <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/VerifyOTPController.java</file>
             <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ChangePasswordForgotController.java</file>
             <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SigninEmployee.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AddToCartController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateProductDetailController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateShoppingController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDetailDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/cart/CartDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CategoryController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateToCartController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/productDetail.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/cart.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDetailDTO.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ForgetPasswordController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/forgotPassword.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateProductDetailController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/cart/CartDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CategoryController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/user/UserDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/verifyOTP.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDetailDTO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateRelatedProductDetailController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AddToCartController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateShoppingController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDetailDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateToCartController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CreateNewUserCustomerController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/productDetail.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/cart.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/UpdatePromotionController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/VerifyOTPController.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ZaloPaymentController.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ShowOrderDetailStaff.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/utils/HexStringUtil.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/STAFF_OrderManagement.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/user/UserDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/utils/DBUtils.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/testZaloPay.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateShoppingController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/order/OrderDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/LoginGoogleController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ZaloPaymentController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_Dashboard.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/utils/HMACUtil.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/changePassword.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/BrandFilterController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/VerifyOTPController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ZaloPayCallBackController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AssignShipperStaffController.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AssignShipperStaffController.java</file>
         </group>
         <group>
             <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_ProductManagement.jsp</file>
