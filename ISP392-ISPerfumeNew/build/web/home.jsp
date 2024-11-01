@@ -136,9 +136,11 @@
                                             </c:forEach>
                                         </div>
                                     </div>
-                                    <a href="MainController?action=NavigateBlog" class="nav-item nav-link">Blog</a>
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
-                                </div>                              
+                                </c:forEach>
+                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                <c:if test="${not empty sessionScope.CUSTOMER_ID}">
+                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                </c:if>
                             </div>
                             <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
                                 <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
