@@ -11,6 +11,7 @@ package isp392.product;
  */
 public class ViewProductDTO {
     private int categoryID;
+    private int productDetailID;
     private int brandID;
     private int productID;
     private int sizeID;
@@ -22,6 +23,7 @@ public class ViewProductDTO {
 
     public ViewProductDTO() {
         this.categoryID = 0;
+        this.productDetailID = 0;
         this.brandID = 0;
         this.productID = 0;
         this.sizeID = 0;
@@ -32,8 +34,9 @@ public class ViewProductDTO {
         this.image = "";
     }
 
-    public ViewProductDTO(int categoryID, int brandID, int productID, int sizeID, String sizeName, String brandName, String productName, int price, String image) {
+    public ViewProductDTO(int categoryID, int productDetailID, int brandID, int productID, int sizeID, String sizeName, String brandName, String productName, int price, String image) {
         this.categoryID = categoryID;
+        this.productDetailID = productDetailID;
         this.brandID = brandID;
         this.productID = productID;
         this.sizeID = sizeID;
@@ -50,6 +53,14 @@ public class ViewProductDTO {
 
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
+    }
+
+    public int getProductDetailID() {
+        return productDetailID;
+    }
+
+    public void setProductDetailID(int productDetailID) {
+        this.productDetailID = productDetailID;
     }
 
     public int getBrandID() {
@@ -114,5 +125,6 @@ public class ViewProductDTO {
 
     public void setImage(String image) {
         this.image = image;
-    } 
+    }
+    
 }

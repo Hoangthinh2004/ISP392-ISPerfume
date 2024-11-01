@@ -32,14 +32,13 @@ public class PriceBySizeController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             ProductDetailDAO productDetailDAO = new ProductDetailDAO();
-           
+            
+            int productID = Integer.parseInt(request.getParameter("productID"));
             int sizeID = Integer.parseInt(request.getParameter("sizeID"));
-            Map<String, Integer> listProIDs = (Map<String, Integer>) session.getAttribute("CURRENT_PRODUCT_ID");
-            int productID = listProIDs.get("productID");
             
             List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);           
             if (listPriceBySize.size() > 0) {
-                request.setAttribute("PRICE_BY_SIZE", listPriceBySize);
+                session.setAttribute("PRICE_BY_SIZE", listPriceBySize);
             }
             url = SUCEES;
         } catch (Exception e) {

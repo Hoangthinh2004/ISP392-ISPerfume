@@ -37,7 +37,9 @@ public class SendEmailController extends HttpServlet {
      */
     private static final String SUCCESS_SEND_MAIL_GOOGLE_USER = "LoginGoogleServlet";
     private static final String REGISTER_GOOGLE_ACCCOUNT = "RegisterGoogleAccount";
+    private static final String FORGOT_PASSWORD_EMAIL = "ForgotPasswordEmail";
     private static final String ERROR = "signin.jsp";
+    private static final String SUCCESS_FORGOT_PASSWORD_EMAIL="ForgotPasswordController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,6 +49,8 @@ public class SendEmailController extends HttpServlet {
         try {
             if (REGISTER_GOOGLE_ACCCOUNT.equals(action)) {
                 url = createGoogleUser(request, response);
+            }else if(FORGOT_PASSWORD_EMAIL.equals(action)){
+                url = sendEmailForgotPassword(request,response);
             }
         } catch (Exception e) {
             log("Error at SendMailController: " + e.toString());
@@ -56,8 +60,8 @@ public class SendEmailController extends HttpServlet {
     }
     
      private boolean sendEmail(String to, String messageBody, String subject, boolean html) {
-        final String FROM_EMAIL = "";
-        final String PASSWORD = "";
+        final String FROM_EMAIL = "isperfume1803@gmail.com";
+        final String PASSWORD = "rnxf gfef mbrn xjqg";
         Properties properties = new Properties();
         boolean check = false;
         properties.put("mail.smtp.auth", "true");
@@ -144,6 +148,22 @@ public class SendEmailController extends HttpServlet {
         boolean result = sendEmail(email, messageBody, subject, true);
         if(result){
             return SUCCESS_SEND_MAIL_GOOGLE_USER;
+        }else{
+            return ERROR;
+        }
+    }
+
+    private String sendEmailForgotPassword(HttpServletRequest request, HttpServletResponse response) {
+        String email = request.getParameter("email");
+        String token = request.getParameter("token");
+        String subject = "RESET PASSWORD - ISPerfume";
+        String messageBody = "Hi, welcome back to ISPERFUME <br><br>"
+                            +"Please verify with OTP code <br><br>"
+                            +"Your OTP code: "+token+"<br><br>"
+                            +"Please enter your OTP code to change password!";
+        boolean result = sendEmail(email, messageBody, subject, true);
+        if(result){
+            return SUCCESS_FORGOT_PASSWORD_EMAIL;
         }else{
             return ERROR;
         }

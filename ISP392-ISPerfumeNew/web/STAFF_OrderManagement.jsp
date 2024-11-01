@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -51,7 +52,7 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                    <a href="" class="navbar-brand mx-4 mb-3">
                         <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
@@ -65,9 +66,8 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="STAFF_OrderManagement.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Management</a>                     
-                        <a href="MainController?action=ShowAllBlogManager" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Blog</a>                     
-
+                         <a href="STAFF_OrderManagement.jsp" class="nav-item nav-link active"><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
+                        <a href="STAFF_BlogManagement.jsp" class="nav-item nav-link "><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>                     
                     </div>
                 </nav>
             </div>
@@ -78,20 +78,20 @@
             <div class="content">
                 <!-- Navbar Start -->
                 <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand d-flex d-lg-none me-4">
+                    <a href="" class="navbar-brand d-flex d-lg-none me-4">
                         <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
                     </a>
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4" action="MainController" method="get">
-                        <input class="form-control border-0" type="search" placeholder="Search" name="">
-                        <button class="btn btn-primary" type="submit" name="action" value="" style="margin-left: 10px;">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </button>
-                    </form>
+                    <!--                    <form class="d-none d-md-flex ms-4" action="MainController" method="get">
+                                            <input class="form-control border-0" type="search" placeholder="Search" name="">
+                                            <button class="btn btn-primary" type="submit" name="action" value="" style="margin-left: 10px;">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                                                </svg>
+                                            </button>
+                                        </form>-->
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -164,6 +164,7 @@
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
+                                <!--                                <a href="#" class="dropdown-item">Log Out</a>-->
                                 <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
                             </div>
                         </div>
@@ -179,85 +180,125 @@
                                 <div class="bg-light rounded h-100 p-4">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <h6 class="mb-0">Order Management</h6>
+                                        <h6 class="mb-0">Order Management</h6>
 
                                     </div>
-
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First Name</th>
-                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Staff</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">Order Date</th>
+                                                <th scope="col">OrderStatus</th>
                                                 <th scope="col">Shipper</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>
-                                                    abc
-                                                </td>
-                                                <td>jacob@email.com</td>
-                                                <td>
-                                                    <input type="hidden" name="productId"  value="" />
-                                                    <a class="" data-bs-toggle="modal" data-bs-target="#updateModal">
-
-                                                        <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
-                                                        </svg>
-
-                                                    </a>
-                                                    <!-- Modal Update -->
-                                                    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" >
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content" style="border-radius: 24px;">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="updateModalLabel">Information</h1>
-                                                                    <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <c:forEach var="order" items="${requestScope.ORDER_LIST_STAFF}">
+                                                <tr>
+                                                    <!--                                                staff-->
+                                                    <td>
+                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                            <c:if test="${order.staffID == user.userID}">
+                                                                ${user.name}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <!--                                                    customer-->
+                                                    <td>
+                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                            <c:if test="${order.customerID == user.userID}">
+                                                                ${user.name}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <!--                                                    order date-->
+                                                    <td>
+                                                        ${order.orderDate}
+                                                    </td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${order.orderStatus == 1}">
+                                                                PROCESSING
+                                                            </c:when>
+                                                            <c:when test="${order.orderStatus == 2}">
+                                                                APPROVED
+                                                            </c:when>
+                                                            <c:when test="${order.orderStatus == 3}">
+                                                                SHIPPING
+                                                            </c:when>
+                                                            <c:when test="${order.orderStatus == 4}">
+                                                                COMPLETED
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Trạng thái không xác định
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <c:choose>
+                                                        <c:when test="${order.shipperID != 0}">
+                                                            <td>
+                                                                <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                                    <c:if test="${order.shipperID == user.userID}">
+                                                                        ${user.name}
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </td>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <td>
+                                                                No shipper assigned yet!
+                                                            </td>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <td>
+                                                        <form action="MainController" method="get" class="d-flex justify-content-around">
+                                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                                            <button type="submit" name="action" value="OrderDetailPage" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+                                                        </form>
+                                                    </td>
+                                                    <c:if test="${order.shipperID == 0}">
+                                                        <td>
+                                                            <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${counter.count}">
+                                                                <i class="fa fa-check"></i>
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                            </a>
+                                                            <!-- Modal Update -->
+                                                            <div class="modal fade" id="updateModal-${counter.count}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" >
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content" style="border-radius: 24px;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="updateModalLabel">Promotion Information</h1>
+                                                                            <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <form action="MainController" method="get">
+                                                                            <div class="modal-body">
+                                                                                <div class="mb-3">
+                                                                                    <label  class="form-label">Shipper</label>
+                                                                                    <c:forEach var="shipper" items="${sessionScope.LIST_USER_STAFF}">
+                                                                                        <c:if test="${shipper.roleID == 2}">
+                                                                                            <div>
+                                                                                                <input type="radio" name="shipperID" value="${shipper.userID}" id="${shipper.userID}" checked="">
+                                                                                                <label for="${shipper.userID}">${shipper.name}</label>
+                                                                                            </div>
+                                                                                        </c:if>
+                                                                                    </c:forEach>
+                                                                                </div>
+                                                                                <!--                                                                                <input type="text" name="productName" value="" class="form-control">                                                                   -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <input type="hidden" name="orderID" value="${order.orderID}" >
+                                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                                                <button type="submit" class="btn" name="action" value="AssignShipperStaff">Approve</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
-                                                                <form action="MainController" method="POST">
-                                                                    <div class="modal-body">
-                                                                        <input type="hidden" name="productId"  value="" />
-                                                                        <div class="mb-3">
-                                                                            <label  class="form-label">Product Name</label>
-                                                                            <input type="text" class="form-control" >                                                                   
-                                                                        </div>
-                                                                        <div class="form-floating mb-3">
-                                                                            <textarea class="form-control" style="height: 100px;"
-                                                                                      id="floatingTextarea"></textarea>
-                                                                            <label for="floatingTextarea">Description</label>
-                                                                        </div>     
-                                                                        <div class="mb-3">
-                                                                            <label for="formFileMultiple" class="form-label">Image</label>
-                                                                            <input class="form-control" type="file" id="formFileMultiple" multiple>
-                                                                        </div>
-                                                                        <select class="form-select mb-3 form-control" aria-label="Default select example">
-                                                                            <option selected>Open this select menu</option>
-                                                                            <option value="1">One</option>
-                                                                            <option value="2">Two</option>
-                                                                            <option value="3">Three</option>
-                                                                        </select>                                                                      
-                                                                        <div class="mb-3">
-                                                                            <label for="password_field" class="form-label">Number</label>
-                                                                            <input type="number" class="form-control input_field" id="password_field">                                                                   
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                                        <input type="submit" name="action" value="Update Product" class="btn btn-primary"/>
-                                                                    </div>
-                                                                </form>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-
-                                            </tr>                                         
+                                                        </td>
+                                                    </c:if>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

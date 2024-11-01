@@ -4,6 +4,8 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -65,13 +67,16 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <form action="MainController" method="POST" id="myForm">
+                            <a href="MGR_Dashboard.jsp" class="nav-item nav-link active" onclick="document.getElementById('myForm').submit(); return false;"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                            <input type="hidden" name="action" value="ListDashboard">
+                        </form>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
-                                <a href="MainController?action=ViewPromotion" class="dropdown-item ">Promotion Management</a>
+                                <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
                         </div>
                     </div>
@@ -83,7 +88,7 @@
             <!-- Content Start -->
             <div class="content">
                 <!-- Navbar Start -->
-                <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0  ">
                     <a href="MGR_Dashboard.jsp" class="navbar-brand d-flex d-lg-none me-4">
                         <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
                     </a>
@@ -166,8 +171,6 @@
                                 <a href="profile.jsp" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
-                                
-                                
                             </div>
                         </div>
                     </div>
@@ -182,17 +185,10 @@
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                 <i class="fa fa-chart-line fa-3x text-primary"></i>
                                 <div class="ms-3">
-                                    <p class="mb-2">Today Sale</p>
-                                    <h6 class="mb-0">$1234</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Sale</p>
-                                    <h6 class="mb-0">$1234</h6>
+                                    <p class="mb-2">Total Product </p>
+                                    <c:forEach var="product" items="${requestScope.ALL_PRODUCT}">
+                                        <h6 class="mb-0">${product.productID}</h6>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -200,20 +196,57 @@
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                 <i class="fa fa-chart-area fa-3x text-primary"></i>
                                 <div class="ms-3">
-                                    <p class="mb-2">Today Revenue</p>
-                                    <h6 class="mb-0">$1234</h6>
+                                    <p class="mb-2">Order Completed</p>
+                                    <c:forEach var="order" items="${requestScope.ALL_ORDER_COMPLETED}">
+                                        <h6 class="mb-0">${order.orderID}</h6>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-xl-3">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                                <i class="fa fa-chart-area fa-3x text-primary"></i>
                                 <div class="ms-3">
-                                    <p class="mb-2">Total Revenue</p>
-                                    <h6 class="mb-0">$1234</h6>
+                                    <p class="mb-2">Order Is Processing</p>
+                                    <c:forEach var="orderP" items="${requestScope.ALL_ORDER_PROCESSING}">
+                                        <h6 class="mb-0">${orderP.orderID}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Brand</p>
+                                    <c:forEach var="brand" items="${requestScope.ALL_BRAND}">
+                                        <h6 class="mb-0">${brand.brandID}</h6>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Promotion</p>
+                                    <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
+                                        <h6 class="mb-0">${pro.promotionID}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>  
+                         <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Revenue</p>
+                                    <c:forEach var="unitP" items="${requestScope.REVENUE}">
+                                        <h6 class="mb-0">${unitP.unitPrice}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>  
                     </div>
                 </div>
                 <!-- Sale & Revenue End -->

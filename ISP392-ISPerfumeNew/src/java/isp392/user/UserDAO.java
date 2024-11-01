@@ -40,6 +40,9 @@ public class UserDAO {
     private static final String UPDATE_PROFILE_USER = "UPDATE dbo.Users SET Name=?, Email=?, Phone=? WHERE UserID=?";
     private static final String UPDATE_PROFILE_CUSTOMER = "UPDATE dbo.Customer SET DetailAddress=?, Area=?, District=?, Ward=?, DayOfBirth=? WHERE customerID=?";
     private static final String GET_PASSWORD_BY_ID = "SELECT Password FROM Users WHERE UserID = ?";
+    private static final String GET_CUSTOMER_ID = "SELECT UserID FROM Users WHERE Phone LIKE ?";
+    private static final String CREATE_EMPLOYEE_ACCOUNT = "INSERT INTO Users(Name, Email, Password, Phone, Status, RoleID) VALUES(?,?,?,?,?,?)";
+    private static final String LIST_USER_BY_PHONE = "SELECT UserID, Name, Email,Phone, Status, RoleID FROM Users WHERE Phone like ?";
 
     public boolean checkEmailExisted(String email) throws ClassNotFoundException, SQLException {
         boolean check = false;
@@ -516,5 +519,95 @@ public class UserDAO {
         }
 
         return check;
+    }
+
+    public int getCusID(String phoneNum) throws ClassNotFoundException, SQLException {
+        int userID = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(GET_CUSTOMER_ID);
+            ps.setString(1,"%" + phoneNum + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                userID = rs.getInt("UserID");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return userID;
+    }
+    
+    public boolean createEmployeeAccount(String name, String email, String password,String phone, int status, int roleID ) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+//            INSERT INTO Promotion(PromotionName,ManagerID,Description,StartDate,EndDate,DiscountPer,Condition,Status) VALUES(?,?,?,?,?,?,?,?)
+            if (conn != null) {
+                ptm = conn.prepareStatement(CREATE_EMPLOYEE_ACCOUNT);
+                ptm.setString(1, name);
+                ptm.setString(2, email);
+                ptm.setString(3, password);
+                ptm.setString(4, phone);
+                ptm.setInt(5, status);
+                ptm.setInt(6, roleID);
+                check = ptm.executeUpdate() > 0;
+            }
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public List<UserDTO> getListUserByPhone(String search) throws SQLException, NamingException, ClassNotFoundException {
+         List<UserDTO> listUser = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_USER_BY_PHONE);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int userID = rs.getInt("UserID");
+                    String name = rs.getString("Name");
+                    String email = rs.getString("Email");
+                    String phone = rs.getString("Phone");
+                    int status = rs.getInt("Status");
+                    int roleID = rs.getInt("RoleID");
+                    listUser.add(new UserDTO(userID, name, email, phone, phone, status, roleID));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listUser;
     }
 }

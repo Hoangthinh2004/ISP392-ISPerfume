@@ -225,7 +225,7 @@
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Discount Percent</label> ${requestScope.PROMOTION_ERROR.discountPerError}
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="discountPer" required="" min="0" max="100">
+                                            <input type="number" class="form-control" name="discountPer" required="" min="0" max="100" step="0.01" >
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -245,7 +245,7 @@
                                             </select>
                                         </div>
                                     </div>
-
+                                            <input type="hidden" name="search" value="${param.search}">
                                     <button type="submit" class="btn btn-primary" name="action" value="CreatePromotion">CREATE</button>
                                     ${requestScope.PROMOTION_ERROR.error}
                                 </form>
