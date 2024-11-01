@@ -171,8 +171,6 @@
                                 <a href="profile.jsp" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
-                                
-                                
                             </div>
                         </div>
                     </div>
@@ -198,13 +196,24 @@
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                 <i class="fa fa-chart-area fa-3x text-primary"></i>
                                 <div class="ms-3">
-                                    <p class="mb-2">Total Order</p>
-                                    <c:forEach var="order" items="${requestScope.ALL_ORDER}">
+                                    <p class="mb-2">Order Completed</p>
+                                    <c:forEach var="order" items="${requestScope.ALL_ORDER_COMPLETED}">
                                         <h6 class="mb-0">${order.orderID}</h6>
                                     </c:forEach>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Order Is Processing</p>
+                                    <c:forEach var="orderP" items="${requestScope.ALL_ORDER_PROCESSING}">
+                                        <h6 class="mb-0">${orderP.orderID}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>  
                         <div class="col-sm-6 col-xl-3">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
@@ -223,6 +232,17 @@
                                     <p class="mb-2">Total Promotion</p>
                                     <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
                                         <h6 class="mb-0">${pro.promotionID}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>  
+                         <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Revenue</p>
+                                    <c:forEach var="unitP" items="${requestScope.REVENUE}">
+                                        <h6 class="mb-0">${unitP.unitPrice}</h6>
                                     </c:forEach>
                                 </div>
                             </div>

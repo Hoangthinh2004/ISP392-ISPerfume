@@ -7,6 +7,10 @@ package isp392.controllers;
 
 import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
+import isp392.order.OrderDAO;
+import isp392.order.OrderDTO;
+import isp392.order.OrderDetailDAO;
+import isp392.order.OrderDetailDTO;
 import isp392.order.ShipperOrderDAO;
 import isp392.order.ShipperOrderDTO;
 import isp392.product.ProductDAO;
@@ -37,20 +41,30 @@ public class ListDashboardController extends HttpServlet {
             PromotionDAO dao = new PromotionDAO();
             ProductDAO pDao = new ProductDAO();
             BrandDAO bDao = new BrandDAO();
-            ShipperOrderDAO oDao = new ShipperOrderDAO();
+            ShipperOrderDAO soDao = new ShipperOrderDAO();
+            OrderDAO oDao = new OrderDAO();
+            OrderDetailDAO odDao = new OrderDetailDAO();
             List<PromotionDTO> listPromotion = dao.countAllPromotion();
             List<ProductDTO> listProduct = pDao.countAllProduct();
             List<BrandDTO> listBrand = bDao.countAllBrand();
-            List<ShipperOrderDTO> listOrder = oDao.countAllOrder();
+            List<ShipperOrderDTO> listSOrder = soDao.countAllOrder();
+            List<OrderDTO> listOrder = oDao.countAllOrderIsProcessing();
+            List<OrderDetailDTO> listOrderD = odDao.totalRevenue();
             if (listPromotion.size() > 0) {
                 if (listProduct.size() > 0) {
                     if (listBrand.size() > 0) {
-                        if (listOrder.size() > 0) {
-                            request.setAttribute("ALL_PROMOTION", listPromotion);
-                            request.setAttribute("ALL_PRODUCT", listProduct);
-                            request.setAttribute("ALL_BRAND", listBrand);
-                            request.setAttribute("ALL_ORDER", listOrder);
-                            url = SUCCESS;
+                        if (listSOrder.size() > 0) {
+                            if (listOrder.size() > 0) {
+                                if (listOrderD.size() > 0) {
+                                    request.setAttribute("ALL_PROMOTION", listPromotion);
+                                    request.setAttribute("ALL_PRODUCT", listProduct);
+                                    request.setAttribute("ALL_BRAND", listBrand);
+                                    request.setAttribute("ALL_ORDER_COMPLETED", listSOrder);
+                                    request.setAttribute("ALL_ORDER_PROCESSING", listOrder);
+                                    request.setAttribute("REVENUE", listOrderD);
+                                    url = SUCCESS;
+                                }
+                            }
                         }
                     }
                 }
