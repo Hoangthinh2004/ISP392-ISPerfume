@@ -28,7 +28,8 @@ public class OrderDetailDAO {
             + "            JOIN Orders O on O.OrderID = OD.OrderID\n"
             + "            JOIN Promotion Pr on O.PromotionID = Pr.PromotionID\n"
             + "            WHERE O.OrderID = ? AND O.PromotionID = Pr.PromotionID";
-
+    public static final String REVENUE = "SELECT SUM(UnitPrice * Quantity) AS UnitPrice FROM Order_Detail";
+    
     public List<OrderDetailDTO> getListOrderDetail(int orderID) throws SQLException, NamingException, ClassNotFoundException {
         List<OrderDetailDTO> listOrderDetail = new ArrayList<>();
         Connection conn = null;
@@ -59,5 +60,34 @@ public class OrderDetailDAO {
             }
         }
         return listOrderDetail;
+    }
+
+    public List<OrderDetailDTO> totalRevenue() throws SQLException, NamingException, ClassNotFoundException{
+        List<OrderDetailDTO> listOrderD = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn!= null){
+                ptm = conn.prepareStatement(REVENUE);
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    int unitPrice = rs.getInt("UnitPrice");
+                    listOrderD.add(new OrderDetailDTO(0, 0, 0, unitPrice, ""));
+                }
+            }
+        } finally {
+            if(rs != null){
+                rs.close();
+            }
+            if(ptm != null){
+                ptm.close();
+            }
+            if(rs != null){
+                rs.close();
+            }
+        }
+        return listOrderD;
     }
 }

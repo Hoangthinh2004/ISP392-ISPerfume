@@ -25,7 +25,7 @@ public class ShipperOrderDAO {
             + "            JOIN Users U ON U.UserID = C.CustomerID\n"
             + "			WHERE O.ShipperID = ? AND orderStatus >= 2";
     private static final String SHIPPER_UPDATE_STATUS_ORDER = "UPDATE Orders SET orderStatus=? WHERE OrderID=?";
-    private static final String COUNT = "SELECT  COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = 4";
+    private static final String COUNT_ORDER_COMPLETED = "SELECT  COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = 4";
     
     public List<ShipperOrderDTO> getListOrder(int shipperID) throws SQLException, NamingException, ClassNotFoundException {
         List<ShipperOrderDTO> listOrder = new ArrayList<>();
@@ -87,18 +87,18 @@ public class ShipperOrderDAO {
     }
 
     public List<ShipperOrderDTO> countAllOrder() throws NamingException, SQLException, ClassNotFoundException {
-        List<ShipperOrderDTO> listOrder = new ArrayList<>();
+        List<ShipperOrderDTO> listSOrder = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(COUNT);
+                ptm = conn.prepareStatement(COUNT_ORDER_COMPLETED);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int orderID = rs.getInt("OrderID");
-                    listOrder.add(new ShipperOrderDTO(0, orderID, "", "", "", "", 0));
+                    listSOrder.add(new ShipperOrderDTO(0, orderID, "", "", "", "", 0));
                 }
             }
         } finally {
@@ -112,6 +112,6 @@ public class ShipperOrderDAO {
                 conn.close();
             }
         }
-        return listOrder;
+        return listSOrder;
     }
 }

@@ -27,6 +27,7 @@ public class OrderDAO {
     private final String GET_LIST_ORDER_DETAIL_STAFF = "SELECT * FROM Order_Detail WHERE OrderID = ?";
     private final String GET_ORDER_BY_ORDERID = "SELECT * FROM Orders WHERE OrderID = ?";
     private final String ASSIGN_SHIPPER_ORDER = "UPDATE Orders SET ShipperID = ? , orderStatus = 2 WHERE OrderID = ?";
+    private final String COUNT_ORDER_IS_PROCESSING = "SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus BETWEEN 1 AND 3";
 
     public List<OrderDTO> getListOrder() throws ClassNotFoundException, SQLException {
         Connection conn = null;
@@ -138,5 +139,34 @@ public class OrderDAO {
             DBUtils.closeConnection2(conn, ptm);
         }
         return check;
+    }
+    
+    public List<OrderDTO> countAllOrderIsProcessing() throws SQLException, NamingException, ClassNotFoundException{
+         List<OrderDTO> listOrder = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_ORDER_IS_PROCESSING);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int orderID = rs.getInt("OrderID");
+                    listOrder.add(new OrderDTO(orderID, 0, 0, 0, 0, 0, null, 0, "", "", "", "", "", ""));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listOrder;
     }
 }
