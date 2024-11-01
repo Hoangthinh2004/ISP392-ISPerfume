@@ -65,7 +65,8 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Management</a>                     
+                        <a href="STAFF_OrderManagement.jsp" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Management</a>                     
+                        <a href="MainController?action=ShowAllBlogManager" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Blog</a>                     
 
                     </div>
                 </nav>
@@ -163,7 +164,6 @@
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
-<!--                                <a href="#" class="dropdown-item">Log Out</a>-->
                                 <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
                             </div>
                         </div>

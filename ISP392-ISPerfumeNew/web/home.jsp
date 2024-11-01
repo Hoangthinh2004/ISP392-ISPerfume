@@ -17,7 +17,7 @@
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -283,7 +283,7 @@
                                             <a href="checkout.jsp" class="dropdown-item">Checkout</a>
                                         </div>
                                     </div>
-                                    <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                    <a href="MainController?action=NavigateBlog" class="nav-item nav-link">Blog</a>
                                     <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>                              
                             </div>
@@ -306,41 +306,39 @@
                         <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
                         <li data-target="#header-carousel" data-slide-to="1"></li>
                         <li data-target="#header-carousel" data-slide-to="2"></li>
+                        <li data-target="#header-carousel" data-slide-to="3"></li>
+                        <li data-target="#header-carousel" data-slide-to="4"></li>
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item position-relative active" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="img/carousel-1.jpg" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100" src="img/Nu.jpg" style="object-fit: cover;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                </div>
                             </div>
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="img/carousel-2.jpg" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100" src="img/deppDior.jpg" style="object-fit: cover;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                </div>
                             </div>
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px;">
-                            <img class="position-absolute w-100 h-100" src="img/carousel-3.jpg" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100" src="img/chanel.jpg" style="object-fit: cover;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids Fashion</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item position-relative" style="height: 430px;">
+                            <img class="position-absolute w-100 h-100" src="img/Gucci1.jpg" style="object-fit: cover;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            </div>
+                        </div>
+                        <div class="carousel-item position-relative" style="height: 430px;">
+                            <img class="position-absolute w-100 h-100" src="img/CK.jpg" style="object-fit: cover;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="product-offer mb-30" style="height: 200px;">
                     <img class="img-fluid" src="img/offer-1.jpg" alt="">
@@ -362,7 +360,6 @@
         </div>
     </div>
     <!-- Carousel End -->
-
 
     <!-- Featured Start -->
     <div class="container-fluid pt-5">
@@ -395,7 +392,6 @@
     </div>
     <!-- Featured End -->
 
-
     <!-- Categories Start -->
     <div class="container-fluid pt-5">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Categories</span></h2>
@@ -418,7 +414,6 @@
         </div>
     </div>
     <!-- Categories End -->
-
 
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">

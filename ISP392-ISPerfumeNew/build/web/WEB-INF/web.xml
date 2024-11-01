@@ -112,6 +112,26 @@
         <servlet-name>SendEmailController</servlet-name>
         <servlet-class>isp392.controllers.SendEmailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NavigateBlogController</servlet-name>
+        <servlet-class>isp392.controllers.NavigateBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSingleBlogController</servlet-name>
+        <servlet-class>isp392.controllers.ViewSingleBlogController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBlogManagerController</servlet-name>
+        <servlet-class>isp392.controllers.UpdateBlogManagerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateBlogManager</servlet-name>
+        <servlet-class>isp392.controllers.CreateBlogManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowAllBlogManager</servlet-name>
+        <servlet-class>isp392.controllers.ShowAllBlogManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -223,6 +243,26 @@
     <servlet-mapping>
         <servlet-name>SendEmailController</servlet-name>
         <url-pattern>/SendEmailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NavigateBlogController</servlet-name>
+        <url-pattern>/NavigateBlogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSingleBlogController</servlet-name>
+        <url-pattern>/ViewSingleBlogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBlogManagerController</servlet-name>
+        <url-pattern>/UpdateBlogManagerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateBlogManager</servlet-name>
+        <url-pattern>/CreateBlogManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAllBlogManager</servlet-name>
+        <url-pattern>/ShowAllBlogManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

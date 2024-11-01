@@ -5,12 +5,14 @@
  */
 package isp392.controllers;
 
-import isp392.product.ProductDetailDAO;
-import isp392.product.ProductDetailError;
+import isp392.blog.BlogDAO;
+import isp392.blog.BlogDTO;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,24 +20,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import net.coobird.thumbnailator.Thumbnails;
 
-/**
- *
- * @author duyhc
- */
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 10, // 10MB
         maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
-//@WebServlet(name = "CreateProductDetailManager", urlPatterns = {"/CreateProductDetailManager"})
-public class CreateProductDetailManager extends HttpServlet {
+//@WebServlet(name = "UpdateBlogManagerController", urlPatterns = {"/UpdateBlogManagerController"})
+public class UpdateBlogManagerController extends HttpServlet {
 
+    private static final String SUCCESS = "ShowAllBlogManager";
+    private static final String ERROR = "ShowAllBlogManager";
     private static final String UPLOAD_DIRECTORY = "img";
-    private static final String ERROR = "MGR_CreateProductDetail.jsp";
-    private static final String SUCCESS = "SearchProductDetailManager";
     private static final int IMAGE_WIDTH = 500;
     private static final int IMAGE_HEIGHT = 500;
 
@@ -43,29 +42,23 @@ public class CreateProductDetailManager extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        ProductDetailDAO proDeDAO = new ProductDetailDAO();
-        ProductDetailError proDeErr = new ProductDetailError();
-        boolean validation = true;
         try {
-            Part filePart = request.getPart("productDetailImage");
-            int numberOfPurchase = 0;
-            int status = 1;
-            int price = Integer.parseInt(request.getParameter("price"));
-            int stockQuantity = Integer.parseInt(request.getParameter("quantity"));
-            int sizeID = Integer.parseInt(request.getParameter("sizeID"));
-            int productID = Integer.parseInt(request.getParameter("productID"));
-            LocalDateTime currentDate = LocalDateTime.now();
-            if (proDeDAO.checkExisted(productID, sizeID)) {
-                proDeErr.setSizeIDErr("THIS PRODUCT ALREADY HAS THIS SIZE!");
-                validation = false;
+            Part filePart = request.getPart("blogImage");
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            int blogID = Integer.parseInt(request.getParameter("blogID"));
+            int staffID = Integer.parseInt(request.getParameter("staffID"));
+            String createDate = request.getParameter("createDate");
+            boolean status = Boolean.parseBoolean(request.getParameter("status"));
+            String existingImage = request.getParameter("existingImage");
+            String image = existingImage;
+            String imagePath = "";
+            String path = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+            File uploadDir = new File(path);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
             }
-            if (validation) {
-                String imagePath = "";
-                String path = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
-                File uploadDir = new File(path);
-                if (!uploadDir.exists()) {
-                    uploadDir.mkdirs();
-                }
+            if (filePart != null && filePart.getSize() > 0) {
                 String fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
                 imagePath = UPLOAD_DIRECTORY + File.separator + fileName;
                 File outputFile = new File(path + File.separator + fileName);
@@ -74,17 +67,24 @@ public class CreateProductDetailManager extends HttpServlet {
                 Thumbnails.of(filePart.getInputStream())
                         .size(IMAGE_WIDTH, IMAGE_HEIGHT)
                         .toFile(outputFile);
-
                 filePart.write(path + File.separator + fileName);
-                boolean check = proDeDAO.createProductDetailManager(productID, sizeID, price, stockQuantity, currentDate, imagePath, numberOfPurchase, status);
-                if (check) {
-                    url = SUCCESS;
-                }
-            } else {
-                request.setAttribute("CREATE_PRODUCT_DETAIL_ERROR", proDeErr);
+                image = imagePath;
+            }
+
+// Parse createDate with SimpleDateFormat
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date utilCreateDate = formatter.parse(createDate);
+            Date sqlCreateDate = new Date(utilCreateDate.getTime()); // Convert to java.sql.Date
+
+            BlogDAO blogDAO = new BlogDAO();
+            BlogDTO blogDTO = new BlogDTO(blogID, staffID, title, image, description, sqlCreateDate, status);
+
+            boolean isUpdated = blogDAO.updateBlog(blogDTO);
+            if (isUpdated) {
+                url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at CreateProductDetailManager: " + e.toString());
+            log("Error at UpdateBlogManagerController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -4,6 +4,8 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,8 +32,46 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <!--<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">-->
-        <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/blogs/blog-4/assets/css/blog-4.css">
+        <style>
+            .text-muted {
+                color: rgba(0, 0, 0, 0.3) !important;
+            }
+            img {
+                border-radius: 10px;
+            }
+
+            /*            .btn {
+                            border-radius: 24px;
+                        }*/
+
+            .blog-post {
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                background-color: #fff;
+            }           
+
+            .list-group-item-blog {
+                margin-bottom: 10px;
+                padding: 15px;
+            }
+            .blog-post, .list-group-item-blog {
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Hiệu ứng bóng nhẹ */
+            }
+
+            .blog-post:hover, .list-group-item-blog:hover {
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            }
+            img, .btn, .list-group-item-blog {
+                transition: all 0.3s ease;
+            }
+
+            img:hover, .btn:hover, .list-group-item-blog:hover {
+                transform: scale(1.05); /* Phóng to nhẹ khi hover */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng */
+            }
+
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -51,22 +91,7 @@
 
                             <div class="btn-group">
                                 <!-- Display when not logged in. -->
-                                <c:choose>
-                                    <c:when test="${sessionScope.LOGIN_USER == null}">
-                                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.LOGIN_USER.name}</button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                            </div>
-                                    </c:when>
-                                    <!-- Display when logged in. -->
-                                    <c:otherwise>
-                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
+
                             </div>                                            
 
                         </div>
@@ -111,7 +136,6 @@
             </div>
         </div>
         <!-- Topbar End -->
-
 
         <!-- Navbar Start -->
         <form action="MainController">
@@ -159,7 +183,7 @@
                                             <a href="checkout.jsp" class="dropdown-item">Checkout</a>
                                         </div>
                                     </div>
-                                    <a href="blog.jsp" class="nav-item nav-link active">Blog</a>
+                                    <a href="MainController?action=NavigateBlog" class="nav-item nav-link active">Blog</a>
                                     <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
                                 </div>
                                 <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
@@ -189,12 +213,46 @@
         </div>
         <!-- Breadcrumb End -->
 
+        <!-- Blog Posts -->
+        <div class="container d-flex justify-content-between">
+            <div class="row">
+                <!-- Blog Start -->
 
-        <!-- Blog Start -->
-        
-        <!-- Blog END -->
+                <div class="col-lg-8">
+                    <c:forEach var="blog" items="${requestScope.BLOG_LIST}">
+                        <div class="blog-post mb-5">
+                            <img src="${blog.image}" class="img-fluid" alt="Blog Post Image" style="width: 650px; height: 297px;">
 
+                            <h2 class="mt-3">${blog.title} </h2>
+                            <p class="text-muted">${blog.createDate} by <a href="#">Staff_${blog.staffID}</a></p>
+<!--                            <p>${blog.description}</p>-->
+                            <a href="MainController?action=ViewBlogDetail&blogID=${blog.blogID}" class="btn btn-primary">Read more</a>
+                        </div>
+                    </c:forEach>
+                </div>
+                <!-- Blog End -->
 
+                <!-- Sidebar Start -->
+                <div class="col-lg-4">
+                    <h4 class="mb-4">New</h4>
+                    <c:forEach var="blog" items="${requestScope.BLOG_NEWEST_LIST}">
+                        <div class="list-group mb-5">
+                            <a href="MainController?action=ViewBlogDetail&blogID=${blog.blogID}" class="list-group-item-blog list-group-item-action d-flex">
+                                <img src="${blog.image}" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Blog Post Image">
+                                <div class="ml-3">
+                                    <h5>${blog.title}</h5>
+                                    <p class="text-muted">${blog.createDate}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </c:forEach>
+                </div>
+                <!-- Sidebar End -->
+
+            </div>
+        </div>
+
+        <!-- Blog End -->
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
@@ -263,7 +321,7 @@
                 <div class="col-md-6 px-xl-0 text-center text-md-right">
                     <img class="img-fluid" src="img/payments.png" alt="">
                 </div>
-            </div>
+            </div>           
         </div>
         <!-- Footer End -->
 
