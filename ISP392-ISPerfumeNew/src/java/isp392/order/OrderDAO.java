@@ -5,6 +5,8 @@
  */
 package isp392.order;
 
+import isp392.product.ProductDetailDTO;
+import isp392.user.UserDTO;
 import isp392.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.NamingException;
 
 /**
  *
@@ -150,7 +153,7 @@ public class OrderDAO {
                     int productDetailID = rs.getInt("ProductDetailID");
                     int quantity = rs.getInt("Quantity");
                     int unitPrice = rs.getInt("UnitPrice");
-                    OrderDetailDTO orderDetail = new OrderDetailDTO(orderID, productDetailID, quantity, unitPrice);
+                    OrderDetailDTO orderDetail = new OrderDetailDTO(orderID, productDetailID, quantity, unitPrice,"");
                     list.add(orderDetail);
                 }
             }
@@ -228,4 +231,32 @@ public class OrderDAO {
         return list;
     }
     
+    public List<OrderDTO> countAllOrderIsProcessing() throws SQLException, NamingException, ClassNotFoundException{
+         List<OrderDTO> listOrder = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_ORDER_IS_PROCESSING);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int orderID = rs.getInt("OrderID");
+                    listOrder.add(new OrderDTO(orderID, 0, 0, 0, 0, 0, null, 0, "", "", "", "", "", ""));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listOrder;
+    }
 }
