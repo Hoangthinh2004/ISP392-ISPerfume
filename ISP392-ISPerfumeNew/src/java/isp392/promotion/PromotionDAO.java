@@ -237,7 +237,7 @@ public class PromotionDAO {
                 ptm = conn.prepareStatement(SHIPPER_LIST_PROMOTION);
                 ptm.setInt(1, promotionID);
                 rs = ptm.executeQuery();
-                while (rs.next()) {
+                if (rs.next()) {
                     String promotionName = rs.getString("PromotionName");
                     int managerID = rs.getInt("ManagerID");
                     String Description = rs.getString("Description");

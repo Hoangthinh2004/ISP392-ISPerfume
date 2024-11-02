@@ -9,9 +9,6 @@ package isp392.order;
  *
 <<<<<<< HEAD
  * @author ThinhHoang
-=======
- * @author duyhc
->>>>>>> 2d637152427bbe1ebd54ab50a04d44821495ef70
  */
 public class OrderDetailDTO {
     private int orderID;
