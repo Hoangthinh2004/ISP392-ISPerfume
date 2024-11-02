@@ -8,6 +8,7 @@ package isp392.controllers;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -37,10 +38,13 @@ public class CategoryController extends HttpServlet {
                 brandID = Integer.parseInt(request.getParameter("brandID"));
             }
             
-
             ProductDAO productDAO = new ProductDAO();
             HttpSession session = request.getSession();
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+            if (ids == null) {
+                ids = new HashMap<>();
+                session.setAttribute("CURRENT_IDS", ids);
+            }
             ids.put("categoryID", categoryID); //store current categoryID and send to Brand & Size filter controller
 
             //remove current sizeID

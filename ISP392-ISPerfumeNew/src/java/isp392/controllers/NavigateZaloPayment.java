@@ -5,13 +5,14 @@
  */
 package isp392.controllers;
 
+import isp392.cart.Cart;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,8 +34,20 @@ public class NavigateZaloPayment extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         int status = Integer.parseInt(request.getParameter("status"));
-        if(status==1){
-            response.sendRedirect("success.jsp");
+        if (status == 1) {
+            String[] productDetailIDs = request.getParameterValues("productDetailIDs");
+            int promotionID = Integer.parseInt(request.getParameter("promotionID"));
+            int customerID = Integer.parseInt(request.getParameter("customerID"));
+            int price = Integer.parseInt(request.getParameter("price"));
+            
+            StringBuilder productDetailIDParams = new StringBuilder();
+                for (String id : productDetailIDs) {
+                    if (productDetailIDParams.length() > 0) {
+                        productDetailIDParams.append("&");
+                    }
+                    productDetailIDParams.append("productDetailIDs=").append(id);
+                }
+            response.sendRedirect("checkOutController?price="+price+"&customerID="+customerID+"&promotionID="+promotionID+"&"+productDetailIDParams.toString());
             // update quantity 
         }else{
             // tra ve trang that bai 

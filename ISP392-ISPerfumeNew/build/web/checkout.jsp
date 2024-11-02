@@ -285,15 +285,16 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
+                    <form action="MainController">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
                     <c:forEach var="check" items="${sessionScope.CHECK_LIST.cart.values()}">
+                        <input type="hidden" name="productDetailID" value="${check.productDetailID}"/>
                         <c:set var="unitTotal" value="${check.price * check.totalQuantity}"/>
                         <div class="bg-light p-30 mb-5">
                             <img src="${check.image}" alt="" style="width: 50px;"><h6 class="mb-3">${check.productName} ${check.sizeName}      ${check.totalQuantity}          
                                 <fmt:formatNumber type="number" value="${unitTotal}"/></h6>
                         </div>
-                    </c:forEach>
-                    <form action="MainController">
+                    </c:forEach>                  
                         <div class="input-group mb-30">
                             <c:forEach var="promotion" items="${sessionScope.PROMOTION}">
                                 <input type="radio" name="promotionID" value="${promotion.promotionID}"/>${promotion.promotionName}
@@ -302,7 +303,6 @@
                                 <button type="submit" class="btn btn-primary" name="action" value="ApplyVoucher">Apply Voucher</button>
                             </div>
                         </div>
-
                         <div class="bg-light p-30 mb-5">
                             <div class="border-bottom pt-3 pb-2">
                                 <c:if test="${sessionScope.PROMOTION_DETAIL != null}">
@@ -319,14 +319,8 @@
                                 <div class="pt-2">
                                     <div class="d-flex justify-content-between mt-2">
                                         <h5>Total</h5>
-                                        <c:choose>
-                                            <c:when test="${requestScope.FINAL_PRICE != null}">
-                                                <h5><fmt:formatNumber type="number" value="${requestScope.FINAL_PRICE}"/> VND</h5>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <h5><fmt:formatNumber type="number" value="${sessionScope.TOTAL_PRICE.total}"/> VND</h5>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <h5><fmt:formatNumber type="number" value="${requestScope.TOTAL_PRICE}"/> VND</h5>
+                                        <input type="hidden" name="orderPrice" value="${requestScope.TOTAL_PRICE}"/>
                                         ${requestScope.CHECKOUT_MESSAGE}
                                     </div>
                                 </div>
@@ -354,7 +348,7 @@
                                         <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
                                     </div>
                                 </div>
-                                <button type="submit" name="action" value="checkOut" class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                                <button type="submit" name="action" value="checkQuantity" class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
                             </div>
                         </div>
                     </form>

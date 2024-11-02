@@ -7,7 +7,6 @@ package isp392.controllers;
 
 import isp392.order.OrderDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

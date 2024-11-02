@@ -48,7 +48,7 @@ public class ApplyVoucherController extends HttpServlet {
             }
             
             session.setAttribute("CUR_PROMOTION", promotions);
-            request.setAttribute("FINAL_PRICE", finalPrice);
+            request.setAttribute("TOTAL_PRICE", finalPrice);
             session.setAttribute("PROMOTION_DETAIL", promotion);
             url = SUCCESS;
         } catch (Exception e) {

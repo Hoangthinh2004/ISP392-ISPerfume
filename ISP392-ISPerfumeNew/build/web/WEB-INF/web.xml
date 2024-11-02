@@ -144,6 +144,10 @@
         <servlet-name>ApplyVoucherController</servlet-name>
         <servlet-class>isp392.controllers.ApplyVoucherController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkOrderQuantityController</servlet-name>
+        <servlet-class>isp392.controllers.checkOrderQuantityController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -287,6 +291,10 @@
     <servlet-mapping>
         <servlet-name>ApplyVoucherController</servlet-name>
         <url-pattern>/ApplyVoucherController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkOrderQuantityController</servlet-name>
+        <url-pattern>/checkOrderQuantityController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

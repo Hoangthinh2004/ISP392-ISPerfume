@@ -303,7 +303,7 @@
                                     </label>
                                 </div>
                             </c:forEach>
-                            <button type="submit" name="action" value="ViewResultInShopping" class="btn btn-primary mt-3">View Result</button>
+                            <button type="submit" name="action" value="ViewResultInShoppingSearch" class="btn btn-primary mt-3">View Result</button>
                             <div class="text-danger mt-2">${requestScope.MESSAGE}</div>
                         </div>
                         <!-- Filter By Size End -->

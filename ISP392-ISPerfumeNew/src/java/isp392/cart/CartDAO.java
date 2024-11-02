@@ -59,6 +59,7 @@ public class CartDAO {
     private static final String CHECK_QUANTITY = "SELECT PD.ProductDetailID, PD.StockQuantity FROM ProductDetail PD "
             + "WHERE PD.ProductDetailID = ? AND PD.StockQuantity >= ?";
     private static final String DELETE_CART_DETAIL = "DELETE FROM CartsDetail WHERE CartID = ? AND ProductDetailID = ?";
+    private static final String UPDATE_PURCHASING = "UPDATE ProductDetail SET NumberOfPurchasing = NumberOfPurchasing + ? WHERE ProductDetailID = ?";
 
     public List<ViewCartDTO> getProductDetailID(int customerID) throws ClassNotFoundException, SQLException {
         List<ViewCartDTO> listProduct = new ArrayList<>();
@@ -94,38 +95,7 @@ public class CartDAO {
         }
         return listProduct;
     }
-
-//    public List<ProductDetailDTO> getDetail() throws ClassNotFoundException, SQLException {
-//        Connection conn = null;
-//        PreparedStatement ptm = null;
-//        ResultSet rs = null;
-//        List<ProductDetailDTO> list = new ArrayList<>();
-//        try {
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                ptm = conn.prepareStatement(GET_DETAIL);
-//                rs = ptm.executeQuery();
-//                while (rs.next()) {
-//                    int productID = rs.getInt("ProductID");;
-//                    int sizeID = rs.getInt("SizeID");
-//                    int price = rs.getInt("Price");
-//                    String image = rs.getString("Image");
-//                    list.add(new ProductDetailDTO(productID, sizeID, price, 0, 0, null, image, 0));
-//                }
-//            }
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (ptm != null) {
-//                ptm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return list;
-//    }
+    
     public List<CartDTO> checkExistProduct(int productDetailID, int customerID) throws ClassNotFoundException, SQLException {
         List<CartDTO> listProduct = new ArrayList<>();
         Connection conn = null;
@@ -347,7 +317,7 @@ public class CartDAO {
                 ptm = conn.prepareStatement(VIEW_CHECKOUT_DETAIL);
                 ptm.setInt(1, parseInt);
                 rs = ptm.executeQuery();
-                while (rs.next()) {
+                if (rs.next()) {
                     int productDetailID = rs.getInt("ProductDetailID");
                     String productName = rs.getString("ProName");
                     String sizeName = rs.getString("Name");
@@ -412,6 +382,29 @@ public class CartDAO {
                 ptm.setInt(1, cartID);
                 ptm.setInt(2, productDetailID);
                 check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean UpdatePur(int productDetailID, int totalQuantity) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_PURCHASING);
+                ptm.setInt(2, productDetailID);
+                ptm.setInt(1, totalQuantity);
+                check = ptm.executeUpdate() > 0 ? true: false;
             }
         } finally {
             if (ptm != null) {
