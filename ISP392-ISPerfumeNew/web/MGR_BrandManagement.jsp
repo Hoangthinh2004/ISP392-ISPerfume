@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Manager | Brand</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -53,7 +53,7 @@
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
                     <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -61,18 +61,18 @@
                             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                         </div>
                         <div class="ms-3">
-                            <h6 class="mb-0">Jhon Doe</h6>
-                            <span>Admin</span>
+                            <h6 class="mb-0">Name</h6>
+                            <span>Manager</span>
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Dashboard</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item active">Brand Management</a>
-                                <a href="MainController?action=ViewPromotion" class="dropdown-item">Promotion Management</a>
+                                <a href="MainController?action=ViewPromotion" class="dropdown-item ">Promotion Management</a>
                             </div>
                         </div>
                     </div>
@@ -90,78 +90,83 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form action="MainController" method="GET" class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search" name="search">
-                        <input type="submit" name="action" value="Search" class="btn btn-sm btn-primary">
+
+                    <form class="d-none d-md-flex ms-4" action="MainController" method="GET">
+                        <input class="form-control border-0" type="search" placeholder="Search brand.." name="search" value="${param.search}">
+                        <button class="btn btn-primary" type="submit" name="action" value="Search" style="margin-left: 10px;">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
+                        <!--                        <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <i class="fa fa-envelope me-lg-2"></i>
+                                                        <span class="d-none d-lg-inline-flex">Message</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item text-center">See all message</a>
+                                                    </div>
+                                                </div>
+                                                <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <i class="fa fa-bell me-lg-2"></i>
+                                                        <span class="d-none d-lg-inline-flex">Notificatin</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">Profile updated</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">New user added</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">Password changed</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item text-center">See all notifications</a>
+                                                    </div>
+                                                </div>-->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-envelope me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Message</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all message</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-bell me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Notificatin</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Profile updated</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">New user added</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Password changed</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all notifications</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <span class="d-none d-lg-inline-flex">John Doe</span>
+                                <i class="fa fa-user"></i>
+                                <span class="d-none d-lg-inline-flex">Ten Manager</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">My Profile</a>
@@ -278,18 +283,15 @@
                 </div>
                 <!-- Blank End -->
 
-
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink.
-                                If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>
