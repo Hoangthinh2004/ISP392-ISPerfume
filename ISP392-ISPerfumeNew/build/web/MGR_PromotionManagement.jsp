@@ -4,6 +4,7 @@
     Author     : User
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page import="java.util.List"%>
 <%@page import="isp392.promotion.PromotionDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -71,7 +72,7 @@
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item ">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item ">Brand Management</a>
-                                <a href="MainController?action=ViewPromotion" class="dropdown-item active">Promotion Management</a>
+                                <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
                         </div>
                     </div>
@@ -90,9 +91,9 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4" action="MainController" method="get">
-                        <input class="form-control border-0" type="search" placeholder="Search product.." name="search">
-                        <button class="btn btn-primary" type="submit" name="action" value="Search product" style="margin-left: 10px;">
+                    <form class="d-none d-md-flex ms-4" action="MainController">
+                        <input class="form-control border-0" type="text" placeholder="Type Name's Promotion" name="search" value="${param.search}">
+                        <button class="btn btn-primary" style="margin-left: 10px;" type="submit" name="action" value="ViewPromotion">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                             </svg>
@@ -170,7 +171,7 @@
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
-                                <a href="#" class="dropdown-item">Log Out</a>
+                                <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
                     </div>
@@ -211,7 +212,6 @@
                                                     <td>
                                                         ${promotion.promotionName}
                                                     </td>
-
                                                     <td>
                                                         ${promotion.startDate}
                                                     </td>

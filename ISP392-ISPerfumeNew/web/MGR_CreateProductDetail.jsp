@@ -170,7 +170,7 @@
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
-                                <a href="#" class="dropdown-item">Log Out</a>
+                                <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
                     </div>
@@ -209,6 +209,7 @@
                                     </div>
                                     <input type="hidden" name="productID" value="${param.productID}">
                                     <button type="submit" class="btn btn-primary">CREATE</button>
+                                    <a href="MainController?action=ProductDetailPage&productID=${param.productID}" class="btn btn-primary">Back</a>
                                 </form>
                             </div>
                         </div>

@@ -258,7 +258,7 @@
 
 
         <!-- Cart Start -->
-        <form action="MainController">
+        <form action="MainController" method="POST">
             <div class="container-fluid">
                 <div class="row px-xl-5">
                     <div class="col-lg-8 table-responsive mb-5">
@@ -282,16 +282,20 @@
                                     <c:set var="Total" value="${unitTotal + Total}"/>
                                     <tr>
                                         <td class="align-middle m-auto">
-                                            <input type="checkbox" name=""  style="height: 16px; width: 16px;"/>
+                                            <input type="checkbox" name="productDetailID" value="${cart.productDetailID}" style="height: 16px; width: 16px;"/>
                                         </td>
                                         <td class="align-middle">
                                             <img src="${cart.image}" alt="" style="width: 50px;"> 
+                                            <input type="hidden" name="image" value="${cart.image}"/>
                                         </td>
                                         <td class="align-middle">
                                             ${cart.productName} ${cart.sizeName}
+                                            <input type="hidden" name="proName" value="${cart.productName}"/>
+                                            <input type="hidden" name="sizeName" value="${cart.sizeName}"/>
                                         </td>
                                         <td class="align-middle price">
                                             <span class="amount"><fmt:formatNumber type="number" value="${cart.price}"/></span><span class="currency"></span>
+                                            <input type="hidden" name="price" value="${cart.price}"/>
                                         </td>
                                         <td class="align-middle">
                                             <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -304,6 +308,7 @@
                                                 <input type="text" readonly
                                                        class="form-control form-control-sm bg-secondary border-0 text-center quantity-input"
                                                        value="${cart.totalQuantity}">
+                                                <input type="hidden" value="${cart.totalQuantity}" name="quantity">
                                                 <div class="input-group-btn">
                                                     <button class="btn btn-sm btn-primary btn-plus"
                                                             onclick="updateQuantity(this, 1, event)">
@@ -316,8 +321,8 @@
                                             <span class="amount"><fmt:formatNumber type="number" value="${unitTotal}"/></span><span class="currency"></span>
                                         </td>
                                         <td class="align-middle">
-                                            <button type="submit" name="action" class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event, ${cart.productDetailID})">                                               
-                                                <i class="fa fa-times" id=""></i>
+                                            <button type="submit" name="productDetailID" value="${cart.productDetailID}" class="btn btn-sm btn-danger" onclick="openDeleteModal(this, event, ${cart.productDetailID})">                                               
+                                                <i class="fa fa-times" id="${cart.productDetailID}"></i>
                                             </button>                                       
                                         </td>
                                     </tr>
@@ -325,13 +330,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="input-group mb-30">
-                            <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary">Apply Coupon</button>
-                            </div>
-                        </div>
+                    <div class="col-lg-4">                       
                         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
                                 Summary</span></h5>
                         <div class="bg-light p-30 mb-5">
@@ -357,7 +356,7 @@
                                         <span id="total-cart"><fmt:formatNumber type="number" value="${Total}"/></span>
                                     </h5> 
                                 </div>
-                                <button  type="submit" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                                    <button  type="submit" name="action" class="btn btn-block btn-primary font-weight-bold my-3 py-3" value="NavigateToCheckOut">Proceed To Checkout</button>
                             </div>
                         </div>
                     </div>

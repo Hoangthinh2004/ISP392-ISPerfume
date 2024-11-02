@@ -19,38 +19,48 @@ import java.util.List;
  * @author ThinhHoang
  */
 public class CartDAO {
-    
+
     private static final String ADD_TO_CART = "INSERT INTO CartsDetail(CartID, ProductDetailID, Quantity) VALUES (?, ?, ?)";
     private static final String VIEW_CART = "SELECT P.ProductID, P.ProName, PD.SizeID, S.Name , PD.Price, PD.Image, C.TotalQuantity FROM ProductDetail PD "
-                                          + "INNER JOIN Products P ON PD.ProductID = P.ProductID "
-                                          + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-                                          + "INNER JOIN Carts C ON C.productID = PD.ProductID "
-                                          + "WHERE C.CustomerID = ? AND P.ProductID = ? AND PD.SizeID = ?";
+            + "INNER JOIN Products P ON PD.ProductID = P.ProductID "
+            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+            + "INNER JOIN Carts C ON C.productID = PD.ProductID "
+            + "WHERE C.CustomerID = ? AND P.ProductID = ? AND PD.SizeID = ?";
     private static final String VIEW_CART_DETAIL = "SELECT C.CustomerID, C.CartID, CD.ProductDetailID, S.Name, P.ProName, PD.Price, PD.Image, CD.Quantity FROM Carts C "
-                                                +  "INNER JOIN CartsDetail CD ON CD.CartID = C.CartID "
-                                                +  "INNER JOIN ProductDetail PD ON PD.ProductDetailID = CD.ProductDetailID "
-                                                +  "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-                                                +  "INNER JOIN Products P ON P.ProductID = PD.ProductID "
-                                                +  "WHERE C.CustomerID = ?";
-    private static final String GET_DETAIL ="SELECT PD.ProductDetailID FROM ProductDetail PD "
-                                          + "WHERE PD.ProductID = ? AND PD.SizeID = ?";
-    
-    private static final String CHECK_EXIST ="SELECT * FROM Carts C " 
-                                           + "INNER JOIN CartsDetail CD ON CD.CartID = C.CartID " 
-                                           + "WHERE CD.ProductDetailID = ? AND C.CustomerID = ?";
+            + "INNER JOIN CartsDetail CD ON CD.CartID = C.CartID "
+            + "INNER JOIN ProductDetail PD ON PD.ProductDetailID = CD.ProductDetailID "
+            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+            + "INNER JOIN Products P ON P.ProductID = PD.ProductID "
+            + "WHERE C.CustomerID = ?";
+    private static final String GET_DETAIL = "SELECT PD.ProductDetailID FROM ProductDetail PD "
+            + "WHERE PD.ProductID = ? AND PD.SizeID = ?";
+
+    private static final String CHECK_EXIST = "SELECT * FROM Carts C "
+            + "INNER JOIN CartsDetail CD ON CD.CartID = C.CartID "
+            + "WHERE CD.ProductDetailID = ? AND C.CustomerID = ?";
     private static final String GET_CARTID = "SELECT C.CartID FROM Carts C WHERE C.CustomerID = ?";
-    private static final String GET_QUANTITY ="SELECT CD.Quantity FROM Carts C "
-                                            + "INNER JOIN CartsDetail CD ON CD.CartID = C.CartID "
-                                            + "WHERE CD.ProductDetailID = ? AND C.CustomerID = ?";
-    private static final String UPDATE_QUANTITY ="UPDATE CartsDetail SET Quantity = ? WHERE ProductDetailID = ?";
+    private static final String GET_QUANTITY = "SELECT CD.Quantity FROM Carts C "
+            + "INNER JOIN CartsDetail CD ON CD.CartID = C.CartID "
+            + "WHERE CD.ProductDetailID = ? AND C.CustomerID = ?";
+    private static final String UPDATE_QUANTITY = "UPDATE CartsDetail SET Quantity = ? WHERE ProductDetailID = ?";
     private static final String DELETE_CART = "DELETE CD FROM CartsDetail CD "
-                                            + "INNER JOIN Carts C ON C.CartID = CD.CartID "
-                                            + "WHERE CD.ProductDetailID = ? AND C.CustomerID = ?";
+            + "INNER JOIN Carts C ON C.CartID = CD.CartID "
+            + "WHERE CD.ProductDetailID = ? AND C.CustomerID = ?";
     private static final String ADD_NEW_CART = "INSERT INTO Carts(CustomerID) VALUES (?)";
     private static final String GET_CART_SIZE = "SELECT COUNT (*) FROM CartsDetail CD "
-                                             +  "INNER JOIN Carts C ON C.CartID = CD.CartID "
-                                             +  "WHERE C.CustomerID = ?";
-    
+            + "INNER JOIN Carts C ON C.CartID = CD.CartID "
+            + "WHERE C.CustomerID = ?";
+    private static final String VIEW_CHECKOUT_DETAIL = "SELECT C.CustomerID, C.CartID, CD.ProductDetailID, S.Name, P.ProName, PD.Price, PD.Image, CD.Quantity FROM Carts C "
+            + "INNER JOIN CartsDetail CD ON CD.CartID = C.CartID "
+            + "INNER JOIN ProductDetail PD ON PD.ProductDetailID = CD.ProductDetailID "
+            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+            + "INNER JOIN Products P ON P.ProductID = PD.ProductID "
+            + "WHERE CD.ProductDetailID = ?";
+    private static final String CHECK_QUANTITY = "SELECT PD.ProductDetailID, PD.StockQuantity FROM ProductDetail PD "
+            + "WHERE PD.ProductDetailID = ? AND PD.StockQuantity >= ?";
+    private static final String DELETE_CART_DETAIL = "DELETE FROM CartsDetail WHERE CartID = ? AND ProductDetailID = ?";
+    private static final String UPDATE_PURCHASING = "UPDATE ProductDetail SET NumberOfPurchasing = NumberOfPurchasing + ? WHERE ProductDetailID = ?";
+
     public List<ViewCartDTO> getProductDetailID(int customerID) throws ClassNotFoundException, SQLException {
         List<ViewCartDTO> listProduct = new ArrayList<>();
         Connection conn = null;
@@ -73,45 +83,19 @@ public class CartDAO {
                 }
             }
         } finally {
-            if(rs!=null) rs.close();
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
-
-//    public List<ProductDetailDTO> getDetail() throws ClassNotFoundException, SQLException {
-//        Connection conn = null;
-//        PreparedStatement ptm = null;
-//        ResultSet rs = null;
-//        List<ProductDetailDTO> list = new ArrayList<>();
-//        try {
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                ptm = conn.prepareStatement(GET_DETAIL);
-//                rs = ptm.executeQuery();
-//                while (rs.next()) {
-//                    int productID = rs.getInt("ProductID");;
-//                    int sizeID = rs.getInt("SizeID");
-//                    int price = rs.getInt("Price");
-//                    String image = rs.getString("Image");
-//                    list.add(new ProductDetailDTO(productID, sizeID, price, 0, 0, null, image, 0));
-//                }
-//            }
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (ptm != null) {
-//                ptm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return list;
-//    }
-
+    
     public List<CartDTO> checkExistProduct(int productDetailID, int customerID) throws ClassNotFoundException, SQLException {
         List<CartDTO> listProduct = new ArrayList<>();
         Connection conn = null;
@@ -129,9 +113,15 @@ public class CartDAO {
                 }
             }
         } finally {
-            if(rs!=null) rs.close();
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listProduct;
     }
@@ -153,9 +143,15 @@ public class CartDAO {
                 }
             }
         } finally {
-            if(rs!=null) rs.close();
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return quantity;
     }
@@ -223,9 +219,15 @@ public class CartDAO {
                 }
             }
         } finally {
-            if(rs!=null) rs.close();
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return cartID;
     }
@@ -291,11 +293,128 @@ public class CartDAO {
                 }
             }
         } finally {
-            if(rs!=null) rs.close();
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return size;
     }
-    
+
+    public List<ViewCartDTO> getProductInfor(int parseInt, int customerID) throws ClassNotFoundException, SQLException {
+        List<ViewCartDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(VIEW_CHECKOUT_DETAIL);
+                ptm.setInt(1, parseInt);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int productDetailID = rs.getInt("ProductDetailID");
+                    String productName = rs.getString("ProName");
+                    String sizeName = rs.getString("Name");
+                    int quantity = rs.getInt("Quantity");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    listProduct.add(new ViewCartDTO(customerID, productDetailID, productName, sizeName, price, image, quantity));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listProduct;
+    }
+
+    public boolean checkQuantity(int productDetailID, int quantity) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_QUANTITY);
+                ptm.setInt(1, productDetailID);
+                ptm.setInt(2, quantity);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean deleteCartDetail(int cartID, int productDetailID) throws ClassNotFoundException, SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_CART_DETAIL);
+                ptm.setInt(1, cartID);
+                ptm.setInt(2, productDetailID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean UpdatePur(int productDetailID, int totalQuantity) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_PURCHASING);
+                ptm.setInt(2, productDetailID);
+                ptm.setInt(1, totalQuantity);
+                check = ptm.executeUpdate() > 0 ? true: false;
+            }
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
 }

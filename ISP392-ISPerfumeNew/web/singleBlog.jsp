@@ -3,6 +3,7 @@
     Created on : Oct 16, 2024, 2:43:34 PM
     Author     : User
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,8 +32,108 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/styleSingleBlog.css" rel="stylesheet">
+        <style>
+            .blog-post {
+                background-color: #fff;
+                border-radius: 8px; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+                padding: 20px; 
+            }
 
+            img {
+                border-radius: 8px; 
+            }
+
+            .blog-post p {
+                margin-bottom: 15px;
+            }
+
+            blockquote {
+                padding: 15px;
+                background-color: #e9ecef;
+                border-left: 5px solid #007bff;
+                margin-bottom: 30px;
+            }
+            .sidebar .list-group-item {
+                border-radius: 8px;
+                margin-bottom: 10px;
+                transition: background-color 0.3s ease;
+            }
+
+            .sidebar .list-group-item:hover {
+                background-color: #f1f1f1;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            /* Sidebar Title Styling */
+            .sidebar-title {
+                font-size: 18px;
+                font-weight: 600;
+                color: #343a40;
+                border-bottom: 2px solid orange;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+
+
+            .recent-post img {
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .recent-post .post-title {
+                font-size: 16px;
+                font-weight: 500;
+                color: #007bff;
+            }
+
+            .recent-post:hover .post-title {
+                color: #0056b3;
+                text-decoration: none;
+            }
+
+            .list-group-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            .list-group-item:hover {
+                background-color: #f8f9fa;
+            }
+
+
+            .tag-cloud {
+                padding: 15px;
+                background-color: transparent;
+                border-radius: 10px; /* Bo góc cho khối tag cloud */
+
+            }
+
+            .tags {
+                display: flex;
+                flex-wrap: wrap; 
+                gap: 10px; 
+            }
+
+            .tag-item {
+                font-size: 14px;
+                color: orange;
+                background-color: white;
+                padding: 8px 15px;
+                border-radius: 10px;
+                text-decoration: none;
+                transition: background-color 0.3s ease, color 0.3s ease; 
+            }
+
+            .tag-item:hover {
+                background-color: orange; 
+                color: #fff; 
+            }
+
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -41,152 +142,116 @@
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
                         <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
-                        <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
-                        <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
-                        <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
+                        <a class="text-body mr-3" href="">Contact</a>
+                        <a class="text-body mr-3" href="">Help</a>
+                        <a class="text-body mr-3" href="">FAQs</a>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
-                    <div class="d-inline-flex align-items-center justify-content-between">  
-                        <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
-                            <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
-                                <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
-                                <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="d-inline-flex align-items-center d-block d-lg-none">
-                            <c:choose>
-                                <c:when test="${empty sessionScope.CUSTOMER_ID}">
-                                    <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
-                                        <i class="fas fa fa-user text-primary"></i>
-                                        <span class="ml-1 text-primary">Account</span>
-                                    </button>                                        
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                        <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
-                                        <i class="fas fa fa-user text-primary"></i>
-                                        <span class="ml-2"> ${sessionScope.CUSTOMER.name}</span>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
-                            <c:choose>
-                                <c:when test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-primary border border-primary rounded-circle ml-1" style="padding-bottom: 2px; top: 0">${sessionScope.CART_SIZE}</span>
-                                    </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <button class="btn btn-sm d-flex align-items-center" onclick="openDeleteModal(this, event)">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="ml-1 text-primary">Cart</span>
-                                    </button>
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
+                <div class="col-lg-6 text-center text-lg-right">
+                    <div class="d-inline-flex align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
+                            </div>
+                        </div>                                            
+                    </div>
+                    <div class="d-inline-flex align-items-center d-block d-lg-none">
+                        <a href="" class="btn px-0 ml-2">
+                            <i class="fas fa-heart text-dark"></i>
+                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                        </a>
+                        <a href="" class="btn px-0 ml-2">
+                            <i class="fas fa-shopping-cart text-dark"></i>
+                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                        </a>
                     </div>
                 </div>
-            </div>          
-        </div>
-        <!-- Topbar End -->
-
-        <!-- Navbar Start -->
-        <div class="container-fluid bg-dark mb-30">
-            <div class="row px-xl-5">
-                <div class="col-lg-3 d-none d-lg-block mt-2">
-                    <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
-                        <i class="fa fa-leaf"></i>
+            </div>
+            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+                <div class="col-lg-4">
+                    <a href="home.jsp" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
                 </div>
-                <div class="col-lg-9 ml-auto">
-                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">                           
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
-                                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
-                                    <div class="nav-item dropdown">
-                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
-                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="MainController?action=Category&Category=${Category.categoryID}" class="dropdown-item">All ${Category.name}</a>
-                                            <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
-                                                <c:if test="${Category.categoryID == brand.categoryID}">
-                                                    <a href="MainController?action=FilterByBrand" class="dropdown-item">${brand.brandName}</a>
-                                                </c:if>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
-                                </c:if>
-                            </div>
-                            <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
-                                <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
-                                    <input type="text" class="form-control" placeholder="Search for products" name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
-                                    <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
-                                <c:choose>
-                                    <c:when test="${empty sessionScope.CUSTOMER_ID}">
-                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
-                                            <i class="fas fa fa-user text-primary"></i>
-                                            <span class="ml-1 text-primary">Account</span>
-                                        </button>                                        
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
-                                            <i class="fas fa fa-user text-primary"></i>
-                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                            <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                                <c:choose>
-                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
-                                        <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
-                                            <i class="fas fa-shopping-cart text-primary"></i>
-                                            <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
-                                        </a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
-                                            <i class="fas fa-shopping-cart text-primary"></i>
-                                            <span class="ml-1 text-primary">Cart</span>
-                                        </button>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
+                <div class="col-lg-4 col-6 text-left">
+                    <form action="">
+                        <div class="input-group">
+                            <form action="MainController" method="POST">
+                                <input type="text" class="form-control" placeholder="Search for products" name="search">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary" style="padding-bottom: 5px ">                                 
+                                        <button name="action" value="Seacrh" type="submit" class="btn btn-block" style="padding: 0"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
-                    </nav>
+                    </form>
+                </div>
+                <div class="col-lg-4 col-6 text-right">
+                    <p class="m-0">Customer Service</p>
+                    <h5 class="m-0">+012 345 6789</h5>
                 </div>
             </div>
         </div>
+        <!-- Topbar End -->
+
+        <!-- Navbar Start -->
+        <form action="MainController">
+            <div class="container-fluid bg-dark mb-30">
+                <div class="row px-xl-5">
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+                            <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Category</h6>
+                            <i class="fa fa-angle-down text-dark"></i>
+                        </a>
+                        <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                            <div class="navbar-nav w-100">
+                                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
+                                    <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-item nav-link">${Category.name}</a>
+                                </c:forEach>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-9">
+                        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                            <a href="" class="text-decoration-none d-block d-lg-none">
+                                <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
+                                <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                            </a>
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                <div class="navbar-nav mr-auto py-0">
+                                    <a href="home.jsp" class="nav-item nav-link ">Home</a>
+                                    <a href="shopping.jsp" class="nav-item nav-link">Shop</a>
+                                    <a href="productDetail.jsp" class="nav-item nav-link">Shop Detail</a>
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
+                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                            <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
+                                            <a href="checkout.jsp" class="dropdown-item">Checkout</a>
+                                        </div>
+                                    </div>
+                                    <a href="MainController?action=NavigateBlog" class="nav-item nav-link active">Blog</a>
+                                    <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
+                                </div>
+                                <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
+                                    <a href="cart.jsp" class="btn px-0 ml-3">
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </form>
         <!-- Navbar End -->
 
         <!-- Breadcrumb Start -->
@@ -206,42 +271,28 @@
         <div class="container p-0">
             <div class="row">
                 <!-- Blog Content Start -->
+
                 <div class="col-lg-8">
                     <div class="blog-post">
-                        <img src="img/blog/blog-one.jpg" alt="Blog Post Image" class="img-fluid">
-                        <h2 class="mt-4">Blog Title 1</h2>
-                        <p class="text-muted">16/11/2024 by <a href="#">Author</a></p>
+                        <img src="${requestScope.BLOG_DETAIL.image}" alt="Blog Post Image" class="img-fluid">
+                        <h2 class="mt-4">${requestScope.BLOG_DETAIL.title}</h2>
+                        <p class="text-muted">${requestScope.BLOG_DETAIL.createDate} by <a href="#"> ${requestScope.BLOG_DETAIL.staffID}</a></p>
+                        <p>${requestScope.BLOG_DETAIL.description}</p>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. 
-                            Sed feugiat, nisl ut facilisis facilisis, est arcu consequat neque, a tempus neque ligula at lorem. 
-                            Curabitur placerat sapien vel orci bibendum, at dignissim libero cursus. Phasellus aliquam felis ut
-                            nisi congue fermentum. Vestibulum euismod, eros at sollicitudin sollicitudin, ipsum urna laoreet nibh, 
-                            eget viverra massa nunc ac lorem.</p>
+                        <!--                            <h4>Subheading</h4>
+                                                    <p>Curabitur vitae dolor sit amet felis venenatis pharetra. </p>
+                                                    <p>Quisque vitae velit nec augue vehicula viverra id eu lorem.</p>                   
+                                                    <blockquote class="blockquote">
+                                                        <p class="mb-0">"This is a sample blockquote, to highlight a quote or a key message within the article."</p>
+                                                        <footer class="blockquote-footer">Source or Author</footer>
+                                                    </blockquote>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. .</p>
 
-                        <h4>Subheading</h4>
-                        <p>Curabitur vitae dolor sit amet felis venenatis pharetra. Integer molestie enim at quam congue, vel ultricies 
-                            risus ullamcorper. Praesent bibendum justo sapien, at pretium tortor volutpat a. Nullam ac metus vel arcu 
-                            tincidunt varius.</p>
-
-                        <p>Quisque vitae velit nec augue vehicula viverra id eu lorem. Etiam non dui ut lorem fermentum 
-                            pharetra nec at risus. Suspendisse malesuada, nulla ac venenatis fringilla, dolor purus malesuada nunc, 
-                            a condimentum justo lacus sed sapien. Phasellus fermentum nec magna et vulputate. Cras auctor, felis id
-                            efficitur eleifend, lectus sem hendrerit elit, ut congue metus ante in risus.</p>
-
-                        <blockquote class="blockquote">
-                            <p class="mb-0">"This is a sample blockquote, to highlight a quote or a key message within the article."</p>
-                            <footer class="blockquote-footer">Source or Author</footer>
-                        </blockquote>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fringilla enim vitae dui efficitur scelerisque. 
-                            Nulla facilisi. Mauris vestibulum dui non arcu fermentum gravida.</p>
-
-                        <h4>Conclusion</h4>
-                        <p>In conclusion, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae 
-                            vestibulum. Vivamus laoreet justo nec nisi efficitur, ut pretium dui condimentum.</p>
+                                                    <h4>Conclusion</h4>
+                                                    <p>In conclusion, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
 
                         <div class="back-to-blog">
-                            <a href="index.html" class="btn btn-primary">Back to Blog</a>
+                            <a href="MainController?action=NavigateBlog" class="btn btn-primary">Back to Blog</a>
                         </div>
                     </div>
                 </div>
@@ -251,28 +302,18 @@
                 <div class="col-lg-4 sidebar">
                     <!-- Recent Posts Section -->
                     <div class="recent-posts mb-5">
-                        <h4 class="sidebar-title mb-4">Recent Posts</h4>
-                        <div class="recent-post d-flex align-items-center mb-3">
-                            <img src="img/cat-1.jpg" alt="Recent Post" class="img-thumbnail mr-3" style="width: 70px; height: 70px;">
-                            <div>
-                                <h6 class="post-title mb-1"><a href="#">How to Stay Productive Working From Home</a></h6>
-                                <small class="text-muted">16/11/2024</small>
+                        <h4 class="sidebar-title mb-4">New Posts</h4>
+                        <c:forEach var="blog" items="${requestScope.BLOG_RECENT_LIST}" >
+                            <div class="list-group mb-5">
+                                <a href="MainController?action=ViewBlogDetail&blogID=${blog.blogID}" class="list-group-item-blog list-group-item-action d-flex">
+                                    <img src="${blog.image}" class="img-thumbnail" style="width: 60px; height: 60px;" alt="Blog Post Image">
+                                    <div class="ml-3">
+                                        <h5>${blog.title}</h5>
+                                        <p class="text-muted">${blog.createDate}</p>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                        <div class="recent-post d-flex align-items-center mb-3">
-                            <img src="img/cat-2.jpg" alt="Recent Post" class="img-thumbnail mr-3" style="width: 70px; height: 70px;">
-                            <div>
-                                <h6 class="post-title mb-1"><a href="#">The Future of Artificial Intelligence</a></h6>
-                                <small class="text-muted">15/11/2024</small>
-                            </div>
-                        </div>
-                        <div class="recent-post d-flex align-items-center mb-3">
-                            <img src="img/cat-4.jpg" alt="Recent Post" class="img-thumbnail mr-3" style="width: 70px; height: 70px;">
-                            <div>
-                                <h6 class="post-title mb-1"><a href="#">Innovative Startups to Watch in 2024</a></h6>
-                                <small class="text-muted">14/11/2024</small>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
 
                     <!-- Categories Section -->
@@ -307,11 +348,9 @@
 
                 </div>
                 <!-- Sidebar End -->
-
             </div>
         </div>
         <!-- Blog End -->
-
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">

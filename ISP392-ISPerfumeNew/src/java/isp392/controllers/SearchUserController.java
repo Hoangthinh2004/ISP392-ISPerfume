@@ -31,9 +31,10 @@ public class SearchUserController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            String search = request.getParameter("search");
             UserDAO dao = new UserDAO();
             RoleDAO roleDao = new RoleDAO();
-            List<UserDTO> listUser = dao.getListUser();
+            List<UserDTO> listUser = dao.getListUserByPhone(search);
             List<RoleDTO> listRole = roleDao.getListRole();
             if(listUser.size() > 0){
                 request.setAttribute("LIST_USER", listUser);
