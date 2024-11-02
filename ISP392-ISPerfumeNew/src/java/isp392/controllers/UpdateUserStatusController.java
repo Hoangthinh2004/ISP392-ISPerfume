@@ -23,8 +23,9 @@ import javax.servlet.http.HttpSession;
 public class UpdateUserStatusController extends HttpServlet {
 
     private static final String ERROR = "SearchUserController";
-    private static final String SUCCESS = "SearchUserController";
-    
+    private static final String EMPLOYEE = "FilterByEmployeeController";
+    private static final String CUSTOMER = "FilterByCustomerController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,20 +36,25 @@ public class UpdateUserStatusController extends HttpServlet {
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
             int status = Integer.parseInt(request.getParameter("status"));
-            if(checkValidation){
+            int roleID = Integer.parseInt(request.getParameter("roleID"));
+            if (checkValidation) {
                 UserDTO user = new UserDTO(userID, "", "", "", "", status, 0);
                 boolean checkUpdateS = dao.updateUserStatus(user);
                 HttpSession session = request.getSession();
                 UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                if(checkUpdateS){
-                    url = SUCCESS;
-                } else{
+                if (checkUpdateS) {
+                    if (roleID == 1) {
+                        url = CUSTOMER;
+                    } else {
+                        url = EMPLOYEE;
+                    }                   
+                } else {
                     request.setAttribute("UPDATE_USER_ERROR", userError);
                 }
             }
         } catch (Exception e) {
             log("Error at UpdateUserController: " + e.toString());
-        }finally{
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

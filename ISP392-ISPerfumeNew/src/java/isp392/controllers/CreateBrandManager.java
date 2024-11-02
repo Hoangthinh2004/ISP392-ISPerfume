@@ -31,7 +31,7 @@ public class CreateBrandManager extends HttpServlet {
     private static final String UPLOAD_DIRECTORY = "img";
     private static final String ERROR = "MGR_CreateBrand.jsp";
     private static final String SUCCESS = "ShowAllBrandManager";
-    private static final int IMAGE_WIDTH = 500; 
+    private static final int IMAGE_WIDTH = 500;
     private static final int IMAGE_HEIGHT = 500;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -47,12 +47,7 @@ public class CreateBrandManager extends HttpServlet {
             String description = request.getParameter("description");
             boolean status = true;
             int managerID = 4;
-            
-//            // Kiểm tra nếu tên brand đã tồn tại
-//            if (dao.checkDuplicateByName(name)) {
-//                brandErr.setBrandNameError("THIS BRAND'S NAME ALREADY EXISTED");
-//                validation = false;
-//            }
+
             if (validation) {
                 String imagePath = "";
                 String path = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
@@ -70,11 +65,10 @@ public class CreateBrandManager extends HttpServlet {
                 Thumbnails.of(filePart.getInputStream())
                         .size(IMAGE_WIDTH, IMAGE_HEIGHT)
                         .toFile(outputFile);
-
                 filePart.write(path + File.separator + fileName);
 
                 // Gọi DAO để thêm brand vào database
-                boolean check = dao.addBrand( name, description, imagePath , managerID, status);
+                boolean check = dao.addBrand(name, description, imagePath, managerID, status);
                 if (check) {
                     url = SUCCESS; // Điều hướng về trang quản lý brand sau khi thành công
                 }

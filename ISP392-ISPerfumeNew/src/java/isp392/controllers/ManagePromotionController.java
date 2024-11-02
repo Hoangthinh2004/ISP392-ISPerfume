@@ -31,8 +31,9 @@ public class ManagePromotionController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {           
+            String search = request.getParameter("search");
             PromotionDAO dao = new PromotionDAO();
-            List<PromotionDTO> listPromotion = dao.getListPromotion();
+            List<PromotionDTO> listPromotion = dao.getListPromotionByName(search);
             if(listPromotion.size() > 0) {
                 request.setAttribute("LIST_PROMOTION", listPromotion);
                 url = SUCCESS;

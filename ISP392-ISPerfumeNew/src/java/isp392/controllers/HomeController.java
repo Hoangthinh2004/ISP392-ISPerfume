@@ -7,9 +7,12 @@ package isp392.controllers;
 
 import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
+import isp392.brand.ViewBrandByCateDTO;
 import isp392.cart.CartDAO;
 import isp392.category.CategoryDAO;
 import isp392.category.CategoryDTO;
+import isp392.product.ProductDAO;
+import isp392.product.ViewProductDTO;
 import isp392.size.SizeDAO;
 import isp392.size.SizeDTO;
 import java.io.IOException;
@@ -40,9 +43,16 @@ public class HomeController extends HttpServlet {
             BrandDAO brandDAO = new BrandDAO();
             SizeDAO sizeDAO = new SizeDAO();
             CartDAO cartDAO = new CartDAO();
+            ProductDAO productDAO = new ProductDAO();
+            
+            Map<String, Integer> IDs = new HashMap<>();   
+            session.setAttribute("SIZE_IDS", IDs); //  storing sizeID 
             
             Map<String, Integer> ids = new HashMap<>();
             session.setAttribute("CURRENT_IDS", ids); //set attribute to Category Controller
+            
+            Map<String, Integer> home = new HashMap<>();
+            session.setAttribute("HOME", home);
             
             Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
             if (sizeIDS != null && !sizeIDS.isEmpty()) {
@@ -64,13 +74,14 @@ public class HomeController extends HttpServlet {
             List<CategoryDTO> listCategory = categoryDAO.getListCategory();
             List<BrandDTO> listBrand = brandDAO.getListBrand();
             List<SizeDTO> listSize = sizeDAO.getListSize();
+            List<ViewBrandByCateDTO> listBrandByCate = brandDAO.getBrandByCate();
+            List<ViewProductDTO> listProduct = productDAO.getListFeaturedProduct();
             
-            Map<String, Integer> IDs = new HashMap<>();   
-            session.setAttribute("SIZE_IDS", IDs); //  storing sizeID 
-            
+            session.setAttribute("LIST_FEATURED_PRODUCT", listProduct);                
             session.setAttribute("LIST_SIZE", listSize);
             session.setAttribute("LIST_CATEGORY", listCategory);
             session.setAttribute("LIST_BRAND", listBrand);
+            session.setAttribute("LIST_BRAND_BY_CATE", listBrandByCate);
             
             url = HOME;
         } catch (Exception e) {

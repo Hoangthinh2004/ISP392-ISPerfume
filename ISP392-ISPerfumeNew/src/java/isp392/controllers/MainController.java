@@ -25,7 +25,7 @@ public class MainController extends HttpServlet {
     private static final String FILTER_BY_BRAND = "FilterByBrand";
     private static final String FILTER_BY_BRAND_CONTROLLER = "BrandFilterController";
 
-    private static final String SHOW_ALL_PRODUCT_MANAGER = "Search product";
+    private static final String SHOW_ALL_PRODUCT_MANAGER = "SearchProduct";
     private static final String SHOW_ALL_PRODUCT_MANAGER_CONTROLLER = "ShowAllProductManager";
 
     private static final String UPDATE_PRODUCT_MANAGER = "Update";
@@ -50,8 +50,8 @@ public class MainController extends HttpServlet {
     private static final String PRODUCT_DETAIL_PAGE_VIEW = "SearchProductDetailManager";
 
     private static final String FILTER_BY_SIZE = "ViewResultInShopping";
-    private static final String FILTER_BY_SIZE_CONTROLLER = "SizeFilterController"; 
-    
+    private static final String FILTER_BY_SIZE_CONTROLLER = "SizeFilterController";
+
     private static final String FILTER_BY_SIZE_2 = "ViewResultInShoppingSearch";
     private static final String FILTER_BY_SIZE_CONTROLLER_2 = "SizeFilterSearchController";
 
@@ -81,10 +81,10 @@ public class MainController extends HttpServlet {
 
     private static final String SORT_BY_PURCHASING = "SortByPurchasing";
     private static final String SORT_BY_PURCHASING_CONTROLLER = "SortByPurchasingController";
-  
+
     private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
     private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
-    
+
     private static final String SEARCH_BRAND = "Search";
     private static final String SEARCH_BRAND_CONTROLLER = "ShowAllBrandManager";
 
@@ -114,30 +114,97 @@ public class MainController extends HttpServlet {
 
     private static final String UPDATE_USER_STATUS = "UpdateUserStatus";
     private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatusController";
-    
+
     private static final String ADD_TO_CART = "AddToCart";
     private static final String ADD_TO_CART_CONTROLLER = "AddToCartController";
-    
+
     private static final String NAVIGATE_DETAIL_TO_CART = "NavigateToCart";
     private static final String NAVIGATE_DETAIL_TO_CART_CONTROLLER = "NavigateToCartController";
-    
+
     private static final String DELETE_CART = "DeleteCart";
     private static final String DELETE_CART_CONTROLLER = "DeleteCartController";
-    
+
     private static final String UPDATE_PROFILE = "UpdateProfile";
     private static final String UPDATE_PROFILE_CONTROLLER = "UpdateUserProfile";
 
     private static final String CREATE_NEW_USER_CUSTOMER = "registerNewUser";
     private static final String CREATE_NEW_USER_CUSTOMER_CONTROLLER = "CreateNewUserCustomerController";
-    
+
+    private static final String NAVIGATE_BLOG = "NavigateBlog";
+    private static final String NAVIGATE_BLOG_CONTROLLER = "NavigateBlogController";
+
+    private static final String VIEW_SINGLE_BLOG = "ViewBlogDetail";
+    private static final String VIEW_SINGLE_BLOG_CONTROLLER = "ViewSingleBlogController";
+
+    private static final String CREATE_BLOG_MANAGER = "CreateBlogManager";
+    private static final String CREATE_BLOG_MANAGER_CONTROLLER = "CreateBlogManagerController";
+
+    private static final String UPDATE_BLOG_MANAGER = "UpdateBlogManager";
+    private static final String UPDATE_BLOG_MANAGER_CONTROLLER = "UpdateBlogManagerController";
+
+    private static final String DELETE_BLOG_MANAGER = "DeleteBlogManager";
+    private static final String DELETE_BLOG_MANAGER_CONTROLLER = "DeleteBlogManagerController";
+
+    private static final String SHOW_ALL_BLOG_MANAGER = "ShowAllBlogManager";
+    private static final String SHOW_ALL_BLOG_MANAGER_CONTROLLER = "ShowAllBlogManager";
+
+    private static final String SHOW_ALL_ORDERS_STAFF = "ShowAllOrder";
+    private static final String SHOW_ALL_ORDERS_STAFF_CONTROLLER = "ShowAllOrderStaffController";
+
+    private static final String ORDER_PAGE = "ManageOrderPage";
+    private static final String ORDER_PAGE_VIEW = "GetAllInfoForOrder";
+
+    private static final String ORDER_DETAIL_PAGE = "OrderDetailPage";
+    private static final String ORDER_DETAIL_PAGE_VIEW = "ShowOrderDetailStaff";
+
+    private static final String ASSIGN_SHIPPER_STAFF = "AssignShipperStaff";
+    private static final String ASSIGN_SHIPPER_STAFF_CONTROLLER = "AssignShipperStaffController";
+
+    private static final String FORGOT_PASSWORD = "ForgetPassword";
+    private static final String FORGET_PASSWORD_CONTROLLER = "ForgetPasswordController";
+
+    private static final String VERIFY_TOKEN_FORGOT_PASSWORD = "VerifyOTP";
+    private static final String VERIFY_TOKEN_FORGOT_PASSWORD_CONTROLLER = "VerifyOTPController";
+
+    private static final String CHANGE_FORGOT_PASSWORD = "ChangePasswordForgot";
+    private static final String CHANGE_FORGOT_PASSWORD_CONTROLLER = "ChangePasswordForgotController";
+
     private static final String NAVIGATE_SIGN_IN = "Sign in";
     private static final String NAVIGATE_SIGN_IN_CONTROLLER = "signin.jsp";
-    
+
     private static final String NAVIGATE_SIGN_UP = "Sign up";
     private static final String NAVIGATE_SIGN_UP_CONTROLLER = "signup.jsp";
-    
+
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL = "NavigateRelatedProductDetail";
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER = "NavigateRelatedProductDetailController";
+
+    private static final String SHIPPER_SEARCH_ORDER = "SHIPPER_SearchOrder";
+    private static final String SHIPPER_SEARCH_ORDER_CONTROLLER = "SHIPPER_SearchOrderController";
+
+    private static final String SHIPPER_UPDATE_STATUS_ORDER = "SHIPPER_UpdateStatusOrder";
+    private static final String SHIPPER_UPDATE_STATUS_ORDER_CONTROLLER = "SHIPPER_UpdateStatusOrderController";
+
+    private static final String CREATE_EMPLOYEE_ACCOUNT = "CreateEmployeeAccount";
+    private static final String CREATE_EMPLOYEE_ACCOUNT_CONTROLLER = "CreateEmployeeAccountController";
+
+    private static final String SHIPPER_VIEW_ORDER_DETAIL = "SHIPPER_ViewOrderDetail";
+    private static final String SHIPPER_VIEW_ORDER_DETAIL_CONTROLLER = "SHIPPER_ViewOrderDetailController";
+
+    private static final String LIST_DASHBOARD = "ListDashboard";
+    private static final String LIST_DASHBOARD_CONTROLLER = "ListDashboardController";
+
+    
+    private static final String NAVIGATE_CHECK_OUT = "NavigateToCheckOut";
+    private static final String NAVIGATE_CHECK_OUT_CONTROLLER = "NavigateToCheckOutController";
+    
+    private static final String CHECK_OUT = "checkOut";
+    private static final String CHECK_OUT_CONTROLLER = "checkOutController";
+    
+    private static final String APPLY_VOUCHER = "ApplyVoucher";
+    private static final String APPLY_VOUCHER_CONTROLLER = "ApplyVoucherController";
+    
+    private static final String CHECK_QUANTITY = "checkQuantity";
+    private static final String CHECK_QUANTITY_CONTROLLER = "checkOrderQuantityController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -176,7 +243,7 @@ public class MainController extends HttpServlet {
             } else if (CREATE_PROMOTION.equals(action)) {
                 url = CREATE_PROMOTION_CONTROLLER;
             } else if (UPDATE_PROMOTION.equals(action)) {
-                url = UPDATE_PROMOTION_CONTROLLER; 
+                url = UPDATE_PROMOTION_CONTROLLER;
             } else if (NAVIGATE_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_PRODUCT_DETAIL_CONTROLLER;
             } else if (SHOW_PRICE_BY_SIZE.equals(action)) {
@@ -219,14 +286,58 @@ public class MainController extends HttpServlet {
                 url = FILTER_BY_CUSTOMER_CONTROLLER;
             } else if (UPDATE_USER_STATUS.equals(action)) {
                 url = UPDATE_USER_STATUS_CONTROLLER;
-            } else if(CREATE_NEW_USER_CUSTOMER.equals(action)){
+            } else if (CREATE_NEW_USER_CUSTOMER.equals(action)) {
                 url = CREATE_NEW_USER_CUSTOMER_CONTROLLER;
+            } else if (NAVIGATE_BLOG.equals(action)) {
+                url = NAVIGATE_BLOG_CONTROLLER;
+            } else if (VIEW_SINGLE_BLOG.equals(action)) {
+                url = VIEW_SINGLE_BLOG_CONTROLLER;
+            } else if (CREATE_BLOG_MANAGER.equals(action)) {
+                url = CREATE_BLOG_MANAGER_CONTROLLER;
+            } else if (UPDATE_BLOG_MANAGER.equals(action)) {
+                url = UPDATE_BLOG_MANAGER_CONTROLLER;
+            } else if (DELETE_BLOG_MANAGER.equals(action)) {
+                url = DELETE_BLOG_MANAGER_CONTROLLER;
+            } else if (SHOW_ALL_BLOG_MANAGER.equals(action)) {
+                url = SHOW_ALL_BLOG_MANAGER_CONTROLLER;
+            } else if (SHOW_ALL_ORDERS_STAFF.equals(action)) {
+                url = SHOW_ALL_ORDERS_STAFF_CONTROLLER;
+            } else if (ORDER_PAGE.equals(action)) {
+                url = ORDER_PAGE_VIEW;
+            } else if (ORDER_DETAIL_PAGE.equals(action)) {
+                url = ORDER_DETAIL_PAGE_VIEW;
+            } else if (ASSIGN_SHIPPER_STAFF.equals(action)) {
+                url = ASSIGN_SHIPPER_STAFF_CONTROLLER;
+            } else if (FORGOT_PASSWORD.equals(action)) {
+                url = FORGET_PASSWORD_CONTROLLER;
+            } else if (VERIFY_TOKEN_FORGOT_PASSWORD.equals(action)) {
+                url = VERIFY_TOKEN_FORGOT_PASSWORD_CONTROLLER;
+            } else if (CHANGE_FORGOT_PASSWORD.equals(action)) {
+                url = CHANGE_FORGOT_PASSWORD_CONTROLLER;
             } else if (NAVIGATE_SIGN_IN.equals(action)) {
                 url = NAVIGATE_SIGN_IN_CONTROLLER;
-            } else if(NAVIGATE_SIGN_UP.equals(action)){
+            } else if (NAVIGATE_SIGN_UP.equals(action)) {
                 url = NAVIGATE_SIGN_UP_CONTROLLER;
-            } else if(NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)){
+            } else if (NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER;
+            } else if (SHIPPER_SEARCH_ORDER.equals(action)) {
+                url = SHIPPER_SEARCH_ORDER_CONTROLLER;
+            } else if (SHIPPER_UPDATE_STATUS_ORDER.equals(action)) {
+                url = SHIPPER_UPDATE_STATUS_ORDER_CONTROLLER;
+            } else if (CREATE_EMPLOYEE_ACCOUNT.equals(action)) {
+                url = CREATE_EMPLOYEE_ACCOUNT_CONTROLLER;
+            } else if (SHIPPER_VIEW_ORDER_DETAIL.equals(action)) {
+                url = SHIPPER_VIEW_ORDER_DETAIL_CONTROLLER;
+            } else if (LIST_DASHBOARD.equals(action)) {
+                url = LIST_DASHBOARD_CONTROLLER;
+            } else if(NAVIGATE_CHECK_OUT.equals(action)){
+                url = NAVIGATE_CHECK_OUT_CONTROLLER;
+            } else if(CHECK_OUT.equals(action)){
+                url = CHECK_OUT_CONTROLLER;
+            } else if(APPLY_VOUCHER.equals(action)){
+                url = APPLY_VOUCHER_CONTROLLER;
+            } else if(CHECK_QUANTITY .equals(action)){
+                url = CHECK_QUANTITY_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -52,7 +52,7 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
                         <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
@@ -66,13 +66,16 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <form action="MainController" method="POST" id="myForm">
+                            <a href="MGR_Dashboard.jsp" class="nav-item nav-link active" onclick="document.getElementById('myForm').submit(); return false;"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                            <input type="hidden" name="action" value="ListDashboard">
+                        </form>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
-                                <a href="MainController?action=Search&search=" class="dropdown-item active">Brand Management</a>
-                                <a href="MainController?action=ViewPromotion" class="dropdown-item">Promotion Management</a>
+                                <a href="MainController?action=SearchProduct&search=" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
+                                <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
                         </div>
                     </div>
@@ -166,7 +169,7 @@
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
-                                <a href="#" class="dropdown-item">Log Out</a>
+                                <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
                     </div>
@@ -200,13 +203,8 @@
                                             <c:forEach var="brand" items="${requestScope.LIST_BRAND_MANAGER}">
                                                 <tr>
                                                     <td>${brand.brandID}</td>
-                                                    <td>
-                                                        ${brand.name}
-                                                    </td>
-
-                                                    <td>
-                                                        <img src="${brand.image}" style="width: 80px; height: 80px; margin-right: 10px;">
-                                                    </td>
+                                                    <td>${brand.name}</td>
+                                                    <td><img src="${brand.image}" style="width: 80px; height: 80px; margin-right: 10px;"></td>
                                                     <td>
                                                         <!-- Hiển thị dropdown trạng thái hiện tại -->
                                                         <div class="row mb-3">
@@ -216,13 +214,10 @@
                                                         </div>
                                                     </td>                                                   
                                                     <td>
-
                                                         <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${brand.brandID}">
-
                                                             <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                                             </svg>
-
                                                         </a>
                                                         <!-- Modal Update -->
                                                         <div class="modal fade" id="updateModal-${brand.brandID}" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" >
@@ -235,7 +230,6 @@
                                                                     <form action="MainController" method="GET">
                                                                         <input type="hidden" value="${brand.brandID}" name ="brandID">
                                                                         <div class="modal-body">
-
                                                                             <div class="mb-3">
                                                                                 <label  class="form-label">Brand Name</label>
                                                                                 <input type="text" class="form-control" value="${brand.name}" name="brandName">                                                                   
@@ -248,7 +242,6 @@
                                                                                 <textarea class="form-control" style="height: 100px;"
                                                                                           id="floatingTextarea" name="brandDes">${brand.description}</textarea>
                                                                                 <label for="floatingTextarea">Description</label>
-
                                                                             </div>
                                                                             <select name="status" class="form-select mb-3 form-control bg-transparent" aria-label="Default select example">
                                                                                 <option value="true" ${brand.status == true ? 'selected="selected"' : ''}>Available</option>

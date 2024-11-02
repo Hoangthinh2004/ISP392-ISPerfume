@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "GetBrandCategoriesManager", urlPatterns = {"/GetBrandCategoriesManager"})
 public class GetBrandCategoriesManager extends HttpServlet {
 
-    private static final String ERROR = "MGR_ProductManagement.jsp";
+    private static final String ERROR = "ShowAllOrderStaffController";
     private static final String SUCCESS = "MGR_ProductManagement.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

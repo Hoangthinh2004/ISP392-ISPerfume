@@ -7,12 +7,14 @@ package isp392.product;
 
 import isp392.utils.DBUtils;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.naming.NamingException;
 
 /**
  *
@@ -35,6 +37,7 @@ public class ProductDAO {
             + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
             + "WHERE P.ProductID = ?";
 
+    private static final String COUNT ="SELECT  COUNT(ProductID) as ProductID FROM Products WHERE Status = 1";
     public List<ViewProductDTO> getListProduct(String search) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
@@ -289,17 +292,25 @@ public class ProductDAO {
             + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
             + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? ";
     private static final String SUGGEST_PRODUCT = "SELECT PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name, PD.Image, PD.Price, P.ProName FROM Products P "
-                                                + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-                                                + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-                                                + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-                                                + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-                                                + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? AND P.ProductID != ? AND PD.SizeID = ?";
+            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+            + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? AND P.ProductID != ? AND PD.SizeID = ?";
     private static final String FILTER_PRODUCT_BY_BRAND = "SELECT PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
             + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
             + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
             + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
             + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
             + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? AND P.BrandID = ?";
+    private static final String GET_CATEGORYID = "SELECT PC.CategoryID FROM Product_Category PC WHERE PC.CategoryID != 4 AND PC.ProductID = ?";
+    private static final String LIST_FEATURED_PRODUCT = "SELECT TOP 8 PC.CategoryID, PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
+                                                    +   "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+                                                    +   "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+                                                    +   "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+                                                    +   "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+                                                    +   "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4"
+                                                    +   "ORDER BY PD.NumberOfPurchasing DESC";
 
     public List<ViewProductDTO> descendingProductByPrice(String search, List<Integer> sizeIDList) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
@@ -584,7 +595,7 @@ public class ProductDAO {
                     String productName = rs.getString("ProName");
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
-                    listProductByCategory.add(new ViewProductDTO(productDetailID, categoryID, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
+                    listProductByCategory.add(new ViewProductDTO(categoryID, productDetailID, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {
@@ -899,6 +910,102 @@ public class ProductDAO {
                 ptm.close();
             }
             if (conn != null) {
+                conn.close();
+            }
+        }
+        return listProduct;
+    }
+
+    public int getCategoryID(int productID) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        int categoryID = 0;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_CATEGORYID);
+                ptm.setInt(1, productID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    categoryID = rs.getInt("CategoryID");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return categoryID;
+    }
+
+    public List<ViewProductDTO> getListFeaturedProduct() throws ClassNotFoundException, SQLException {
+        List<ViewProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_FEATURED_PRODUCT);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int categoryID = rs.getInt("CategoryID");
+                    int productDetailID = rs.getInt("ProductDetailID");
+                    int productID = rs.getInt("ProductID");
+                    int brandID = rs.getInt("BrandID");
+                    int sizeID = rs.getInt("SizeID");
+                    String sizeName = rs.getString("Name");
+                    String brandName = rs.getString("BrandName");
+                    String productName = rs.getString("ProName");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    listProduct.add(new ViewProductDTO(categoryID, productDetailID, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listProduct;
+    }
+
+    public List<ProductDTO> countAllProduct() throws SQLException, ClassNotFoundException, NamingException {
+        List<ProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if( conn != null){
+                ptm = conn.prepareStatement(COUNT);
+                rs = ptm.executeQuery();
+                while (rs.next()){
+                    int productID = rs.getInt("ProductID");
+                    listProduct.add(new ProductDTO(productID, 0, 0, "", "", "", "", 0, "", 0));
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if(ptm != null){
+                ptm.close();
+            }
+            if( conn != null){
                 conn.close();
             }
         }

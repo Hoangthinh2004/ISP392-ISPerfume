@@ -33,31 +33,31 @@ public class BrandFilterController extends HttpServlet {
             throws ServletException, IOException {
         String url = ERROR;
         try {
+            int categoryID = 0;
+            int brandID = Integer.parseInt(request.getParameter("brandID"));
+
             ProductDAO productDAO = new ProductDAO();
             BrandDAO brandDAO = new BrandDAO();
             HttpSession session = request.getSession();
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            int categoryID = ids.get("categoryID");
-            
+            categoryID = ids.get("categoryID");
+
             Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
             if (sizeIDS != null && !sizeIDS.isEmpty()) {
                 session.removeAttribute("SIZE_IDS");
             }
-            
 
-            int brandID = Integer.parseInt(request.getParameter("brandID"));
-            
-            Map<String, Integer> currentBrandID = new HashMap<>();           
+            Map<String, Integer> currentBrandID = new HashMap<>();
             currentBrandID.put("brandID", brandID);
             session.setAttribute("CURRENT_BRANDID", currentBrandID); // Store brandID for filter By size controller
-            
+
             if (categoryID != 0 && brandID != 0) {
                 List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
                 session.setAttribute("LIST_PRODUCT", listProduct);
-                
+
                 List<BrandDTO> brandInfor = brandDAO.showBrandInfor(brandID);
                 session.setAttribute("BRAND_INFOR", brandInfor);
-                
+
             }
             url = SUCCESS;
         } catch (Exception e) {

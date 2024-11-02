@@ -20,11 +20,18 @@ import javax.naming.NamingException;
  * @author ThinhHoang
  */
 public class PromotionDAO {
-      private static final String LIST_PROMOTION = "SELECT PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion";
+
+    private static final String LIST_PROMOTION = "SELECT PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion";
+    private static final String PROMOTION_DETAIL = "SELECT PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion WHERE PromotionID = ?";
     private static final String INSERT = "INSERT INTO Promotion(PromotionName,ManagerID,Description,StartDate,EndDate,DiscountPer,Condition,Status) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE Promotion SET PromotionName=?, Description=?, StartDate=?, EndDate=?, DiscountPer=?, Condition=?, Status=?  WHERE PromotionID=?";
     private static final String DUPLICATE = "SELECT PromotionName FROM Promotion WHERE PromotionName=?";
-    private static final String DELETE = "DELETE Promotion WHERE promotionID=?";
+    private static final String COUNT = "SELECT  COUNT(PromotionID) as PromotionID FROM Promotion WHERE Status = 1";
+    private static final String SHIPPER_LIST_PROMOTION = "SELECT P.PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion P \n"
+            + "JOIN Orders O on P.PromotionID = O.PromotionID \n"
+            + "WHERE O.PromotionID = ?";
+    private static final String GET_PROMOTION_BY_NAME = "SELECT P.PromotionID, PromotionName, ManagerID, Description, StartDate, EndDate, DiscountPer, Condition, Status FROM Promotion P\n"
+            + "			WHERE PromotionName like ?";
 
     public List<PromotionDTO> getListPromotion() throws SQLException, ClassNotFoundException, NamingException {
         List<PromotionDTO> listPromotion = new ArrayList<>();
@@ -152,26 +159,147 @@ public class PromotionDAO {
         }
         return check;
     }
+    
+    public List<PromotionDTO> getDetail(int promotionID) throws ClassNotFoundException, SQLException {
+        List<PromotionDTO> listPromotion = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PROMOTION_DETAIL);
+                ptm.setInt(1, promotionID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    String promotionName = rs.getString("PromotionName");
+                    int managerID = rs.getInt("ManagerID");
+                    String Description = rs.getString("Description");
+                    Date StartDate = rs.getDate("StartDate");
+                    Date EndDate = rs.getDate("EndDate");
+                    int DiscountPer = rs.getInt("DiscountPer");
+                    int Condition = rs.getInt("Condition");
+                    int Status = rs.getInt("Status");
+                    listPromotion.add(new PromotionDTO(promotionID, managerID, promotionName, Description, StartDate, EndDate, DiscountPer, Condition, Status));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listPromotion;
+    }
 
-//    public boolean delete(int promotionID) throws SQLException, ClassNotFoundException, NamingException {
-//        boolean check = false;
-//        Connection conn = null;
-//        PreparedStatement ptm = null;
-//        try {
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                ptm = conn.prepareStatement(DELETE);
-//                ptm.setInt(1, promotionID);
-//                check = ptm.executeUpdate() > 0 ? true : false;
-//            }
-//        } finally {
-//            if (ptm != null) {
-//                ptm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return check;
-//    }
+    public List<PromotionDTO> countAllPromotion() throws SQLException, NamingException, ClassNotFoundException {
+        List<PromotionDTO> listPromotion = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int promotionID = rs.getInt("PromotionID");
+                    listPromotion.add(new PromotionDTO(promotionID, 0, "", "", null, null, 0, 0, 0));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listPromotion;
+    }
+
+    public List<PromotionDTO> getShipperListPromotion(int promotionID) throws SQLException, NamingException, ClassNotFoundException {
+        List<PromotionDTO> listPromotion = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SHIPPER_LIST_PROMOTION);
+                ptm.setInt(1, promotionID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    String promotionName = rs.getString("PromotionName");
+                    int managerID = rs.getInt("ManagerID");
+                    String Description = rs.getString("Description");
+                    Date StartDate = rs.getDate("StartDate");
+                    Date EndDate = rs.getDate("EndDate");
+                    int DiscountPer = rs.getInt("DiscountPer");
+                    int Condition = rs.getInt("Condition");
+                    int Status = rs.getInt("Status");
+                    listPromotion.add(new PromotionDTO(promotionID, managerID, promotionName, Description, StartDate, EndDate, DiscountPer, Condition, Status));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listPromotion;
+
+    }
+
+    public List<PromotionDTO> getListPromotionByName(String search) throws SQLException, NamingException, ClassNotFoundException {
+        List<PromotionDTO> listPromotion = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_PROMOTION_BY_NAME);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int promotionID = rs.getInt("PromotionID");
+                    String promotionName = rs.getString("PromotionName");
+                    int managerID = rs.getInt("ManagerID");
+                    String Description = rs.getString("Description");
+                    Date StartDate = rs.getDate("StartDate");
+                    Date EndDate = rs.getDate("EndDate");
+                    int DiscountPer = rs.getInt("DiscountPer");
+                    int Condition = rs.getInt("Condition");
+                    int Status = rs.getInt("Status");
+                    listPromotion.add(new PromotionDTO(promotionID, managerID, promotionName, Description, StartDate, EndDate, DiscountPer, Condition, Status));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listPromotion;
+
+    }
 }
