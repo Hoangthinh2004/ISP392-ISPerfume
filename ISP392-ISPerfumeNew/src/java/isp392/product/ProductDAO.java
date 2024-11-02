@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.naming.NamingException;
 
 /**
  *
@@ -36,6 +37,7 @@ public class ProductDAO {
             + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
             + "WHERE P.ProductID = ?";
 
+    private static final String COUNT ="SELECT  COUNT(ProductID) as ProductID FROM Products WHERE Status = 1";
     public List<ViewProductDTO> getListProduct(String search) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
         Connection conn = null;
@@ -585,7 +587,7 @@ public class ProductDAO {
                     String productName = rs.getString("ProName");
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
-                    listProductByCategory.add(new ViewProductDTO(productDetailID, categoryID, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
+                    listProductByCategory.add(new ViewProductDTO(categoryID, productDetailID, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {
@@ -900,6 +902,35 @@ public class ProductDAO {
                 ptm.close();
             }
             if (conn != null) {
+                conn.close();
+            }
+        }
+        return listProduct;
+    }
+
+    public List<ProductDTO> countAllProduct() throws SQLException, ClassNotFoundException, NamingException {
+        List<ProductDTO> listProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if( conn != null){
+                ptm = conn.prepareStatement(COUNT);
+                rs = ptm.executeQuery();
+                while (rs.next()){
+                    int productID = rs.getInt("ProductID");
+                    listProduct.add(new ProductDTO(productID, 0, 0, "", "", "", "", 0, "", 0));
+                }
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if(ptm != null){
+                ptm.close();
+            }
+            if( conn != null){
                 conn.close();
             }
         }

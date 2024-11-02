@@ -25,7 +25,7 @@ public class MainController extends HttpServlet {
     private static final String FILTER_BY_BRAND = "FilterByBrand";
     private static final String FILTER_BY_BRAND_CONTROLLER = "BrandFilterController";
 
-    private static final String SHOW_ALL_PRODUCT_MANAGER = "Search product";
+    private static final String SHOW_ALL_PRODUCT_MANAGER = "SearchProduct";
     private static final String SHOW_ALL_PRODUCT_MANAGER_CONTROLLER = "ShowAllProductManager";
 
     private static final String UPDATE_PRODUCT_MANAGER = "Update";
@@ -130,6 +130,24 @@ public class MainController extends HttpServlet {
     private static final String CREATE_NEW_USER_CUSTOMER = "registerNewUser";
     private static final String CREATE_NEW_USER_CUSTOMER_CONTROLLER = "CreateNewUserCustomerController";
 
+    private static final String NAVIGATE_BLOG = "NavigateBlog";
+    private static final String NAVIGATE_BLOG_CONTROLLER = "NavigateBlogController";
+
+    private static final String VIEW_SINGLE_BLOG = "ViewBlogDetail";
+    private static final String VIEW_SINGLE_BLOG_CONTROLLER = "ViewSingleBlogController";
+
+    private static final String CREATE_BLOG_MANAGER = "CreateBlogManager";
+    private static final String CREATE_BLOG_MANAGER_CONTROLLER = "CreateBlogManagerController";
+
+    private static final String UPDATE_BLOG_MANAGER = "UpdateBlogManager";
+    private static final String UPDATE_BLOG_MANAGER_CONTROLLER = "UpdateBlogManagerController";
+
+    private static final String DELETE_BLOG_MANAGER = "DeleteBlogManager";
+    private static final String DELETE_BLOG_MANAGER_CONTROLLER = "DeleteBlogManagerController";
+
+    private static final String SHOW_ALL_BLOG_MANAGER = "ShowAllBlogManager";
+    private static final String SHOW_ALL_BLOG_MANAGER_CONTROLLER = "ShowAllBlogManager";
+
     private static final String SHOW_ALL_ORDERS_STAFF = "ShowAllOrder";
     private static final String SHOW_ALL_ORDERS_STAFF_CONTROLLER = "ShowAllOrderStaffController";
 
@@ -159,6 +177,21 @@ public class MainController extends HttpServlet {
 
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL = "NavigateRelatedProductDetail";
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER = "NavigateRelatedProductDetailController";
+
+    private static final String SHIPPER_SEARCH_ORDER = "SHIPPER_SearchOrder";
+    private static final String SHIPPER_SEARCH_ORDER_CONTROLLER = "SHIPPER_SearchOrderController";
+
+    private static final String SHIPPER_UPDATE_STATUS_ORDER = "SHIPPER_UpdateStatusOrder";
+    private static final String SHIPPER_UPDATE_STATUS_ORDER_CONTROLLER = "SHIPPER_UpdateStatusOrderController";
+
+    private static final String CREATE_EMPLOYEE_ACCOUNT = "CreateEmployeeAccount";
+    private static final String CREATE_EMPLOYEE_ACCOUNT_CONTROLLER = "CreateEmployeeAccountController";
+
+    private static final String SHIPPER_VIEW_ORDER_DETAIL = "SHIPPER_ViewOrderDetail";
+    private static final String SHIPPER_VIEW_ORDER_DETAIL_CONTROLLER = "SHIPPER_ViewOrderDetailController";
+
+    private static final String LIST_DASHBOARD = "ListDashboard";
+    private static final String LIST_DASHBOARD_CONTROLLER = "ListDashboardController";
 
     private static final String VIEW_ORDER_STATUS = "viewOrderHistory";
     private static final String VIEW_ORDER_STATUS_VIEW = "viewOrderHistoryController";
@@ -248,6 +281,18 @@ public class MainController extends HttpServlet {
                 url = UPDATE_USER_STATUS_CONTROLLER;
             } else if (CREATE_NEW_USER_CUSTOMER.equals(action)) {
                 url = CREATE_NEW_USER_CUSTOMER_CONTROLLER;
+            } else if (NAVIGATE_BLOG.equals(action)) {
+                url = NAVIGATE_BLOG_CONTROLLER;
+            } else if (VIEW_SINGLE_BLOG.equals(action)) {
+                url = VIEW_SINGLE_BLOG_CONTROLLER;
+            } else if (CREATE_BLOG_MANAGER.equals(action)) {
+                url = CREATE_BLOG_MANAGER_CONTROLLER;
+            } else if (UPDATE_BLOG_MANAGER.equals(action)) {
+                url = UPDATE_BLOG_MANAGER_CONTROLLER;
+            } else if (DELETE_BLOG_MANAGER.equals(action)) {
+                url = DELETE_BLOG_MANAGER_CONTROLLER;
+            } else if (SHOW_ALL_BLOG_MANAGER.equals(action)) {
+                url = SHOW_ALL_BLOG_MANAGER_CONTROLLER;
             } else if (SHOW_ALL_ORDERS_STAFF.equals(action)) {
                 url = SHOW_ALL_ORDERS_STAFF_CONTROLLER;
             } else if (ORDER_PAGE.equals(action)) {
@@ -268,6 +313,16 @@ public class MainController extends HttpServlet {
                 url = NAVIGATE_SIGN_UP_CONTROLLER;
             } else if (NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER;
+            } else if (SHIPPER_SEARCH_ORDER.equals(action)) {
+                url = SHIPPER_SEARCH_ORDER_CONTROLLER;
+            } else if (SHIPPER_UPDATE_STATUS_ORDER.equals(action)) {
+                url = SHIPPER_UPDATE_STATUS_ORDER_CONTROLLER;
+            } else if (CREATE_EMPLOYEE_ACCOUNT.equals(action)) {
+                url = CREATE_EMPLOYEE_ACCOUNT_CONTROLLER;
+            } else if (SHIPPER_VIEW_ORDER_DETAIL.equals(action)) {
+                url = SHIPPER_VIEW_ORDER_DETAIL_CONTROLLER;
+            } else if (LIST_DASHBOARD.equals(action)) {
+                url = LIST_DASHBOARD_CONTROLLER;
             } else if (VIEW_ORDER_STATUS.equals(action)) {
                 url = VIEW_ORDER_STATUS_VIEW;
             } else if (VIEW_ORDER_DETAIL_CUSTOMER.equals(action)){

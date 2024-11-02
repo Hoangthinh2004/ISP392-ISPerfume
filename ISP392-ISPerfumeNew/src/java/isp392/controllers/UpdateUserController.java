@@ -23,12 +23,12 @@ import javax.servlet.http.HttpSession;
  */
 public class UpdateUserController extends HttpServlet {
 
-    private static final String ERROR = "SearchUserController";
+    private static final String ERROR = "FilterByEmployeeController";
     private static final String SUCCESS = "FilterByEmployeeController";
     
-    private static final String EMAIL_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    private static final String EMAIL_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z0-9._%+-]+@gmail\\.com$";
     private static final String NAME_REGEX = "^[a-zA-Z]+$";
-    private static final String PHONE_REGEX = "^(0[1-9]{1}[0-9]{8})$";
+    private static final String PHONE_REGEX = "^(?:\\+84|0)(3[2-9]|5[6|8|9]|7[0|6|7|8|9]|8[1-9]|9[0-9])[0-9]{7}$";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,16 +43,16 @@ public class UpdateUserController extends HttpServlet {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             int roleID = Integer.parseInt(request.getParameter("roleID"));
-            
-            if(name.isEmpty()){
+
+            if (name.isEmpty()) {
                 userError.setNameError("Not be empty");
                 checkValidation = false;
             }
-            if(!name.matches(NAME_REGEX)){
+            if (!name.matches(NAME_REGEX)) {
                 userError.setNameError("Not available name");
                 checkValidation = false;
             }
-            if(email.isEmpty()){
+            if (email.isEmpty()) {
                 userError.setEmailError("Not be empty");
                 checkValidation = false;
             }
@@ -60,30 +60,29 @@ public class UpdateUserController extends HttpServlet {
                 userError.setEmailError("Not available email");
                 checkValidation = false;
             }
-            if(phone.isEmpty()){
+            if (phone.isEmpty()) {
                 userError.setPhoneError("Not be empty");
                 checkValidation = false;
             }
-            if(!phone.matches(PHONE_REGEX)){
+            if (!phone.matches(PHONE_REGEX)) {
                 userError.setPhoneError("Not available phone");
                 checkValidation = false;
             }
-            if(checkValidation){
+            if (checkValidation) {
                 UserDTO user = new UserDTO(userID, name, email, phone, phone, roleID, roleID);
                 RoleDTO role = new RoleDTO(roleID, name);
                 boolean checkUpdate = dao.update(user);
                 HttpSession session = request.getSession();
                 UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                if(checkUpdate){
-                    url= SUCCESS;
+                if (checkUpdate) {
+                    url = SUCCESS;
                 }
+            } else {
+                request.setAttribute("UPDATE_USER_ERROR", userError);
             }
-                else {
-                    request.setAttribute("UPDATE_USER_ERROR", userError);
-                }
         } catch (Exception e) {
             log("Error at UpdateUserController: " + e.toString());
-        } finally{
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

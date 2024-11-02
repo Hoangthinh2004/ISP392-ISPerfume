@@ -51,7 +51,7 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
                         <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
@@ -62,30 +62,6 @@
                         <div class="ms-3">
                             <h6 class="mb-0">Jhon Doe</h6>
                             <span>Admin</span>
-                        </div>
-                    </div>
-                    <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MGR_ProductManagement.jsp" class="dropdown-item active">Product Management</a>
-                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
-                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
-                            </div>
-                        </div>
-                        <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                        <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                        <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                        <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="signin.html" class="dropdown-item">Sign In</a>
-                                <a href="signup.html" class="dropdown-item">Sign Up</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                                <a href="blank.html" class="dropdown-item">Blank Page</a>
-                            </div>
                         </div>
                     </div>
                 </nav>
@@ -178,7 +154,7 @@
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                                 <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
-                                <a href="#" class="dropdown-item">Log Out</a>
+                                <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
                     </div>
@@ -218,7 +194,7 @@
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Fragrance</label>
                                         <div class="col-sm-10">
-<!--                                            <input type="text" name="fregranceFamilies" class="form-control">-->
+                                            <!--                                            <input type="text" name="fregranceFamilies" class="form-control">-->
                                             <textarea name="fregranceFamilies" class="form-control"></textarea>
                                         </div>
                                     </div>
@@ -242,6 +218,7 @@
                                     </select>
                                     <button type="submit"class="btn btn-primary">CREATE</button>
                                     <input type="hidden" name="search" value="${requestScope.SEARCH}">
+                                    <a href="MainController?action=SearchProduct&search=" class="btn btn-primary">Back</a>
                                 </form>
                             </div>
                         </div>

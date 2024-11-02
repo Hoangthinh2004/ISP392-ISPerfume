@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -28,6 +28,20 @@ public class OrderDTO {
     private String note;
 
     public OrderDTO() {
+        this.orderID = 0;
+        this.cartID = 0;
+        this.staffID = 0;
+        this.shipperID = 0;
+        this.promotionID = 0;
+        this.customerID = 0;
+        this.orderDate = null;
+        this.orderStatus = 0;
+        this.city = "";
+        this.district = "";
+        this.ward = "";
+        this.address = "";
+        this.phone = "";
+        this.note = "";
     }
 
     public OrderDTO(int orderID, int cartID, int staffID, int shipperID, int promotionID, int customerID, Date orderDate, int orderStatus, String city, String district, String ward, String address, String phone, String note) {
