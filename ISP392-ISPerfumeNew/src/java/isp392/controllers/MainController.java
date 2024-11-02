@@ -199,6 +199,19 @@ public class MainController extends HttpServlet {
     private static final String VIEW_ORDER_DETAIL_CUSTOMER = "viewOrderDetail";
     private static final String VIEW_ORDER_DETAIL_CUSTOMER_CONTROLLER = "viewOrderDetailController";
 
+    
+    private static final String NAVIGATE_CHECK_OUT = "NavigateToCheckOut";
+    private static final String NAVIGATE_CHECK_OUT_CONTROLLER = "NavigateToCheckOutController";
+    
+    private static final String CHECK_OUT = "checkOut";
+    private static final String CHECK_OUT_CONTROLLER = "checkOutController";
+    
+    private static final String APPLY_VOUCHER = "ApplyVoucher";
+    private static final String APPLY_VOUCHER_CONTROLLER = "ApplyVoucherController";
+    
+    private static final String CHECK_QUANTITY = "checkQuantity";
+    private static final String CHECK_QUANTITY_CONTROLLER = "checkOrderQuantityController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -327,6 +340,14 @@ public class MainController extends HttpServlet {
                 url = VIEW_ORDER_STATUS_VIEW;
             } else if (VIEW_ORDER_DETAIL_CUSTOMER.equals(action)){
                 url = VIEW_ORDER_DETAIL_CUSTOMER_CONTROLLER;
+            } else if(NAVIGATE_CHECK_OUT.equals(action)){
+                url = NAVIGATE_CHECK_OUT_CONTROLLER;
+            } else if(CHECK_OUT.equals(action)){
+                url = CHECK_OUT_CONTROLLER;
+            } else if(APPLY_VOUCHER.equals(action)){
+                url = APPLY_VOUCHER_CONTROLLER;
+            } else if(CHECK_QUANTITY .equals(action)){
+                url = CHECK_QUANTITY_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -5,15 +5,12 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
-import isp392.product.ProductDAO;
-import isp392.product.ViewProductDTO;
+import isp392.cart.Cart;
+import isp392.cart.CartDAO;
+import isp392.cart.ViewCartDTO;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.faces.flow.builder.ViewBuilder;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,48 +21,55 @@ import javax.servlet.http.HttpSession;
  *
  * @author ThinhHoang
  */
-public class BrandFilterController extends HttpServlet {
+public class checkOrderQuantityController extends HttpServlet {
 
-    private static final String ERROR = "shopping.jsp";
-    private static final String SUCCESS = "shopping.jsp";
+    private static final String ERROR = "checkout.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int categoryID = 0;
-            int brandID = Integer.parseInt(request.getParameter("brandID"));
-
-            ProductDAO productDAO = new ProductDAO();
-            BrandDAO brandDAO = new BrandDAO();
             HttpSession session = request.getSession();
-            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            categoryID = ids.get("categoryID");
+            CartDAO cartDAO = new CartDAO();
+            Cart listChecked = (Cart) session.getAttribute("CHECK_LIST");
+            String[] productDetailIDs = request.getParameterValues("productDetailID");
+            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
+            Map<String, Integer> promotionIDS = (Map<String, Integer>) session.getAttribute("CUR_PROMOTION");
 
-            Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
-            if (sizeIDS != null && !sizeIDS.isEmpty()) {
-                session.removeAttribute("SIZE_IDS");
+            int customerID = CustomerIDS.get("customerID");
+            int promotionID = 0;
+            if (promotionIDS != null) {
+                promotionID = promotionIDS.get("promotionID");
             }
+            int price = Integer.parseInt(request.getParameter("orderPrice"));
 
-            Map<String, Integer> currentBrandID = new HashMap<>();
-            currentBrandID.put("brandID", brandID);
-            session.setAttribute("CURRENT_BRANDID", currentBrandID); // Store brandID for filter By size controller
-
-            if (categoryID != 0 && brandID != 0) {
-                List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
-                session.setAttribute("LIST_PRODUCT", listProduct);
-
-                List<BrandDTO> brandInfor = brandDAO.showBrandInfor(brandID);
-                session.setAttribute("BRAND_INFOR", brandInfor);
-
+            boolean checkQuanity = false;
+            for (ViewCartDTO product : listChecked.getCart().values()) {
+                int productDetailID = product.getProductDetailID();
+                int quantity = product.getTotalQuantity();
+                boolean checkQuantity = cartDAO.checkQuantity(productDetailID, quantity);
+                if (!checkQuantity) {
+                    checkQuanity = false;
+                    break;
+                }
+                checkQuanity = true;
             }
-            url = SUCCESS;
+            if (checkQuanity) {
+                StringBuilder productDetailIDParams = new StringBuilder();
+                for (String id : productDetailIDs) {
+                    if (productDetailIDParams.length() > 0) {
+                        productDetailIDParams.append("&");
+                    }
+                    productDetailIDParams.append("productDetailIDs=").append(id);
+                }
+                url = "ZaloPaymentController?" + "price=" + price + "&customerID=" + customerID + "&promotionID=" + promotionID + "&" + productDetailIDParams.toString();
+            }
         } catch (Exception e) {
-            log("Error at BrandFilterController: " + e.toString());
+            log("Error at checkOrderQuantityController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

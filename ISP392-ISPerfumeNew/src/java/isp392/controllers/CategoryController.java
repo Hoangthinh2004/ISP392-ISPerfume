@@ -8,6 +8,7 @@ package isp392.controllers;
 import isp392.product.ProductDAO;
 import isp392.product.ViewProductDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -22,41 +23,61 @@ import javax.servlet.http.HttpSession;
  */
 public class CategoryController extends HttpServlet {
 
-    private static final String ERROR ="home.jsp";
-    private static final String SUCCESS ="shopping.jsp";
-    
+    private static final String ERROR = "home.jsp";
+    private static final String SUCCESS = "shopping.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url=ERROR;
+        String url = ERROR;
         try {
-            int categoryID = Integer.parseInt(request.getParameter("Category"));
+            int categoryID = Integer.parseInt(request.getParameter("CategoryID"));
+            int brandID = 0;
+            if (request.getParameter("brandID") == null) {
+                brandID = 0;
+            } else {
+                brandID = Integer.parseInt(request.getParameter("brandID"));
+            }
             
+            ProductDAO productDAO = new ProductDAO();
             HttpSession session = request.getSession();
-            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS"); 
+            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+            if (ids == null) {
+                ids = new HashMap<>();
+                session.setAttribute("CURRENT_IDS", ids);
+            }
             ids.put("categoryID", categoryID); //store current categoryID and send to Brand & Size filter controller
-            
+
+            //remove current sizeID
             Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
             if (sizeIDS != null && !sizeIDS.isEmpty()) {
                 session.removeAttribute("SIZE_IDS");
             }
-            
+
+            //remove current brandID
             Map<String, Integer> brandIDS = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID");
             if (brandIDS != null && !brandIDS.isEmpty()) {
                 session.removeAttribute("CURRENT_BRANDID");
             }
-            
+
+            //remove current search key
             Object searchContent = session.getAttribute("CURRENT_SEARCH");
             if (searchContent != null) {
                 session.removeAttribute("CURRENT_SEARCH");
             }
             
-            ProductDAO productDAO = new ProductDAO();           
-            List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
-                       
-            session.setAttribute("LIST_PRODUCT", listProduct);
+            if (brandID == 0) {
+                List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
+                session.setAttribute("LIST_PRODUCT", listProduct);
+            } else {
+                List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
+                session.setAttribute("LIST_PRODUCT", listProduct);
+            }
+            
+
+            
             session.removeAttribute("BRAND_INFOR");
             url = SUCCESS;
-                
+
         } catch (Exception e) {
             log("Error at CategoryController: " + e.toString());
         } finally {

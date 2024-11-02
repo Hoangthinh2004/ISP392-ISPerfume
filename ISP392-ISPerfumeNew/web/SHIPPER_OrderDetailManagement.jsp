@@ -182,14 +182,14 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach var="shipper" items="${sessionScope.LIST_ORDER_DETAIL}">
-                                            <form action="MainController" method="POST">
-                                                <tr>
-                                                    <td>${shipper.productName}</td>
+                                                <c:set var="unitTotal" value="${shipper.quantity * shipper.unitPrice}" ></c:set>
+                                                <c:set var="Total" value="${unitTotal + Total}" ></c:set>
+                                                <form action="MainController" method="POST">
+                                                    <tr>
+                                                        <td>${shipper.productName}</td>
                                                     <td>${shipper.quantity}</td>
                                                     <td><fmt:formatNumber type="number" value="${shipper.unitPrice}" /> VND</td>
                                                     <td>
-                                                        <c:set var="unitTotal" value="${shipper.quantity * shipper.unitPrice}" ></c:set>
-                                                        <c:set var="Total" value="${unitTotal + Total}" ></c:set>
                                                         <fmt:formatNumber type="number" value="${unitTotal}" /> VND
                                                         <input type="hidden" name="Total" value="${shipper.quantity * shipper.unitPrice}"/>
                                                     </td>
@@ -197,16 +197,14 @@
                                             </form>
                                         </c:forEach>
                                         <c:forEach var="promotion" items="${sessionScope.LIST_PROMOTION}">
-                                            <c:if test="${Total >= promotion.condition}">
-                                                <tr>
-                                                    <td colspan="3" style="text-align: right;"><strong>Promotion:</strong></td>
-                                                    <td><strong><c:out value="${promotion.discountPer}%" /></strong></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
-                                                    <td><strong><fmt:formatNumber type="number" value="${Total * ((100-promotion.discountPer)/100)}"/> VND</strong></td>
-                                                </tr>
-                                            </c:if>
+                                            <tr>
+                                                <td colspan="3" style="text-align: right;"><strong>Promotion:</strong></td>
+                                                <td><strong><c:out value="${promotion.discountPer}%" /></strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+                                                <td><strong><fmt:formatNumber type="number" value="${Total * ((100-promotion.discountPer)/100)}"/> VND</strong></td>
+                                            </tr>
                                         </c:forEach>
                                         </tbody>
                                     </table>

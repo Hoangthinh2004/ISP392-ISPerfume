@@ -7,7 +7,8 @@ package isp392.order;
 
 /**
  *
- * @author duyhc
+<<<<<<< HEAD
+ * @author ThinhHoang
  */
 public class OrderDetailDTO {
     private int orderID;
@@ -21,7 +22,6 @@ public class OrderDetailDTO {
         this.productDetailID = 0;
         this.quantity = 0;
         this.unitPrice = 0;
-        this.productName = "";
     }
 
     public OrderDetailDTO(int orderID, int productDetailID, int quantity, int unitPrice,String productName) {

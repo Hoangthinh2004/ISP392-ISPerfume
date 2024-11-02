@@ -41,6 +41,7 @@ public class UserDAO {
     private static final String UPDATE_PROFILE_CUSTOMER = "UPDATE dbo.Customer SET DetailAddress=?, Area=?, District=?, Ward=?, DayOfBirth=? WHERE customerID=?";
     private static final String GET_PASSWORD_BY_ID = "SELECT Password FROM Users WHERE UserID = ?";
     private static final String GET_CUSTOMER_ID = "SELECT UserID FROM Users WHERE Phone LIKE ?";
+    private static final String GET_STAFF_ID = "SELECT UserID FROM Users WHERE RoleID = 3";
     private static final String CREATE_EMPLOYEE_ACCOUNT = "INSERT INTO Users(Name, Email, Password, Phone, Status, RoleID) VALUES(?,?,?,?,?,?)";
     private static final String LIST_USER_BY_PHONE = "SELECT UserID, Name, Email,Phone, Status, RoleID FROM Users WHERE Phone like ?";
 
@@ -392,7 +393,6 @@ public class UserDAO {
                 ptm.setInt(1, userID);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-
                     int custID = rs.getInt("CustomerID");
                     String area = rs.getString("Area");
                     String district = rs.getString("District");
@@ -546,6 +546,74 @@ public class UserDAO {
             }
         }
         return userID;
+    }
+
+    public List<CustomerViewProfileDTO> getPersonalInfor(int customerID) throws ClassNotFoundException, SQLException {
+        List<CustomerViewProfileDTO> profile = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        CustomerViewProfileDTO cust = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_CUSTOMER_BY_USERID_01);
+                ptm.setInt(1, customerID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int custID = rs.getInt("CustomerID");
+                    String area = rs.getString("Area");
+                    String district = rs.getString("District");
+                    String ward = rs.getString("Ward");
+                    String detailAddress = rs.getString("DetailAddress");
+                    Date dob = rs.getDate("DayOfBirth");
+                    String name = rs.getString("Name");
+                    String email = rs.getString("Email");
+                    String password = rs.getString("Password");
+                    String phone = rs.getString("Phone");
+                    int status = rs.getInt("Status");
+                    int roleID = rs.getInt("RoleID");
+                    profile.add(new CustomerViewProfileDTO(custID, area, district, ward, detailAddress, dob, name, email, password, phone, roleID, status));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return profile;
+    }
+
+    public int getstaffID() throws ClassNotFoundException, SQLException {
+        int staffID = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(GET_STAFF_ID);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                staffID = rs.getInt("UserID");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return staffID;
     }
     
     public boolean createEmployeeAccount(String name, String email, String password,String phone, int status, int roleID ) throws SQLException, ClassNotFoundException {

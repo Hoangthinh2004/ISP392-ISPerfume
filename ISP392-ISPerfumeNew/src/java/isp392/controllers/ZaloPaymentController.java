@@ -5,6 +5,7 @@
  */
 package isp392.controllers;
 
+import isp392.cart.Cart;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -50,46 +52,6 @@ public class ZaloPaymentController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ZaloPaymentController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ZaloPaymentController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private static final Map<String, String> CONFIG = new HashMap<String, String>() {
         {
             put("app_id", "2554");
@@ -106,21 +68,29 @@ public class ZaloPaymentController extends HttpServlet {
         return fmt.format(cal.getTimeInMillis());
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         try {
-            String userID = null;
-            String promotionID = null;
             String paymentMethod = String.valueOf(1);
-            String shipper = null;
-            int price = 123000;
+            String[] productDetailIDs = request.getParameterValues("productDetailIDs");
+            int price = Integer.parseInt(request.getParameter("price"));
+            int customerID = Integer.parseInt(request.getParameter("customerID"));
+            int promotionID = Integer.parseInt(request.getParameter("promotionID"));
+
             if (paymentMethod.equals("1")) {
                 Random rand = new Random();
                 int random_id = rand.nextInt(1000000);
                 final Map embed_data = new HashMap() {
                     {
-                        put("redirecturl", "https://4f2e-113-22-32-127.ngrok-free.app/ISP392-ISPerfumeNew/chooseController");
+                        StringBuilder productDetailIDParams = new StringBuilder();
+                        for (String id : productDetailIDs) {
+                            if (productDetailIDParams.length() > 0) {
+                                productDetailIDParams.append("&");
+                            }
+                            productDetailIDParams.append("productDetailIDs=").append(id);
+                        }
+                        put("redirecturl", "https://8ed5-2001-ee0-d705-c60-80f8-90f3-da7b-5ce0.ngrok-free.app/ISP392-ISPerfumeNew/chooseController?price=" + price + "&customerID=" + customerID + "&promotionID=" + promotionID + "&" + productDetailIDParams.toString());
                     }
                 };
                 final Map<String, Object>[] item = new Map[]{
@@ -138,8 +108,8 @@ public class ZaloPaymentController extends HttpServlet {
                         put("amount", price);// số tiền
                         put("description", "ISPerfume - Payment for the order #" + random_id);
                         put("bank_code", "");
-                        put("redirect_url", "https://4f2e-113-22-32-127.ngrok-free.app/ISP392-ISPerfumeNew/NavigateZaloPayment");
-                        put("callback_url", "https://4f2e-113-22-32-127.ngrok-free.app/ISP392-ISPerfumeNew/ZaloPayCallBackController");
+                        put("redirect_url", "https://8ed5-2001-ee0-d705-c60-80f8-90f3-da7b-5ce0.ngrok-free.app/ISP392-ISPerfumeNew/NavigateZaloPayment");
+                        put("callback_url", "https://8ed5-2001-ee0-d705-c60-80f8-90f3-da7b-5ce0.ngrok-free.app/ISP392-ISPerfumeNew/ZaloPayCallBackController");
                         put("item", new JSONArray(item).toString());
                         put("embed_data", new JSONObject(embed_data).toString());
                     }
@@ -181,6 +151,35 @@ public class ZaloPaymentController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
 
     }
 

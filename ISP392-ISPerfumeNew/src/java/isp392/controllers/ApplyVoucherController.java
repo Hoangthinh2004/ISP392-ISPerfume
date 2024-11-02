@@ -5,38 +5,54 @@
  */
 package isp392.controllers;
 
-import isp392.blog.BlogDAO;
-import isp392.blog.BlogDTO;
+import isp392.promotion.PromotionDAO;
+import isp392.promotion.PromotionDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author GIGABYTE
+ * @author ThinhHoang
  */
-public class ShowAllBlogManager extends HttpServlet {
+public class ApplyVoucherController extends HttpServlet {
 
-    private static final String SUCCESS = "STAFF_BlogManagement.jsp";
-    private static final String ERROR = "HomeController";
+    private static final String ERROR = "checkout.jsp";
+    private static final String SUCCESS = "checkout.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            BlogDAO daoBlog = new BlogDAO();
-            List<BlogDTO> listBlog = daoBlog.getListBlogManagement();
+            HttpSession session = request.getSession();
+            PromotionDAO promotionDAO = new PromotionDAO();
+            Map<String, Integer> promotions = new HashMap<>();
+            session.setAttribute("CUR_PROMOTION", promotions);
 
-            if (!listBlog.isEmpty()) {
-                request.setAttribute("SHOW_BLOG_MANAGEMENT", listBlog);
-                url = SUCCESS;
+            int promotionID = Integer.parseInt(request.getParameter("promotionID"));
+            promotions.put("promotionID", promotionID);
+            int finalPrice = 0;
+            List<PromotionDTO> promotion = promotionDAO.getDetail(promotionID);
+
+            Map<String, Integer> total = (Map<String, Integer>) session.getAttribute("TOTAL_PRICE");
+            int price = total.get("total");
+            for (PromotionDTO promo : promotion) {
+                finalPrice = price - (price*promo.getDiscountPer()/100);
             }
+            
+            session.setAttribute("CUR_PROMOTION", promotions);
+            request.setAttribute("TOTAL_PRICE", finalPrice);
+            session.setAttribute("PROMOTION_DETAIL", promotion);
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at ShowAllBlogManager: " + e.toString());
+            log("Error at ApplyVoucherController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

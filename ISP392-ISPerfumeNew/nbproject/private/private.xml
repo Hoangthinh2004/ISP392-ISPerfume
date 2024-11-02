@@ -409,5 +409,12 @@
             <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/viewOrderHistoryController.java</file>
             <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/viewOrderDetail.jsp</file>
         </group>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CategoryController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateProductDetailController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ViewProductDTO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/HomeController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/home.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDAO.java</file>
+        </group>
     </open-files>
 </project-private>

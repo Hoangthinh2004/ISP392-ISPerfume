@@ -35,7 +35,7 @@ public class OrderDTO {
         this.promotionID = 0;
         this.customerID = 0;
         this.orderDate = null;
-        this.orderStatus = 0;
+        this.orderStatus = 1;
         this.city = "";
         this.district = "";
         this.ward = "";

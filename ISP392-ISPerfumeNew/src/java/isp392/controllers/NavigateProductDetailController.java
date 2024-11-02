@@ -14,7 +14,6 @@ import isp392.product.ProductDetailDTO;
 import isp392.product.ViewProductDTO;
 import isp392.size.SizeDAO;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -32,6 +31,7 @@ public class NavigateProductDetailController extends HttpServlet {
     private static final String ERROR = "shopping.jsp";
     private static final String ERROR_SEARCH = "shoppingSearch.jsp";
     private static final String SUCCESS = "productDetail.jsp";
+    private static final String HOME = "HomeController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,8 +39,10 @@ public class NavigateProductDetailController extends HttpServlet {
         String url = "";
         HttpSession session = request.getSession();
         Object search = session.getAttribute("CURRENT_SEARCH");
-        Object category = session.getAttribute("CURRENT_IDS");
-        if (search != null) {
+        Map<String, Integer> category = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+        if (search == null && category == null) {
+            url = HOME;
+        } else if (search != null) {
             url = ERROR_SEARCH;
         } else if (category != null) {
             url = ERROR;
@@ -48,19 +50,28 @@ public class NavigateProductDetailController extends HttpServlet {
             url = SUCCESS;
         }
         try {
+            ProductDAO productDAO = new ProductDAO();
+            SizeDAO sizeDAO = new SizeDAO();
+            BrandDAO brandDAO = new BrandDAO();
+            ProductDetailDAO productDetailDAO = new ProductDetailDAO();
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-
+            
+            int categoryID = 0;
             int productID = Integer.parseInt(request.getParameter("productID"));
             int sizeID = Integer.parseInt(request.getParameter("sizeID"));
-            int categoryID = ids.get("categoryID");
-
-            SizeDAO sizeDAO = new SizeDAO();
+            if (search == null && category.size() == 0) {
+                categoryID = Integer.parseInt(request.getParameter("categoryID"));
+            } else if (search == null) {
+                categoryID = ids.get("categoryID");
+            } else {
+                categoryID = productDAO.getCategoryID(productID);
+            }
+                       
             List<ViewProductDTO> sizeAvailable = sizeDAO.getAvailableSize(productID);
             if (sizeAvailable.size() > 0) {
                 session.setAttribute("AVAILABLE_SIZE", sizeAvailable);
             }
-
-            BrandDAO brandDAO = new BrandDAO();
+           
             List<BrandDTO> brand = brandDAO.getBrandByProduct(productID);
             if (brand.size() > 0) {
                 int brandID = brand.get(0).getBrandID();
@@ -69,8 +80,7 @@ public class NavigateProductDetailController extends HttpServlet {
                 String brandName = brand.get(0).getName();
                 session.setAttribute("BRAND_BY_PRODUCT", brandName);
             }
-
-            ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+           
             List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);
             if (listPriceBySize.size() > 0) {
                 session.setAttribute("PRICE_BY_SIZE", listPriceBySize);
@@ -80,8 +90,7 @@ public class NavigateProductDetailController extends HttpServlet {
             if (listImage.size() > 0) {
                 session.setAttribute("LIST_IMAGE", listImage);
             }
-
-            ProductDAO productDAO = new ProductDAO();
+           
             List<ProductDTO> productInformation = productDAO.getProductInformation(productID);
             if (productInformation.size() > 0) {
                 session.setAttribute("PRODUCT_INFORMATION", productInformation);
