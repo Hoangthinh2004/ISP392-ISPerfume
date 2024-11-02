@@ -45,9 +45,9 @@
                             <input type="hidden" name="action" value="ListDashboard">
 
                         </form>
-                        <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
+                        <a class="text-body mr-3" href="MainController?action=SearchUser&search=${param.search}">ADMIN</a>
                         <a class="text-body mr-3" href="MainController?action=ManageOrderPage">STAFF</a>
-                        <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
+                        <a class="text-body mr-3" href="MainController?action=SHIPPER_SearchOrder">SHIPPER</a>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
