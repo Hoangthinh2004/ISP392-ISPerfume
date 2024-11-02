@@ -25,7 +25,7 @@ public class MainController extends HttpServlet {
     private static final String FILTER_BY_BRAND = "FilterByBrand";
     private static final String FILTER_BY_BRAND_CONTROLLER = "BrandFilterController";
 
-    private static final String SHOW_ALL_PRODUCT_MANAGER = "Search product";
+    private static final String SHOW_ALL_PRODUCT_MANAGER = "SearchProduct";
     private static final String SHOW_ALL_PRODUCT_MANAGER_CONTROLLER = "ShowAllProductManager";
 
     private static final String UPDATE_PRODUCT_MANAGER = "Update";
