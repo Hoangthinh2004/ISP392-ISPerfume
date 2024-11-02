@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,6 +31,61 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            .alert {
+                display: flex;
+                align-items: center;
+                padding: 15px 20px;
+                font-size: 16px;
+                max-width: 400px;
+                position: fixed;
+                top: 50px;
+                right: 20px;
+                z-index: 1050;
+                border: 1px solid transparent;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #f8d7da;
+                border-color: #f5c6cb;
+                color: #721c24;
+            }
+
+            .alert-icon {
+                font-size: 1.5rem;
+                color: #721c24; /* Màu đỏ cho icon lỗi */
+            }
+
+            .alert-content {
+                flex: 1;
+                font-weight: 500;
+                color: #721c24;
+                margin: 0 10px; /* Giãn cách nội dung */
+            }
+
+            .btn-close {
+                background: none;
+                border: none;
+                font-size: 1.2rem;
+                color: #721c24; 
+                transition: color 0.2s ease;
+                cursor: pointer;
+            }
+
+            .btn-close:hover {
+                color: #000;
+            }
+
+            .progress-bar-timer {
+                border-radius: 24px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 5px;
+                width: 100% ;
+                background-color: #721c24 !important;
+                transition: width linear;
+            }
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -92,10 +148,20 @@
         </div>
         <!-- Topbar End -->
 
+        <!--Pop-up End-->
+        <c:if test="${not empty requestScope.ERROR_FORGOT_PASSWORD.tokenError}">
+            <div class="alert alert-dismissible fade show fade-out d-flex align-items-center" role="alert" id="autoDismissAlert">
+                <i class="fa fa-times-circle alert-icon me-2"></i> 
+                <div class="alert-content">${requestScope.ERROR_FORGOT_PASSWORD.tokenError}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="progress-bar-timer bg-danger" id="progressBar" style="width: 100%;"></div>
+            </div>
 
-        <!-- Navbar Start -->
+        </c:if>
 
-        <!-- Navbar End -->
+        <!--Pop-up End-->
 
 
         <!--Change passwword form Start-->
@@ -127,5 +193,30 @@
             </form>
         </div>
         <!--Change password form End-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var duration = 5000;
+                var progressBar = document.getElementById('progressBar');
+                var alertElement = document.getElementById('autoDismissAlert');
+
+                progressBar.style.width = '100%';
+
+                requestAnimationFrame(function () {
+                    setTimeout(function () {
+                        progressBar.style.transitionDuration = duration + 'ms';
+                        progressBar.style.width = '0%';
+                    }, 10); // Đợi một chút trước khi áp dụng transition
+                });
+
+                setTimeout(function () {
+                    alertElement.classList.add('hide');
+                    setTimeout(function () {
+                        alertElement.remove();
+                    }, 200);
+                }, duration);
+            });
+
+        </script>
     </body>
 </html>

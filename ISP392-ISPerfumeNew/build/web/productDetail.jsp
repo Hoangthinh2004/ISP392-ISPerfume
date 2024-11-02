@@ -33,17 +33,16 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/stylePopup.css" rel="stylesheet">
         <style>
-            /* Nút close (x) */
             .btn-close {
                 background: none;
                 border: none;
-                font-size: 1.5rem; /* Tăng kích thước font cho nút close */
+                font-size: 1.5rem; 
                 color: #6c757d; 
                 transition: color 0.2s ease;
                 position: absolute;
-                right: 15px; /* Tăng khoảng cách sang phải */
+                right: 15px; 
                 top: 50%;
-                transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+                transform: translateY(-50%); 
                 cursor: pointer;
             }
 
@@ -721,7 +720,6 @@
                                                         alertElement.remove();
                                                     }, 200);
                                                 }, duration);
-
 
         </script>
 
