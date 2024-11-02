@@ -587,7 +587,7 @@ public class ProductDAO {
                     String productName = rs.getString("ProName");
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
-                    listProductByCategory.add(new ViewProductDTO(productDetailID, categoryID, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
+                    listProductByCategory.add(new ViewProductDTO(categoryID, productDetailID, brandID, productID, sizeID, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {

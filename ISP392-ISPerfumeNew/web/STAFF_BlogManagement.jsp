@@ -1,8 +1,3 @@
-<%-- 
-    Document   : STAFF_BlogManagement
-    Created on : Oct 16, 2024, 12:36:23 PM
-    Author     : User
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

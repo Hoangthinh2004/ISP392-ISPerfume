@@ -115,10 +115,6 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_USER_STATUS = "UpdateUserStatus";
     private static final String UPDATE_USER_STATUS_CONTROLLER = "UpdateUserStatusController";
 
-    private static final String NAVIGATE_DETAIL_TO_SHOPPING = "NavigateShopping";
-    private static final String NAVIGATE_DETAIL_TO_SHOPPING_CONTROLLER = "NavigateShoppingController";
-
-
     private static final String ADD_TO_CART = "AddToCart";
     private static final String ADD_TO_CART_CONTROLLER = "AddToCartController";
 
@@ -142,16 +138,15 @@ public class MainController extends HttpServlet {
 
     private static final String CREATE_BLOG_MANAGER = "CreateBlogManager";
     private static final String CREATE_BLOG_MANAGER_CONTROLLER = "CreateBlogManagerController";
-    
+
     private static final String UPDATE_BLOG_MANAGER = "UpdateBlogManager";
     private static final String UPDATE_BLOG_MANAGER_CONTROLLER = "UpdateBlogManagerController";
-    
+
     private static final String DELETE_BLOG_MANAGER = "DeleteBlogManager";
     private static final String DELETE_BLOG_MANAGER_CONTROLLER = "DeleteBlogManagerController";
-    
+
     private static final String SHOW_ALL_BLOG_MANAGER = "ShowAllBlogManager";
     private static final String SHOW_ALL_BLOG_MANAGER_CONTROLLER = "ShowAllBlogManager";
-
 
     private static final String SHOW_ALL_ORDERS_STAFF = "ShowAllOrder";
     private static final String SHOW_ALL_ORDERS_STAFF_CONTROLLER = "ShowAllOrderStaffController";
@@ -182,7 +177,6 @@ public class MainController extends HttpServlet {
 
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL = "NavigateRelatedProductDetail";
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER = "NavigateRelatedProductDetailController";
-
 
     private static final String SHIPPER_SEARCH_ORDER = "SHIPPER_SearchOrder";
     private static final String SHIPPER_SEARCH_ORDER_CONTROLLER = "SHIPPER_SearchOrderController";
@@ -281,12 +275,10 @@ public class MainController extends HttpServlet {
                 url = UPDATE_USER_STATUS_CONTROLLER;
             } else if (CREATE_NEW_USER_CUSTOMER.equals(action)) {
                 url = CREATE_NEW_USER_CUSTOMER_CONTROLLER;
-
             } else if (NAVIGATE_BLOG.equals(action)) {
                 url = NAVIGATE_BLOG_CONTROLLER;
             } else if (VIEW_SINGLE_BLOG.equals(action)) {
                 url = VIEW_SINGLE_BLOG_CONTROLLER;
-
             } else if (CREATE_BLOG_MANAGER.equals(action)) {
                 url = CREATE_BLOG_MANAGER_CONTROLLER;
             } else if (UPDATE_BLOG_MANAGER.equals(action)) {
@@ -295,7 +287,6 @@ public class MainController extends HttpServlet {
                 url = DELETE_BLOG_MANAGER_CONTROLLER;
             } else if (SHOW_ALL_BLOG_MANAGER.equals(action)) {
                 url = SHOW_ALL_BLOG_MANAGER_CONTROLLER;
-            }
             } else if (SHOW_ALL_ORDERS_STAFF.equals(action)) {
                 url = SHOW_ALL_ORDERS_STAFF_CONTROLLER;
             } else if (ORDER_PAGE.equals(action)) {
@@ -326,7 +317,7 @@ public class MainController extends HttpServlet {
                 url = SHIPPER_VIEW_ORDER_DETAIL_CONTROLLER;
             } else if (LIST_DASHBOARD.equals(action)) {
                 url = LIST_DASHBOARD_CONTROLLER;
-            } 
+            }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
