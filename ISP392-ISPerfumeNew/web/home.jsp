@@ -135,7 +135,7 @@
                                 </c:forEach>
                                 <a href="blog.jsp" class="nav-item nav-link">Blog</a>
                                 <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                    <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link"> Order History</a>
                                 </c:if>
                             </div>
                             <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
