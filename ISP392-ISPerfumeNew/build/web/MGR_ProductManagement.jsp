@@ -225,7 +225,7 @@
                                                             ${brand.name}
                                                         </c:if>
                                                     </c:forEach>
-
+                                                </td>
                                                 <td class="d-flex justify-content-center">
                                                     <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px; border-radius: 16px;">
                                                 </td>
@@ -238,7 +238,8 @@
                                                             UNAVAILABLE
                                                         </c:otherwise>
                                                     </c:choose>
-                                                </td>                                                     
+                                                </td>         
+<!--                                                update-->
                                                 <td>
                                                     <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${counter.count}">
                                                         <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

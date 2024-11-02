@@ -160,6 +160,12 @@ public class MainController extends HttpServlet {
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL = "NavigateRelatedProductDetail";
     private static final String NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER = "NavigateRelatedProductDetailController";
 
+    private static final String VIEW_ORDER_STATUS = "viewOrderHistory";
+    private static final String VIEW_ORDER_STATUS_VIEW = "viewOrderHistoryController";
+    
+    private static final String VIEW_ORDER_DETAIL_CUSTOMER = "viewOrderDetail";
+    private static final String VIEW_ORDER_DETAIL_CUSTOMER_CONTROLLER = "viewOrderDetailController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -262,6 +268,10 @@ public class MainController extends HttpServlet {
                 url = NAVIGATE_SIGN_UP_CONTROLLER;
             } else if (NAVIGATE_RELATED_PRODUCT_DETAIL.equals(action)) {
                 url = NAVIGATE_RELATED_PRODUCT_DETAIL_CONTROLLER;
+            } else if (VIEW_ORDER_STATUS.equals(action)) {
+                url = VIEW_ORDER_STATUS_VIEW;
+            } else if (VIEW_ORDER_DETAIL_CUSTOMER.equals(action)){
+                url = VIEW_ORDER_DETAIL_CUSTOMER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

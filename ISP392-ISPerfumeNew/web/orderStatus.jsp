@@ -387,129 +387,118 @@
 
                     <!-- Order List Status 1 -->
                     <div class="order-list" id="order-list-1" style="display: none;">
-                        <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="order-item-image">
-                                    <img src="img/product-1.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                                <div class="order-item-details flex-grow-1 mx-3">
-                                    <h6 class="mb-1"><strong>Order #123456</strong></h6>
-                                    <p class="mb-1"><strong>Product:</strong> Product 1</p>
-                                    <p class="mb-1"><strong>Date:</strong> 2024-10-15 10:45 AM</p>
-                                    <p class="mb-1"><strong>Total:</strong> $120.50</p>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#orderDetailsModal-123456">View Details</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal for Order Details -->
-                        <div class="modal fade" id="orderDetailsModal-123456" tabindex="-1" aria-labelledby="orderDetailsLabel-123456" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="orderDetailsLabel-123456">Order #123456 Details</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                        <c:forEach var="order" items="${sessionScope.ORDER_STATUS_1}">
+                            <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="order-item-image">
+                                        <img src="https://cdn-icons-png.flaticon.com/256/4990/4990422.png" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
                                     </div>
-                                    <div class="modal-body">
-                                        <p><strong>Order ID:</strong> 123456</p>
-
-                                        <h6><strong>Products:</strong></h6>
-                                        <ul class="product-list">
-                                            <li>
-                                                <p><strong>Product Name:</strong> Product 1</p>
-                                                <p><strong>Quantity:</strong> 2</p>
-                                                <p><strong>Price:</strong> $60.25</p>
-                                            </li>
-                                            <li>
-                                                <p><strong>Product Name:</strong> Product 2</p>
-                                                <p><strong>Quantity:</strong> 1</p>
-                                                <p><strong>Price:</strong> $45.00</p>
-                                            </li>
-                                        </ul>
-
-                                        <p><strong>Shipper:</strong> Fast Shipping Inc.</p>
-                                        <p><strong>Order Date:</strong> 2024-10-15 10:45 AM</p>
-                                        <p><strong>Shipping Address:</strong> 123 Main Street, City, Country</p>
-
-                                        <!-- Add classes for specific fields -->
-                                        <p class="promotion"><strong>Promotion:</strong> 10% off (Promo Code: SAVE10)</p>
-                                        <p class="total"><strong>Total:</strong> $135.25</p>
-
-                                        <p><strong>Status:</strong> Shipped</p>
+                                    <div class="order-item-details flex-grow-1 mx-3">
+                                        <h6 class="mb-1"><strong>Order #${order.orderID}</strong></h6>
+                                        <p class="mb-1"><strong>Date:</strong> ${order.orderDate}</p>
+                                        <p class="mb-1"><strong>Recipient phone number</strong> ${order.phone}</p>
+                                        <c:forEach var="user" items="${sessionScope.LIST_USER}">
+                                            <c:if test="${order.shipperID == user.userID}">
+                                                <p class="mb-1"><strong>Shipper name: </strong> ${user.name}</p>
+                                            </c:if>
+                                        </c:forEach>
                                     </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <div class="text-right">
+                                        <form action="MainController">
+                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                            <button  type="submit" name="action" value="viewOrderDetail"class="btn btn-sm btn-primary" data-bs-toggle="modal">View Details</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
 
                     <!-- Order List Status 2 -->
                     <div class="order-list" id="order-list-2" style="display: none;">
 
-                        <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="order-item-image">
-                                    <img src="img/product-2.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                                <div class="order-item-details flex-grow-1 mx-3">
-                                    <h6 class="mb-1"><strong>Order #654321</strong></h6>
-                                    <p class="mb-1"><strong>Product:</strong> Product 2</p>
-                                    <p class="mb-1"><strong>Date:</strong> 2024-10-16 12:30 PM</p>
-                                    <p class="mb-1"><strong>Total:</strong> $150.00</p>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-sm btn-primary">View Details</button>
+                        <c:forEach var="order" items="${sessionScope.ORDER_STATUS_2}">
+                            <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="order-item-image">
+                                        <img src="https://cdn-icons-png.flaticon.com/256/17959/17959498.png" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+                                    <div class="order-item-details flex-grow-1 mx-3">
+                                        <h6 class="mb-1"><strong>Order #${order.orderID}</strong></h6>
+                                        <p class="mb-1"><strong>Date:</strong> ${order.orderDate}</p>
+                                        <p class="mb-1"><strong>Recipient phone number</strong> ${order.phone}</p>
+                                        <c:forEach var="user" items="${sessionScope.LIST_USER}">
+                                            <c:if test="${order.shipperID == user.userID}">
+                                                <p class="mb-1"><strong>Shipper name: </strong> ${user.name}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="text-right">
+                                        <form action="MainController">
+                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                            <button  type="submit" name="action" value="viewOrderDetail"class="btn btn-sm btn-primary" data-bs-toggle="modal">View Details</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
 
                     </div>
 
                     <!-- Order List Status 3 -->
                     <div class="order-list" id="order-list-3" style="display: none;">
-
-                        <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="order-item-image">
-                                    <img src="img/product-3.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                                <div class="order-item-details flex-grow-1 mx-3">
-                                    <h6 class="mb-1"><strong>Order #987654</strong></h6>
-                                    <p class="mb-1"><strong>Product:</strong> Product 3</p>
-                                    <p class="mb-1"><strong>Date:</strong> 2024-10-17 09:00 AM</p>
-                                    <p class="mb-1"><strong>Total:</strong> $75.25</p>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-sm btn-primary">View Details</button>
+                        <c:forEach var="order" items="${sessionScope.ORDER_STATUS_3}">
+                            <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="order-item-image">
+                                        <img src="https://cdn-icons-png.flaticon.com/256/14306/14306803.png" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+                                    <div class="order-item-details flex-grow-1 mx-3">
+                                        <h6 class="mb-1"><strong>Order #${order.orderID}</strong></h6>
+                                        <p class="mb-1"><strong>Date:</strong> ${order.orderDate}</p>
+                                        <p class="mb-1"><strong>Recipient phone number</strong> ${order.phone}</p>
+                                        <c:forEach var="user" items="${sessionScope.LIST_USER}">
+                                            <c:if test="${order.shipperID == user.userID}">
+                                                <p class="mb-1"><strong>Shipper name: </strong> ${user.name}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="text-right">
+                                        <form action="MainController">
+                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                            <button  type="submit" name="action" value="viewOrderDetail"class="btn btn-sm btn-primary" data-bs-toggle="modal">View Details</button>
+                                        </form>                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        </c:forEach>
                     </div>
-
                     <!-- Order List Status 4 -->
                     <div class="order-list" id="order-list-4" style="display: none;">
-                        <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="order-item-image">
-                                    <img src="img/product-4.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                                <div class="order-item-details flex-grow-1 mx-3">
-                                    <h6 class="mb-1"><strong>Order #246810</strong></h6>
-                                    <p class="mb-1"><strong>Product:</strong> Product 4</p>
-                                    <p class="mb-1"><strong>Date:</strong> 2024-10-18 02:15 PM</p>
-                                    <p class="mb-1"><strong>Total:</strong> $220.75</p>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-sm btn-primary">View Details</button>
+                        <c:forEach var="order" items="${sessionScope.ORDER_STATUS_4}">
+                            <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="order-item-image">
+                                        <img src="https://cdn-icons-png.flaticon.com/256/9403/9403187.png" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+                                    <div class="order-item-details flex-grow-1 mx-3">
+                                        <h6 class="mb-1"><strong>Order #${order.orderID}</strong></h6>
+                                        <p class="mb-1"><strong>Date:</strong> ${order.orderDate}</p>
+                                        <p class="mb-1"><strong>Recipient phone number</strong> ${order.phone}</p>
+                                        <c:forEach var="user" items="${sessionScope.LIST_USER}">
+                                            <c:if test="${order.shipperID == user.userID}">
+                                                <p class="mb-1"><strong>Shipper name: </strong> ${user.name}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="text-right">
+                                        <form action="MainController">
+                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                            <button  type="submit" name="action" value="viewOrderDetail"class="btn btn-sm btn-primary" data-bs-toggle="modal">View Details</button>
+                                        </form> 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
 
                 </div>

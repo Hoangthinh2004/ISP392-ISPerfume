@@ -25,7 +25,7 @@ public class OrderDAO {
     private final String GET_LIST_ORDER_DETAIL_STAFF = "SELECT * FROM Order_Detail WHERE OrderID = ?";
     private final String GET_ORDER_BY_ORDERID = "SELECT * FROM Orders WHERE OrderID = ?";
     private final String ASSIGN_SHIPPER_ORDER = "UPDATE Orders SET ShipperID = ? , orderStatus = 2 WHERE OrderID = ?";
-            
+    private final String GET_LIST_ORDER_BY_STATUS = "SELECT * FROM Orders WHERE CustomerID = ? AND orderStatus = ?";
     public List<OrderDTO> getListOrder() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -125,16 +125,54 @@ public class OrderDAO {
         boolean check = false;
         try {
             conn = DBUtils.getConnection();
-            if(conn!=null){
+            if (conn != null) {
 //              UPDATE Orders SET ShipperID = ? , orderStatus = 2 WHERE OrderID = ?
                 ptm = conn.prepareStatement(ASSIGN_SHIPPER_ORDER);
                 ptm.setInt(1, shipperID);
                 ptm.setInt(2, orderID);
-                check = ptm.executeUpdate()>0;
+                check = ptm.executeUpdate() > 0;
             }
-        }finally{
+        } finally {
             DBUtils.closeConnection2(conn, ptm);
         }
         return check;
+    }
+
+    public List<OrderDTO> getListOrderByStatus(int custID, int i) throws ClassNotFoundException, SQLException {
+        List<OrderDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn!=null){
+//                SELECT * FROM Orders WHERE CustomerID = ? AND orderStatus = ?
+                ptm = conn.prepareStatement(GET_LIST_ORDER_BY_STATUS);
+                ptm.setInt(1, custID);
+                ptm.setInt(2, i);
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    int orderID = rs.getInt("OrderID");
+                    int cartID = rs.getInt("CartID");
+                    int staffID = rs.getInt("StaffID");
+                    int shipperID = rs.getInt("ShipperID");
+                    int promotionID = rs.getInt("PromotionID");
+                    int customerID = rs.getInt("CustomerID");
+                    Date orderDate = rs.getDate("OrderDate");
+                    int orderStatus = rs.getInt("orderStatus");
+                    String city = rs.getString("City");
+                    String district = rs.getString("District");
+                    String ward = rs.getString("Ward");
+                    String address = rs.getString("Address");
+                    String phone = rs.getString("Phone");
+                    String note = rs.getString("Note");
+                    OrderDTO order = new OrderDTO(orderID, cartID, staffID, shipperID, promotionID, customerID, orderDate, orderStatus, city, district, ward, address, phone, note);
+                    list.add(order);
+                }
+            }
+        }finally{
+            DBUtils.closeConnection3(conn, ptm, rs);
+        }
+        return list;
     }
 }
