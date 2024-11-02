@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,7 +54,7 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                    <a href="MainController?action=HomeController" class="navbar-brand mx-4 mb-3">
                         <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHBOARD</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
@@ -74,7 +75,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=SearchProduct&search=" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
                                 <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
@@ -236,13 +237,15 @@
                                 </div>
                             </div>
                         </div>  
-                         <div class="col-sm-6 col-xl-3">
+                        <div class="col-sm-6 col-xl-3">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                 <i class="fa fa-chart-area fa-3x text-primary"></i>
                                 <div class="ms-3">
                                     <p class="mb-2">Total Revenue</p>
                                     <c:forEach var="unitP" items="${requestScope.REVENUE}">
-                                        <h6 class="mb-0">${unitP.unitPrice}</h6>
+                                        <h6 class="mb-0">
+                                            <fmt:formatNumber type="number" value="${unitP.unitPrice}" /> VND
+                                        </h6>
                                     </c:forEach>
                                 </div>
                             </div>
