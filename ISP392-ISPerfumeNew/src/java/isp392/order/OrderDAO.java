@@ -5,8 +5,6 @@
  */
 package isp392.order;
 
-import isp392.product.ProductDetailDTO;
-import isp392.user.UserDTO;
 import isp392.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.Date;
@@ -30,6 +28,8 @@ public class OrderDAO {
     private final String GET_LIST_ORDER_STAFF = "SELECT * FROM Orders";
     private final String GET_LIST_ORDER_DETAIL_STAFF = "SELECT * FROM Order_Detail WHERE OrderID = ?";
     private final String GET_ORDER_BY_ORDERID = "SELECT * FROM Orders WHERE OrderID = ?";
+    private final String GET_LIST_ORDER_BY_STATUS = "SELECT * FROM Orders WHERE CustomerID = ? AND orderStatus = ?";
+    private final String COUNT_ORDER_IS_PROCESSING = "SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus BETWEEN 1 AND 3";
     
     public int createOrder(OrderDTO order) throws ClassNotFoundException, SQLException {
         int orderID = 0;
@@ -76,6 +76,45 @@ public class OrderDAO {
         }
         return orderID;
     }
+    
+    public List<OrderDTO> getListOrderByStatus(int custID, int i) throws ClassNotFoundException, SQLException {
+        List<OrderDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn!=null){
+//                SELECT * FROM Orders WHERE CustomerID = ? AND orderStatus = ?
+                ptm = conn.prepareStatement(GET_LIST_ORDER_BY_STATUS);
+                ptm.setInt(1, custID);
+                ptm.setInt(2, i);
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    int orderID = rs.getInt("OrderID");
+                    int cartID = rs.getInt("CartID");
+                    int staffID = rs.getInt("StaffID");
+                    int shipperID = rs.getInt("ShipperID");
+                    int promotionID = rs.getInt("PromotionID");
+                    int customerID = rs.getInt("CustomerID");
+                    Date orderDate = rs.getDate("OrderDate");
+                    int orderStatus = rs.getInt("orderStatus");
+                    String city = rs.getString("City");
+                    String district = rs.getString("District");
+                    String ward = rs.getString("Ward");
+                    String address = rs.getString("Address");
+                    String phone = rs.getString("Phone");
+                    String note = rs.getString("Note");
+                    OrderDTO order = new OrderDTO(orderID, cartID, staffID, shipperID, promotionID, customerID, orderDate, orderStatus, city, district, ward, address, phone, note);
+                    list.add(order);
+                }
+            }
+        }finally{
+            DBUtils.closeConnection3(conn, ptm, rs);
+        }
+        return list;
+    }
+
 
     public boolean updateQuantity(int productDetailID, int quantity) throws SQLException, ClassNotFoundException {
         boolean check = false;

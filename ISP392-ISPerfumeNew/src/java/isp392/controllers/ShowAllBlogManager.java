@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ShowAllBlogManager extends HttpServlet {
 
     private static final String SUCCESS = "STAFF_BlogManagement.jsp";
-    private static final String ERROR = "HomeController.jsp";
+    private static final String ERROR = "HomeController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

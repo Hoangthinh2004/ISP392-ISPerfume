@@ -29,13 +29,12 @@ public class SHIPPER_SearchOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int shipperID = 10;
+            int shipperID = 2;
 //            int shipperID = Integer.parseInt(request.getParameter("shipperID"));
             ShipperOrderDAO orderDao = new ShipperOrderDAO();
             List<ShipperOrderDTO> listOrder = orderDao.getListOrder(shipperID);
             //lấy list orderdetail
             if (listOrder.size() > 0) {
-//                request.setAttribute("LIST_ORDER", listOrder);
                 HttpSession session = request.getSession();
                 session.setAttribute("LIST_ORDER", listOrder);
                 url = SUCCESS;
