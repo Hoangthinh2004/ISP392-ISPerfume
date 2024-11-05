@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Manager | Home</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -54,8 +54,8 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MainController?action=HomeController" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHBOARD</h3>
+                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -75,7 +75,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=SearchProduct&search=" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
                                 <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
@@ -96,80 +96,77 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                    </form>
                     <div class="navbar-nav align-items-center ms-auto">
+                        <!--                        <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <i class="fa fa-envelope me-lg-2"></i>
+                                                        <span class="d-none d-lg-inline-flex">Message</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item text-center">See all message</a>
+                                                    </div>
+                                                </div>
+                                                <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <i class="fa fa-bell me-lg-2"></i>
+                                                        <span class="d-none d-lg-inline-flex">Notificatin</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">Profile updated</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">New user added</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">Password changed</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item text-center">See all notifications</a>
+                                                    </div>
+                                                </div>-->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-envelope me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Message</span>
+                                <i class="fa fa-user"></i>
+                                <span class="d-none d-lg-inline-flex">Name</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all message</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-bell me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Notificatin</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Profile updated</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">New user added</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Password changed</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all notifications</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <span class="d-none d-lg-inline-flex">${sessionScope.LOGIN_USER.name}</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="profile.jsp" class="dropdown-item">My Profile</a>
+                                <a href="#" class="dropdown-item">My Profile</a>
                                 <a href="#" class="dropdown-item">Settings</a>
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
@@ -178,72 +175,84 @@
                 </nav>
                 <!-- Navbar End -->
 
-
-                <!-- Sale & Revenue Start -->
+                <!-- Sales Chart Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row g-4">
-                        <div class="col-sm-6 col-xl-3">
+                        <div class="col-sm-12 col-xl-6">
+                            <div class="bg-light text-center rounded p-4">
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <h6 class="mb-0">Category</h6>
+                                    <a href="">Show All</a>
+                                </div>
+                                <canvas id="worldwide-sales"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xl-6">
+                            <div class="row g-4">
+                                <div class="col-sm-6">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-line fa-3x text-primary"></i>
+                                        <i class="fa fa-boxes fa-3x text-primary"></i>
                                 <div class="ms-3">
                                     <p class="mb-2">Total Product </p>
                                     <c:forEach var="product" items="${requestScope.ALL_PRODUCT}">
-                                        <h6 class="mb-0">${product.productID}</h6>
+                                                <h6 class="mb-0 text-end">${product.productID}</h6>
+                                                
                                     </c:forEach>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-xl-3">
+                                <div class="col-sm-6">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                        <i class="fa fa-building fa-3x text-primary"></i>                                        
                                 <div class="ms-3">
-                                    <p class="mb-2">Order Completed</p>
-                                    <c:forEach var="order" items="${requestScope.ALL_ORDER_COMPLETED}">
-                                        <h6 class="mb-0">${order.orderID}</h6>
+                                            <p class="mb-2">Total Brand</p>
+                                            <c:forEach var="brand" items="${requestScope.ALL_BRAND}">
+                                                <h6 class="mb-0 text-end">${brand.brandID}</h6>
                                     </c:forEach>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-xl-3">
+                                <div class="col-sm-6">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                        <i class="fa fa-check-circle fa-3x text-primary"></i>                                        
                                 <div class="ms-3">
-                                    <p class="mb-2">Order Is Processing</p>
-                                    <c:forEach var="orderP" items="${requestScope.ALL_ORDER_PROCESSING}">
-                                        <h6 class="mb-0">${orderP.orderID}</h6>
+                                            <p class="mb-2">Order Completed</p>
+                                            <c:forEach var="order" items="${requestScope.ALL_ORDER_COMPLETED}">
+                                                <h6 class="mb-0 text-end">${order.orderID}</h6>
                                     </c:forEach>
                                 </div>
                             </div>
                         </div>  
-                        <div class="col-sm-6 col-xl-3">
+
+                                <div class="col-sm-6">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                                        <i class="fa fa-spinner fa-3x text-primary"></i>
                                 <div class="ms-3">
-                                    <p class="mb-2">Total Brand</p>
-                                    <c:forEach var="brand" items="${requestScope.ALL_BRAND}">
-                                        <h6 class="mb-0">${brand.brandID}</h6>
+                                            <p class="mb-2">Order Is Processing</p>
+                                            <c:forEach var="orderP" items="${requestScope.ALL_ORDER_PROCESSING}">
+                                                <h6 class="mb-0 text-end">${orderP.orderID}</h6>
                                     </c:forEach>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-xl-3">
+                        <div class="col-sm-6">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                 <i class="fa fa-chart-area fa-3x text-primary"></i>
                                 <div class="ms-3">
                                     <p class="mb-2">Total Promotion</p>
                                     <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
-                                        <h6 class="mb-0">${pro.promotionID}</h6>
+                                                <h6 class="mb-0 text-end">${pro.promotionID}</h6>
                                     </c:forEach>
                                 </div>
                             </div>
                         </div>  
-                        <div class="col-sm-6 col-xl-3">
+                                <div class="col-sm-6">
                             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                        <i class="fa fa-dollar-sign fa-3x text-primary"></i>
                                 <div class="ms-3">
                                     <p class="mb-2">Total Revenue</p>
                                     <c:forEach var="unitP" items="${requestScope.REVENUE}">
-                                        <h6 class="mb-0">
+                                                <h6 class="mb-0 text-end">
                                             <fmt:formatNumber type="number" value="${unitP.unitPrice}" /> VND
                                         </h6>
                                     </c:forEach>
@@ -252,6 +261,8 @@
                         </div>  
                     </div>
                 </div>
+                                </div>
+                            </div>
                 <!-- Sale & Revenue End -->
 
 
@@ -261,145 +272,26 @@
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Worldwide Sales</h6>
+                                    <h6 class="mb-0">Brands</h6>
                                     <a href="">Show All</a>
                                 </div>
-                                <canvas id="worldwide-sales"></canvas>
+                                <canvas id="pie-chart"></canvas>
                             </div>
                         </div>
+
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Salse & Revenue</h6>
+                                    <h6 class="mb-0">Orders</h6>
                                     <a href="">Show All</a>
                                 </div>
-                                <canvas id="salse-revenue"></canvas>
+                                <canvas id="doughnut-chart"></canvas>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- Sales Chart End -->
-
-                <!-- Widgets Start -->
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-md-6 col-xl-4">
-                            <div class="h-100 bg-light rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <h6 class="mb-0">Messages</h6>
-                                    <a href="">Show All</a>
-                                </div>
-                                <div class="d-flex align-items-center border-bottom py-3">
-                                    <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-0">Jhon Doe</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                        <span>Short message goes here...</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center border-bottom py-3">
-                                    <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-0">Jhon Doe</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                        <span>Short message goes here...</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center border-bottom py-3">
-                                    <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-0">Jhon Doe</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                        <span>Short message goes here...</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center pt-3">
-                                    <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-0">Jhon Doe</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                        <span>Short message goes here...</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-xl-4">
-                            <div class="h-100 bg-light rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Calender</h6>
-                                    <a href="">Show All</a>
-                                </div>
-                                <div id="calender"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-xl-4">
-                            <div class="h-100 bg-light rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">To Do List</h6>
-                                    <a href="">Show All</a>
-                                </div>
-                                <div class="d-flex mb-2">
-                                    <input class="form-control bg-transparent" type="text" placeholder="Enter task">
-                                    <button type="button" class="btn btn-primary ms-2">Add</button>
-                                </div>
-                                <div class="d-flex align-items-center border-bottom py-2">
-                                    <input class="form-check-input m-0" type="checkbox">
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 align-items-center justify-content-between">
-                                            <span>Short task goes here...</span>
-                                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center border-bottom py-2">
-                                    <input class="form-check-input m-0" type="checkbox">
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 align-items-center justify-content-between">
-                                            <span>Short task goes here...</span>
-                                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center border-bottom py-2">
-                                    <input class="form-check-input m-0" type="checkbox" checked>
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 align-items-center justify-content-between">
-                                            <span><del>Short task goes here...</del></span>
-                                            <button class="btn btn-sm text-primary"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center border-bottom py-2">
-                                    <input class="form-check-input m-0" type="checkbox">
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 align-items-center justify-content-between">
-                                            <span>Short task goes here...</span>
-                                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center pt-2">
-                                    <input class="form-check-input m-0" type="checkbox">
-                                    <div class="w-100 ms-3">
-                                        <div class="d-flex w-100 align-items-center justify-content-between">
-                                            <span>Short task goes here...</span>
-                                            <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Widgets End -->
 
 
                 <!-- Footer Start -->
@@ -407,11 +299,10 @@
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>
@@ -438,5 +329,76 @@
 
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
+        <script>
+            // Worldwide Sales Chart
+            var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
+            var myChart1 = new Chart(ctx1, {
+                type: "bar",
+                data: {
+                    labels: ["04", "05", "06", "07", "08", "09", "10"],
+                    datasets: [{
+                            label: "Men",
+                            data: [15, 30, 55, 65, 60, 80, 95],
+                            backgroundColor: "rgba(255, 159, 64, .7)"
+                        },
+                        {
+                            label: "Women",
+                            data: [8, 35, 40, 60, 70, 55, 75],
+                            backgroundColor: "rgba(255, 159, 64, .5)"
+                        },
+                        {
+                            label: "Unisex",
+                            data: [12, 25, 45, 55, 65, 70, 60],
+                            backgroundColor: "rgba(255, 159, 64, .3)"
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+// Pie Chart
+            var ctx5 = $("#pie-chart").get(0).getContext("2d");
+            var myChart5 = new Chart(ctx5, {
+                type: "pie",
+                data: {
+                    labels: ["Gucci", "Calvin Klein", "Channel", "Versace", "Christian Dior"],
+                    datasets: [{
+                            backgroundColor: [
+                                "rgba(255, 159, 64, .7)",
+                                "rgba(255, 159, 64, .6)",
+                                "rgba(255, 159, 64, .5)",
+                                "rgba(255, 159, 64, .4)",
+                                "rgba(255, 159, 64, .3)"
+                            ],
+                            data: [20, 20, 20, 20, 20]
+                        }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            // Doughnut Chart
+            var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
+            var myChart6 = new Chart(ctx6, {
+                type: "doughnut",
+                data: {
+                    labels: ["Confirmation", "Pickup", "Delivery", "Successfully"],
+                    datasets: [{
+                            backgroundColor: [
+                                "rgba(255, 159, 64, .8)",
+                                "rgba(255, 159, 64, .6)",
+                                "rgba(255, 159, 64, .4)",
+                                "rgba(255, 159, 64, .2)"
+                            ],
+                            data: [25, 19, 22, 34]
+                        }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        </script>
     </body>
 </html>

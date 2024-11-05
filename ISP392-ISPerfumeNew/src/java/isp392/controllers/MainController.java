@@ -193,6 +193,13 @@ public class MainController extends HttpServlet {
     private static final String LIST_DASHBOARD = "ListDashboard";
     private static final String LIST_DASHBOARD_CONTROLLER = "ListDashboardController";
 
+    private static final String VIEW_ORDER_STATUS = "viewOrderHistory";
+    private static final String VIEW_ORDER_STATUS_VIEW = "viewOrderHistoryController";
+    
+    private static final String VIEW_ORDER_DETAIL_CUSTOMER = "viewOrderDetail";
+    private static final String VIEW_ORDER_DETAIL_CUSTOMER_CONTROLLER = "viewOrderDetailController";
+
+    
     private static final String NAVIGATE_CHECK_OUT = "NavigateToCheckOut";
     private static final String NAVIGATE_CHECK_OUT_CONTROLLER = "NavigateToCheckOutController";
     
@@ -332,6 +339,10 @@ public class MainController extends HttpServlet {
                 url = SHIPPER_VIEW_ORDER_DETAIL_CONTROLLER;
             } else if (LIST_DASHBOARD.equals(action)) {
                 url = LIST_DASHBOARD_CONTROLLER;
+            } else if (VIEW_ORDER_STATUS.equals(action)) {
+                url = VIEW_ORDER_STATUS_VIEW;
+            } else if (VIEW_ORDER_DETAIL_CUSTOMER.equals(action)){
+                url = VIEW_ORDER_DETAIL_CUSTOMER_CONTROLLER;
             } else if(NAVIGATE_CHECK_OUT.equals(action)){
                 url = NAVIGATE_CHECK_OUT_CONTROLLER;
             } else if(CHECK_OUT.equals(action)){

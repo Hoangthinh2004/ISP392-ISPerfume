@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,9 +31,66 @@
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">     
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/stylePopup.css" rel="stylesheet"> 
+        <style>
+            .alert {
+                display: flex;
+                align-items: center;
+                padding: 15px 20px;
+                font-size: 16px;
+                max-width: 400px;
+                position: fixed;
+                top: 50px;
+                right: 20px;
+                z-index: 1050;
+                border: 1px solid transparent;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #f8d7da;
+                border-color: #f5c6cb;
+                color: #721c24;
+            }
+
+            .alert-icon {
+                font-size: 1.5rem;
+                color: #721c24; /* Màu đỏ cho icon lỗi */
+            }
+
+            .alert-content {
+                flex: 1;
+                font-weight: 500;
+                color: #721c24;
+                margin: 0 10px; /* Giãn cách nội dung */
+            }
+
+            .btn-close {
+                background: none;
+                border: none;
+                font-size: 1.2rem;
+                color: #721c24; 
+                transition: color 0.2s ease;
+                cursor: pointer;
+            }
+
+            .btn-close:hover {
+                color: #000;
+            }
+
+            .progress-bar-timer {
+                border-radius: 24px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 5px;
+                width: 100%;
+                background-color: #721c24 !important;
+                transition: width linear;
+            }
+        </style>
     </head>
     <body>
+
         <!-- Topbar Start -->
         <div class="container-fluid">
             <div class="row bg-secondary py-1 px-xl-5">
@@ -93,6 +151,16 @@
         <!-- Breadcrumb End -->
 
 
+        <div class="alert alert-danger alert-dismissible fade show fade-out d-flex align-items-center" role="alert" id="autoDismissAlert">
+            <i class="fa fa-times-circle alert-icon me-2"></i> 
+            <div class="alert-content">Incorrect email or password!</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <i class="fa fa-times"></i>
+            </button>
+            <div class="progress-bar-timer bg-danger" id="progressBar" style="width: 100%;"></div>
+        </div>
+
+
         <!--Sigin in form Start-->
         <div class="container-fluid">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sign
@@ -122,9 +190,9 @@
                                         <a href="forgotPassword.jsp">Forgot Password</a>
                                     </div>
                                     <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="action" value="Sign In">Sign In</button>
-<!--                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit" name="action" value="Sign In">Sign In</button>
-                                    </div>-->
+                                    <!--                                    <div class="input-group-append">
+                                                                            <button class="btn btn-primary" type="submit" name="action" value="Sign In">Sign In</button>
+                                                                        </div>-->
                                 </form>
                                 <p class="text-center mb-4">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
                                 <div class="d-flex align-items-center justify-content-center mb-4">
@@ -230,5 +298,33 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var duration = 5000;
+                var progressBar = document.getElementById('progressBar');
+                var alertElement = document.getElementById('autoDismissAlert');
+
+                // Đặt lại thanh tiến trình về 100% trước khi bắt đầu hiệu ứng
+                progressBar.style.width = '100%';
+
+                // Sử dụng requestAnimationFrame để đảm bảo cập nhật CSS hoàn tất trước khi thu hẹp thanh xuống 0%
+                requestAnimationFrame(function () {
+                    setTimeout(function () {
+                        progressBar.style.transitionDuration = duration + 'ms';
+                        progressBar.style.width = '0%';
+                    }, 10); // Đợi một chút trước khi áp dụng transition
+                });
+
+                // Sau khi hết thời gian, ẩn và xoá alert
+                setTimeout(function () {
+                    alertElement.classList.add('hide');
+                    setTimeout(function () {
+                        alertElement.remove();
+                    }, 200);
+                }, duration);
+            });
+
+        </script>
     </body>
 </html>

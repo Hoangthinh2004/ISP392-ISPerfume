@@ -32,6 +32,71 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            .product-info {
+                border: 1px solid #ddd; 
+                border-radius: 5px;
+                padding: 15px; 
+            }
+
+            .total-price {
+                font-weight: bold; 
+                color: black; 
+            }
+            .address-infor{
+                border: 1px solid #ddd; 
+                border-radius: 5px;
+            }
+            .voucher-options {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .voucher-option {
+                display: flex;
+                align-items: center;
+                border: 1px solid #ddd;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+
+            .voucher-option input[type="radio"] {
+                display: none;
+            }
+
+            .voucher-option span {
+                margin-left: 5px;
+                color: #333;
+            }
+
+            .voucher-option:hover {
+                background-color: #f0f0f0; 
+                border-color: orange; 
+            }
+
+            .voucher-option input[type="radio"]:checked + span {
+                color: orange;
+                font-weight: bold;
+            }
+
+            .voucher-option input[type="radio"]:checked + span::before {
+                content: "✓ ";
+                color: orange; 
+            }
+            .btn-outline-primary:hover{
+                background-color: #f0f0f0;
+                color: orange
+            }
+            .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+                background-color: orange;
+                color: white !important;
+            }   
+            
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -104,7 +169,6 @@
             <div class="row px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block mt-2">
                     <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
-                        <i class="fa fa-leaf"></i>
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
@@ -205,13 +269,13 @@
 
 
         <!-- Checkout Start -->
+        <form action="MainController">
         <div class="container-fluid">
             <div class="row px-xl-5">
                 <div class="col-lg-8">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
-
-                    <div class="bg-light p-30 mb-5">
-                        <div class="row">
+                        <div class="bg-light p-30 mb-5 address-infor">
+                            <div class="row ">
                             <div class="col-md-6 form-group">
                                 <label>Name</label>
                                 <input class="form-control" type="text" value="${sessionScope.CUSTOMER.name}" readonly="">
@@ -326,30 +390,108 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div>
+                        <div class="mb-5">
+                            <h5 class="section-title position-relative text-uppercase mb-3">
+                                <span class="bg-secondary pr-3">Payment</span>
+                            </h5>
+                            <div class="bg-light p-30 address-infor">
+                                <div class="d-flex justify-content-between">
+
+                                    <label class="btn btn-outline-primary d-flex align-items-center p-3 payment-option" for="cod" style="width: 48%;">
+                                        <input type="radio" class="d-none" name="payment" value="1" id="cod" onchange="updateSelection(this)">
+                                        <img src="img/COD.png" alt="COD" style="width: 30px; height: 30px;" class="mr-2">
+                                        <span>COD</span>
+                                    </label>
+
+                                    <label class="btn btn-outline-primary d-flex align-items-center p-3 payment-option" for="zalo" style="width: 48%;">
+                                        <input type="radio" class="d-none" name="payment" value="2" id="zalo" onchange="updateSelection(this)">
+                                        <img src="img/zalopay.png" alt="Zalo Pay" style="width: 30px; height: 30px;" class="mr-2">
+                                        <span>Zalo Pay</span>
+                                    </label>
                             </div> 
                         </div>
+
+                                <button type="submit" name="action" value="checkQuantity" class="btn btn-block btn-primary font-weight-bold py-3 mt-4">Place Order</button>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <form action="MainController">
+                                </div>
+
+
+                                </div>
+                    <div class="col-lg-4">
                         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
-                        <c:forEach var="check" items="${sessionScope.CHECK_LIST.cart.values()}">
+                        <c:forEach var="check" items="${sessionScope.CHECK_LIST.cart.values()}" varStatus="counter">
                             <input type="hidden" name="productDetailID" value="${check.productDetailID}"/>
                             <c:set var="unitTotal" value="${check.price * check.totalQuantity}"/>
-                            <div class="bg-light p-30 mb-5">
-                                <img src="${check.image}" alt="" style="width: 50px;"><h6 class="mb-3">${check.productName} ${check.sizeName}      ${check.totalQuantity}          
-                                    <fmt:formatNumber type="number" value="${unitTotal}"/></h6>
+                            <div class="product-info bg-light p-3 mb-3 align-items-center" id="product-${counter.count}" style=" display: ${counter.count > 1 ? "none" : "flex"}">
+                                <img src="${check.image}" alt="${check.productName}" style="width: 50px; height: auto; margin-right: 15px;">
+                                <div class="product-details">
+                                    <h6 class="mb-1">${check.productName}</h6>
+                                    <p class="mb-1">Size: ${check.sizeName}</p>
+                                    <p class="mb-1">Quantity: ${check.totalQuantity}</p>
+                                    <h6 class="total-price">
+                                        <fmt:formatNumber type="number" value="${unitTotal}"/>
+                                    </h6>
+                                </div>
+                                </div>
+                        </c:forEach>      
+
+                        <div style="text-align: center; margin-top: 10px;" class="d-flex justify-content-center text-primary">
+                            <button type="button" id="viewMoreBtn" class="text-primary" onclick="toggleProducts()" 
+                                    style="border: none; background: none; outline: none; display: flex; align-items: center; gap: 5px;">
+                                View More
+                                <img id="arrowIcon" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" 
+                                     alt="View more" style="width: 20px; height: 20px; transition: transform 0.3s;
+                                     filter: brightness(0) saturate(100%) invert(47%) sepia(89%) saturate(5925%) hue-rotate(356deg) brightness(103%) contrast(102%);">
+                            </button>
+                                </div>
+
+
+
+                        <!-- Modal Popup voucher -->
+                        <div class="modal fade" id="voucherModal" tabindex="-1" role="dialog" aria-labelledby="voucherModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="voucherModalLabel">Choose a Voucher</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                    <div class="modal-body">
+                                        <div class="voucher-options mb-3">
+                                            <c:forEach var="promotion" items="${sessionScope.PROMOTION}">
+                                                <label class="voucher-option d-flex align-items-center border rounded p-3 mb-3">
+                                                    <input type="radio" name="promotionID" value="${promotion.promotionID}" onclick="enableApplyButton()" class="d-none" />
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">${promotion.promotionName}</h6>
+                                                        <small class="text-muted">${promotion.description}</small>
+                                                        <div class="d-flex justify-content-between mt-1">
+                                                            <span class="text-primary">${promotion.discountPer}% OFF</span>
+                                                            <span class="text-secondary">${promotion.condition}</span>
+                                </div>
                             </div>
-                        </c:forEach>                  
-                        <div class="input-group mb-30">
-                            <c:forEach var="promotion" items="${sessionScope.PROMOTION}">
-                                <input type="radio" name="promotionID" value="${promotion.promotionID}"/>${promotion.promotionName}
-                            </c:forEach>
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary" name="action" value="ApplyVoucher">Apply Voucher</button>
+                                                    <i class="fa fa-check-circle fa-2x text-primary" aria-hidden="true" style="display: none;"></i>
+                                                </label>
+                                            </c:forEach>
+                        </div>
+                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" name="action" value="ApplyVoucher" id="applyButton" disabled>
+                                            Apply Voucher
+                                        </button>
+                </div>
+                        </div>
                             </div>
                         </div>
-                        <div class="bg-light p-30 mb-5">
+                        <!-- Modal Popup voucher -->
+
+
+
+
+
+                        <div class="bg-light p-30 mb-5 address-infor mt-5">
                             <div class="border-bottom pt-3 pb-2">
                                 <c:if test="${sessionScope.PROMOTION_DETAIL != null}">
                                     <div class="d-flex justify-content-between mb-3">
@@ -370,38 +512,22 @@
                                         ${requestScope.CHECKOUT_MESSAGE}
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
-                        <div class="mb-5">
-                            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
-                            <div class="bg-light p-30">
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" name="payment" value="1" id="paypal">
-                                        <label class="custom-control-label" for="paypal">Paypal</label>
+                            <div class="input-group-append mt-4 d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#voucherModal">
+                                    Choose Voucher
+                                </button>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" name="payment" value="2" id="directcheck">
-                                        <label class="custom-control-label" for="directcheck">Direct Check</label>
+
                                     </div>
                                 </div>
-                                <div class="form-group mb-4">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" name="payment" value="3" id="banktransfer">
-                                        <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
                                     </div>
                                 </div>
-                                <button type="submit" name="action" value="checkQuantity" class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
-                            </div>
-                        </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Checkout End -->
 
 
@@ -493,6 +619,50 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+                                                        let isExpanded = false;
+
+                                                        function toggleProducts() {
+                                                            const products = document.querySelectorAll('.product-info');
+
+                                                            if (!isExpanded) {
+                                                                products.forEach(product => product.style.display = 'flex');
+                                                                document.getElementById("arrowIcon").style.transform = "rotate(180deg)";
+                                                                isExpanded = true;
+                                                            } else {
+                                                                products.forEach((product, index) => product.style.display = index === 0 ? 'flex' : 'none');
+                                                                document.getElementById("arrowIcon").style.transform = "rotate(0deg)";
+                                                                isExpanded = false;
+                                                            }
+                                                        }
+
+                                                        function enableApplyButton() {
+                                                            const applyButton = document.getElementById('applyButton');
+                                                            applyButton.disabled = false;
+
+                                                            document.querySelectorAll('.voucher-option i').forEach(icon => {
+                                                                icon.style.display = 'none'; 
+                                                            });
+                                                            const selectedVoucher = document.querySelector('input[name="promotionID"]:checked');
+                                                            if (selectedVoucher) {
+                                                                selectedVoucher.closest('.voucher-option').querySelector('i').style.display = 'inline'; // Hiện biểu tượng tick cho voucher được chọn
+                                                            }
+                                                        }
+
+                                                        function updateSelection(selectedRadio) {
+                                                            document.querySelectorAll('.payment-option').forEach(option => {
+                                                                option.classList.remove('active', 'btn-primary');
+                                                                option.classList.add('btn-outline-primary');
+                                                            });
+
+                                                            selectedRadio.closest('label').classList.add('active', 'btn-primary');
+                                                            selectedRadio.closest('label').classList.remove('btn-outline-primary');
+                                                        }
+    </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

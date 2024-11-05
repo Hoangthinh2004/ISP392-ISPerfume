@@ -70,7 +70,6 @@
                 transform: scale(1.05); /* Phóng to nhẹ khi hover */
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng */
             }
-
         </style>
     </head>
     <body>
