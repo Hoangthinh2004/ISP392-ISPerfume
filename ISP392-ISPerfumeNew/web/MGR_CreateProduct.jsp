@@ -90,14 +90,6 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form class="d-none d-md-flex ms-4" action="MainController" method="get">
-                        <input class="form-control border-0" type="search" placeholder="Search product.." name="search">
-                        <button class="btn btn-primary" type="submit" name="action" value="Search product" style="margin-left: 10px;">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                            </svg>
-                        </button>
-                    </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         <!--                        <div class="nav-item dropdown">
                                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -233,9 +225,11 @@
                                             </c:if>
                                         </c:forEach>
                                     </select>
-                                    <button type="submit"class="btn btn-primary">CREATE</button>
-                                    <input type="hidden" name="search" value="${requestScope.SEARCH}">
-                                    <a href="MainController?action=SearchProduct&search=" class="btn btn-primary">Back</a>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit"class="btn btn-primary">CREATE</button>
+                                        <input type="hidden" name="search" value="${requestScope.SEARCH}">
+                                        <a href="MainController?action=SearchProduct&search=" class="btn btn-primary">Back</a>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -243,7 +237,7 @@
                 </div>
                 <!-- Blank End -->
 
-                 <!-- Footer Start -->
+                <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">

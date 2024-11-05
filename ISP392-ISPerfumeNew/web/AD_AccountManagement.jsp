@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="#" class="nav-item nav-link active"><i class="fa fa-user me-2"></i>User Management</a>                   
+                        <a href="MainController?search=&action=SearchUser" class="nav-item nav-link active"><i class="fa fa-user me-2"></i>User Management</a>                   
                     </div>
                 </nav>
             </div>
@@ -201,8 +201,7 @@
                             <div class="col-sm-12 col-xl-12">
                                 <div class="bg-light rounded h-100 p-4" style=" min-height: 540px;">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-4">User Management</h6>
-                                        <a href="AD_CreateAccount.jsp" class="btn btn-primary">Create New Employee Account</a>
+
                                         <div class="nav-item dropdown" style="width: 150px;">
                                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                                 <span class="d-none d-lg-inline-flex">Filter</span>
@@ -212,6 +211,7 @@
                                                 <li><a href="MainController?action=FilterByCustomer" class="dropdown-item">Customer</a></li>
                                             </ul>
                                         </div>
+                                        <a href="AD_CreateAccount.jsp"><i class="fa fa-plus me-2"></i>Create Account</a>                   
                                     </div>
                                     <c:if test="${requestScope.LIST_USER != null}">
                                         <c:if test="${!empty requestScope.LIST_USER}"> 

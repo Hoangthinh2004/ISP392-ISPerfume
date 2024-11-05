@@ -207,9 +207,11 @@
                                         <label for="productDetailImage" class="form-label">Picture</label>
                                         <input class="form-control" type="file" id="formFile" name="productDetailImage">
                                     </div>
+                                    <div>
                                     <input type="hidden" name="productID" value="${param.productID}">
                                     <button type="submit" class="btn btn-primary">CREATE</button>
                                     <a href="MainController?action=ProductDetailPage&productID=${param.productID}" class="btn btn-primary">Back</a>
+                                    </div>
                                 </form>
                             </div>
                         </div>

@@ -62,7 +62,7 @@
                     </div>
                     <div class="navbar-nav w-100">
                         <a href="MainController?action=ManageOrderPage" class="nav-item nav-link "><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
-                        <a href="" class="nav-item nav-link active"><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>      
+                        <a href="MainController?action=ShowAllBlogManager" class="nav-item nav-link active"><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>                     
                     </div>
                 </nav>
             </div>

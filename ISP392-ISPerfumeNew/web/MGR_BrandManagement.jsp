@@ -52,8 +52,8 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
+                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -208,14 +208,7 @@
                                                     <td>${brand.name}</td>
                                                     <td><img src="${brand.image}" style="width: 80px; height: 80px; margin-right: 10px;"></td>
                                                     <td>
-                                                        ${brand.name}
-                                                    </td>
-
-                                                    <td>
-                                                        <img src="${brand.image}" style="width: 80px; height: 80px; margin-right: 10px; object-fit: contain;">
-
-                                                    </td>
-                                                    <td>
+                                                        <!-- Hiển thị dropdown trạng thái hiện tại -->
                                                         <div class="row mb-3">
                                                             <div class="col-sm-12">
                                                                 ${brand.status == true ? "Available" : "Unavailable"}

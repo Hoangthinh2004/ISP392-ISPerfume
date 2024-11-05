@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <form action="MainController" method="get" id="myForm">
+                        <form action="MainController" method="POST" id="myForm">
                             <a href="MGR_Dashboard.jsp" class="nav-item nav-link active" onclick="document.getElementById('myForm').submit(); return false;"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                             <input type="hidden" name="action" value="ListDashboard">
                         </form>
@@ -175,83 +175,6 @@
                 </nav>
                 <!-- Navbar End -->
 
-
-                <!-- Sale & Revenue Start -->
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-line fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Product </p>
-                                    <c:forEach var="product" items="${requestScope.ALL_PRODUCT}">
-                                        <h6 class="mb-0">${product.productID}</h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Order Completed</p>
-                                    <c:forEach var="order" items="${requestScope.ALL_ORDER_COMPLETED}">
-                                        <h6 class="mb-0">${order.orderID}</h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Order Is Processing</p>
-                                    <c:forEach var="orderP" items="${requestScope.ALL_ORDER_PROCESSING}">
-                                        <h6 class="mb-0">${orderP.orderID}</h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Brand</p>
-                                    <c:forEach var="brand" items="${requestScope.ALL_BRAND}">
-                                        <h6 class="mb-0">${brand.brandID}</h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Promotion</p>
-                                    <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
-                                        <h6 class="mb-0">${pro.promotionID}</h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Revenue</p>
-                                    <c:forEach var="unitP" items="${requestScope.REVENUE}">
-                                        <h6 class="mb-0">
-                                            <fmt:formatNumber type="number" value="${unitP.unitPrice}" /> VND
-                                        </h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
-                <!-- Sale & Revenue End -->
-
-
                 <!-- Sales Chart Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row g-4">
@@ -267,45 +190,79 @@
                         <div class="col-sm-12 col-xl-6">
                             <div class="row g-4">
                                 <div class="col-sm-6">
-                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                        <i class="fa fa-chart-line fa-3x text-primary"></i>
-                                        <div class="ms-3">
-                                            <p class="mb-2">Today Sale</p>
-                                            <h6 class="mb-0">$1234</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                        <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                                        <div class="ms-3">
-                                            <p class="mb-2">Total Sale</p>
-                                            <h6 class="mb-0">$1234</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                        <i class="fa fa-chart-area fa-3x text-primary"></i>
-                                        <div class="ms-3">
-                                            <p class="mb-2">Today Revenue</p>
-                                            <h6 class="mb-0">$1234</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                                        <div class="ms-3">
-                                            <p class="mb-2">Total Revenue</p>
-                                            <h6 class="mb-0">$1234</h6>
-                                        </div>
-                                    </div>
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                        <i class="fa fa-boxes fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Product </p>
+                                    <c:forEach var="product" items="${requestScope.ALL_PRODUCT}">
+                                                <h6 class="mb-0 text-end">${product.productID}</h6>
+                                                
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
+                                <div class="col-sm-6">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                        <i class="fa fa-building fa-3x text-primary"></i>                                        
+                                <div class="ms-3">
+                                            <p class="mb-2">Total Brand</p>
+                                            <c:forEach var="brand" items="${requestScope.ALL_BRAND}">
+                                                <h6 class="mb-0 text-end">${brand.brandID}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                                <div class="col-sm-6">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                        <i class="fa fa-check-circle fa-3x text-primary"></i>                                        
+                                <div class="ms-3">
+                                            <p class="mb-2">Order Completed</p>
+                                            <c:forEach var="order" items="${requestScope.ALL_ORDER_COMPLETED}">
+                                                <h6 class="mb-0 text-end">${order.orderID}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>  
+
+                                <div class="col-sm-6">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                        <i class="fa fa-spinner fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                            <p class="mb-2">Order Is Processing</p>
+                                            <c:forEach var="orderP" items="${requestScope.ALL_ORDER_PROCESSING}">
+                                                <h6 class="mb-0 text-end">${orderP.orderID}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Promotion</p>
+                                    <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
+                                                <h6 class="mb-0 text-end">${pro.promotionID}</h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>  
+                                <div class="col-sm-6">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                        <i class="fa fa-dollar-sign fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Revenue</p>
+                                    <c:forEach var="unitP" items="${requestScope.REVENUE}">
+                                                <h6 class="mb-0 text-end">
+                                            <fmt:formatNumber type="number" value="${unitP.unitPrice}" /> VND
+                                        </h6>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>  
                     </div>
                 </div>
+                                </div>
+                            </div>
                 <!-- Sale & Revenue End -->
 
 
