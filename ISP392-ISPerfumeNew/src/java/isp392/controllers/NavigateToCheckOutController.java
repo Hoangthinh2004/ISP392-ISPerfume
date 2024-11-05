@@ -40,18 +40,33 @@ public class NavigateToCheckOutController extends HttpServlet {
             CartDAO cartDao = new CartDAO();
             UserDAO dao = new UserDAO();
             PromotionDAO promotionDAO = new PromotionDAO();
-            Map<String, Integer> total = new HashMap<>();
-            session.setAttribute("TOTAL_PRICE", total); 
-            
+            Map<String, Integer> total = (Map<String, Integer>) session.getAttribute("TOTAL_PRICE");
+            if (total == null || total.size() == 0) {
+                total = new HashMap<String, Integer>();
+                session.setAttribute("TOTAL_PRICE", total);
+            }
+
+            Map<String, String[]> productDetailIDS = (Map<String, String[]>) session.getAttribute("PRODUCTDETAILIDS_CHECKLIST");
+            if (productDetailIDS == null || productDetailIDS.size() == 0) {
+                productDetailIDS = new HashMap<>();
+                session.setAttribute("PRODUCTDETAILIDS_CHECKLIST", productDetailIDS);
+            }
+
             int totalPrice = 0;
-            
             Cart listChecked = (Cart) session.getAttribute("CHECK_LIST");
             if (listChecked == null) {
                 listChecked = new Cart();
             }
             Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
             int customerID = CustomerIDS.get("customerID");
-            String[] productDetailIDs = request.getParameterValues("productDetailID");
+
+            String[] productDetailIDs = new String[0];
+            if (productDetailIDS == null || productDetailIDS.size() == 0) {
+                productDetailIDs = request.getParameterValues("productDetailID");
+                productDetailIDS.put("productDetailID", productDetailIDs);
+            } else {
+                productDetailIDs = productDetailIDS.get("productDetailID");
+            }
             for (int i = 0; i < productDetailIDs.length; i++) {
                 List<ViewCartDTO> productInfor = cartDao.getProductInfor(Integer.parseInt(productDetailIDs[i]), customerID);
                 for (ViewCartDTO product : productInfor) {
@@ -64,14 +79,14 @@ public class NavigateToCheckOutController extends HttpServlet {
                             product.getImage(),
                             product.getTotalQuantity()
                     );
-                    totalPrice += product.getPrice()*product.getTotalQuantity();
+                    totalPrice += product.getPrice() * product.getTotalQuantity();
                     total.put("total", totalPrice);
                     listChecked.add(viewProduct);
                 }
             }
             List<CustomerViewProfileDTO> custProfile = dao.getPersonalInfor(customerID);
             List<PromotionDTO> listPromotion = promotionDAO.getListPromotion();
-            
+
             request.setAttribute("TOTAL_PRICE", totalPrice);
             session.setAttribute("PROMOTION", listPromotion);
             session.setAttribute("CHECK_LIST", listChecked);

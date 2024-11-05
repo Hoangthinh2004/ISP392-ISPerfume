@@ -311,6 +311,14 @@ public class ProductDAO {
                                                     +   "INNER JOIN Brands B ON B.BrandID = P.BrandID "
                                                     +   "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4"
                                                     +   "ORDER BY PD.NumberOfPurchasing DESC";
+    private static final String LIST_RECENT_PRODUCT = "SELECT TOP 8 PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name, PD.Image, PD.Price, P.ProName FROM Products P\n" +
+                                                    "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID " +
+                                                    "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID " +
+                                                    "INNER JOIN Size S ON S.SizeID = PD.SizeID " +
+                                                    "INNER JOIN Brands B ON B.BrandID = P.BrandID " +
+                                                    "INNER JOIN Recent_Product RP ON RP.ProductDetailID = PD.ProductDetailID " +
+                                                    "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4 " +
+                                                    "ORDER BY RP.TimeAccess DESC";
 
     public List<ViewProductDTO> descendingProductByPrice(String search, List<Integer> sizeIDList) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();
@@ -1010,6 +1018,44 @@ public class ProductDAO {
             }
         }
         return listProduct;
+    }
+
+    public List<ViewProductDTO> ListRecentProduct() throws ClassNotFoundException, SQLException {
+        List<ViewProductDTO> ListRecentProduct = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_RECENT_PRODUCT);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int categoryID = rs.getInt("CategoryID");
+                    int productDetailID = rs.getInt("ProductDetailID");
+                    int productIDrela = rs.getInt("ProductID");
+                    int sizeIDrela = rs.getInt("SizeID");
+                    int brandID = rs.getInt("BrandID");
+                    String sizeName = rs.getString("Name");
+                    String brandName = rs.getString("BrandName");
+                    String productName = rs.getString("ProName");
+                    String image = rs.getString("Image");
+                    int price = rs.getInt("Price");
+                    ListRecentProduct.add(new ViewProductDTO(categoryID, productDetailID, brandID, productIDrela, sizeIDrela, sizeName, brandName, productName, price, image));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return ListRecentProduct;
     }
 
 }
