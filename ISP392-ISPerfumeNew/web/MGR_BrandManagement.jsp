@@ -71,7 +71,7 @@
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
-                                <a href="MainController?action=Search&search=" class="dropdown-item active">Brand Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
                                 <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
                         </div>

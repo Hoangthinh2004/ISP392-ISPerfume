@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -40,10 +42,9 @@
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
-                        <form action="MainController" method="POST" id="myForm">
+                        <form action="MainController" method="get" id="myForm">
                             <a class="text-body mr-3" href="MGR_Dashboard.jsp"  onclick="document.getElementById('myForm').submit(); return false;">MANAGER</a>
                             <input type="hidden" name="action" value="ListDashboard">
-
                         </form>
                         <a class="text-body mr-3" href="MainController?action=SearchUser&search=${param.search}">ADMIN</a>
                         <a class="text-body mr-3" href="MainController?action=ManageOrderPage">STAFF</a>
@@ -139,7 +140,7 @@
                                 </c:forEach>
                                 <a href="MainController?action=NavigateBlog" class="nav-item nav-link">Blog</a>
                                 <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                    <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link"> Order History</a>
                                 </c:if>
                             </div>
                             <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
@@ -318,7 +319,7 @@
                 <div class="row px-xl-5 pb-3">
                     <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                            <a class="text-decoration-none" href="MainController?action=Category&Category=${Category.categoryID}">
+                            <a class="text-decoration-none" href="MainController?action=Category&CategoryID=${Category.categoryID}">
                                 <div class="cat-item d-flex align-items-center mb-4">
                                     <div class="overflow-hidden" style="width: 100px; height: 100px;">
                                         <img class="img-fluid" src="${Category.image}" alt="">

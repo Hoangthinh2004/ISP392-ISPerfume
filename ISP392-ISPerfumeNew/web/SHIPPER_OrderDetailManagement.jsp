@@ -175,39 +175,92 @@
                                         <thead>
                                             <tr class="text-dark">
                                                 <th scope="col">Product Name</th>
+                                                <th scope="col">Size</th>
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Total Unit Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="shipper" items="${sessionScope.LIST_ORDER_DETAIL}">
-                                                <c:set var="unitTotal" value="${shipper.quantity * shipper.unitPrice}" ></c:set>
-                                                <c:set var="Total" value="${unitTotal + Total}" ></c:set>
-                                                <form action="MainController" method="POST">
-                                                    <tr>
-                                                        <td>${shipper.productName}</td>
-                                                    <td>${shipper.quantity}</td>
-                                                    <td><fmt:formatNumber type="number" value="${shipper.unitPrice}" /> VND</td>
+                                            <c:forEach var="orderDetail" items="${requestScope.LIST_ORDER_DETAIL_SHIPPER}">
+                                                <tr>
+                                                    <!--                                                    productName-->
                                                     <td>
-                                                        <fmt:formatNumber type="number" value="${unitTotal}" /> VND
-                                                        <input type="hidden" name="Total" value="${shipper.quantity * shipper.unitPrice}"/>
+                                                        <c:forEach var="productDetail" items="${sessionScope.LIST_PRODUCT_DETAIL}">
+                                                            <c:if test="${orderDetail.productDetailID == productDetail.productDetailID}">
+                                                                <c:forEach var="product" items="${sessionScope.LIST_PRODUCT}">
+                                                                    <c:if test="${product.productID == productDetail.productID}">
+                                                                        ${product.name}
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <!--                                                    size-->
+                                                    <td>
+                                                        <c:forEach var="productDetail" items="${sessionScope.LIST_PRODUCT_DETAIL}">
+                                                            <c:if test="${orderDetail.productDetailID == productDetail.productDetailID}">
+                                                                <c:forEach var="size" items="${sessionScope.LIST_SIZE}">
+                                                                    <c:if test="${size.sizeID == productDetail.sizeID}">
+                                                                        ${size.name}
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        ${orderDetail.quantity}
+                                                    </td>
+                                                    <td>
+                                                        <fmt:formatNumber type="number" value="${orderDetail.unitPrice}"/>
+                                                    </td>
+                                                    <td>
+                                                        <fmt:formatNumber type="number" value="${orderDetail.unitPrice* orderDetail.quantity}"/>
                                                     </td>
                                                 </tr>
-                                            </form>
-                                        </c:forEach>
-                                        <c:forEach var="promotion" items="${sessionScope.LIST_PROMOTION}">
-                                            <tr>
-                                                <td colspan="3" style="text-align: right;"><strong>Promotion:</strong></td>
-                                                <td><strong><c:out value="${promotion.discountPer}%" /></strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
-                                                <td><strong><fmt:formatNumber type="number" value="${Total * ((100-promotion.discountPer)/100)}"/> VND</strong></td>
-                                            </tr>
-                                        </c:forEach>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
+                                    <div class="d-flex align-items-center justify-content-between mb-4" >
+                                        <h6 class="mb-0">Total Price</h6>
+                                        <p class="mb-0 ml-auto">
+                                            <c:forEach var="orderDetail" items="${requestScope.LIST_ORDER_DETAIL_SHIPPER}" >
+                                                <c:set var="unitTotal" value="${orderDetail.unitPrice * orderDetail.quantity}"/>
+                                                <c:set var="Total" value="${unitTotal + Total}"/>
+                                            </c:forEach>
+                                            <fmt:formatNumber value="${Total}" type="number"/> VNĐ
+                                        </p>
+                                    </div>
+                                    <c:choose>
+                                        <c:when test="${requestScope.ORDER_SHIPPER.promotionID != 0}">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h6 class="mb-0">Promotion Applied:</h6>
+                                                <c:forEach var="promotion" items="${sessionScope.LIST_PROMOTION}">
+                                                    <c:if test="${requestScope.ORDER_SHIPPER.promotionID == promotion.promotionID}">
+                                                        <p class="mb-0 ml-auto">${promotion.promotionName} - ${promotion.discountPer}% off</p>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h6 class="mb-0">Final Price</h6>
+                                                <c:forEach var="promotion" items="${sessionScope.LIST_PROMOTION}">
+                                                    <c:if test="${requestScope.ORDER_SHIPPER.promotionID == promotion.promotionID}">
+                                                        <p class="mb-0 ml-auto">
+                                                            <fmt:formatNumber value="${Total * (1 - promotion.discountPer / 100.0)}" type="number"/> VNĐ
+                                                        </p>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h6 class="mb-0">Final Price</h6>
+                                                <p class="mb-0 ml-auto">
+                                                    <fmt:formatNumber value="${Total}" type="number"/> VNĐ
+                                                </p>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <a href="MainController?action=SHIPPER_SearchOrder" class="btn btn-primary">Back</a>
                                 </div>
                             </div>

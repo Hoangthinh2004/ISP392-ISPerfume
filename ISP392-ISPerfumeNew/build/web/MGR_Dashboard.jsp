@@ -68,14 +68,14 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <form action="MainController" method="POST" id="myForm">
+                        <form action="MainController" method="get" id="myForm">
                             <a href="MGR_Dashboard.jsp" class="nav-item nav-link active" onclick="document.getElementById('myForm').submit(); return false;"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                             <input type="hidden" name="action" value="ListDashboard">
                         </form>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=SearchProduct&search=" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
                                 <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>

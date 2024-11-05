@@ -5,55 +5,49 @@
  */
 package isp392.controllers;
 
-import isp392.brand.BrandDAO;
-import isp392.brand.BrandDTO;
-import isp392.category.CategoryDAO;
-import isp392.category.CategoryDTO;
-import isp392.size.SizeDAO;
-import isp392.size.SizeDTO;
+import isp392.order.OrderDAO;
+import isp392.order.OrderDTO;
+import isp392.order.OrderDetailDTO;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author duyhc
  */
-@WebServlet(name = "GetBrandCategoriesManager", urlPatterns = {"/GetBrandCategoriesManager"})
-public class GetBrandCategoriesManager extends HttpServlet {
+@WebServlet(name = "viewOrderDetailController", urlPatterns = {"/viewOrderDetailController"})
+public class ViewOrderDetailController extends HttpServlet {
 
-    private static final String ERROR = "ShowAllProductManager?search=";
-    private static final String SUCCESS = "ShowAllProductManager?search=";
+    private static final String ERROR = "viewOrderHistoryController";
+    private static final String SUCCESS = "viewOrderDetail.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        BrandDAO brandDAO = new BrandDAO();
-        CategoryDAO cateDAO = new CategoryDAO();
-        SizeDAO sizeDAO = new SizeDAO();
+        OrderDAO dao = new OrderDAO();
         try {
-            List<BrandDTO> brandList = brandDAO.getListBrand();
-            List<CategoryDTO> cateList = cateDAO.getListCategory();
-            List<SizeDTO> sizeList = sizeDAO.getListSize();
-            if (brandList != null || cateList!=null ||sizeList!=null) {
-                HttpSession ses = request.getSession();
-                ses.setAttribute("BRAND_LIST_MANAGER", brandList);
-                ses.setAttribute("CATEGORY_LIST_MANAGER", cateList);
-                ses.setAttribute("SIZE_LIST_MANAGER", sizeList);
+            int orderID = Integer.parseInt(request.getParameter("orderID"));
+            List<OrderDetailDTO> listOrderDetail = dao.getListOrderDetail(orderID);
+            OrderDTO order = dao.getOrder(orderID);
+            if( order!= null || listOrderDetail!=null){
+                request.setAttribute("ORDER_CUSTOMER", order);
+                request.setAttribute("LIST_ORDER_DETAIL_CUSTOMER", listOrderDetail);
+                request.setAttribute("ORDERID", orderID);
                 url = SUCCESS;
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            log("Error at GetBrandControllerManager: " + e.toString());
-        } finally {
+        } catch (Exception e) {
+            log("Error at viewOrderDetailController: "+e.toString());
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

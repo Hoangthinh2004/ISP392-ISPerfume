@@ -72,7 +72,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=SearchProduct&search=" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
                                 <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
@@ -183,64 +183,60 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important; min-height: 540px;">
-                        <!--                        <div class="col-md-6 text-center">-->
-                        <!-- Recent Sales Start -->
-                        <div class="container-fluid pt-4 px-4">
-                            <div class="bg-light text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">   
-                                    <h6 class="mb-0">Product Management</h6>
-                                    <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create product</a>
-                                    <!--                                    <button class="btn btn-primary">
-                                                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                                                            </svg>
-                                                                        </button>-->
-                                </div>
-                                <div class="table-responsive">
-                                    <c:if test="${requestScope.SHOW_ALL_PRODUCT_MANAGER!=null}">
-                                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                            <thead>
-                                                <tr class="text-dark">
-                                                    <th scope="col" class="text-center">Name</th>
-                                                    <th scope="col" class="text-center">Brand</th>
-                                                    <th scope="col" class="text-center">Image</th>
-                                                    <th scope="col" class="text-center">Status</th>                                                   
-                                                    <th scope="col" class="text-center">Update</th>                                                   
-                                                    <th scope="col" class="text-center">Detail</th>                                                   
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="pro" varStatus="counter" items="${requestScope.SHOW_ALL_PRODUCT_MANAGER}">
-                                                    <tr>
-                                                        <td class="text-center">
-                                                            ${pro.name}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
-                                                                <c:if test="${brand.brandID == pro.brandID}">
-                                                                    ${brand.name}
-                                                                </c:if>
-                                                            </c:forEach>
-
-                                                        <td class="d-flex justify-content-center">
-                                                            <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px; border-radius: 16px;">
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <c:choose>
-                                                                <c:when test="${pro.status == 1}">
-                                                                    AVAILABLE
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    UNAVAILABLE
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </td>                                                     
-                                                        <td>
-                                                            <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${counter.count}">
-                                                                <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
-                                                                </svg>
+                    <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">   
+                            <h6 class="mb-0">Product Management</h6>
+                            <a href="MGR_CreateProduct.jsp" class="btn btn-primary">Create product</a>
+                            <!--                                    <button class="btn btn-primary">
+                                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                                                                    </svg>
+                                                                </button>-->
+                        </div>
+                        <div class="table-responsive">
+                            <c:if test="${requestScope.SHOW_ALL_PRODUCT_MANAGER!=null}">
+                                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                    <thead>
+                                        <tr class="text-dark">
+                                            <th scope="col" class="text-center">Name</th>
+                                            <th scope="col" class="text-center">Brand</th>
+                                            <th scope="col" class="text-center">Image</th>
+                                            <th scope="col" class="text-center">Status</th>                                                   
+                                            <th scope="col" class="text-center">Update</th>                                                   
+                                            <th scope="col" class="text-center">Detail</th>                                                   
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="pro" varStatus="counter" items="${requestScope.SHOW_ALL_PRODUCT_MANAGER}">
+                                            <tr>
+                                                <td class="text-center">
+                                                    ${pro.name}
+                                                </td>
+                                                <td class="text-center">
+                                                    <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
+                                                        <c:if test="${brand.brandID == pro.brandID}">
+                                                            ${brand.name}
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
+                                                <td class="d-flex justify-content-center">
+                                                    <img src="${pro.image}" style="width: 100px; height: 100px; margin-right: 10px; border-radius: 16px;">
+                                                </td>
+                                                <td class="text-center">
+                                                    <c:choose>
+                                                        <c:when test="${pro.status == 1}">
+                                                            AVAILABLE
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            UNAVAILABLE
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>                                                
+                                                <td>
+                                                    <a class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#updateModal-${counter.count}">
+                                                        <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                                        </svg>
 
                                                             </a>
                                                             <!-- Modal Update -->
@@ -361,20 +357,5 @@
 
 <!-- Template Javascript -->
 <script src="dashmin/js/main.js"></script>
-<script>
-                                window.onload = function () {
-                                    const searchInput = document.querySelector('input[name="search"]');
-                                    const form = searchInput.form;
-                                    if (!sessionStorage.getItem('isSubmitted')) {
-                                        const hiddenAction = document.createElement('input');
-                                        hiddenAction.type = 'hidden';
-                                        hiddenAction.name = 'action';
-                                        hiddenAction.value = 'Search product';
-                                        form.appendChild(hiddenAction);
-                                        form.submit();
-                                        sessionStorage.setItem('isSubmitted', 'true');
-                                    }
-                                };
-</script>
 </body>
 </html>
