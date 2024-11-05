@@ -5,10 +5,20 @@
  */
 package isp392.controllers;
 
+import isp392.order.OrderDAO;
+import isp392.order.OrderDTO;
 import isp392.order.OrderDetailDAO;
 import isp392.order.OrderDetailDTO;
+import isp392.product.ProductDAO;
+import isp392.product.ProductDTO;
+import isp392.product.ProductDetailDAO;
+import isp392.product.ProductDetailDTO;
 import isp392.promotion.PromotionDAO;
 import isp392.promotion.PromotionDTO;
+import isp392.size.SizeDAO;
+import isp392.size.SizeDTO;
+import isp392.user.UserDAO;
+import isp392.user.UserDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -30,20 +40,33 @@ public class SHIPPER_ViewOrderDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        HttpSession ses = request.getSession();
+        UserDAO userDAO = new UserDAO();
+        OrderDAO dao = new OrderDAO();
+        ProductDAO proDAO = new ProductDAO();
+        ProductDetailDAO proDeDAO = new ProductDetailDAO();
+        SizeDAO sizeDAO = new SizeDAO();
+        PromotionDAO promoDAO = new PromotionDAO();
         try {
-            int promotionID = 1;
             int orderID = Integer.parseInt(request.getParameter("orderID"));
-            OrderDetailDAO odDao = new OrderDetailDAO();
-            PromotionDAO pDao = new PromotionDAO();
-            List<OrderDetailDTO> listOrderDetail = odDao.getListOrderDetail(orderID);
-            List<PromotionDTO> listPromotion = pDao.getShipperListPromotion(promotionID);
-            if (listOrderDetail.size() > 0) {
-                if (listPromotion.size() > 0) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("LIST_ORDER_DETAIL", listOrderDetail);
-                    session.setAttribute("LIST_PROMOTION", listPromotion);
-                    url = SUCCESS;
-                }
+            List<UserDTO> listUser = userDAO.getListUser();
+            List<OrderDetailDTO> listOrderDetail = dao.getListOrderDetail(orderID);
+            List<ProductDTO> listProduct = proDAO.getListProductManager("");
+            List<ProductDetailDTO> listProductDetail = proDeDAO.getListAllProductDetail();
+            List<SizeDTO> listSize = sizeDAO.getListSize();
+            List<PromotionDTO> listPromotion = promoDAO.getListPromotion();
+            OrderDTO order = dao.getOrder(orderID);
+            if (order != null || listOrderDetail != null || listProduct != null || listProductDetail != null || listSize != null || listPromotion != null || listUser!=null) {
+                ses.setAttribute("LIST_PRODUCT", listProduct);
+                ses.setAttribute("LIST_PRODUCT_DETAIL", listProductDetail);
+                ses.setAttribute("LIST_SIZE", listSize);
+                ses.setAttribute("LIST_PROMOTION", listPromotion);
+                ses.setAttribute("LIST_USER", listUser);
+                request.setAttribute("ORDER_SHIPPER", order);
+                request.setAttribute("LIST_ORDER_DETAIL_SHIPPER", listOrderDetail);
+                request.setAttribute("ORDERID", orderID);
+                url = SUCCESS;
+
             }
         } catch (Exception e) {
             log("Error at SHIPPER_ViewOrderDetailController: " + e.toString());

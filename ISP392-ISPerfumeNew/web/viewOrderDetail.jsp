@@ -170,6 +170,46 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <h6 class="mb-0">Total Price:</h6>
+                                <p class="mb-0 ml-auto">
+                                    <c:forEach var="orderDetail" items="${requestScope.LIST_ORDER_DETAIL_CUSTOMER}" >
+                                        <c:set var="unitTotal" value="${orderDetail.unitPrice * orderDetail.quantity}"/>
+                                        <c:set var="Total" value="${unitTotal + Total}"/>
+                                    </c:forEach>
+                                    <fmt:formatNumber value="${Total}" type="number"/> VNĐ
+                                </p>
+                            </div>
+                            <c:choose>
+                                <c:when test="${requestScope.ORDER_CUSTOMER.promotionID != 0}">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0">Promotion Applied:</h6>
+                                        <c:forEach var="promotion" items="${sessionScope.LIST_PROMOTION}">
+                                            <c:if test="${requestScope.ORDER_CUSTOMER.promotionID == promotion.promotionID}">
+                                                <p class="mb-0 ml-auto">${promotion.promotionName} - ${promotion.discountPer}% off</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0">Final Price</h6>
+                                        <c:forEach var="promotion" items="${sessionScope.LIST_PROMOTION}">
+                                            <c:if test="${requestScope.ORDER_CUSTOMER.promotionID == promotion.promotionID}">
+                                                <p class="mb-0 ml-auto">
+                                                    <fmt:formatNumber value="${Total * (1 - promotion.discountPer / 100.0)}" type="number"/> VNĐ
+                                                </p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0">Final Price</h6>
+                                        <p class="mb-0 ml-auto">
+                                            <fmt:formatNumber value="${Total}" type="number"/> VNĐ
+                                        </p>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>

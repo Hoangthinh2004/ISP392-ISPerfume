@@ -341,7 +341,7 @@
                             <a href="#">
                                 <span class="progress-count">
                                     <i class="fa fa-hourglass-half"></i>
-                                    <span class="order-count">15</span>
+                                    <span class="order-count">${sessionScope.QUANTITY_STATUS_1}</span>
                                 </span>
                                 <span class="progress-label">Waiting for confirmation</span>
                             </a>
@@ -350,7 +350,7 @@
                             <a href="#">
                                 <span class="progress-count">
                                     <i class="fa fa-box"></i>
-                                    <span class="order-count">10</span>
+                                    <span class="order-count">${sessionScope.QUANTITY_STATUS_2}</span>
                                 </span>
                                 <span class="progress-label">Waiting for pickup</span>
                             </a>
@@ -359,7 +359,7 @@
                             <a href="#">
                                 <span class="progress-count">
                                     <i class="fa fa-truck"></i>
-                                    <span class="order-count">8</span>
+                                    <span class="order-count">${sessionScope.QUANTITY_STATUS_3}</span>
                                 </span>
                                 <span class="progress-label">Waiting for delivery</span>
                             </a>
@@ -368,7 +368,7 @@
                             <a href="#">
                                 <span class="progress-count">
                                     <i class="fa fa-clipboard-check"></i>
-                                    <span class="order-count">20</span>
+                                    <span class="order-count">${sessionScope.QUANTITY_STATUS_4}</span>
                                 </span>
                                 <span class="progress-label">Delivered successfully</span>
                             </a>

@@ -75,7 +75,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=SearchProduct&search=" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
                                 <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
@@ -365,20 +365,5 @@
 
 <!-- Template Javascript -->
 <script src="dashmin/js/main.js"></script>
-<script>
-                                window.onload = function () {
-                                    const searchInput = document.querySelector('input[name="search"]');
-                                    const form = searchInput.form;
-                                    if (!sessionStorage.getItem('isSubmitted')) {
-                                        const hiddenAction = document.createElement('input');
-                                        hiddenAction.type = 'hidden';
-                                        hiddenAction.name = 'action';
-                                        hiddenAction.value = 'Search product';
-                                        form.appendChild(hiddenAction);
-                                        form.submit();
-                                        sessionStorage.setItem('isSubmitted', 'true');
-                                    }
-                                };
-</script>
 </body>
 </html>
