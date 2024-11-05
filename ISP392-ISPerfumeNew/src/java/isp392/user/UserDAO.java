@@ -25,6 +25,8 @@ public class UserDAO {
     private final String INSERT_USER_GOOGLE = "INSERT INTO Users(Name, Email, Password, Phone, RoleID, Status) VALUES (?,?,?,?,?,1)";
     private final String INSERT_CUSTOMER_GOOGLE = "INSERT INTO Customer(CustomerID, Area, District, Ward, DetailAddress, DayOfBirth) VALUES(?,?,?,?,?,?)";
     private final String CHECK_USER_BY_EMAIL = "SELECT * FROM Users WHERE Email LIKE ?";
+    private final String CHECK_USER_BY_EMAIL_UPDATE = "SELECT * FROM Users WHERE Email LIKE ? AND UserID !=?";
+    private final String CHECK_USER_BY_PHONE_UPDATE = "SELECT * FROM Users WHERE Phone LIKE ? AND UserID !=?";
     private final String CHECK_USER_BY_PHONE = "SELECT * FROM Users WHERE Phone LIKE ?";
     private final String GET_CUSTOMER_BY_USERID = "SELECT * FROM Customer WHERE CustomerID = ?";
     private static final String LIST_USER = "SELECT UserID, Name, Email,Phone, Status, RoleID FROM Users";
@@ -677,5 +679,50 @@ public class UserDAO {
             }
         }
         return listUser;
+    }
+
+    public boolean checkEmailExistedForUp(String email, int userID) throws ClassNotFoundException, SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_USER_BY_EMAIL_UPDATE);
+                ptm.setString(1, email);
+                ptm.setInt(2, userID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } finally {
+            DBUtils.closeConnection3(conn, ptm, rs);
+        }
+        return check;
+    }
+
+    public boolean checkPhoneNumExistedForUp(String phone, int userID) throws ClassNotFoundException, SQLException {
+        
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_USER_BY_PHONE_UPDATE);
+                ptm.setString(1, phone);
+                ptm.setInt(2, userID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } finally {
+            DBUtils.closeConnection3(conn, ptm, rs);
+        }
+        return check;
     }
 }

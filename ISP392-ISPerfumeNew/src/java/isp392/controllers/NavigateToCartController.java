@@ -5,6 +5,7 @@
  */
 package isp392.controllers;
 
+import isp392.cart.Cart;
 import isp392.cart.CartDAO;
 import isp392.cart.ViewCartDTO;
 import java.io.IOException;
@@ -33,6 +34,14 @@ public class NavigateToCartController extends HttpServlet {
             HttpSession session = request.getSession();
             CartDAO dao = new CartDAO();           
             Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
+            Cart listChecked = (Cart) session.getAttribute("CHECK_LIST");
+            if (listChecked != null) {
+                session.removeAttribute("CHECK_LIST");
+            }
+            Object promotion = session.getAttribute("PROMOTION_DETAIL");
+            if (promotion != null) {
+                session.removeAttribute("PROMOTION_DETAIL");
+            }
             
             int customerID = CustomerIDS.get("customerID");            
             List<ViewCartDTO> cartList = dao.getProductDetailID(customerID);
