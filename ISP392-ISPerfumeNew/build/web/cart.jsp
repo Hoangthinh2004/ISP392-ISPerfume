@@ -70,7 +70,7 @@
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
                 <div class="col-lg-4 justify-content-center text-center">
-                    <a href="home.jsp" class="text-decoration-none">
+                    <a href="HomeController" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
@@ -109,7 +109,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>
-                                        <input type="checkbox" id="selectAll" style="height: 16px; width: 16px;"/>  
+                                        <input type="checkbox" id="selectAll" style="height: 16px; width: 16px;"/>
                                     </th>
                                     <th></th>
                                     <th>Products</th>
@@ -120,7 +120,7 @@
                                 </tr>
                             </thead>
                             <tbody class="align-middle">
-                                <c:forEach var="cart" items="${sessionScope.CART}">
+                                <c:forEach var="cart" items="${requestScope.CART}">
                                     <c:set var="unitTotal" value="${cart.price * cart.totalQuantity}"/>
                                     <c:set var="Total" value="${unitTotal + Total}"/>
                                     <tr>
@@ -207,7 +207,6 @@
             </div>
         </form>
         <!-- Cart End -->
-
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
