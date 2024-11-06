@@ -62,7 +62,7 @@ public class NavigateToCartController extends HttpServlet {
             int customerID = CustomerIDS.get("customerID");           
             List<ViewCartDTO> cartList = dao.getProductDetailID(customerID);
             if (cartList.size() > 0) {
-                session.setAttribute("CART", cartList);
+                request.setAttribute("CART", cartList);
             } else {
                 request.setAttribute("MESSAGE", "Your cart is empty ! Please select more products to buy");
             }
