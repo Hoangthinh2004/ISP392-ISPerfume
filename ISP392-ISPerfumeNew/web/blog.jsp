@@ -122,23 +122,65 @@
                                     <div class="nav-item dropdown">
                                         <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="MainController?action=Category&Category=${Category.categoryID}" class="dropdown-item">All ${Category.name}</a>
+                                            <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
                                             <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
                                                 <c:if test="${Category.categoryID == brand.categoryID}">
-                                                    <a href="MainController?action=FilterByBrand" class="dropdown-item">${brand.brandName}</a>
+                                                    <a href="MainController?action=Category&CategoryID=${Category.categoryID}&brandID=${brand.brandID}" class="dropdown-item">${brand.brandName}</a>
                                                 </c:if>
                                             </c:forEach>
                                         </div>
                                     </div>
                                 </c:forEach>
-                                <a href="MainController?action=NavigateBlog" class="nav-item nav-link active">Blog</a>
-                                <a href="orderStatus.jsp" class="nav-item nav-link">Order Status</a>
+                                <a href="MainController?action=NavigateBlog" class="nav-item nav-link">Blog</a>
+                                <c:if test="${not empty sessionScope.CUSTOMER_ID}">
+                                    <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link"> Order History</a>
+                                </c:if>
                             </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-block">                            
-                                <a href="cart.jsp" class="btn px-0 ml-3">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                                </a>
+                            <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
+                                <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                                    <input type="text" class="form-control" placeholder="Search for products" name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                    <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">Account</span>
+                                        </button>                                        
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                            <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="ml-1 text-primary">Cart</span>
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </nav>

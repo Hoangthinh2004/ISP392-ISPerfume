@@ -149,16 +149,16 @@
             </div>
         </div>
         <!-- Breadcrumb End -->
-
-
+        <c:if test="${requestScope.ERROR_MESSAGE != null}">
         <div class="alert alert-danger alert-dismissible fade show fade-out d-flex align-items-center" role="alert" id="autoDismissAlert">
             <i class="fa fa-times-circle alert-icon me-2"></i> 
-            <div class="alert-content">Incorrect email or password!</div>
+            <div class="alert-content">${requestScope.ERROR_MESSAGE}</div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 <i class="fa fa-times"></i>
             </button>
             <div class="progress-bar-timer bg-danger" id="progressBar" style="width: 100%;"></div>
         </div>
+        </c:if>
 
 
         <!--Sigin in form Start-->
@@ -176,7 +176,7 @@
                                     </a>
                                     <h3>Sign In</h3>
                                 </div>
-                                <form action="MainController" method="get">
+                                <form action="MainController" method="POST">
                                     <div class="form-floating mb-3">
                                         <label for="floatingInput">Email</label>
                                         <input type="text" class="form-control" placeholder="Email" name="Email" required="">

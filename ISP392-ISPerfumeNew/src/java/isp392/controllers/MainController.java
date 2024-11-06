@@ -199,7 +199,6 @@ public class MainController extends HttpServlet {
     private static final String VIEW_ORDER_DETAIL_CUSTOMER = "viewOrderDetail";
     private static final String VIEW_ORDER_DETAIL_CUSTOMER_CONTROLLER = "viewOrderDetailController";
 
-    
     private static final String NAVIGATE_CHECK_OUT = "NavigateToCheckOut";
     private static final String NAVIGATE_CHECK_OUT_CONTROLLER = "NavigateToCheckOutController";
     
