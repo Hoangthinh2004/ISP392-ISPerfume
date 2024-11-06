@@ -104,8 +104,6 @@
         </div>
         <!-- Topbar End -->
 
-
-
         <!-- Navbar Start -->
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
@@ -348,8 +346,6 @@
                                         <img class="img-fluid w-100" src="${product.image}" alt="">
                                         <div class="product-action">
                                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                                             <a class="btn btn-outline-dark btn-square" href="NavigateProductDetailController?categoryID=${product.categoryID}&productID=${product.productID}&sizeID=${product.sizeID}&productDetailID=${product.productDetailID}"><i class="fa fa-search"></i></a>
                                         </div>
                                     </div>

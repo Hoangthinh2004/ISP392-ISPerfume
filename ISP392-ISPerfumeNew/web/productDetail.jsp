@@ -64,7 +64,7 @@
                 font-size: 18px;
                 max-width: 400px; 
                 position: fixed; 
-                top 20px; 
+                top: 20px; 
                 right: 20px;
                 z-index: 1050; 
                 border: 1px solid transparent;
@@ -407,7 +407,6 @@
                                 <div class="d-flex mb-3">
                                     <strong class="text-dark mr-2 mt-1">Sizes:</strong>
                                     <c:forEach var="size" items="${sessionScope.AVAILABLE_SIZE}">
-                                        <input type="hidden" name="productID" value="${size.productID}"/>
                                         <a href="MainController?action=PriceBySize&sizeID=${size.sizeID}&productID=${size.productID}" 
                                            class="size-button ml-2 ${size.sizeID == param.sizeID ? "active" : ""}">${size.sizeName}</a>
                                     </c:forEach>

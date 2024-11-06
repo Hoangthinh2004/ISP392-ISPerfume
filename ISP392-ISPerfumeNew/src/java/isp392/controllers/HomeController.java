@@ -9,6 +9,7 @@ import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
 import isp392.brand.ViewBrandByCateDTO;
 import isp392.cart.CartDAO;
+import isp392.cart.ViewCartDTO;
 import isp392.category.CategoryDAO;
 import isp392.category.CategoryDTO;
 import isp392.product.ProductDAO;
@@ -69,6 +70,23 @@ public class HomeController extends HttpServlet {
                 int customerID = CustomerIDS.get("customerID");
                 int cartSize = cartDAO.getCartSize(customerID);
                 session.setAttribute("CART_SIZE", cartSize);
+
+                //Update product quantity when back from cart
+                String[] currentQuantity = request.getParameterValues("currentQuantity");
+                List<ViewCartDTO> cartList = cartDAO.getProductDetailID(customerID);
+                int productDetailID = 0;
+                int cartQuantity = 0;
+                for (int i = 0; i < currentQuantity.length; i++) {
+                    ViewCartDTO product = cartList.get(i);
+                    productDetailID = product.getProductDetailID();
+                    cartQuantity = product.getTotalQuantity();
+                    if (Integer.parseInt(currentQuantity[i]) != cartQuantity) {
+                        boolean updateNewQuantity = cartDAO.updateNewQuantity(productDetailID, Integer.parseInt(currentQuantity[i]));
+                        if (updateNewQuantity) {
+                            continue;
+                        }
+                    }
+                }
             }
 
             List<ViewProductDTO> listRecentProduct = productDAO.ListRecentProduct();
@@ -84,7 +102,6 @@ public class HomeController extends HttpServlet {
             session.setAttribute("LIST_BRAND", listBrand);
             session.setAttribute("LIST_BRAND_BY_CATE", listBrandByCate);
             session.setAttribute("RECENT_PRODUCT", listRecentProduct);
-
 
             url = HOME;
         } catch (Exception e) {

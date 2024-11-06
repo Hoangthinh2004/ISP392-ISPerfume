@@ -50,6 +50,7 @@ public class AddToCartController extends HttpServlet {
                     if (check) {
                         int cartSize = dao.getCartSize(customerID);
                         session.setAttribute("CART_SIZE", cartSize);
+                        request.setAttribute("MESSAGE", "Add to cart successfully");
                         url = SUCCESS;
                     } else {
                         request.setAttribute("MESSAGE", "Add to cart fail");

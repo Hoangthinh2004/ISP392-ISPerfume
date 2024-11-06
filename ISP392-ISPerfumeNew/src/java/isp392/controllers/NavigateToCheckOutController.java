@@ -47,7 +47,7 @@ public class NavigateToCheckOutController extends HttpServlet {
             }
 
             Map<String, String[]> productDetailIDS = (Map<String, String[]>) session.getAttribute("PRODUCTDETAILIDS_CHECKLIST");
-            if (productDetailIDS == null || productDetailIDS.size() == 0) {
+            if (productDetailIDS == null || productDetailIDS.isEmpty()) {
                 productDetailIDS = new HashMap<>();
                 session.setAttribute("PRODUCTDETAILIDS_CHECKLIST", productDetailIDS);
             }
@@ -67,6 +67,24 @@ public class NavigateToCheckOutController extends HttpServlet {
             } else {
                 productDetailIDs = productDetailIDS.get("productDetailID");
             }
+            
+            //Update product quantity when back from cart
+            String[] currentQuantity = request.getParameterValues("currentQuantity");
+            List<ViewCartDTO> cartList = cartDao.getProductDetailID(customerID);
+            int productDeID = 0;
+            int cartQuantity = 0;
+            for (int i = 0; i < currentQuantity.length; i++) {
+                ViewCartDTO product = cartList.get(i);
+                productDeID = product.getProductDetailID();
+                cartQuantity = product.getTotalQuantity();
+                if (Integer.parseInt(currentQuantity[i]) != cartQuantity) {
+                    boolean updateNewQuantity = cartDao.updateNewQuantity(productDeID, Integer.parseInt(currentQuantity[i]));
+                    if (updateNewQuantity) {
+                        continue;
+                    }
+                }
+            }
+            
             for (int i = 0; i < productDetailIDs.length; i++) {
                 List<ViewCartDTO> productInfor = cartDao.getProductInfor(Integer.parseInt(productDetailIDs[i]), customerID);
                 for (ViewCartDTO product : productInfor) {
@@ -86,7 +104,7 @@ public class NavigateToCheckOutController extends HttpServlet {
             }
             List<CustomerViewProfileDTO> custProfile = dao.getPersonalInfor(customerID);
             List<PromotionDTO> listPromotion = promotionDAO.getListPromotion();
-
+            
             request.setAttribute("TOTAL_PRICE", totalPrice);
             session.setAttribute("PROMOTION", listPromotion);
             session.setAttribute("CHECK_LIST", listChecked);

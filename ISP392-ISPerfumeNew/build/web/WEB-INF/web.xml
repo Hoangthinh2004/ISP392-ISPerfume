@@ -192,6 +192,10 @@
         <servlet-name>UpdateCheckOutProfileController</servlet-name>
         <servlet-class>isp392.controllers.UpdateCheckOutProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CODCheckOutController</servlet-name>
+        <servlet-class>isp392.controllers.CODCheckOutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -383,6 +387,10 @@
     <servlet-mapping>
         <servlet-name>UpdateCheckOutProfileController</servlet-name>
         <url-pattern>/UpdateCheckOutProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CODCheckOutController</servlet-name>
+        <url-pattern>/CODCheckOutController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

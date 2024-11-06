@@ -65,6 +65,8 @@ public class SigninEmployee extends HttpServlet {
                     session.setAttribute("LOGIN_USER", loginUser);
                     url = AD_PAGE;
                 }
+            } else {
+                request.setAttribute("ERROR_MESSAGE", "Incorrect email or password!");
             }
         } catch (Exception e) {
             log("Error at SigninEmployee: " + e.toString());
