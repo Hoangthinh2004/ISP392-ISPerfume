@@ -11,13 +11,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>ISPER FUME | Sign In</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -54,14 +54,14 @@
 
             .alert-icon {
                 font-size: 1.5rem;
-                color: #721c24; /* Màu đỏ cho icon lỗi */
+                color: #721c24; 
             }
 
             .alert-content {
                 flex: 1;
                 font-weight: 500;
                 color: #721c24;
-                margin: 0 10px; /* Giãn cách nội dung */
+                margin: 0 10px; 
             }
 
             .btn-close {
@@ -90,66 +90,62 @@
         </style>
     </head>
     <body>
-
         <!-- Topbar Start -->
         <div class="container-fluid">
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
-                        <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
-                        <a class="text-body mr-3" href="">Contact</a>
-                        <a class="text-body mr-3" href="">Help</a>
-                        <a class="text-body mr-3" href="">FAQs</a>
+                        <span class="text-primary ml-3"><i class="fa fa-envelope mr-2"></i>isperfume1803@gmail.com</span>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center text-lg-right">
-                    <div class="d-inline-flex align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                <a class="dropdown-item btn" type="button" href="MainController?action=Signout">Sign out</a>                                
-                            </div>
-                        </div>                                            
-                    </div>
-                    <div class="d-inline-flex align-items-center d-block d-lg-none">
-                        <a href="" class="btn px-0 ml-2">
-                            <i class="fas fa-heart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
-                        <a href="" class="btn px-0 ml-2">
-                            <i class="fas fa-shopping-cart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
+                <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
+                    <span class="text-primary text- ml-3 d-none d-lg-inline" ><i class="fa fa-map-marker-alt mr-2"></i>123 D1 Street, Thu Duc, HCM</span>
+                    <div class="d-inline-flex align-items-center justify-content-between">  
+                        <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
+                            <form action="MainController" method="get" class="w-100 d-flex mb-2 mb-lg-0">
+                                <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="d-inline-flex align-items-center d-block d-lg-none">
+                            <c:choose>
+                                <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                    <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-1 text-primary">Account</span>
+                                    </button>                                        
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                        <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                        <i class="fas fa fa-user text-primary"></i>
+                                        <span class="ml-2"> ${sessionScope.CUSTOMER.name}</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>                          
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
-                <div class="col-lg-4 justify-content-center text-center">
-                    <a href="home.jsp" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
-                    </a>
-                </div>
-
-            </div>
+            </div>          
         </div>
         <!-- Topbar End -->
-
-        <!-- Breadcrumb Start -->
-        <div class="container-fluid mt-4">
-            <div class="row px-xl-5">
-                <div class="col-12">
-                    <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="home.jsp">Home</a>
-                        <span class="breadcrumb-item active">Sign In</span>
-                    </nav>
-                </div>
+        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
+            <div class="col-lg-4 justify-content-center text-center">
+                <a href="MainController?action=HomeController" class="text-decoration-none">
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
+                </a>
             </div>
         </div>
-        <!-- Breadcrumb End -->
-
 
         <div class="alert alert-danger alert-dismissible fade show fade-out d-flex align-items-center" role="alert" id="autoDismissAlert">
             <i class="fa fa-times-circle alert-icon me-2"></i> 
@@ -163,7 +159,7 @@
 
         <!--Sigin in form Start-->
         <div class="container-fluid">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sign
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-2"><span class="bg-secondary pr-3">Sign
                     In</span></h2>
             <div class="row px-xl-5">
                 <div class="col-lg-12 mb-5">
@@ -171,12 +167,12 @@
                         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 justify-content-center">
                             <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3 justify-content-center">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <a href="index.html" class="">
-                                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                                    <a href="MainController?action=HomeController" class="">
+                                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                                     </a>
                                     <h3>Sign In</h3>
                                 </div>
-                                <form action="MainController" method="get">
+                                <form action="MainController" method="post">
                                     <div class="form-floating mb-3">
                                         <label for="floatingInput">Email</label>
                                         <input type="text" class="form-control" placeholder="Email" name="Email" required="">
@@ -215,72 +211,47 @@
             </div>
         </div>
         <!--Sigin in form End-->
+        
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
             <div class="row px-xl-5 pt-5">
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                    <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                    <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>D1 Street, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
                 </div>
-                <div class="col-lg-8 col-md-12">
+                <div class="col-lg-3 col-md-12 mb-5 pr-3 pr-xl-5">                 
+                </div>
+                <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-4 mb-5">
+                        <div class="col-md-6 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                                <a class="text-secondary mb-2" href="MainController?action=HomeController"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-secondary mb-2" href="MainController?action=NavigateBlog"><i class="fa fa-angle-right mr-2"></i>Blog</a>
+                                <a class="text-secondary mb-2" href="MainController?action=SeacrhProduct&search="><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
+                        <div class="col-md-6 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                            <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Your Email Address">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary">Sign Up</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-                            <div class="d-flex">
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a class="text-secondary mb-2" href="profile.jsp"><i class="fa fa-angle-right mr-2"></i>Profile</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}"><i class="fa fa-angle-right mr-2"></i>Order History</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=NavigateToCart"><i class="fa fa-angle-right mr-2"></i>My Cart</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=Sign out"><i class="fa fa-angle-right mr-2"></i>Sign out</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="text-secondary mb-2" href="signin.jsp"><i class="fa fa-angle-right mr-2"></i>Sign in</a>
+                                        <a class="text-secondary mb-2" href="signup.jsp"><i class="fa fa-angle-right mr-2"></i>Sign up</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
-                <div class="col-md-6 px-xl-0">
-                    <p class="mb-md-0 text-center text-md-left text-secondary">
-                        &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
-                        by
-                        <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
-                    </p>
-                </div>
-                <div class="col-md-6 px-xl-0 text-center text-md-right">
-                    <img class="img-fluid" src="img/payments.png" alt="">
                 </div>
             </div>
         </div>
@@ -305,18 +276,15 @@
                 var progressBar = document.getElementById('progressBar');
                 var alertElement = document.getElementById('autoDismissAlert');
 
-                // Đặt lại thanh tiến trình về 100% trước khi bắt đầu hiệu ứng
                 progressBar.style.width = '100%';
 
-                // Sử dụng requestAnimationFrame để đảm bảo cập nhật CSS hoàn tất trước khi thu hẹp thanh xuống 0%
                 requestAnimationFrame(function () {
                     setTimeout(function () {
                         progressBar.style.transitionDuration = duration + 'ms';
                         progressBar.style.width = '0%';
-                    }, 10); // Đợi một chút trước khi áp dụng transition
+                    }, 10);
                 });
 
-                // Sau khi hết thời gian, ẩn và xoá alert
                 setTimeout(function () {
                     alertElement.classList.add('hide');
                     setTimeout(function () {

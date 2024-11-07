@@ -22,7 +22,6 @@ and open the template in the editor.
     gap: 20px;
     padding: 30px;
     position: fixed;
-    /* Changed from relative to fixed */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -38,12 +37,10 @@ and open the template in the editor.
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent black */
     z-index: 1100;
     /* Below the modal itself */
 }
 
-/* Existing styles for the content */
 .card-content {
     width: 100%;
     height: fit-content;

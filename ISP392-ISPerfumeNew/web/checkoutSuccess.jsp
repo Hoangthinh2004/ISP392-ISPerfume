@@ -1,15 +1,17 @@
 <%-- 
-    Document   : changePassword
-    Created on : Oct 5, 2024, 12:16:41 PM
+    Document   : checkoutSuccess
+    Created on : Nov 7, 2024, 9:23:58 AM
     Author     : User
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ISPERFUME | Change Password</title>
+        <title>ISPERFUME | Checkout Success</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
@@ -73,29 +75,13 @@
                                         <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
                                     </div>
                                 </c:otherwise>
-                            </c:choose>
-                            <c:choose>
-                                <c:when test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-primary border border-primary rounded-circle ml-1" style="padding-bottom: 2px; top: 0">${sessionScope.CART_SIZE}</span>
-                                    </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <button class="btn btn-sm d-flex align-items-center" onclick="openDeleteModal(this, event)">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="ml-1 text-primary">Cart</span>
-                                    </button>
-                                </c:otherwise>
-                            </c:choose>
+                            </c:choose>                          
                         </div>
                     </div>
                 </div>
             </div>          
         </div>
         <!-- Topbar End -->
-
-
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
             <div class="col-lg-4 justify-content-center text-center">
                 <a href="MainController?action=HomeController" class="text-decoration-none">
@@ -105,42 +91,16 @@
             </div>
         </div>
 
-
-
-        <!--Change passwword form Start-->
-        <div class="container-fluid">
-            <form action="MainController" method="get">
-                <div class="row px-xl-5">
-                    <div class="col-lg-12 mb-5">
-                        <div class="row h-100 align-items-center justify-content-center">
-                            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3" style="padding-bottom: 15px !important; width: 455px;">
-                                    <div class="d-flex align-items-center justify-content-between mb-3">
-                                        <h3 class="text-primary"></i>Forgot Password</h3>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <label for="floatingInput">New Password</label>
-                                        <input name="newPass" type="password" class="form-control" id="floatingInput"
-                                               placeholder="" required="">
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <label for="floatingInput">Confirm password</label>
-                                        <input name="confirmPass" type="password" class="form-control" id="floatingInput"
-                                               placeholder="${requestScope.ERROR_CHANGE_FORGOT_PASSWORD.confirmPasswordError}" required="">
-                                    </div>
-                                    <input type="hidden" name="userID" value="${sessionScope.USERID}">
-                                    <button type="submit" value="ChangePasswordForgot" name="action" class="btn btn-primary py-3 w-100 mb-4">Change Password</button>
-                                    <p class="text-center mb-0">
-                                        <a href="signup.jsp">Continue login</a> OR
-                                        <a href="signup.jsp">Login Again</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="container-fluid pt-4 px-4">
+            <div class="row bg-light rounded align-items-center justify-content-center mx-0 my-2 py-5 px-2" >
+                <div class="">
+                    <img src="img/success-icon-10-300x300.png" class="ml-3">
+                    <h1 class="text-primary text-success">Order Successfully!</h1>
+                    <a class="btn text-uppercase text-primary bg-secondary d-flex justify-content-center" href="MainController?action=HomeController">
+                        Continue shopping
+                    </a>
                 </div>
-            </form>
+            </div>
         </div>
-        <!--Change password form End-->
     </body>
 </html>

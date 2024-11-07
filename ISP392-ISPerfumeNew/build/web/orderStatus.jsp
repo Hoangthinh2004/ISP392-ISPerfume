@@ -10,13 +10,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>ISPERFUME | Order History</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -35,12 +35,11 @@
               rel="stylesheet">
         <link href="css/styleOrderStatus.css" rel="stylesheet">
         <style>
-            /* General Modal Styling */
             .modal-content {
                 border-radius: 10px; 
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
-                background-color: #f8f9fa; /* Light grey background */
-                padding: 20px; /* Internal padding for content */
+                background-color: #f8f9fa; 
+                padding: 20px; 
             }
 
             .modal-header {
@@ -51,15 +50,14 @@
             .modal-title {
                 font-size: 1.5rem;
                 font-weight: bold;
-                color: #343a40; /* Dark grey text */
+                color: #343a40;
             }
 
-            /* Close Button Styling */
             .btn-close {
                 background: none;
                 border: none;
                 font-size: 1.2rem;
-                color: #6c757d; /* Grey for icon */
+                color: #6c757d; 
                 transition: color 0.2s ease;
             }
 
@@ -79,17 +77,16 @@
                 color: #343a40;
             }
 
-            /* Styling for the product list */
             .product-list {
                 list-style: none; 
                 padding: 0;
-                margin-bottom: 20px; /* Spacing at the bottom */
+                margin-bottom: 20px; 
             }
 
             .product-list li {
-                margin-bottom: 15px; /* Spacing between products */
+                margin-bottom: 15px; 
                 padding-bottom: 10px;
-                border-bottom: 1px solid #e9ecef; /* Light border between products */
+                border-bottom: 1px solid #e9ecef; 
             }
 
             .product-list p {
@@ -98,45 +95,41 @@
             }
 
             .product-list p strong {
-                color: #495057; /* Medium dark grey */
+                color: #495057;
             }
 
-            /* Promotion and Total Styling */
             .promotion {
-                color: #28a745; /* Green for promotion */
+                color: #28a745; 
                 font-size: 1.1rem;
                 font-weight: bold;
             }
 
             .total {
-                color: #007bff; /* Primary blue for total */
+                color: #007bff; 
                 font-size: 1.1rem;
                 font-weight: bold;
             }
 
-            /* Modal Footer */
             .modal-footer {
-                border-top: 1px solid #e9ecef; /* Subtle border */
+                border-top: 1px solid #e9ecef; 
                 padding-top: 10px;
-                justify-content: center; /* Center the footer content */
+                justify-content: center;
             }
 
-            /* Buttons */
             .btn-secondary {
-                background-color: #6c757d; /* Bootstrap secondary color */
+                background-color: #6c757d; 
                 border: none;
                 color: white;
-                padding: 10px 20px; /* Larger padding for more clickable area */
+                padding: 10px 20px;
                 font-size: 1rem;
                 border-radius: 5px;
                 transition: background-color 0.3s ease, transform 0.3s ease;
             }
 
             .btn-secondary:hover {
-                background-color: #5a6268; /* Darker on hover */
+                background-color: #5a6268;
             }
 
-            /* Primary Button Styling */
             .btn-primary {
                 background-color: orange;
                 color: white;
@@ -157,22 +150,6 @@
                 box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
             }
 
-            /* Responsive Design */
-            @media (max-width: 576px) {
-                .modal-content {
-                    padding: 15px;
-                }
-
-                .modal-title {
-                    font-size: 1.2rem;
-                }
-
-                .modal-body p {
-                    font-size: 0.9rem;
-                }
-
-
-            }
 
         </style>
     </head>
@@ -182,16 +159,14 @@
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
-                        <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
-                        <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
-                        <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
-                        <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
+                        <span class="text-primary ml-3"><i class="fa fa-envelope mr-2"></i>isperfume1803@gmail.com</span>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
+                    <span class="text-primary text- ml-3 d-none d-lg-inline" ><i class="fa fa-map-marker-alt mr-2"></i>123 D1 Street, Thu Duc, HCM</span>
                     <div class="d-inline-flex align-items-center justify-content-between">  
                         <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
-                            <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                            <form action="MainController" method="get" class="w-100 d-flex mb-2 mb-lg-0">
                                 <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
                                 <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
                                     <i class="fa fa-search"></i>
@@ -243,12 +218,12 @@
         <!-- Topbar End -->
 
 
+
         <!-- Navbar Start -->
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block mt-2">
                     <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
-                        <i class="fa fa-leaf"></i>
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
@@ -260,23 +235,23 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
+                                <a href="MainController?action=HomeController" class="nav-item nav-link ">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <div class="nav-item dropdown">
                                         <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="MainController?action=Category&Category=${Category.categoryID}" class="dropdown-item">All ${Category.name}</a>
+                                            <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="btn dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
                                             <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
                                                 <c:if test="${Category.categoryID == brand.categoryID}">
-                                                    <a href="MainController?action=FilterByBrand" class="dropdown-item">${brand.brandName}</a>
+                                                    <a href="MainController?action=Category&CategoryID=${Category.categoryID}&brandID=${brand.brandID}" class="dropdown-item btn">${brand.brandName}</a>
                                                 </c:if>
                                             </c:forEach>
                                         </div>
                                     </div>
                                 </c:forEach>
-                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                <a href="MainController?action=NavigateBlog" class="nav-item nav-link">Blog</a>
                                 <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                    <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link active"> Order History</a>
                                 </c:if>
                             </div>
                             <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
@@ -374,7 +349,6 @@
                             </a>
                         </li>
                     </ul>
-
                 </section>
                 <!-- Order Status End -->
             </div>
@@ -504,6 +478,51 @@
                 </div>
             </div>
         </div>
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+            <div class="row px-xl-5 pt-5">
+                <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                    <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+                    <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>D1 Street, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
+                </div>
+                <div class="col-lg-3 col-md-12 mb-5 pr-3 pr-xl-5">                 
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 mb-5">
+                            <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <a class="text-secondary mb-2" href="MainController?action=HomeController"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-secondary mb-2" href="MainController?action=NavigateBlog"><i class="fa fa-angle-right mr-2"></i>Blog</a>
+                                <a class="text-secondary mb-2" href="MainController?action=SeacrhProduct&search="><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a class="text-secondary mb-2" href="profile.jsp"><i class="fa fa-angle-right mr-2"></i>Profile</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}"><i class="fa fa-angle-right mr-2"></i>Order History</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=NavigateToCart"><i class="fa fa-angle-right mr-2"></i>My Cart</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=Sign out"><i class="fa fa-angle-right mr-2"></i>Sign out</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="text-secondary mb-2" href="signin.jsp"><i class="fa fa-angle-right mr-2"></i>Sign in</a>
+                                        <a class="text-secondary mb-2" href="signup.jsp"><i class="fa fa-angle-right mr-2"></i>Sign up</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
