@@ -275,6 +275,7 @@
                     <div class="col-lg-8">
                         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
                         <div class="bg-light p-30 mb-5 address-infor">
+                            ${requestScope.INFOR_MESSAGE}
                             <div class="row ">
                                 <div class="col-md-6 form-group">
                                     <label>Name</label>
@@ -366,12 +367,6 @@
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-md-6 mb-3 text-left">
-                                                            <label class="form-label ">Birthday</label>
-                                                            <div class="input-group">
-                                                                <input type="date" class="form-control" value="${sessionScope.CUSTOMER.dayOfBirth}" placeholder="Enter birthday" name="birthday">
-                                                            </div>
-                                                        </div>
                                                         <div class="col-md-6 mb-3 text-left">
                                                             <label class="form-label ">Phone</label>
                                                             <div class="input-group">

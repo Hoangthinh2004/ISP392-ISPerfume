@@ -8,6 +8,8 @@ package isp392.controllers;
 import isp392.cart.Cart;
 import isp392.cart.CartDAO;
 import isp392.cart.ViewCartDTO;
+import isp392.user.CustomerViewProfileDTO;
+import isp392.user.UserDAO;
 import java.io.IOException;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -31,6 +33,7 @@ public class checkOrderQuantityController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             CartDAO cartDAO = new CartDAO();
+            UserDAO userDAO = new UserDAO();
             Cart listChecked = (Cart) session.getAttribute("CHECK_LIST");
             String[] productDetailIDs = request.getParameterValues("productDetailID");
             Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
@@ -43,7 +46,16 @@ public class checkOrderQuantityController extends HttpServlet {
                 promotionID = promotionIDS.get("promotionID");
             }
             int price = Integer.parseInt(request.getParameter("orderPrice"));
-
+            
+            CustomerViewProfileDTO newCust = userDAO.getCustInfoByUserID(customerID);
+            boolean checkCustomerInfor = true;
+            if (!newCust.isProfileComplete()) {
+                checkCustomerInfor = false;
+                if (!checkCustomerInfor) {
+                    request.setAttribute("INFOR_MESSAGE", "You haven't filled in your personal information yet !!!");
+                }
+            }
+            
             boolean checkQuanity = false;
             for (ViewCartDTO product : listChecked.getCart().values()) {
                 int productDetailID = product.getProductDetailID();
@@ -55,7 +67,7 @@ public class checkOrderQuantityController extends HttpServlet {
                 }
                 checkQuanity = true;
             }
-            if (checkQuanity) {
+            if (checkQuanity && checkCustomerInfor) {
                 StringBuilder productDetailIDParams = new StringBuilder();
                 for (String id : productDetailIDs) {
                     if (productDetailIDParams.length() > 0) {
