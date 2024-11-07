@@ -39,8 +39,9 @@ public class NavigateProductDetailController extends HttpServlet {
         String url = "";
         HttpSession session = request.getSession();
         Object search = session.getAttribute("CURRENT_SEARCH");
+        Object cate = session.getAttribute("CURRENT_IDS");
         Map<String, Integer> category = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-        if (search == null && category == null) {
+        if (search == null && cate == null) {
             url = HOME;
         } else if (search != null) {
             url = ERROR_SEARCH;

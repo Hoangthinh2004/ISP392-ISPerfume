@@ -530,7 +530,7 @@
                                                 <a onclick="openDeleteModal(this, event)" class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                                 </c:otherwise>
                                             </c:choose>
-                                        <a class="btn btn-outline-dark btn-square" href="NavigateProductDetailController?categoryID=${product.categoryID}&productID=${product.productID}&sizeID=${product.sizeID}&productDetailID=${product.productDetailID}"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateRelatedProductDetail&categoryID=${product.categoryID}&productID=${product.productID}&sizeID=${product.sizeID}"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
