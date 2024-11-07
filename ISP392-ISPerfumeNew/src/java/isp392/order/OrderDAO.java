@@ -31,6 +31,7 @@ public class OrderDAO {
     private final String GET_LIST_ORDER_BY_STATUS = "SELECT * FROM Orders WHERE CustomerID = ? AND orderStatus = ?";
     private final String COUNT_ORDER_IS_PROCESSING = "SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus BETWEEN 1 AND 3";
     private final String COUNT_ORDER_BY_STATUS = "SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = ? AND  CustomerID = ?";
+    private final String COUNT_ORDER_BY_STATUS_V2 = "SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = ?";
 
     public int createOrder(OrderDTO order) throws ClassNotFoundException, SQLException {
         int orderID = 0;
@@ -313,17 +314,39 @@ public class OrderDAO {
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn!=null){
+            if (conn != null) {
 //                SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = ? AND  CustomerID = ?
                 ptm = conn.prepareStatement(COUNT_ORDER_BY_STATUS);
                 ptm.setInt(1, i);
                 ptm.setInt(2, custID);
                 rs = ptm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     result = rs.getInt("OrderID");
                 }
             }
-        }finally{
+        } finally {
+            DBUtils.closeConnection3(conn, ptm, rs);
+        }
+        return result;
+    }
+
+    public int getQuantityOrderByStatusV2(int i) throws ClassNotFoundException, SQLException {
+        int result = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+//            SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = ?
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_ORDER_BY_STATUS_V2);
+                ptm.setInt(1, i);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    result = rs.getInt("OrderID");
+                }
+            }
+        } finally {
             DBUtils.closeConnection3(conn, ptm, rs);
         }
         return result;

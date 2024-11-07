@@ -191,9 +191,9 @@
                                             </div>
                                         </div>
                                     </c:forEach>
-                                    <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                    <a href="MainController?action=NavigateBlog" class="nav-item nav-link">Blog</a>
                                     <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                                        <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                        <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link"> Order History</a>
                                     </c:if>
                                 </div>
                                 <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">          
@@ -368,14 +368,6 @@
                                                 <a class="dropdown-item" href="MainController?action=DescendingSortByPrice">Descending Price</a>
                                                 <a class="dropdown-item" href="MainController?action=AscendingSortByPrice">Ascending price</a>
                                                 <a class="dropdown-item" href="MainController?action=SortByPurchasing">Best Seller</a>
-                                            </div>
-                                        </div>
-                                        <div class="btn-group ml-2">
-                                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">10</a>
-                                                <a class="dropdown-item" href="#">20</a>
-                                                <a class="dropdown-item" href="#">30</a>
                                             </div>
                                         </div>
                                     </div>

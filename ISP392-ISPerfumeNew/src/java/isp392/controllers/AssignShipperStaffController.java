@@ -31,9 +31,12 @@ public class AssignShipperStaffController extends HttpServlet {
         try {
             int shipperID = Integer.parseInt(request.getParameter("shipperID"));
             int orderID = Integer.parseInt(request.getParameter("orderID"));
+            String email = request.getParameter("email");
             boolean checkAssign = dao.assignShipper(orderID,shipperID);
             if(checkAssign){
                 request.setAttribute("ASSIGN_SUCCESS", "ASSIGNED ORDER SUCCESSFULLY!");
+                url="SendEmailController?email="+email+"&orderID="+orderID+"&action=ConfirmEmail";
+                request.getRequestDispatcher(url).include(request, response);
                 url = SUCCESS;
             }
         } catch (Exception e) {

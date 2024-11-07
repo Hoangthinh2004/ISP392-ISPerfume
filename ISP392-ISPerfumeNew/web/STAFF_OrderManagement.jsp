@@ -61,12 +61,12 @@
                             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                         </div>
                         <div class="ms-3">
-                            <h6 class="mb-0">Jhon Doe</h6>
-                            <span>Admin</span>
+                            <h6 class="mb-0">${sessionScope.LOGIN_USER.name}</h6>
+                            <span>Staff</span>
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                         <a href="STAFF_OrderManagement.jsp" class="nav-item nav-link active"><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
+                        <a href="MainController?action=ManageOrderPage" class="nav-item nav-link active"><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
                         <a href="MainController?action=ShowAllBlogManager" class="nav-item nav-link "><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>                     
                     </div>
                 </nav>
@@ -84,88 +84,14 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <!--                    <form class="d-none d-md-flex ms-4" action="MainController" method="get">
-                                            <input class="form-control border-0" type="search" placeholder="Search" name="">
-                                            <button class="btn btn-primary" type="submit" name="action" value="" style="margin-left: 10px;">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                                                </svg>
-                                            </button>
-                                        </form>-->
                     <div class="navbar-nav align-items-center ms-auto">
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-envelope me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Message</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all message</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-bell me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Notificatin</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Profile updated</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">New user added</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Password changed</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all notifications</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <span class="d-none d-lg-inline-flex">John Doe</span>
+                                <span class="d-none d-lg-inline-flex">${sessionScope.LOGIN_USER.name}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
-                                <!--                                <a href="#" class="dropdown-item">Log Out</a>-->
-                                <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                <a href="MainController?action=Sign out" class="dropdown-item">Log Out</a>
                             </div>
                         </div>
                     </div>
@@ -287,7 +213,12 @@
                                                                                 <!--                                                                                <input type="text" name="productName" value="" class="form-control">                                                                   -->
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <input type="hidden" name="orderID" value="${order.orderID}" >
+                                                                                <input type="hidden" name="orderID" value="${order.orderID}">
+                                                                                <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                                                    <c:if test="${order.customerID == user.userID}">
+                                                                                        <input type="hidden" name="email" value="${user.email}">
+                                                                                    </c:if>
+                                                                                </c:forEach>
                                                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                                                                 <button type="submit" class="btn" name="action" value="AssignShipperStaff">Approve</button>
                                                                             </div>
