@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Manager | Brand</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -34,7 +34,7 @@
         <link href="dashmin/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="dashmin/css/style.css" rel="stylesheet">
+        <link href="dashmin/css/style.css" rel="stylesheet">    
     </head>
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
@@ -50,8 +50,8 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -61,6 +61,17 @@
                         <div class="ms-3">
                             <h6 class="mb-0">${sessionScope.LOGIN_USER.name}</h6>
                             <span>Manager</span>
+                        </div>
+                    </div>
+                    <div class="navbar-nav w-100">
+                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Dashboard</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item active">Brand Management</a>
+                                <a href="MainController?action=ViewPromotion" class="dropdown-item ">Promotion Management</a>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -110,26 +121,25 @@
                                             <input type="text" name="brandName" class="form-control" required>
                                         </div>
                                     </div>
-                                    
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label">Brand Description</label>
+                                        <label  class="col-sm-2 col-form-label">Brand Description</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="description" class="form-control" required>
+                                            <textarea name="description" class="form-control"></textarea>
                                         </div>
                                     </div>
-
                                     <!-- Image Upload -->
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label">Image</label>
                                         <div class="col-sm-10">
-                                            <!-- Use file input for image uploads -->
                                             <input type="file" name="brandImage" class="form-control" accept="image/*" required="">
                                         </div>
                                     </div>
-                                <!-- Submit Button -->
-                                    <button type="submit" class="btn btn-primary">CREATE</button>
-                                    <input type="hidden" name="search" value="${param.search}"/>
-                                    <a href="MainController?action=Search&search=" class="btn btn-primary">Back</a>
+                                    <div class="">
+                                        <!-- Submit Button -->
+                                        <button type="submit" class="btn btn-primary">CREATE</button>
+                                        <input type="hidden" name="search" value="${param.search}"/>
+                                        <a href="MainController?action=Search&search=" class="btn btn-primary">Back</a>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -137,17 +147,15 @@
                 </div>
                 <!-- Blank End -->
 
-
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>

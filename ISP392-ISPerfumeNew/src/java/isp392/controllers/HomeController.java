@@ -9,6 +9,7 @@ import isp392.brand.BrandDAO;
 import isp392.brand.BrandDTO;
 import isp392.brand.ViewBrandByCateDTO;
 import isp392.cart.CartDAO;
+import isp392.cart.ViewCartDTO;
 import isp392.category.CategoryDAO;
 import isp392.category.CategoryDTO;
 import isp392.product.ProductDAO;
@@ -30,10 +31,10 @@ import javax.servlet.http.HttpSession;
  * @author ThinhHoang
  */
 public class HomeController extends HttpServlet {
-    
+
     private static final String ERROR = "home.jsp";
     private static final String HOME = "home.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
@@ -44,40 +45,58 @@ public class HomeController extends HttpServlet {
             SizeDAO sizeDAO = new SizeDAO();
             CartDAO cartDAO = new CartDAO();
             ProductDAO productDAO = new ProductDAO();
-            
-            Map<String, Integer> IDs = new HashMap<>();   
+
+            Map<String, Integer> IDs = new HashMap<>();
             session.setAttribute("SIZE_IDS", IDs); //  storing sizeID 
-            
+
             Map<String, Integer> ids = new HashMap<>();
             session.setAttribute("CURRENT_IDS", ids); //set attribute to Category Controller
-            
+
             Map<String, Integer> home = new HashMap<>();
             session.setAttribute("HOME", home);
-            
+
             Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
             if (sizeIDS != null && !sizeIDS.isEmpty()) {
                 session.removeAttribute("SIZE_IDS");
             }
-            
+
             Map<String, Integer> brandIDS = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID");
             if (brandIDS != null && !brandIDS.isEmpty()) {
                 session.removeAttribute("CURRENT_BRANDID");
             }
-            
-            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID"); 
+
+            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
             if (CustomerIDS != null && !CustomerIDS.isEmpty()) {
                 int customerID = CustomerIDS.get("customerID");
                 int cartSize = cartDAO.getCartSize(customerID);
                 session.setAttribute("CART_SIZE", cartSize);
+
+                //Update product quantity when back from cart
+                String[] currentQuantity = request.getParameterValues("currentQuantity");
+                List<ViewCartDTO> cartList = cartDAO.getProductDetailID(customerID);
+                int productDetailID = 0;
+                int cartQuantity = 0;
+                for (int i = 0; i < currentQuantity.length; i++) {
+                    ViewCartDTO product = cartList.get(i);
+                    productDetailID = product.getProductDetailID();
+                    cartQuantity = product.getTotalQuantity();
+                    if (Integer.parseInt(currentQuantity[i]) != cartQuantity) {
+                        boolean updateNewQuantity = cartDAO.updateNewQuantity(productDetailID, Integer.parseInt(currentQuantity[i]));
+                        if (updateNewQuantity) {
+                            continue;
+                        }
+                    }
+                }
             }
-            
+
+            List<ViewProductDTO> listRecentProduct = productDAO.ListRecentProduct();
             List<CategoryDTO> listCategory = categoryDAO.getListCategory();
             List<BrandDTO> listBrand = brandDAO.getListBrand();
             List<SizeDTO> listSize = sizeDAO.getListSize();
             List<ViewBrandByCateDTO> listBrandByCate = brandDAO.getBrandByCate();
-            List<ViewProductDTO> listProduct = productDAO.getListFeaturedProduct();
-            List<ViewProductDTO> listProductRecent = productDAO.getListProductRecent();
-            session.setAttribute("LIST_FEATURED_PRODUCT", listProduct);                
+            List<ViewProductDTO> listFeaturedProduct = productDAO.getListFeaturedProduct();
+
+            session.setAttribute("LIST_FEATURED_PRODUCT", listFeaturedProduct);
             session.setAttribute("LIST_SIZE", listSize);
             session.setAttribute("LIST_CATEGORY", listCategory);
             session.setAttribute("LIST_BRAND", listBrand);

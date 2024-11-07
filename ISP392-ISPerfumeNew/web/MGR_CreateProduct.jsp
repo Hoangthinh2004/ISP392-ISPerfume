@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Manager | Product</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -36,6 +36,7 @@
 
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
+
     </head>
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
@@ -51,8 +52,8 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -64,10 +65,20 @@
                             <span>Manager</span>
                         </div>
                     </div>
+                    <div class="navbar-nav w-100">
+                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Dashboard</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item active">Product Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item ">Brand Management</a>
+                                <a href="MainController?action=ViewPromotion" class="dropdown-item ">Promotion Management</a>
+                            </div>
+                        </div>
+                    </div>
                 </nav>
             </div>
             <!-- Sidebar End -->
-
 
             <!-- Content Start -->
             <div class="content">
@@ -94,12 +105,14 @@
                     </div>
                 </nav>
                 <!-- Navbar End -->
+
+
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Create Form</h6>
+                                <h6 class="mb-4">Create Product Form</h6>
                                 <form action="CreateProductManager" method="post" enctype="multipart/form-data">
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Name</label>
@@ -120,15 +133,14 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Release date</label>
+                                        <label  class="col-sm-2 col-form-label">Release Year</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="releaaseDate" class="form-control" min="1900" max="2024">
+                                            <input type="number" name="releaaseDate" class="form-control input_field" min="1900" max="2024">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Fragrance</label>
                                         <div class="col-sm-10">
-                                            <!--                                            <input type="text" name="fregranceFamilies" class="form-control">-->
                                             <textarea name="fregranceFamilies" class="form-control"></textarea>
                                         </div>
                                     </div>
@@ -138,21 +150,23 @@
                                             <input type="file" name="brandImage" class="form-control" required="">
                                         </div>
                                     </div>
-                                    Brand <select name="brandID" class="form-select mb-3 form-control" aria-label="Default select example" required="">
+                                    Brand <select name="brandID" class="form-select mb-3 form-control bg-transparent" aria-label="Default select example" required="">
                                         <c:forEach var="brand" items="${sessionScope.BRAND_LIST_MANAGER}">
                                             <option value="${brand.brandID}">${brand.name}</option>
                                         </c:forEach>
                                     </select>
-                                    Category <select name="categoryID" class="form-select mb-3 form-control" aria-label="Default select example" required="">
+                                    Category <select name="categoryID" class="form-select mb-3 form-control bg-transparent" aria-label="Default select example" required="">
                                         <c:forEach var="cate" items="${sessionScope.CATEGORY_LIST_MANAGER}">
                                             <c:if test="${cate.categoryID!=4}">
                                                 <option value="${cate.categoryID}">${cate.name}</option>
                                             </c:if>
                                         </c:forEach>
                                     </select>
-                                    <button type="submit"class="btn btn-primary">CREATE</button>
-                                    <input type="hidden" name="search" value="${requestScope.SEARCH}">
-                                    <a href="MainController?action=SearchProduct&search=" class="btn btn-primary">Back</a>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit"class="btn btn-primary">CREATE</button>
+                                        <input type="hidden" name="search" value="${requestScope.SEARCH}">
+                                        <a href="MainController?action=SearchProduct&search=" class="btn btn-primary">Back</a>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -160,16 +174,15 @@
                 </div>
                 <!-- Blank End -->
 
-
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
-                            <div class="col-12 col-sm-6 text-center text-sm-end">                               
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                            <div class="col-12 col-sm-6 text-center text-sm-end">
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>

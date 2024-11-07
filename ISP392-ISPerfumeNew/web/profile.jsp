@@ -31,9 +31,7 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">    
-        <style>
-
-        </style>
+     
     </head>
     <body>
         <!-- Topbar Start -->
@@ -131,7 +129,7 @@
         <!--Profile form Start-->
         <div class="container-fluid">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Profile</span></h2>
-            ${requestScope.MESSAGE}
+            ${requestScope.MESSAGE} 
             <div class="row px-xl-5">
                 <div class="container mb-5"> 
                     <div class="row h-100 d-flex align-items-center justify-content-center">
@@ -141,6 +139,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label  class="form-label">Username</label>
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.name}" placeholder="Enter username" name="userName">
                                     </div>
                                 </div>
@@ -148,6 +147,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm- mb-3">
                                     <label class="form-label">Email</label>
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="email" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.email}" placeholder="Enter email" name="email">
                                     </div>
                                 </div>
@@ -155,6 +155,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm- mb-3">
                                     <label class="form-label">Address</label> 
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.detailAddress}" placeholder="Enter address" name="address">
                                     </div>
                                 </div> 
@@ -162,18 +163,21 @@
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label class="form-label">Area</label> 
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.area}" placeholder="Enter area" name="area">
                                     </div>
                                 </div>  
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label for="floatingInput3" class="form-label">District</label> 
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.district}" placeholder="Enter district" name="district">
                                     </div>
                                 </div>  
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label class="form-label">Ward</label> 
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.ward}" placeholder="Enter ward" name="ward">
                                     </div>
                                 </div>  
@@ -181,6 +185,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label class="form-label">Birthday</label>
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="date" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.dayOfBirth}" placeholder="Enter birthday" name="birthday">
                                     </div>
                                 </div>
@@ -188,6 +193,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label for="floatingInput3" class="form-label">Phone</label>
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.phoneError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.phone}" placeholder="Enter phone" name="phone">
                                     </div>
                                 </div>
@@ -204,10 +210,9 @@
                                             </svg>
                                         </span>
                                     </button>
-
                                     <div class="modal fade" id="UpdateProfile" tabindex="-1" aria-labelledby="UpdateProfileLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
-                                            <form action="MainController" method="POST">
+                                            <form action="MainController" method="get">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="UpdateProfileLabel">User Information</h5>
@@ -228,7 +233,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div class="row">
                                                             <div class="col-md-6 mb-3 text-left">
                                                                 <label class="form-label ">Address</label>
@@ -283,9 +287,7 @@
                                             </form>
                                         </div>
                                     </div>
-
                                 </div> 
-
                             </div>
                         </div>
                     </div>

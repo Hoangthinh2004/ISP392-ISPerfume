@@ -61,8 +61,8 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="STAFF_OrderManagement.jsp" class="nav-item nav-link "><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
-                        <a href="" class="nav-item nav-link active"><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>      
+                        <a href="MainController?action=ManageOrderPage" class="nav-item nav-link "><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
+                        <a href="MainController?action=ShowAllBlogManager" class="nav-item nav-link active"><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>                     
                     </div>
                 </nav>
             </div>
@@ -105,7 +105,7 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0 " style="height: auto !important">
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0 " style="height: auto !important; min-height: 540px;">
                         <div class="table-responsive">
                             <div class="col-sm-12 col-xl-12">
                                 <div class="bg-light rounded h-100 p-4">
@@ -209,11 +209,10 @@
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Manager | Product Detail</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -50,11 +50,12 @@
             <!-- Spinner End -->
 
 
+
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -69,7 +70,7 @@
                     <div class="navbar-nav w-100">
                         <a href="MainController?action=ListDashboard" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
@@ -93,13 +94,12 @@
                         <i class="fa fa-bars"></i>
                     </a>
                     <form class="d-none d-md-flex ms-4" action="MainController" method="get">
-                        <input type="hidden" name="productID" value="${param.productID}">
-                        <!--                        <input class="form-control border-0" type="text" placeholder="" name="">
-                                                <button class="btn btn-primary" type="submit" style="margin-left: 10px;" value="" name="action">
-                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                                                    </svg>
-                                                </button>-->
+                        <input class="form-control border-0" type="search" placeholder="Search product.." name="search">
+                        <button class="btn btn-primary" type="submit" name="action" value="Search product" style="margin-left: 10px;">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
 
@@ -120,7 +120,7 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0">
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0 "style="height: auto !important; min-height: 540px;" >
                         <!--                        <div class="col-md-6 text-center">-->
                         <!-- Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
@@ -242,15 +242,16 @@
                     </div>
                 </div>
                 <!-- Blank End -->
-                <!--                Footer Start -->
+                
+                <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>

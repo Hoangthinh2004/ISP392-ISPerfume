@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Manager | Promotion</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -55,8 +55,8 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -66,6 +66,17 @@
                         <div class="ms-3">
                             <h6 class="mb-0">${sessionScope.LOGIN_USER.name}</h6>
                             <span>Manager</span>
+                        </div>
+                    </div>
+                    <div class="navbar-nav w-100">
+                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Dashboard</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Search&search=" class="dropdown-item ">Brand Management</a>
+                                <a href="MainController?action=ViewPromotion" class="dropdown-item active">Promotion Management</a>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -84,6 +95,69 @@
                         <i class="fa fa-bars"></i>
                     </a>
                     <div class="navbar-nav align-items-center ms-auto">
+                        <!--                        <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <i class="fa fa-envelope me-lg-2"></i>
+                                                        <span class="d-none d-lg-inline-flex">Message</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item text-center">See all message</a>
+                                                    </div>
+                                                </div>
+                                                <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <i class="fa fa-bell me-lg-2"></i>
+                                                        <span class="d-none d-lg-inline-flex">Notificatin</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">Profile updated</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">New user added</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">Password changed</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item text-center">See all notifications</a>
+                                                    </div>
+                                                </div>-->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
@@ -107,45 +181,46 @@
                                 <c:set var="promotionError" value="${requestScope.PROMOTION_ERROR}" />
                                 <form action="MainController" method="GET">
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Promotion Name</label>
-                                        <div class="col-sm-10">
+                                        <label  class="col-sm-2 col-lg-4 col-form-label">Promotion Name</label>
+                                        <div class="col-sm-10 col-lg-8">
                                             <input type="text" class="form-control" name="promotionName" required=""> ${requestScope.PROMOTION_ERROR.promotionNameError}
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Description</label>
-                                        <div class="col-sm-10">
+                                        <label  class="col-sm-2 col-form-label col-lg-4">Description</label>
+                                        <div class="col-sm-10 col-lg-8">
                                             <textarea class="form-control" name="description" required=""> ${requestScope.PROMOTION_ERROR.descriptionError}</textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Start Date</label>
-                                        <div class="col-sm-10">
+                                        <label  class="col-sm-2 col-form-label col-lg-4">Start Date</label>
+                                        <div class="col-sm-10 col-lg-8">
                                             <input type="date" class="form-control" name="startDate" required="" min="<%= todayStr%>"> ${requestScope.PROMOTION_ERROR.startDateError}
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">End Date</label>
-                                        <div class="col-sm-10">
+                                        <label  class="col-sm-2 col-form-label col-lg-4">End Date</label>
+                                        <div class="col-sm-10 col-lg-8">
                                             <input type="date" class="form-control" name="endDate" required="" min="<%= todayStr%>"> ${requestScope.PROMOTION_ERROR.endDateError}
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Discount Percent</label> ${requestScope.PROMOTION_ERROR.discountPerError}
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="discountPer" required="" min="0" max="100" step="0.01" >
+                                        <label  class="col-sm-2 col-lg-4 col-form-label"><span>Discount Percent</span></label> ${requestScope.PROMOTION_ERROR.discountPerError}
+                                        <div class="col-sm-10 d-flex col-lg-8 align-items-center">
+                                            <input type="number" class="form-control input_field" name="discountPer" required="" min="0" max="100" style="flex: 1;">
+                                            <span style="margin-left: 5px; font-size: 1rem;">%</span>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label  class="col-sm-2 col-form-label">Condition</label> ${requestScope.PROMOTION_ERROR.conditionError}
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="condition" required="" min="0">
+                                        <label  class="col-sm-2 col-form-label col-lg-4">Condition</label> ${requestScope.PROMOTION_ERROR.conditionError}
+                                        <div class="col-sm-10 col-lg-8">
+                                            <input type="number" class="form-control input_field" name="condition" required="" min="0">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="statusSelect" class="col-sm-2 col-form-label">Status</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control" id="statusSelect" name="status"> ${requestScope.PROMOTION_ERROR.statusError}
+                                        <label for="statusSelect" class="col-sm-2 col-form-label col-lg-4">Status</label>
+                                        <div class="col-sm-10 col-lg-8">
+                                            <select class="form-control bg-transparent" id="statusSelect" name="status"> ${requestScope.PROMOTION_ERROR.statusError}
                                                 <!-- Kiểm tra nếu status là 1 thì chọn Available -->
                                                 <option value="1" ${status == 1 ? 'selected' : ''}>Available</option>
                                                 <!-- Kiểm tra nếu status là 0 thì chọn Unavailable -->
@@ -164,17 +239,15 @@
                 </div>
                 <!-- Blank End -->
 
-
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>

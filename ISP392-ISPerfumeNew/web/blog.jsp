@@ -70,7 +70,6 @@
                 transform: scale(1.05); /* Phóng to nhẹ khi hover */
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng bóng */
             }
-
         </style>
     </head>
     <body>
@@ -136,6 +135,44 @@
                                 <c:if test="${not empty sessionScope.CUSTOMER_ID}">
                                     <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link"> Order History</a>
                                 </c:if>
+                            </div>
+                            <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">Account</span>
+                                        </button>                                        
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                            <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="ml-1 text-primary">Cart</span>
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
                                 <c:choose>

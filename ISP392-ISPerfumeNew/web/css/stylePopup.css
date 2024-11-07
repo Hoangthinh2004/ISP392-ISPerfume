@@ -39,7 +39,7 @@ and open the template in the editor.
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     /* Semi-transparent black */
-    z-index: 1000;
+    z-index: 1100;
     /* Below the modal itself */
 }
 

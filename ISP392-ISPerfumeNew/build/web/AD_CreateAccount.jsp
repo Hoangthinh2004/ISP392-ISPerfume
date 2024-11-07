@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Admmin | Create Account</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -37,6 +37,7 @@
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
     </head>
+
     <body>
         <div class="container-fluid position-relative bg-white d-flex p-0">
             <!-- Spinner Start -->
@@ -52,7 +53,7 @@
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
                     <a href="MainController?action=SearchUser&search=${param.search}" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -60,9 +61,12 @@
                             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                         </div>
                         <div class="ms-3">
-                            <h6 class="mb-0">Jhon Doe</h6>
+                            <h6 class="mb-0">Name Adminitrator</h6>
                             <span>Admin</span>
                         </div>
+                    </div>
+                    <div class="navbar-nav w-100">
+                        <a href="MainController?search=&action=SearchUser" class="nav-item nav-link "><i class="fa fa-user me-2"></i>User Management</a>                   
                     </div>
                 </nav>
             </div>
@@ -152,6 +156,7 @@
                                             </select>
                                         </div>
                                     </div>                         
+                                    <div class="d-flex justify-content-between">
                                         <button type="submit"class="btn btn-primary" name="action" value="CreateEmployeeAccount">Create</button>
                                         <input type="hidden" name="search" value="${param.search}">
                                         <a href="MainController?action=SearchUser&search=" class="btn btn-primary">Back</a>
@@ -163,16 +168,15 @@
                 </div>
                 <!-- Blank End -->
 
-
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
-                            <div class="col-12 col-sm-6 text-center text-sm-end">                               
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                            <div class="col-12 col-sm-6 text-center text-sm-end">
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>
@@ -186,10 +190,6 @@
             <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </div>
 
-        <!-- JavaScript Libraries -->
-        <!-- JavaScript Libraries -->
-        <!-- JavaScript Libraries -->
-        <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="dashmin/lib/chart/chart.min.js"></script>

@@ -199,7 +199,6 @@ public class MainController extends HttpServlet {
     private static final String VIEW_ORDER_DETAIL_CUSTOMER = "viewOrderDetail";
     private static final String VIEW_ORDER_DETAIL_CUSTOMER_CONTROLLER = "viewOrderDetailController";
 
-    
     private static final String NAVIGATE_CHECK_OUT = "NavigateToCheckOut";
     private static final String NAVIGATE_CHECK_OUT_CONTROLLER = "NavigateToCheckOutController";
     
@@ -214,6 +213,9 @@ public class MainController extends HttpServlet {
     
     private static final String QUICK_ADD_TO_CART = "quickAddToCart";
     private static final String QUICK_ADD_TO_CART_CONTROLLER = "QuickAddToCartController";
+    
+    private static final String UPDATE_CHECK_OUT_ADDRESS = "UpdateCheckOutProfile";
+    private static final String UPDATE_CHECK_OUT_ADDRESS_CONTROLLER = "UpdateCheckOutProfileController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -353,6 +355,8 @@ public class MainController extends HttpServlet {
                 url = CHECK_QUANTITY_CONTROLLER;
             } else if(QUICK_ADD_TO_CART.equals(action)){
                 url = QUICK_ADD_TO_CART_CONTROLLER;
+            } else if(UPDATE_CHECK_OUT_ADDRESS.equals(action)){
+                url = UPDATE_CHECK_OUT_ADDRESS_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

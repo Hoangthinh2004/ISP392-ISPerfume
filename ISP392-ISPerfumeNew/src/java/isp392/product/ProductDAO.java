@@ -306,19 +306,20 @@ public class ProductDAO {
             + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = ? AND P.BrandID = ?";
     private static final String GET_CATEGORYID = "SELECT PC.CategoryID FROM Product_Category PC WHERE PC.CategoryID != 4 AND PC.ProductID = ?";
     private static final String LIST_FEATURED_PRODUCT = "SELECT TOP 8 PC.CategoryID, PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P "
-            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
-            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-            + "INNER JOIN Brands B ON B.BrandID = P.BrandID "
-            + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4"
-            + "ORDER BY PD.NumberOfPurchasing DESC";
-    private static final String LIST_RECENT_PRODUCT = "SELECT TOP 8 PC.CategoryID, PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name , PD.Image, PD.Price, P.ProName FROM Products P \n"
-            + "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID \n"
-            + "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID \n"
-            + "INNER JOIN Size S ON S.SizeID = PD.SizeID \n"
-            + "INNER JOIN Brands B ON B.BrandID = P.BrandID \n"
-            + "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4\n"
-            + "ORDER BY PD.importDate DESC";
+                                                    +   "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID "
+                                                    +   "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID "
+                                                    +   "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+                                                    +   "INNER JOIN Brands B ON B.BrandID = P.BrandID "
+                                                    +   "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4"
+                                                    +   "ORDER BY PD.NumberOfPurchasing DESC";
+    private static final String LIST_RECENT_PRODUCT = "SELECT TOP 8 PD.ProductDetailID, P.ProductID, PD.SizeID, PC.CategoryID, B.BrandID, B.BrandName, S.Name, PD.Image, PD.Price, P.ProName FROM Products P\n" +
+                                                    "INNER JOIN Product_Category PC ON P.ProductID = PC.ProductID " +
+                                                    "INNER JOIN ProductDetail PD ON PD.ProductID = P.ProductID " +
+                                                    "INNER JOIN Size S ON S.SizeID = PD.SizeID " +
+                                                    "INNER JOIN Brands B ON B.BrandID = P.BrandID " +
+                                                    "INNER JOIN Recent_Product RP ON RP.ProductDetailID = PD.ProductDetailID " +
+                                                    "WHERE P.Status = 1 AND PD.Status = 1 AND PC.CategoryID = 4 " +
+                                                    "ORDER BY RP.TimeAccess DESC";
 
     public List<ViewProductDTO> descendingProductByPrice(String search, List<Integer> sizeIDList) throws ClassNotFoundException, SQLException {
         List<ViewProductDTO> listProduct = new ArrayList<>();

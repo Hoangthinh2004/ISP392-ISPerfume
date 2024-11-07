@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Manager | Brand</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -66,12 +66,9 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <form action="MainController" method="POST" id="myForm">
-                            <a href="MGR_Dashboard.jsp" class="nav-item nav-link active" onclick="document.getElementById('myForm').submit(); return false;"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                            <input type="hidden" name="action" value="ListDashboard">
-                        </form>
+                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Dashboard</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
@@ -93,9 +90,14 @@
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
-                    <form action="MainController" method="GET" class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search" name="search">
-                        <input type="submit" name="action" value="Search" class="btn btn-sm btn-primary">
+
+                    <form class="d-none d-md-flex ms-4" action="MainController" method="GET">
+                        <input class="form-control border-0" type="search" placeholder="Search brand.." name="search" value="${param.search}">
+                        <button class="btn btn-primary" type="submit" name="action" value="Search" style="margin-left: 10px;">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </button>
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
                         
@@ -115,7 +117,7 @@
 
                 <!-- Blank Start -->
                 <div class="container-fluid pt-4 px-4">
-                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important">
+                    <div class="row vh-100 bg-light rounded justify-content-center mx-0" style="height: auto !important; min-height: 540px;">
                         <!--                                                <div class="col-md-6 text-center">
                                                  Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
@@ -207,18 +209,15 @@
                 </div>
                 <!-- Blank End -->
 
-
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink.
-                                If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>
