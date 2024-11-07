@@ -284,18 +284,45 @@
         </div>
         <!--Pop-up End-->
 
-
         <!-- Breadcrumb Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
                         <a class="breadcrumb-item text-dark" href="MainController?action=HomeController">Home</a>
-                        <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
-                            <c:if test="${category.categoryID == requestScope.LIST_PRODUCT[0].categoryID}">
-                                <span class="breadcrumb-item active">${category.name}</span>
-                            </c:if>
-                        </c:forEach>
+                        <c:choose>
+                            <c:when test="${requestScope.BRAND != null}">
+                                <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
+                                    <c:if test="${sessionScope.LIST_BRAND_BY_CATE!= null}">
+                                        <c:if test="${category.categoryID == requestScope.CATEID}">
+                                            <a class="breadcrumb-item text-dark" href="MainController?action=Category&Category=${category.categoryID}">${category.name}</a>
+                                            <span class="breadcrumb-item active">${sessionScope.LIST_PRODUCT[0].brandName}</span>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${requestScope.BRA_NAME != null}">
+                                        <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
+                                            <c:if test="${category.categoryID == requestScope.CATEID}">
+                                                <a class="breadcrumb-item text-dark" href="MainController?action=Category&Category=${Category.categoryID}">${category.name}</a>
+                                                <c:if test="${category.categoryID == requestScope.CATEID}">
+                                                    <span class="breadcrumb-item text-dark">${requestScope.BRA_NAME}</span>
+                                                </c:if>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
+                                            <c:if test="${category.categoryID == sessionScope.LIST_PRODUCT[0].categoryID}">
+                                                <span class="breadcrumb-item active">${category.name}</span>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
                     </nav>
                 </div>
             </div>

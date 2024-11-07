@@ -3,71 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/STAFF_BlogManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_ProductManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_ProductDetailManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/checkout.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SignoutEmployee.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/SHIPPER_OrderManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateProduct.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/AD_CreateAccount.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SearchUserController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/cart/CartDAO.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/MainController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateBrand.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SendEmailController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/profile.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ForgetPasswordController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/forgotPassword.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/AD_AccountManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/orderStatus.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreatePromotion.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_Dashboard.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/cart.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/productDetail.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SigninEmployee.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_PromotionManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/STAFF_OrderManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AddToCartController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shoppingSearch.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateProductDetail.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_BrandManagement.jsp</file>
-        </group>
-        <group>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/STAFF_BlogManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_ProductManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_ProductDetailManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/checkout.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SignoutEmployee.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/SHIPPER_OrderManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateProduct.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/AD_CreateAccount.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SearchUserController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/cart/CartDAO.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/MainController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateBrand.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SendEmailController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/profile.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ForgetPasswordController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/forgotPassword.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/AD_AccountManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/orderStatus.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreatePromotion.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_Dashboard.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/cart.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/productDetail.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SigninEmployee.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_PromotionManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/STAFF_OrderManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AddToCartController.java</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/STAFF_BlogManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shoppingSearch.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateProductDetail.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_BrandManagement.jsp</file>
-        </group>
-        <group>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/productDetail.jsp</file>
             <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/signin.jsp</file>
             <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/singleBlog.jsp</file>
@@ -629,6 +564,27 @@
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/home.jsp</file>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/cart.jsp</file>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/blog.jsp</file>
+        </group>
+        <group>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CategoryController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateToCheckOutController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/checkout.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/HomeController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SizeFilterController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/checkOutController.java</file>
+        </group>
+        <group>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CategoryController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/productDetail.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/BrandFilterController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ViewProductDTO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/HomeController.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/home.jsp</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/brand/ViewBrandByCateDTO.java</file>
+            <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/category/CategoryDTO.java</file>
         </group>
     </open-files>
 </project-private>

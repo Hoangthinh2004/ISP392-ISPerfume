@@ -79,7 +79,9 @@ public class CategoryController extends HttpServlet {
             } else {
                 List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
                 session.setAttribute("LIST_PRODUCT", listProduct);
+                request.setAttribute("BRAND", listProduct);
             }
+            request.setAttribute("CATEID", categoryID); //store categoryID for Breadcrumb
             
             session.removeAttribute("BRAND_INFOR");
             url = SUCCESS;
