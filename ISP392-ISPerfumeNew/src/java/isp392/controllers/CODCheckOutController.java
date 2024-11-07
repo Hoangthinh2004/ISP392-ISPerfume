@@ -142,6 +142,8 @@ public class CODCheckOutController extends HttpServlet {
                     }
                 }
                 if (check) {
+                    request.setAttribute("EMAIL", email);
+                    request.setAttribute("PASSWORD", password);
                     url = "checkoutSuccess.jsp";
                 }
             }

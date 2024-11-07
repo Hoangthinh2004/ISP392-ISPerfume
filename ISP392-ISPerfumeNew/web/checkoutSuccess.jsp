@@ -53,30 +53,6 @@
                                 </button>
                             </form>
                         </div>
-                        <div class="d-inline-flex align-items-center d-block d-lg-none">
-                            <c:choose>
-                                <c:when test="${empty sessionScope.CUSTOMER_ID}">
-                                    <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
-                                        <i class="fas fa fa-user text-primary"></i>
-                                        <span class="ml-1 text-primary">Account</span>
-                                    </button>                                        
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                        <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
-                                        <i class="fas fa fa-user text-primary"></i>
-                                        <span class="ml-2"> ${sessionScope.CUSTOMER.name}</span>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                        <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>                          
-                        </div>
                     </div>
                 </div>
             </div>          
@@ -96,9 +72,13 @@
                 <div class="text-center">
                     <img src="img/success-icon-10-300x300.png" class="mb-3" alt="Success Icon" style="width: 100px; height: 100px;">
                     <h1 class="text-success mb-4">Order Successfully!</h1>
-                    <a class="btn btn-success text-uppercase px-4 py-2" href="MainController?action=HomeController">
-                        Continue Shopping
-                    </a>
+                    <form action="SigninEmployee" method="POST">
+                        <input type="hidden" name="Email" value="${requestScope.EMAIL}">
+                        <input type="hidden" name="Password" value="${requestScope.PASSWORD}">
+                        <button type="submit" class="btn btn-success text-uppercase px-4 py-2">
+                            Continue Shopping
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
