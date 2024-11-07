@@ -13,6 +13,7 @@ import isp392.promotion.PromotionDTO;
 import isp392.user.CustomerViewProfileDTO;
 import isp392.user.UserDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,9 +105,18 @@ public class NavigateToCheckOutController extends HttpServlet {
             }
             List<CustomerViewProfileDTO> custProfile = dao.getPersonalInfor(customerID);
             List<PromotionDTO> listPromotion = promotionDAO.getListPromotion();
+            List<PromotionDTO> listPromoAvailable = new ArrayList<>();
+            for (PromotionDTO promotion : listPromotion) {
+                if (totalPrice > promotion.getCondition()) {
+                    listPromoAvailable.add(promotion);
+                }
+            }
+            if (listPromoAvailable.isEmpty()) {
+                request.setAttribute("MESSAGE", "None of voucher available !");
+            }
             
             request.setAttribute("TOTAL_PRICE", totalPrice);
-            session.setAttribute("PROMOTION", listPromotion);
+            session.setAttribute("PROMOTION", listPromoAvailable);
             session.setAttribute("CHECK_LIST", listChecked);
             session.setAttribute("CUSTOMERINFOR", custProfile);
             url = CHECK_OUT_PAGE;
