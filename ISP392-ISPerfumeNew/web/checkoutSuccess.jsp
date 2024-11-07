@@ -66,16 +66,15 @@
                 </a>
             </div>
         </div>
-
         <div class="container-fluid pt-4 px-4">
             <div class="row bg-light rounded align-items-center justify-content-center mx-0 my-4 py-5 px-3">
                 <div class="text-center">
                     <img src="img/success-icon-10-300x300.png" class="mb-3" alt="Success Icon" style="width: 100px; height: 100px;">
                     <h1 class="text-success mb-4">Order Successfully!</h1>
-                    <form action="SigninEmployee" method="POST">
+                    <form action="MainController" method="POST">
                         <input type="hidden" name="Email" value="${requestScope.EMAIL}">
                         <input type="hidden" name="Password" value="${requestScope.PASSWORD}">
-                        <button type="submit" class="btn btn-success text-uppercase px-4 py-2">
+                        <button type="submit" name="action" value="Sign In" class="btn btn-success text-uppercase px-4 py-2">
                             Continue Shopping
                         </button>
                     </form>

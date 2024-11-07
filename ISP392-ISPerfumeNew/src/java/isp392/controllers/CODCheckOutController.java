@@ -13,8 +13,6 @@ import isp392.order.OrderDTO;
 import isp392.user.CustomerViewProfileDTO;
 import isp392.user.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -48,6 +46,7 @@ public class CODCheckOutController extends HttpServlet {
             if (promotions != null) {
                 promotionID = promotions.get("promotionID");
             }
+            
             int orderID = 0;
             String note = "";
             int staffID = userDAO.getstaffID();
@@ -153,7 +152,6 @@ public class CODCheckOutController extends HttpServlet {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

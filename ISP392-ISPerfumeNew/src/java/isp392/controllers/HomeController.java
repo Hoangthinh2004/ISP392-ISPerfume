@@ -73,17 +73,19 @@ public class HomeController extends HttpServlet {
 
                 //Update product quantity when back from cart
                 String[] currentQuantity = request.getParameterValues("currentQuantity");
-                List<ViewCartDTO> cartList = cartDAO.getProductDetailID(customerID);
-                int productDetailID = 0;
-                int cartQuantity = 0;
-                for (int i = 0; i < currentQuantity.length; i++) {
-                    ViewCartDTO product = cartList.get(i);
-                    productDetailID = product.getProductDetailID();
-                    cartQuantity = product.getTotalQuantity();
-                    if (Integer.parseInt(currentQuantity[i]) != cartQuantity) {
-                        boolean updateNewQuantity = cartDAO.updateNewQuantity(productDetailID, Integer.parseInt(currentQuantity[i]));
-                        if (updateNewQuantity) {
-                            continue;
+                if (currentQuantity != null) {
+                    List<ViewCartDTO> cartList = cartDAO.getProductDetailID(customerID);
+                    int productDetailID = 0;
+                    int cartQuantity = 0;
+                    for (int i = 0; i < currentQuantity.length; i++) {
+                        ViewCartDTO product = cartList.get(i);
+                        productDetailID = product.getProductDetailID();
+                        cartQuantity = product.getTotalQuantity();
+                        if (Integer.parseInt(currentQuantity[i]) != cartQuantity) {
+                            boolean updateNewQuantity = cartDAO.updateNewQuantity(productDetailID, Integer.parseInt(currentQuantity[i]));
+                            if (updateNewQuantity) {
+                                continue;
+                            }
                         }
                     }
                 }
@@ -95,7 +97,7 @@ public class HomeController extends HttpServlet {
             List<SizeDTO> listSize = sizeDAO.getListSize();
             List<ViewBrandByCateDTO> listBrandByCate = brandDAO.getBrandByCate();
             List<ViewProductDTO> listFeaturedProduct = productDAO.getListFeaturedProduct();
-            
+
             session.setAttribute("LIST_FEATURED_PRODUCT", listFeaturedProduct);
             session.setAttribute("LIST_SIZE", listSize);
             session.setAttribute("LIST_CATEGORY", listCategory);
