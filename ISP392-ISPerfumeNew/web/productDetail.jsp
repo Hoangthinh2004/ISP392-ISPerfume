@@ -10,13 +10,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>ISPERFUME | Product Detail</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -64,7 +64,7 @@
                 font-size: 18px;
                 max-width: 400px; 
                 position: fixed; 
-                top: 20px; 
+                top: 100px; 
                 right: 20px;
                 z-index: 1050; 
                 border: 1px solid transparent;
@@ -75,7 +75,6 @@
                 color: #155724;
             }
 
-            /* Thanh progress bar bên trong alert */
             .progress-bar-timer {
                 border-radius: 24px;
                 position: absolute;
@@ -161,16 +160,14 @@
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
-                        <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
-                        <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
-                        <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
-                        <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
+                        <span class="text-primary ml-3"><i class="fa fa-envelope mr-2"></i>isperfume1803@gmail.com</span>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
+                    <span class="text-primary text- ml-3 d-none d-lg-inline" ><i class="fa fa-map-marker-alt mr-2"></i>123 D1 Street, Thu Duc, HCM</span>
                     <div class="d-inline-flex align-items-center justify-content-between">  
                         <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
-                            <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                            <form action="MainController" method="get" class="w-100 d-flex mb-2 mb-lg-0">
                                 <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
                                 <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
                                     <i class="fa fa-search"></i>
@@ -222,12 +219,12 @@
         <!-- Topbar End -->
 
 
+
         <!-- Navbar Start -->
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block mt-2">
                     <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
-                        <i class="fa fa-leaf"></i>
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
@@ -239,23 +236,23 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
+                                <a href="MainController?action=HomeController" class="nav-item nav-link">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <div class="nav-item dropdown">
                                         <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
+                                            <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="btn dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
                                             <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
                                                 <c:if test="${Category.categoryID == brand.categoryID}">
-                                                    <a href="MainController?action=Category&CategoryID=${Category.categoryID}&brandID=${brand.brandID}" class="dropdown-item">${brand.brandName}</a>
+                                                    <a href="MainController?action=Category&CategoryID=${Category.categoryID}&brandID=${brand.brandID}" class="dropdown-item btn">${brand.brandName}</a>
                                                 </c:if>
                                             </c:forEach>
                                         </div>
                                     </div>
                                 </c:forEach>
-                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
+                                <a href="MainController?action=NavigateBlog" class="nav-item nav-link">Blog</a>
                                 <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
+                                    <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link"> Order History</a>
                                 </c:if>
                             </div>
                             <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
@@ -312,6 +309,15 @@
         <!-- Navbar End -->
 
         <!--Pop-up start-->
+        <c:if test="${not empty requestScope.MESSAGE}">
+            <div class="alert alert-success alert-dismissible fade show fade-out" role="alert" id="autoDismissAlert" >
+                <i class="fa fa-check-circle me-2"></i> ${requestScope.MESSAGE}
+                <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="progress-bar-timer bg-success" id="progressBar"></div>
+            </div>
+        </c:if>
         <div id="modalOverlay" class="modal-overlay" style="display: none;">
             <div id="deleteConfirmation" class="card">
                 <div class="card-content">
@@ -331,15 +337,7 @@
                 </button>
             </div>
         </div>
-        <c:if test="${not empty requestScope.MESSAGE}">
-            <div class="alert alert-success alert-dismissible fade show fade-out" role="alert" id="autoDismissAlert" >
-                <i class="fa fa-check-circle me-2"></i> ${requestScope.MESSAGE}
-                <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close">
-                    <i class="fa fa-times"></i>
-                </button>
-                <div class="progress-bar-timer bg-success" id="progressBar"></div>
-            </div>
-        </c:if>
+
         <!--Pop-up End-->
 
 
@@ -418,7 +416,7 @@
                                         document.querySelector('.btn-minus').addEventListener('click', function () {
                                             let input = document.getElementById('quantityInput');
                                             let currentValue = parseInt(input.value);
-                                            if (currentValue > 1) { // Không cho phép giảm xuống dưới 1
+                                            if (currentValue > 1) {
                                                 input.value = currentValue - 1;
                                             }
                                         });
@@ -441,23 +439,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
-                                <div class="d-flex pt-2">
-                                    <strong class="text-dark mr-2">Share on:</strong>
-                                    <div class="d-inline-flex">
-                                        <a class="text-dark px-2" href="">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
-                                        <a class="text-dark px-2" href="">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                        <a class="text-dark px-2" href="">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
-                                        <a class="text-dark px-2" href="">
-                                            <i class="fab fa-pinterest"></i>
-                                        </a>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -479,27 +461,7 @@
                                         <h5 class="mb-3">Release Date:  ${product.releaseDate}</h5>
                                         <h5 class="mb-3">Fragrance Families: ${product.fragranceFamilies}</h5>
                                     </div>
-                                    <div class="tab-pane fade" id="tab-pane-3">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h4 class="mb-4">1 review for "Product Name"</h4>
-                                                <div class="media mb-4">
-                                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                                    <div class="media-body">
-                                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                                        <div class="text-primary mb-2">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                            <i class="far fa-star"></i>
-                                                        </div>
-                                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -552,67 +514,41 @@
             <div class="row px-xl-5 pt-5">
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                    <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                    <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
                 </div>
-                <div class="col-lg-8 col-md-12">
+                <div class="col-lg-3 col-md-12 mb-5 pr-3 pr-xl-5">                 
+                </div>
+                <div class="col-lg-5 col-md-12">
                     <div class="row">
-                        <div class="col-md-4 mb-5">
+                        <div class="col-md-6 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                                <a class="text-secondary mb-2" href="MainController?action=HomeController"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-secondary mb-2" href="MainController?action=NavigateBlog"><i class="fa fa-angle-right mr-2"></i>Blog</a>
+                                <a class="text-secondary mb-2" href="MainController?action=SeacrhProduct&search="><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-5">
+                        <div class="col-md-6 mb-5">
                             <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
                             <div class="d-flex flex-column justify-content-start">
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                                <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-5">
-                            <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                            <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-                            <form action="">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Your Email Address">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary">Sign Up</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-                            <div class="d-flex">
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a class="text-secondary mb-2" href="profile.jsp"><i class="fa fa-angle-right mr-2"></i>Profile</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}"><i class="fa fa-angle-right mr-2"></i>Order History</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=NavigateToCart"><i class="fa fa-angle-right mr-2"></i>My Cart</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=Sign out"><i class="fa fa-angle-right mr-2"></i>Sign out</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="text-secondary mb-2" href="signin.jsp"><i class="fa fa-angle-right mr-2"></i>Sign in</a>
+                                        <a class="text-secondary mb-2" href="signup.jsp"><i class="fa fa-angle-right mr-2"></i>Sign up</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
-                <div class="col-md-6 px-xl-0">
-                    <p class="mb-md-0 text-center text-md-left text-secondary">
-                        &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
-                        by
-                        <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
-                    </p>
-                </div>
-                <div class="col-md-6 px-xl-0 text-center text-md-right">
-                    <img class="img-fluid" src="img/payments.png" alt="">
                 </div>
             </div>
         </div>
@@ -649,7 +585,7 @@
                                                     }
                                                     function openDeleteModal(button, event) {
                                                         event.preventDefault();
-                                                        deleteButtonRef = button; // Store the reference to the delete button
+                                                        deleteButtonRef = button;
 
                                                         // Show the modal
                                                         document.getElementById('deleteConfirmation').style.display = 'block';
@@ -657,24 +593,31 @@
                                                     }
 
                                                     function cancelDelete() {
-                                                        // Hide the modal and overlay
                                                         document.getElementById('deleteConfirmation').style.display = 'none';
                                                         document.getElementById('modalOverlay').style.display = 'none';
                                                     }
 
-                                                    var duration = 5000;
-                                                    var progressBar = document.getElementById('progressBar');
-                                                    var alertElement = document.getElementById('autoDismissAlert');
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        var duration = 5000;
+                                                        var progressBar = document.getElementById('progressBar');
+                                                        var alertElement = document.getElementById('autoDismissAlert');
 
-                                                    progressBar.style.transitionDuration = duration + 'ms';
-                                                    progressBar.style.width = '0%';
+                                                        progressBar.style.width = '100%';
 
-                                                    setTimeout(function () {
-                                                        alertElement.classList.add('hide');
+                                                        requestAnimationFrame(function () {
+                                                            setTimeout(function () {
+                                                                progressBar.style.transitionDuration = duration + 'ms';
+                                                                progressBar.style.width = '0%';
+                                                            }, 10);
+                                                        });
+
                                                         setTimeout(function () {
-                                                            alertElement.remove();
-                                                        }, 200);
-                                                    }, duration);
+                                                            alertElement.classList.add('hide');
+                                                            setTimeout(function () {
+                                                                alertElement.remove();
+                                                            }, 200);
+                                                        }, duration);
+                                                    });
 
         </script>
 

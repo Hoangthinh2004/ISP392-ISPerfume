@@ -1,15 +1,17 @@
 <%-- 
-    Document   : forgetPassword
-    Created on : Oct 5, 2024, 9:48:46 AM
+    Document   : checkoutSuccess
+    Created on : Nov 7, 2024, 9:23:58 AM
     Author     : User
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ISPERFUME | Forgot Password</title>
+        <title>ISPERFUME | Checkout Success</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
@@ -73,30 +75,13 @@
                                         <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
                                     </div>
                                 </c:otherwise>
-                            </c:choose>
-                            <c:choose>
-                                <c:when test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="badge text-primary border border-primary rounded-circle ml-1" style="padding-bottom: 2px; top: 0">${sessionScope.CART_SIZE}</span>
-                                    </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <button class="btn btn-sm d-flex align-items-center" onclick="openDeleteModal(this, event)">
-                                        <i class="fas fa-shopping-cart text-primary"></i>
-                                        <span class="ml-1 text-primary">Cart</span>
-                                    </button>
-                                </c:otherwise>
-                            </c:choose>
+                            </c:choose>                          
                         </div>
                     </div>
                 </div>
             </div>          
         </div>
         <!-- Topbar End -->
-
-
-        <!-- Logo Start -->
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
             <div class="col-lg-4 justify-content-center text-center">
                 <a href="MainController?action=HomeController" class="text-decoration-none">
@@ -106,49 +91,16 @@
             </div>
         </div>
 
-        <!-- Logo End -->
-
-
-        <!--Sigin in form Start-->
-        <div class="container-fluid">
-            <div class="row px-xl-5">
-                <div class="col-lg-12 mb-5">
-                    <div class="row h-100 align-items-center justify-content-center">
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                            <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3" style="padding-bottom: 15px !important; width: 455px;">
-                                <form action="MainController" method="get">
-                                    <div class="d-flex align-items-center justify-content-between mb-3">
-                                        <h3 class="text-primary"></i>Forgot Password</h3>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <label for="floatingInput">Email</label>
-                                        <input type="email" class="form-control" id="floatingInput"
-                                               placeholder="Enter your email" name="emailReset">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="action" value="ForgetPassword">Send OTP</button>
-                                    <p class="text-left mb-0">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
-                                    <p class="text-left mb-0">Do you already have an Account? <a href="signin.jsp">Sign In</a></p>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+        <div class="container-fluid pt-4 px-4">
+            <div class="row bg-light rounded align-items-center justify-content-center mx-0 my-4 py-5 px-3">
+                <div class="text-center">
+                    <img src="img/success-icon-10-300x300.png" class="mb-3" alt="Success Icon" style="width: 100px; height: 100px;">
+                    <h1 class="text-success mb-4">Order Successfully!</h1>
+                    <a class="btn btn-success text-uppercase px-4 py-2" href="MainController?action=HomeController">
+                        Continue Shopping
+                    </a>
                 </div>
             </div>
         </div>
-        <!--Sigin in form End-->
-        
-        
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
-
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
     </body>
 </html>

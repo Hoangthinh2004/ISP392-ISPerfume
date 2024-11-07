@@ -11,13 +11,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>ISPERFUME | Cart</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -34,7 +34,6 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/stylePopup.css" rel="stylesheet">
         <style>
-            /* Ẩn checkbox mặc định */
             input[type="checkbox"] {
                 -webkit-appearance: none;
                 -moz-appearance: none;
@@ -46,13 +45,11 @@
                 position: relative;
             }
 
-            /* Tạo hiệu ứng khi checkbox được chọn */
             input[type="checkbox"]:checked {
                 background-color: orange;
                 border-color: orange;
             }
 
-            /* Tạo dấu tích (checkmark) khi checkbox được chọn */
             input[type="checkbox"]:checked::after {
                 content: "";
                 position: absolute;
@@ -64,10 +61,65 @@
                 border-width: 0 2px 2px 0;
                 transform: rotate(45deg);
             }
+            .btn-close {
+                background: none;
+                border: none;
+                font-size: 1.5rem; 
+                color: #6c757d; 
+                transition: color 0.2s ease;
+                position: absolute;
+                right: 15px; 
+                top: 50%;
+                transform: translateY(-50%); 
+                cursor: pointer;
+            }
+
+            .btn-close:hover {
+                color: #000;
+            }
+
+            .fade-out {
+                opacity: 1;
+                transition: opacity 0.3s ease-out;
+            }
+
+            .fade-out.hide {
+                opacity: 0;
+            }
+
+            .alert {
+                padding: 20px 30px;
+                font-size: 18px;
+                max-width: 400px; 
+                position: fixed; 
+                top: 20px; 
+                right: 20px;
+                z-index: 1050; 
+                border: 1px solid transparent;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-color: #c3e6cb;
+                color: #e67e22;
+            }
+
+            .progress-bar-timer {
+                border-radius: 24px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 8px;
+                width: 100%;
+                transition: width linear;
+            }
+
+            .alert-dismissible {
+                padding-right: 60px; 
+            }
+
         </style>
     </head>
     <body>
-        <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+        <div class="container-fluid bg-dark text-secondary mb-4 pt-5">
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
                 <div class="col-lg-4 justify-content-center text-center">
                     <a href="HomeController" class="text-decoration-none">
@@ -96,15 +148,25 @@
                 </button>
             </div>
         </div>
+
+        <c:if test="${not empty requestScope.MESSAGE}">
+            <div class="alert alert-warning alert-dismissible fade show fade-out" role="alert" id="autoDismissAlert" >
+                <i class="fa fa fa-exclamation-circle me-2"></i> ${requestScope.MESSAGE}
+                <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="progress-bar-timer bg-warning" id="progressBar"></div>
+            </div>
+        </c:if>
         <!-- Pop-up End -->
 
 
         <!-- Cart Start -->
-        ${requestScope.MESSAGE}
+
         <form action="MainController" method="POST">
             <div class="container-fluid">
                 <div class="row px-xl-5">
-                    <div class="col-lg-8 table-responsive mb-5">
+                    <div class="col-lg-8 table-responsive mb-2">
                         <table class="table table-light table-borderless table-hover text-center mb-0">
                             <thead class="thead-dark">
                                 <tr>
@@ -168,8 +230,8 @@
                                             </button>                                       
                                         </td>
                                     </tr>
-                                </c:forEach>
-                            </tbody>
+                                </c:forEach>                         
+                            </tbody>                            
                         </table>
                     </div>
                     <div class="col-lg-4">                    
@@ -201,35 +263,14 @@
                                 <button  type="submit" name="action" class="btn btn-block btn-primary font-weight-bold my-3 py-3" value="NavigateToCheckOut">Proceed To Checkout</button>
                             </div>
                         </div>
-                        <button type="submit" name="action" value="HomeController">Continue Shopping</button>
                     </div>
+                    <button type="submit" name="action" value="HomeController" class="btn btn-primary py-3">Continue Shopping</button>
                 </div>
             </div>
         </form>
         <!-- Cart End -->
 
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
-            <div class="row px-xl-5 pt-5">
-                <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Đ. D1</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>0384767323</p>
-                </div>
-            </div>
-            <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
-                <div class="col-md-6 px-xl-0">
-                    <p class="mb-md-0 text-center text-md-left text-secondary">
-                        <a class="text-primary" href="">ISPerfume</a>
-                    </p>
-                </div>
-                <div class="col-md-6 px-xl-0 text-center text-md-right">
-                    <img class="img-fluid" src="img/payments.png" alt="">
-                </div>
-            </div>           
-        </div>
-        <!-- Footer End -->
+
 
 
         <!-- Back to Top -->
@@ -248,6 +289,8 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
         <script>
                                                 window.onload = function () {
                                                     updateCartTotal();
@@ -354,7 +397,27 @@
                                                     document.getElementById('deleteConfirmation').style.display = 'none';
                                                     document.getElementById('modalOverlay').style.display = 'none';
                                                 }
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    var duration = 5000;
+                                                    var progressBar = document.getElementById('progressBar');
+                                                    var alertElement = document.getElementById('autoDismissAlert');
 
+                                                    progressBar.style.width = '100%';
+
+                                                    requestAnimationFrame(function () {
+                                                        setTimeout(function () {
+                                                            progressBar.style.transitionDuration = duration + 'ms';
+                                                            progressBar.style.width = '0%';
+                                                        }, 10);
+                                                    });
+
+                                                    setTimeout(function () {
+                                                        alertElement.classList.add('hide');
+                                                        setTimeout(function () {
+                                                            alertElement.remove();
+                                                        }, 200);
+                                                    }, duration);
+                                                });
 
         </script>
 

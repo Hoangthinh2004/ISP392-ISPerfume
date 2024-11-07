@@ -16,7 +16,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +61,7 @@
                             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                         </div>
                         <div class="ms-3">
-                            <h6 class="mb-0">Name Adminitrator</h6>
+                            <h6 class="mb-0">${sessionScope.LOGIN_USER.name}</h6>
                             <span>Admin</span>
                         </div>
                     </div>
@@ -84,15 +84,13 @@
                         <i class="fa fa-bars"></i>
                     </a>
                     <div class="navbar-nav align-items-center ms-auto">
-                        
+
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
                                 <span class="d-none d-lg-inline-flex">${sessionScope.LOGIN_USER.name}</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
+                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">                               
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
@@ -104,7 +102,7 @@
                     <div class="row vh-100 bg-light rounded justify-content-center mx-0">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Create Account Management</h6>
+                                <h6 class="mb-4">Create Account</h6>
                                 <c:set var="userError" value="${requestScope.USER_ERROR}" />
 
                                 <form action="MainController" method="post">
@@ -125,21 +123,21 @@
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Phone</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="phone" required="" class="form-control" placeholder="${requestScope.USER_ERROR.phoneError}" maxlength="10">
+                                            <input type="number" name="phone" required="" class="form-control input_field" placeholder="${requestScope.USER_ERROR.phoneError}" maxlength="10">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Password</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="password" required="" class="form-control" placeholder="${requestScope.USER_ERROR.passwordError}">
+                                            <input type="password" name="password" required="" class="form-control" placeholder="${requestScope.USER_ERROR.passwordError}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="statusSelect" class="col-sm-2 col-form-label">Status</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="statusSelect" name="status"> ${requestScope.USER_ERROR.statusError}
+                                            <select class="form-control bg-transparent" id="statusSelect" name="status"> ${requestScope.USER_ERROR.statusError}
                                                 <option value="1" ${status == 1 ? 'selected' : ''}>Available</option>
                                                 <option value="0" ${status == 0 ? 'selected' : ''}>Unavailable</option>
                                             </select>
@@ -148,7 +146,7 @@
                                     <div class="row mb-3">
                                         <label for="statusSelect" class="col-sm-2 col-form-label">Role</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="statusSelect" name="roleID"> ${requestScope.USER_ERROR.roleIDError}
+                                            <select class="form-control bg-transparent" id="statusSelect" name="roleID"> ${requestScope.USER_ERROR.roleIDError}
                                                 <option value="2" ${roleID == 2 ? 'selected' : ''}>Shipper</option>
                                                 <option value="3" ${roleID == 3 ? 'selected' : ''}>Staff</option>
                                                 <option value="4" ${roleID == 4 ? 'selected' : ''}>Manager</option>
@@ -160,47 +158,47 @@
                                         <button type="submit"class="btn btn-primary" name="action" value="CreateEmployeeAccount">Create</button>
                                         <input type="hidden" name="search" value="${param.search}">
                                         <a href="MainController?action=SearchUser&search=" class="btn btn-primary">Back</a>
-                                    ${requestScope.USER_ERROR.error}
+                                        ${requestScope.USER_ERROR.error}
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Blank End -->
+                    <!-- Blank End -->
 
-                <!-- Footer Start -->
-                <div class="container-fluid pt-4 px-4">
-                    <div class="bg-light rounded-top p-4">
-                        <div class="row">
-                            <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">ISPERFUME</a>
-                            </div>
-                            <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+                    <!-- Footer Start -->
+                    <div class="container-fluid pt-4 px-4">
+                        <div class="bg-light rounded-top p-4">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 text-center text-sm-start">
+                                    &copy; <a href="#">ISPERFUME</a>
+                                </div>
+                                <div class="col-12 col-sm-6 text-center text-sm-end">
+                                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Footer End -->
                 </div>
-                <!-- Footer End -->
+                <!-- Content End -->
+
+
+                <!-- Back to Top -->
+                <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
             </div>
-            <!-- Content End -->
 
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="dashmin/lib/chart/chart.min.js"></script>
+            <script src="dashmin/lib/easing/easing.min.js"></script>
+            <script src="dashmin/lib/waypoints/waypoints.min.js"></script>
+            <script src="dashmin/lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="dashmin/lib/tempusdominus/js/moment.min.js"></script>
+            <script src="dashmin/lib/tempusdominus/js/moment-timezone.min.js"></script>
+            <script src="dashmin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-            <!-- Back to Top -->
-            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="dashmin/lib/chart/chart.min.js"></script>
-        <script src="dashmin/lib/easing/easing.min.js"></script>
-        <script src="dashmin/lib/waypoints/waypoints.min.js"></script>
-        <script src="dashmin/lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="dashmin/lib/tempusdominus/js/moment.min.js"></script>
-        <script src="dashmin/lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="dashmin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-        <!-- Template Javascript -->
-        <script src="dashmin/js/main.js"></script>
+            <!-- Template Javascript -->
+            <script src="dashmin/js/main.js"></script>
     </body>
 </html>

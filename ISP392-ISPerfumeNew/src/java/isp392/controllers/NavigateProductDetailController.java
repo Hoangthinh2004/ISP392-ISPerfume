@@ -73,7 +73,15 @@ public class NavigateProductDetailController extends HttpServlet {
             for (ProductDetailDTO product : listPriceBySize) {
                 productDetailID = product.getProductDetailID();
             }
-            
+
+            int customerID = 0;
+            if (CustomerIDS != null && !CustomerIDS.isEmpty()) {
+                customerID = CustomerIDS.get("customerID");
+                boolean checkExist = productDetailDAO.checkExistRecentProduct(productDetailID);
+                if (!checkExist) {
+                    productDetailDAO.addRecentProduct(productDetailID, customerID);
+                }                
+            }
             List<ViewProductDTO> sizeAvailable = sizeDAO.getAvailableSize(productID);
             if (sizeAvailable.size() > 0) {
                 session.setAttribute("AVAILABLE_SIZE", sizeAvailable);

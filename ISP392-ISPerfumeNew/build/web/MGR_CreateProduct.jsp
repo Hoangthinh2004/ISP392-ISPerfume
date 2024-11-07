@@ -16,7 +16,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,8 +91,8 @@
                         <i class="fa fa-bars"></i>
                     </a>
                     <div class="navbar-nav align-items-center ms-auto">
-                        
-                        
+
+
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
@@ -162,10 +162,10 @@
                                             </c:if>
                                         </c:forEach>
                                     </select>
-                                    <div class="d-flex justify-content-end">
+                                    <div class="d-flex justify-content-between">
                                         <button type="submit"class="btn btn-primary">CREATE</button>
                                         <input type="hidden" name="search" value="${requestScope.SEARCH}">
-                                        <a href="MainController?action=SearchProduct&search=" class="btn btn-primary">Back</a>
+                                        <a href="MainController?action=Manage_Product_Page" class="btn btn-primary">Back</a>
                                     </div>
                                 </form>
                             </div>

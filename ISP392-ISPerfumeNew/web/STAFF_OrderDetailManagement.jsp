@@ -17,7 +17,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -243,6 +243,11 @@
                                                             </c:if>
                                                         </c:forEach>
                                                     </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 d-flex justify-content-end align-items-center mt-5">
+                                                    <a class="btn btn-primary " href="MainController?action=ManageOrderPage">
+                                                        Back
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
