@@ -111,7 +111,7 @@
                 background-color: orange; 
                 color: white
             }
-           
+
 
             .product-img {
                 position: relative;
@@ -340,7 +340,6 @@
                 <div class="progress-bar-timer bg-success" id="progressBar"></div>
             </div>
         </c:if>
-
         <!--Pop-up End-->
 
 
@@ -663,19 +662,19 @@
                                                         document.getElementById('modalOverlay').style.display = 'none';
                                                     }
 
-                                                var duration = 5000;
-                                                var progressBar = document.getElementById('progressBar');
-                                                var alertElement = document.getElementById('autoDismissAlert');
+                                                    var duration = 5000;
+                                                    var progressBar = document.getElementById('progressBar');
+                                                    var alertElement = document.getElementById('autoDismissAlert');
 
-                                                progressBar.style.transitionDuration = duration + 'ms';
-                                                progressBar.style.width = '0%';
+                                                    progressBar.style.transitionDuration = duration + 'ms';
+                                                    progressBar.style.width = '0%';
 
-                                                setTimeout(function () {
-                                                    alertElement.classList.add('hide');
                                                     setTimeout(function () {
-                                                        alertElement.remove();
-                                                    }, 200);
-                                                }, duration);
+                                                        alertElement.classList.add('hide');
+                                                        setTimeout(function () {
+                                                            alertElement.remove();
+                                                        }, 200);
+                                                    }, duration);
 
         </script>
 

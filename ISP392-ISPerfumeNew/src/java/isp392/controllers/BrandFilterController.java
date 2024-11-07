@@ -55,9 +55,14 @@ public class BrandFilterController extends HttpServlet {
                 List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
                 session.setAttribute("LIST_PRODUCT", listProduct);
 
+                String braName ="";
                 List<BrandDTO> brandInfor = brandDAO.showBrandInfor(brandID);
+                for (BrandDTO brand : brandInfor) {
+                    braName = brand.getName();
+                }
                 session.setAttribute("BRAND_INFOR", brandInfor);
-
+                request.setAttribute("BRA_NAME", braName);
+                request.setAttribute("CATEID", categoryID);
             }
             url = SUCCESS;
         } catch (Exception e) {
