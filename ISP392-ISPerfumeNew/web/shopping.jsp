@@ -106,6 +106,60 @@
                 object-fit: cover; 
                 transition: transform 0.3s ease-in-out; 
             }
+            .btn-close {
+                background: none;
+                border: none;
+                font-size: 1.5rem; 
+                color: #6c757d; 
+                transition: color 0.2s ease;
+                position: absolute;
+                right: 15px; 
+                top: 50%;
+                transform: translateY(-50%); 
+                cursor: pointer;
+            }
+
+            .btn-close:hover {
+                color: #000;
+            }
+
+            .fade-out {
+                opacity: 1;
+                transition: opacity 0.3s ease-out;
+            }
+
+            .fade-out.hide {
+                opacity: 0;
+            }
+
+            .alert {
+                padding: 20px 30px;
+                font-size: 18px;
+                max-width: 400px; 
+                position: fixed; 
+                top: 20px; 
+                right: 20px;
+                z-index: 1050; 
+                border: 1px solid transparent;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-color: #c3e6cb;
+                color: #e67e22;
+            }
+
+            .progress-bar-timer {
+                border-radius: 24px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 8px;
+                width: 100%;
+                transition: width linear;
+            }
+
+            .alert-dismissible {
+                padding-right: 60px; 
+            }
         </style>
     </head>
     <body>
@@ -385,16 +439,22 @@
                                 </div>
                             </c:forEach>
                             <button type="submit" name="action" value="ViewResultInShopping" class="btn btn-primary mt-3">View Result</button>
-                            <div class="text-danger mt-2">${requestScope.MESSAGE}</div>
                         </div>
 
                         <!-- Filter By Size End -->
                     </div>
                     <!-- Shop Sidebar End -->
-
+                    <c:if test="${not empty requestScope.MESSAGE}">
+                        <div class="alert alert-warning alert-dismissible fade show fade-out" role="alert" id="autoDismissAlert" >
+                            <i class="fa fa fa-exclamation-circle me-2"></i> ${requestScope.MESSAGE}
+                            <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <div class="progress-bar-timer bg-warning" id="progressBar"></div>
+                        </div>
+                    </c:if>
 
                     <!-- Shop Product Start -->
-                    ${requestScope.MESSAGE}
                     <div class="col-lg-9 col-md-8">
                         <div class="row pb-3">
                             <div class="col-12 pb-1">
@@ -538,6 +598,28 @@
                                                                 document.getElementById('deleteConfirmation').style.display = 'none';
                                                                 document.getElementById('modalOverlay').style.display = 'none';
                                                             }
+                                                            document.addEventListener('DOMContentLoaded', function () {
+                                                                var duration = 5000;
+                                                                var progressBar = document.getElementById('progressBar');
+                                                                var alertElement = document.getElementById('autoDismissAlert');
+
+                                                                progressBar.style.width = '100%';
+
+                                                                requestAnimationFrame(function () {
+                                                                    setTimeout(function () {
+                                                                        progressBar.style.transitionDuration = duration + 'ms';
+                                                                        progressBar.style.width = '0%';
+                                                                    }, 10);
+                                                                });
+
+                                                                setTimeout(function () {
+                                                                    alertElement.classList.add('hide');
+                                                                    setTimeout(function () {
+                                                                        alertElement.remove();
+                                                                    }, 200);
+                                                                }, duration);
+                                                            });
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

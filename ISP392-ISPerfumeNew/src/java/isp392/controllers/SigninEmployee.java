@@ -50,7 +50,11 @@ public class SigninEmployee extends HttpServlet {
                     cust = dao.getCustInfoByUserID(loginUser.getUserID());
                     if (cust != null) {
                         session.setAttribute("CUSTOMER", cust);
-                        url = CUS_PAGE;
+                        if (request.getParameter("checkOutStatus") != null) {
+                            url = "checkoutSuccess.jsp";
+                        } else {
+                           url = CUS_PAGE; 
+                        }
                     }
                 } else if (loginUser.getRoleID() == 2) { // shipper
                     session.setAttribute("LOGIN_USER", loginUser);

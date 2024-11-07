@@ -142,13 +142,8 @@ public class CODCheckOutController extends HttpServlet {
                     }
                 }
                 if (check) {
-                    url = "HomeController";
+                    url = "checkoutSuccess.jsp";
                 }
-//                if (check) {
-//                    request.setAttribute("CHECKOUT_MESSAGE", "Order successfully!");
-//                    session.removeAttribute("CHECK_LIST");
-//                    url = "SigninEmployee?Email="+email+"&Password="+password;
-//                }
             }
         } catch (Exception e) {
             log("Error at checkOutController: " + e.toString());

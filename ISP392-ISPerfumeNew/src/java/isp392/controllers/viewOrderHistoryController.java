@@ -7,7 +7,6 @@ package isp392.controllers;
 
 import isp392.order.OrderDAO;
 import isp392.order.OrderDTO;
-import isp392.order.OrderDetailDTO;
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
 import isp392.product.ProductDetailDAO;
@@ -19,7 +18,6 @@ import isp392.size.SizeDTO;
 import isp392.user.UserDAO;
 import isp392.user.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

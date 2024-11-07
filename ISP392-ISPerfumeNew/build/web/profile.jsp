@@ -37,7 +37,7 @@
                 font-size: 18px;
                 max-width: 400px; 
                 position: fixed; 
-                top 10px; 
+                top: 10px; 
                 right: 20px;
                 z-index: 1050; 
                 border: 1px solid transparent;

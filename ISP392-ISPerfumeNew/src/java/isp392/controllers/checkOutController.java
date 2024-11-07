@@ -136,7 +136,8 @@ public class checkOutController extends HttpServlet {
                 if (check) {
                     request.setAttribute("CHECKOUT_MESSAGE", "Order successfully!");
                     session.removeAttribute("CHECK_LIST");
-                    url = "SigninEmployee?Email="+email+"&Password="+password;
+                    String checkOutStatus = "CheckOutSuccessFull";
+                    url = "SigninEmployee?Email="+email+"&Password="+password+"&checkOutStatus="+checkOutStatus;
                 }
             }
  
