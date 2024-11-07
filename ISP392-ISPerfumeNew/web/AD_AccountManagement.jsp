@@ -18,7 +18,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +39,50 @@
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
         <link href="css/stylePopup.css" rel="stylesheet">
+        <style>
+            .alert-container {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1050;
+                display: flex;
+                flex-direction: column;
+                gap: 10px; 
+                transition: all 0.3s ease; 
+            }
+
+            .alert {
+                width: 250px;
+                display: flex;
+                align-items: center;
+                padding: 15px 20px;
+                font-size: 16px;
+                max-width: 500px;
+                border: 1px solid transparent;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #f8d7da;
+                border-color: #f5c6cb;
+                color: #721c24;
+                position: relative; 
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+
+            .progress-bar-timer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 5px;
+                width: 100%;
+                background-color: #721c24 !important;
+                transition: width linear;
+            }
+            .hide {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        </style>
 
     </head>
 
@@ -164,9 +208,7 @@
                                 <i class="fa fa-user"></i>
                                 <span class="d-none d-lg-inline-flex">John Doe</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
+                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">                            
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
@@ -178,12 +220,12 @@
                 <div id="modalOverlay" class="modal-overlay" style="display: none;">
                     <div id="deleteConfirmation" class="card">
                         <div class="card-content">
-                            <p class="card-heading">Delete User</p>
-                            <p class="card-description">Are you sure you want to delete this user?</p>
+                            <p class="card-heading">Ban User</p>
+                            <p class="card-description">Are you sure you want to unavailable this user?</p>
                         </div>
                         <div class="card-button-wrapper">
                             <button class="card-button secondary" onclick="cancelDelete()">Cancel</button>
-                            <button class="card-button primary" onclick="proceedDelete()">Delete</button>
+                            <button class="card-button primary" onclick="proceedDelete()">Unavailable</button>
                         </div>
                         <button class="exit-button" onclick="cancelDelete()">
                             <svg height="20px" viewBox="0 0 384 512">
@@ -192,6 +234,29 @@
                         </button>
                     </div>
                 </div>
+                <div class="alert-container">
+                </div>
+                <c:if test="${not empty requestScope.UPDATE_USER_ERROR.nameError}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i> ${requestScope.UPDATE_USER_ERROR.nameError}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="progress-bar-timer bg-danger"></div>
+                    </div>
+                </c:if>
+                <c:if test="${not empty requestScope.UPDATE_USER_ERROR.emailError}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i> ${requestScope.UPDATE_USER_ERROR.emailError}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="progress-bar-timer bg-danger"></div>
+                    </div>
+                </c:if>
+                <c:if test="${not empty requestScope.UPDATE_USER_ERROR.phoneError}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i> ${requestScope.UPDATE_USER_ERROR.phoneError}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="progress-bar-timer bg-danger"></div>
+                    </div>
+                </c:if>
                 <!--Pop-up End-->
 
                 <!-- Blank Start -->
@@ -318,10 +383,7 @@
                                                             </c:if>
                                                         </tr>
 
-                                                    </c:forEach>
-                                                    ${requestScope.UPDATE_USER_ERROR.nameError}
-                                                    ${requestScope.UPDATE_USER_ERROR.emailError}
-                                                    ${requestScope.UPDATE_USER_ERROR.phoneError}
+                                                    </c:forEach>                                              
                                                 </tbody>
                                             </table>
                                         </c:if>
@@ -369,6 +431,32 @@
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
         <script>
+                                                                            document.addEventListener('DOMContentLoaded', function () {
+                                                                                const alerts = document.querySelectorAll('.alert');
+                                                                                const alertContainer = document.querySelector('.alert-container');
+                                                                                const duration = 7000;
+
+                                                                                alerts.forEach(alert => alertContainer.appendChild(alert));
+
+                                                                                alerts.forEach(alert => {
+                                                                                    const progressBar = alert.querySelector('.progress-bar-timer');
+                                                                                    progressBar.style.width = '100%';
+
+                                                                                    requestAnimationFrame(function () {
+                                                                                        setTimeout(function () {
+                                                                                            progressBar.style.transitionDuration = duration + 'ms';
+                                                                                            progressBar.style.width = '0%';
+                                                                                        }, 10);
+                                                                                    });
+
+                                                                                    setTimeout(() => {
+                                                                                        alert.classList.add('hide');
+                                                                                        setTimeout(() => {
+                                                                                            alert.remove();
+                                                                                        }, 200);
+                                                                                    }, duration);
+                                                                                });
+                                                                            });
                                                                             let previousValue;
                                                                             let deleteButtonRef;
                                                                             let formIDToSubmit;

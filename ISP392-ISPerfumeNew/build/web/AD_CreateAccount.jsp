@@ -16,7 +16,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,9 +152,7 @@
                                 <i class="fa fa-user"></i>
                                 <span class="d-none d-lg-inline-flex">Ten Admin</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
+                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">                               
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
@@ -187,21 +185,21 @@
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Phone</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="phone" required="" class="form-control" placeholder="${requestScope.USER_ERROR.phoneError}" maxlength="10">
+                                            <input type="number" name="phone" required="" class="form-control input_field" placeholder="${requestScope.USER_ERROR.phoneError}" maxlength="10">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label  class="col-sm-2 col-form-label">Password</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="password" required="" class="form-control" placeholder="${requestScope.USER_ERROR.passwordError}">
+                                            <input type="password" name="password" required="" class="form-control" placeholder="${requestScope.USER_ERROR.passwordError}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="statusSelect" class="col-sm-2 col-form-label">Status</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="statusSelect" name="status"> ${requestScope.USER_ERROR.statusError}
+                                            <select class="form-control bg-transparent" id="statusSelect" name="status"> ${requestScope.USER_ERROR.statusError}
                                                 <option value="1" ${status == 1 ? 'selected' : ''}>Available</option>
                                                 <option value="0" ${status == 0 ? 'selected' : ''}>Unavailable</option>
                                             </select>
@@ -210,7 +208,7 @@
                                     <div class="row mb-3">
                                         <label for="statusSelect" class="col-sm-2 col-form-label">Role</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="statusSelect" name="roleID"> ${requestScope.USER_ERROR.roleIDError}
+                                            <select class="form-control bg-transparent" id="statusSelect" name="roleID"> ${requestScope.USER_ERROR.roleIDError}
                                                 <option value="2" ${roleID == 2 ? 'selected' : ''}>Shipper</option>
                                                 <option value="3" ${roleID == 3 ? 'selected' : ''}>Staff</option>
                                                 <option value="4" ${roleID == 4 ? 'selected' : ''}>Manager</option>

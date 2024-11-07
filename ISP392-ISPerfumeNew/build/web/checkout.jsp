@@ -11,13 +11,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>ISPERFUME | Checkout</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -95,7 +95,7 @@
                 background-color: orange;
                 color: white !important;
             }   
-            
+
         </style>
     </head>
     <body>
@@ -270,42 +270,42 @@
 
         <!-- Checkout Start -->
         <form action="MainController">
-        <div class="container-fluid">
-            <div class="row px-xl-5">
-                <div class="col-lg-8">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+            <div class="container-fluid">
+                <div class="row px-xl-5">
+                    <div class="col-lg-8">
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
                         <div class="bg-light p-30 mb-5 address-infor">
                             <div class="row ">
-                            <div class="col-md-6 form-group">
-                                <label>Name</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.name}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.email}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Phone Number</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.phone}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>City</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.area}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>district</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.district}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Ward</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.ward}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Detail Address</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.detailAddress}" readonly="">
-                            </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Name</label>
+                                    <input class="form-control" type="text" value="${sessionScope.CUSTOMER.name}" readonly="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>E-mail</label>
+                                    <input class="form-control" type="text" value="${sessionScope.CUSTOMER.email}" readonly="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Phone Number</label>
+                                    <input class="form-control" type="text" value="${sessionScope.CUSTOMER.phone}" readonly="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>City</label>
+                                    <input class="form-control" type="text" value="${sessionScope.CUSTOMER.area}" readonly="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>district</label>
+                                    <input class="form-control" type="text" value="${sessionScope.CUSTOMER.district}" readonly="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Ward</label>
+                                    <input class="form-control" type="text" value="${sessionScope.CUSTOMER.ward}" readonly="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Detail Address</label>
+                                    <input class="form-control" type="text" value="${sessionScope.CUSTOMER.detailAddress}" readonly="">
                                 </div>
                             </div>
+                        </div>
                         <div class="mb-5">
                             <h5 class="section-title position-relative text-uppercase mb-3">
                                 <span class="bg-secondary pr-3">Payment</span>
@@ -324,14 +324,12 @@
                                         <img src="img/zalopay.png" alt="Zalo Pay" style="width: 30px; height: 30px;" class="mr-2">
                                         <span>Zalo Pay</span>
                                     </label>
-                        </div>
+                                </div>
 
                                 <button type="submit" name="action" value="checkQuantity" class="btn btn-block btn-primary font-weight-bold py-3 mt-4">Place Order</button>
+                            </div>
+                        </div>
                     </div>
-                                </div>
-
-
-                                </div>
                     <div class="col-lg-4">
                         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
                         <c:forEach var="check" items="${sessionScope.CHECK_LIST.cart.values()}" varStatus="counter">
@@ -347,7 +345,7 @@
                                         <fmt:formatNumber type="number" value="${unitTotal}"/>
                                     </h6>
                                 </div>
-                                </div>
+                            </div>
                         </c:forEach>      
 
                         <div style="text-align: center; margin-top: 10px;" class="d-flex justify-content-center text-primary">
@@ -358,7 +356,7 @@
                                      alt="View more" style="width: 20px; height: 20px; transition: transform 0.3s;
                                      filter: brightness(0) saturate(100%) invert(47%) sepia(89%) saturate(5925%) hue-rotate(356deg) brightness(103%) contrast(102%);">
                             </button>
-                                </div>
+                        </div>
 
 
 
@@ -371,7 +369,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
-                                </div>
+                                    </div>
                                     <div class="modal-body">
                                         <div class="voucher-options mb-3">
                                             <c:forEach var="promotion" items="${sessionScope.PROMOTION}">
@@ -383,20 +381,20 @@
                                                         <div class="d-flex justify-content-between mt-1">
                                                             <span class="text-primary">${promotion.discountPer}% OFF</span>
                                                             <span class="text-secondary">${promotion.condition}</span>
-                                </div>
-                            </div>
+                                                        </div>
+                                                    </div>
                                                     <i class="fa fa-check-circle fa-2x text-primary" aria-hidden="true" style="display: none;"></i>
                                                 </label>
                                             </c:forEach>
-                        </div>
-                    </div>
+                                        </div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-primary" name="action" value="ApplyVoucher" id="applyButton" disabled>
                                             Apply Voucher
                                         </button>
-                </div>
-                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- Modal Popup voucher -->
@@ -430,151 +428,151 @@
                             </div>
                         </div>
 
-                            <div class="input-group-append mt-4 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#voucherModal">
-                                    Choose Voucher
-                                </button>
-                                    </div>
-                                </div>
+                        <div class="input-group-append mt-4 d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#voucherModal">
+                                Choose Voucher
+                            </button>
+                        </div>
+                    </div>
 
-                                    </div>
-                                </div>
-                                    </div>
-                                </div>
-                    </form>
-    <!-- Checkout End -->
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                </div>
             </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                        </div>
+        </div>
+    </div>
+</form>
+<!-- Checkout End -->
+
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+    <div class="row px-xl-5 pt-5">
+        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+            <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+            <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
+            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                     </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                        </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
+                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                     </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                        <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Your Email Address">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary">Sign Up</button>
-                                </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
+                    <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
+                    <form action="">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Your Email Address">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary">Sign Up</button>
                             </div>
-                        </form>
-                        <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-                        <div class="d-flex">
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
                         </div>
+                    </form>
+                    <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+                    <div class="d-flex">
+                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-secondary">
-                    &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
-                    by
-                    <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
-                </p>
-            </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
+    </div>
+    <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="col-md-6 px-xl-0">
+            <p class="mb-md-0 text-center text-md-left text-secondary">
+                &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
+                by
+                <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
+            </p>
+        </div>
+        <div class="col-md-6 px-xl-0 text-center text-md-right">
+            <img class="img-fluid" src="img/payments.png" alt="">
         </div>
     </div>
-    <!-- Footer End -->
+</div>
+<!-- Footer End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+<!-- Contact Javascript File -->
+<script src="mail/jqBootstrapValidation.min.js"></script>
+<script src="mail/contact.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-                                                        let isExpanded = false;
+<script>
+                                                    let isExpanded = false;
 
-                                                        function toggleProducts() {
-                                                            const products = document.querySelectorAll('.product-info');
+                                                    function toggleProducts() {
+                                                        const products = document.querySelectorAll('.product-info');
 
-                                                            if (!isExpanded) {
-                                                                products.forEach(product => product.style.display = 'flex');
-                                                                document.getElementById("arrowIcon").style.transform = "rotate(180deg)";
-                                                                isExpanded = true;
-                                                            } else {
-                                                                products.forEach((product, index) => product.style.display = index === 0 ? 'flex' : 'none');
-                                                                document.getElementById("arrowIcon").style.transform = "rotate(0deg)";
-                                                                isExpanded = false;
-                                                            }
+                                                        if (!isExpanded) {
+                                                            products.forEach(product => product.style.display = 'flex');
+                                                            document.getElementById("arrowIcon").style.transform = "rotate(180deg)";
+                                                            isExpanded = true;
+                                                        } else {
+                                                            products.forEach((product, index) => product.style.display = index === 0 ? 'flex' : 'none');
+                                                            document.getElementById("arrowIcon").style.transform = "rotate(0deg)";
+                                                            isExpanded = false;
                                                         }
+                                                    }
 
-                                                        function enableApplyButton() {
-                                                            const applyButton = document.getElementById('applyButton');
-                                                            applyButton.disabled = false;
+                                                    function enableApplyButton() {
+                                                        const applyButton = document.getElementById('applyButton');
+                                                        applyButton.disabled = false;
 
-                                                            document.querySelectorAll('.voucher-option i').forEach(icon => {
-                                                                icon.style.display = 'none'; 
-                                                            });
-                                                            const selectedVoucher = document.querySelector('input[name="promotionID"]:checked');
-                                                            if (selectedVoucher) {
-                                                                selectedVoucher.closest('.voucher-option').querySelector('i').style.display = 'inline'; // Hiện biểu tượng tick cho voucher được chọn
-                                                            }
+                                                        document.querySelectorAll('.voucher-option i').forEach(icon => {
+                                                            icon.style.display = 'none';
+                                                        });
+                                                        const selectedVoucher = document.querySelector('input[name="promotionID"]:checked');
+                                                        if (selectedVoucher) {
+                                                            selectedVoucher.closest('.voucher-option').querySelector('i').style.display = 'inline'; // Hiện biểu tượng tick cho voucher được chọn
                                                         }
+                                                    }
 
-                                                        function updateSelection(selectedRadio) {
-                                                            document.querySelectorAll('.payment-option').forEach(option => {
-                                                                option.classList.remove('active', 'btn-primary');
-                                                                option.classList.add('btn-outline-primary');
-                                                            });
+                                                    function updateSelection(selectedRadio) {
+                                                        document.querySelectorAll('.payment-option').forEach(option => {
+                                                            option.classList.remove('active', 'btn-primary');
+                                                            option.classList.add('btn-outline-primary');
+                                                        });
 
-                                                            selectedRadio.closest('label').classList.add('active', 'btn-primary');
-                                                            selectedRadio.closest('label').classList.remove('btn-outline-primary');
-                                                        }
-    </script>
+                                                        selectedRadio.closest('label').classList.add('active', 'btn-primary');
+                                                        selectedRadio.closest('label').classList.remove('btn-outline-primary');
+                                                    }
+</script>
 
 
 </body>
