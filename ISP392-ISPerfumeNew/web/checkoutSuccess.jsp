@@ -92,12 +92,12 @@
         </div>
 
         <div class="container-fluid pt-4 px-4">
-            <div class="row bg-light rounded align-items-center justify-content-center mx-0 my-2 py-5 px-2" >
-                <div class="">
-                    <img src="img/success-icon-10-300x300.png" class="ml-3">
-                    <h1 class="text-primary text-success">Order Successfully!</h1>
-                    <a class="btn text-uppercase text-primary bg-secondary d-flex justify-content-center" href="MainController?action=HomeController">
-                        Continue shopping
+            <div class="row bg-light rounded align-items-center justify-content-center mx-0 my-4 py-5 px-3">
+                <div class="text-center">
+                    <img src="img/success-icon-10-300x300.png" class="mb-3" alt="Success Icon" style="width: 100px; height: 100px;">
+                    <h1 class="text-success mb-4">Order Successfully!</h1>
+                    <a class="btn btn-success text-uppercase px-4 py-2" href="MainController?action=HomeController">
+                        Continue Shopping
                     </a>
                 </div>
             </div>

@@ -172,9 +172,7 @@
         </div>
         <!-- Topbar End -->
 
-
         <!-- Navbar Start -->
-
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block mt-2">
@@ -193,12 +191,12 @@
                                 <a href="MainController?action=HomeController" class="nav-item nav-link">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <div class="nav-item dropdown">
-                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle ${Category.categoryID == param.CategoryID ? "active": ""}" data-toggle="dropdown">${Category.name}</a>
+                                        <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="nav-link dropdown-toggle ${Category.categoryID == param.CategoryID ? "active" : ""}" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="btn dropdown-item ${Category.categoryID == param.CategoryID && param.brandID == null?  "active": ""}">All ${Category.name}</a>
+                                            <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="btn dropdown-item  ${Category.categoryID == param.CategoryID && param.brandID == null ? "active" : ""}">All ${Category.name}</a>
                                             <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
                                                 <c:if test="${Category.categoryID == brand.categoryID}">
-                                                    <a href="MainController?action=Category&CategoryID=${Category.categoryID}&brandID=${brand.brandID}" class="dropdown-item btn ${Category.categoryID == param.CategoryID && brand.brandID == param.brandID ? "active": ""}">${brand.brandName}</a>
+                                                    <a href="MainController?action=Category&CategoryID=${Category.categoryID}&brandID=${brand.brandID}" class="dropdown-item btn ${Category.categoryID == param.CategoryID && brand.brandID == param.brandID ? "active" : ""}">${brand.brandName}</a>
                                                 </c:if>
                                             </c:forEach>
                                         </div>
@@ -217,52 +215,6 @@
                                     </button>
                                 </form>
                             </div>
-                            <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">          
-                                <input type="text" class="form-control" placeholder="Search for products" name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
-                                <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
-                                <c:choose>
-                                    <c:when test="${empty sessionScope.CUSTOMER_ID}">
-                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
-                                            <i class="fas fa fa-user text-primary"></i>
-                                            <span class="ml-1 text-primary">Account</span>
-                                        </button>                                        
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
-                                            <i class="fas fa fa-user text-primary"></i>
-                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                            <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                                <c:choose>
-                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
-                                        <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
-                                            <i class="fas fa-shopping-cart text-primary"></i>
-                                            <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
-                                        </a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
-                                            <i class="fas fa-shopping-cart text-primary"></i>
-                                            <span class="ml-1 text-primary">Cart</span>
-                                        </button>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                        </div>
-                    </nav>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
                                 <c:choose>
                                     <c:when test="${empty sessionScope.CUSTOMER_ID}">
@@ -447,7 +399,6 @@
                         <div class="row pb-3">
                             <div class="col-12 pb-1">
                                 <div class="d-flex align-items-center justify-content-end mb-4">
-                                   
                                     <div class="ml-2">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
@@ -505,7 +456,7 @@
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
                     <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>D1 Street, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Thu Duc, TP HoChiMinh</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
                     <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
                 </div>
@@ -543,6 +494,7 @@
             </div>
         </div>
         <!-- Footer End -->
+
         <!-- Back to Top -->
         <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 

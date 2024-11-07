@@ -1,4 +1,4 @@
-1<%-- 
+<%-- 
     Document   : MGR_PromotionManagement
     Created on : Sep 25, 2024, 3:56:09 PM
     Author     : User
@@ -18,7 +18,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +72,7 @@
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
-                                <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
+                                <a href="MainController?action=ViewPromotion&search=" class="dropdown-item active">Promotion Management</a>
                             </div>
                         </div>
                     </div>

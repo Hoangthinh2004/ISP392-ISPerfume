@@ -18,7 +18,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +72,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item">Product Management</a>
+                                <a href="MainController?action=Manage_Product_Page" class="dropdown-item active">Product Management</a>
                                 <a href="MainController?action=Search&search=" class="dropdown-item">Brand Management</a>
                                 <a href="MainController?action=ViewPromotion&search=" class="dropdown-item ">Promotion Management</a>
                             </div>
@@ -125,10 +125,9 @@
                         <!-- Recent Sales Start -->
                         <div class="container-fluid pt-4 px-4">
                             <div class="bg-light text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">   
-                                    <h6 class="mb-0">Product Management</h6>
+                                <div class="d-flex align-items-center justify-content-between mb-4">                                     
+                                    <a href="MainController?action=Manage_Product_Page" class="btn btn-primary">Back</a>
                                     <a href="MGR_CreateProductDetail.jsp?productID=${param.productID}" class="btn btn-primary">Create</a>
-                                    <a href="MainController?action=SearchProduct&search=" class="btn btn-primary">Back</a>
                                 </div>
                                 <div class="table-responsive">
                                     <c:if test="${requestScope.LIST_PRODUCT_DETAIL_MANAGER!=null}">
@@ -242,7 +241,7 @@
                     </div>
                 </div>
                 <!-- Blank End -->
-                
+
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">

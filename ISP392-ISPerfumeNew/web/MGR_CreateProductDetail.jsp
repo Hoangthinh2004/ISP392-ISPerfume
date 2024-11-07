@@ -16,7 +16,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -136,7 +136,7 @@
                                         <label for="productDetailImage" class="form-label">Picture</label>
                                         <input class="form-control" type="file" id="formFile" name="productDetailImage">
                                     </div>
-                                    <div>
+                                    <div class="d-flex justify-content-between">
                                     <input type="hidden" name="productID" value="${param.productID}">
                                     <button type="submit" class="btn btn-primary">CREATE</button>
                                     <a href="MainController?action=ProductDetailPage&productID=${param.productID}" class="btn btn-primary">Back</a>
