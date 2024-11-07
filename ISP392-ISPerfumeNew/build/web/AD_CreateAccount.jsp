@@ -84,73 +84,11 @@
                         <i class="fa fa-bars"></i>
                     </a>
                     <div class="navbar-nav align-items-center ms-auto">
-                        <!--                        <div class="nav-item dropdown">
-                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                                        <i class="fa fa-envelope me-lg-2"></i>
-                                                        <span class="d-none d-lg-inline-flex">Message</span>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                                        <a href="#" class="dropdown-item">
-                                                            <div class="d-flex align-items-center">
-                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                                                <div class="ms-2">
-                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                                                    <small>15 minutes ago</small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <hr class="dropdown-divider">
-                                                        <a href="#" class="dropdown-item">
-                                                            <div class="d-flex align-items-center">
-                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                                                <div class="ms-2">
-                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                                                    <small>15 minutes ago</small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <hr class="dropdown-divider">
-                                                        <a href="#" class="dropdown-item">
-                                                            <div class="d-flex align-items-center">
-                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                                                <div class="ms-2">
-                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                                                    <small>15 minutes ago</small>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <hr class="dropdown-divider">
-                                                        <a href="#" class="dropdown-item text-center">See all message</a>
-                                                    </div>
-                                                </div>
-                                                <div class="nav-item dropdown">
-                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                                        <i class="fa fa-bell me-lg-2"></i>
-                                                        <span class="d-none d-lg-inline-flex">Notificatin</span>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                                        <a href="#" class="dropdown-item">
-                                                            <h6 class="fw-normal mb-0">Profile updated</h6>
-                                                            <small>15 minutes ago</small>
-                                                        </a>
-                                                        <hr class="dropdown-divider">
-                                                        <a href="#" class="dropdown-item">
-                                                            <h6 class="fw-normal mb-0">New user added</h6>
-                                                            <small>15 minutes ago</small>
-                                                        </a>
-                                                        <hr class="dropdown-divider">
-                                                        <a href="#" class="dropdown-item">
-                                                            <h6 class="fw-normal mb-0">Password changed</h6>
-                                                            <small>15 minutes ago</small>
-                                                        </a>
-                                                        <hr class="dropdown-divider">
-                                                        <a href="#" class="dropdown-item text-center">See all notifications</a>
-                                                    </div>
-                                                </div>-->
+                        
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-user"></i>
-                                <span class="d-none d-lg-inline-flex">Ten Admin</span>
+                                <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                <span class="d-none d-lg-inline-flex">${sessionScope.LOGIN_USER.name}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">                               
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
@@ -219,9 +157,8 @@
                                     <div class="d-flex justify-content-between">
                                         <button type="submit"class="btn btn-primary" name="action" value="CreateEmployeeAccount">Create</button>
                                         <input type="hidden" name="search" value="${param.search}">
-                                        <a href="MainController?search=&action=SearchUser" class="btn btn-primary">Back</a>
-                                        ${requestScope.USER_ERROR.error}
-                                    </div>
+                                        <a href="MainController?action=SearchUser&search=" class="btn btn-primary">Back</a>
+                                    ${requestScope.USER_ERROR.error}
                                 </form>
                             </div>
                         </div>

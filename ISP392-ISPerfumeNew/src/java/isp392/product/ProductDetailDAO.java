@@ -27,15 +27,17 @@ public class ProductDetailDAO {
     private static final String DELETE_PRODUCT_DETAIL = "DELETE FROM ProductDetail WHERE ProductID = ? AND SizeID = ?";
     private static final String LIST_PRODUCT_DETAIL = "SELECT * FROM ProductDetail WHERE ProductID = ?";
     private static final String VIEW_PRODUCT_DETAIL = "SELECT P.ProductID, S.SizeID, P.ProName, P.Description, PD.Price ,S.Name, PD.NumberOfPurchasing, PD.Country, PD.ReleaseDate, PD.FragranceFamilies, PD.Image FROM ProductDetail PD "
-                                                    + "INNER JOIN Products P ON PD.ProductID = P.ProductID "
-                                                    + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
-                                                    + "WHERE PD.ProductID = ? AND P.BrandID = 4";
+            + "INNER JOIN Products P ON PD.ProductID = P.ProductID "
+            + "INNER JOIN Size S ON S.SizeID = PD.SizeID "
+            + "WHERE PD.ProductID = ? AND P.BrandID = 4";
     private static final String GET_PRICE_BY_SIZE = "SELECT PD.ProductDetailID, PD.Price, PD.StockQuantity FROM ProductDetail PD "
-                                                  + "WHERE ProductID = ? AND SizeID = ?";
+            + "WHERE ProductID = ? AND SizeID = ?";
     private static final String GET_LIST_IMAGE = "SELECT PD.Image FROM ProductDetail PD "
-                                               + "WHERE PD.ProductID = ?";
+            + "WHERE PD.ProductID = ?";
     private static final String CHECK_PRODUCT_DETAIL_EXISTED = "SELECT * FROM ProductDetail WHERE ProductID =? AND SizeID = ?";
+    private static final String CHECK_RECENT_PRODUCT_EXISTED_ = "SELECT * FROM Recent_Product WHERE ProductDetailID = ?";
     private static final String INSERT_PRODUCT_DETAIL = "INSERT INTO ProductDetail(ProductID,SizeID,Price,StockQuantity,NumberOfPurchasing,ImportDate,Image,Status) VALUES (?,?,?,?,?,?,?,?)";
+    private static final String INSERT_RECENT_PRODUCT = "INSERT INTO Recent_Product(ProductDetailID,CustomerID,TimeAccess) VALUES (?,?,GETDATE())";
     private static final String GET_LIST_PRODUCT_DETAIL_STAFF = "SELECT * FROM ProductDetail";
 
     public List<ProductDetailDTO> getListProductDetail(int productID) throws SQLException, ClassNotFoundException {
@@ -144,7 +146,7 @@ public class ProductDetailDAO {
                     int productDetailID = rs.getInt("ProductDetailID");
                     int price = rs.getInt("Price");
                     list.add(new ProductDetailDTO(productDetailID, productID, sizeID, price, 0, 0, null, "", 0));
-                
+
                 }
             }
         } finally {
@@ -278,5 +280,55 @@ public class ProductDetailDAO {
             DBUtils.closeConnection3(conn, ptm, rs);
         }
         return list;
+    }
+
+    public boolean addRecentProduct(int productDetailID, int customerID) throws ClassNotFoundException, SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(INSERT_RECENT_PRODUCT);
+            ptm.setInt(1, productDetailID);
+            ptm.setInt(2, customerID);
+            check = ptm.executeUpdate() > 0;
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean checkExistRecentProduct(int productDetailID) throws ClassNotFoundException, SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_RECENT_PRODUCT_EXISTED_);
+                ptm.setInt(1, productDetailID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }

@@ -47,7 +47,8 @@ public class SizeFilterController extends HttpServlet {
 
             List<Integer> sizeList = new ArrayList<>();
             int sizeIDLength = sizeIDs.length;
-
+            String Error = "";
+            
             if (currentBrandID == null) {
                 if (sizeIDLength == 2) {
                     sizeList.add(Integer.parseInt(sizeIDs[0]));
@@ -61,6 +62,9 @@ public class SizeFilterController extends HttpServlet {
                     currentSizeID.put("sizeID", Integer.parseInt(sizeIDs[0]));
                 }
                 List<ViewProductDTO> listProduct = productDAO.filterListProduct(categoryID, sizeList);
+                if (listProduct.isEmpty()) {
+                    Error = "None of product";
+                }
                 session.setAttribute("LIST_PRODUCT", listProduct);
             } else {
                 int brandID = currentBrandID.get("brandID");
@@ -76,8 +80,12 @@ public class SizeFilterController extends HttpServlet {
                     currentSizeID.put("sizeID", Integer.parseInt(sizeIDs[0]));
                 }
                 List<ViewProductDTO> listProduct = productDAO.filterListProductBrandID(categoryID, brandID, sizeList);
+                if (listProduct.isEmpty()) {
+                    Error = "None of product";
+                }
                 session.setAttribute("LIST_PRODUCT", listProduct);
             }
+            request.setAttribute("MESSAGE", Error);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at BrandFilterController: " + e.toString());

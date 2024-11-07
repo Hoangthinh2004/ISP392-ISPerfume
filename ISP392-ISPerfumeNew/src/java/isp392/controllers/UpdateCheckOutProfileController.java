@@ -10,6 +10,7 @@ import isp392.user.UserDAO;
 import isp392.user.UserError;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,12 +19,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author GIGABYTE
+ * @author ThinhHoang
  */
-public class UpdateUserProfile extends HttpServlet {
+public class UpdateCheckOutProfileController extends HttpServlet {
 
-    private static final String ERROR = "profile.jsp";
-    private static final String SUCCESS = "profile.jsp";
+    private static final String ERROR = "NavigateToCheckOutController";
+    private static final String SUCCESS = "NavigateToCheckOutController";
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final String PHONE_REGEX = "^(?:\\+84|0)(3[2-9]|5[6|8|9]|7[0|6|7|8|9]|8[1-9]|9[0-9])[0-9]{7}$";
 
@@ -37,6 +38,11 @@ public class UpdateUserProfile extends HttpServlet {
 
         try {
             // Retrieve updated information from the form
+            Map<String, Integer> total = (Map<String, Integer>) ses.getAttribute("TOTAL_PRICE");
+            if (total.size() > 0) {
+                ses.removeAttribute("TOTAL_PRICE");
+            }
+            
             boolean checkValidation = true;
             int userID = Integer.parseInt(request.getParameter("userID"));
             String username = request.getParameter("userName");
@@ -80,11 +86,10 @@ public class UpdateUserProfile extends HttpServlet {
             } else {
                 request.setAttribute("UPDATE_PROFILE_MESSAGE", userErr);
             }
-
         } catch (Exception e) {
             log("Error at UpdateProfileController: " + e.toString());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+             request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

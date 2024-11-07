@@ -304,6 +304,91 @@
                                     <label>Detail Address</label>
                                     <input class="form-control" type="text" value="${sessionScope.CUSTOMER.detailAddress}" readonly="">
                                 </div>
+                                <div class="col-lg-5 col-md-5 col-sm-12 mb-3 mt-3 text-right">
+                                    <button class="btn btn-primary bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#UpdateProfile" type="button">
+                                        <span class=" bg-transparent text-primary" style="cursor: pointer;">
+                                            <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <div class="modal fade" id="UpdateProfile" tabindex="-1" aria-labelledby="UpdateProfileLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="UpdateProfileLabel">User Information</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label">Username</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.name}" placeholder="Enter username" name="userName">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label">Email</label>
+                                                            <div class="input-group">
+                                                                <input type="email" class="form-control" value="${sessionScope.CUSTOMER.email}" placeholder="Enter email" name="email">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Address</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.detailAddress}" placeholder="Enter address" name="address">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Area</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.area}" placeholder="Enter area" name="area">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">District</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.district}" placeholder="Enter district" name="district">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Ward</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.ward}" placeholder="Enter ward" name="ward">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Birthday</label>
+                                                            <div class="input-group">
+                                                                <input type="date" class="form-control" value="${sessionScope.CUSTOMER.dayOfBirth}" placeholder="Enter birthday" name="birthday">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Phone</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.phone}" placeholder="Enter phone" name="phone">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="userID" value="${sessionScope.CUSTOMER.id}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" name="action" value="UpdateCheckOutProfile" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="mb-5">
@@ -324,12 +409,12 @@
                                         <img src="img/zalopay.png" alt="Zalo Pay" style="width: 30px; height: 30px;" class="mr-2">
                                         <span>Zalo Pay</span>
                                     </label>
-                                </div>
-
-                                <button type="submit" name="action" value="checkQuantity" class="btn btn-block btn-primary font-weight-bold py-3 mt-4">Place Order</button>
+                                </div> 
+                                <button type="submit" name="action" value="checkQuantity" class="btn btn-block btn-primary font-weight-bold py-3 mt-4" disabled="" id="placeOrderBtn">Place Order</button>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-4">
                         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
                         <c:forEach var="check" items="${sessionScope.CHECK_LIST.cart.values()}" varStatus="counter">
@@ -372,6 +457,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="voucher-options mb-3">
+                                            ${requestScope.MESSAGE}
                                             <c:forEach var="promotion" items="${sessionScope.PROMOTION}">
                                                 <label class="voucher-option d-flex align-items-center border rounded p-3 mb-3">
                                                     <input type="radio" name="promotionID" value="${promotion.promotionID}" onclick="enableApplyButton()" class="d-none" />
@@ -398,11 +484,6 @@
                             </div>
                         </div>
                         <!-- Modal Popup voucher -->
-
-
-
-
-
                         <div class="bg-light p-30 mb-5 address-infor mt-5">
                             <div class="border-bottom pt-3 pb-2">
                                 <c:if test="${sessionScope.PROMOTION_DETAIL != null}">
@@ -424,15 +505,15 @@
                                         ${requestScope.CHECKOUT_MESSAGE}
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="input-group-append mt-4 d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#voucherModal">
+                                    Choose Voucher
+                                </button>
                             </div>
                         </div>
 
-                        <div class="input-group-append mt-4 d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#voucherModal">
-                                Choose Voucher
-                            </button>
-                        </div>
+
                     </div>
 
                 </div>
@@ -534,7 +615,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-                                                    let isExpanded = false;
+                                                        let isExpanded = false;
 
                                                     function toggleProducts() {
                                                         const products = document.querySelectorAll('.product-info');
@@ -554,12 +635,13 @@
                                                         const applyButton = document.getElementById('applyButton');
                                                         applyButton.disabled = false;
 
-                                                        document.querySelectorAll('.voucher-option i').forEach(icon => {
-                                                            icon.style.display = 'none';
-                                                        });
-                                                        const selectedVoucher = document.querySelector('input[name="promotionID"]:checked');
-                                                        if (selectedVoucher) {
-                                                            selectedVoucher.closest('.voucher-option').querySelector('i').style.display = 'inline'; // Hiện biểu tượng tick cho voucher được chọn
+                                                            document.querySelectorAll('.voucher-option i').forEach(icon => {
+                                                                icon.style.display = 'none';
+                                                            });
+                                                            const selectedVoucher = document.querySelector('input[name="promotionID"]:checked');
+                                                            if (selectedVoucher) {
+                                                                selectedVoucher.closest('.voucher-option').querySelector('i').style.display = 'inline'; // Hiện biểu tượng tick cho voucher được chọn
+                                                            }
                                                         }
                                                     }
 
@@ -569,9 +651,13 @@
                                                             option.classList.add('btn-outline-primary');
                                                         });
 
-                                                        selectedRadio.closest('label').classList.add('active', 'btn-primary');
-                                                        selectedRadio.closest('label').classList.remove('btn-outline-primary');
-                                                    }
+                                                            selectedRadio.closest('label').classList.add('active', 'btn-primary');
+                                                            selectedRadio.closest('label').classList.remove('btn-outline-primary');
+                                                            const placeOrderBtn = document.getElementById('placeOrderBtn');
+                                                            const paymentSelected = document.querySelector('input[name="payment"]:checked');
+
+                                                            placeOrderBtn.disabled = !paymentSelected;
+                                                        }
 </script>
 
 

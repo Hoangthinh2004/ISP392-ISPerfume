@@ -5,9 +5,11 @@
  */
 package isp392.controllers;
 
+import isp392.cart.Cart;
 import isp392.cart.CartDAO;
 import isp392.cart.ViewCartDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -34,14 +36,37 @@ public class NavigateToCartController extends HttpServlet {
             CartDAO dao = new CartDAO();           
             Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
             
-            int customerID = CustomerIDS.get("customerID");            
+            Cart listChecked = (Cart) session.getAttribute("CHECK_LIST");
+            if (listChecked != null) {
+                session.removeAttribute("CHECK_LIST");
+            }
+            
+            Map<String, String[]> productDetailIDS = (Map<String, String[]>) session.getAttribute("PRODUCTDETAILIDS_CHECKLIST");
+            if (productDetailIDS == null || productDetailIDS.isEmpty()) {
+                productDetailIDS = new HashMap<>();
+                session.setAttribute("PRODUCTDETAILIDS_CHECKLIST", productDetailIDS);
+            } else {
+                session.removeAttribute("PRODUCTDETAILIDS_CHECKLIST");
+            }
+            
+            Object promotion = session.getAttribute("PROMOTION_DETAIL");
+            if (promotion != null) {
+                session.removeAttribute("PROMOTION_DETAIL");
+            }
+            
+            Map<String, Integer> promotions = (Map<String, Integer>) session.getAttribute("CUR_PROMOTION");
+            if (promotions != null) {
+                session.removeAttribute("CUR_PROMOTION");
+            } 
+            
+            int customerID = CustomerIDS.get("customerID");           
             List<ViewCartDTO> cartList = dao.getProductDetailID(customerID);
             if (cartList.size() > 0) {
-                session.setAttribute("CART", cartList);
-                url = SUCCESS;
+                request.setAttribute("CART", cartList);
             } else {
-                request.setAttribute("MESSAGE", "Your cart is empty ! /n Please select more products to buy");
-            }           
+                request.setAttribute("MESSAGE", "Your cart is empty ! Please select more products to buy");
+            }
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at NavigateToCartController: " + e.toString());
         } finally {

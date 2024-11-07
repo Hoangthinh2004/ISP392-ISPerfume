@@ -127,7 +127,7 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="action" value="ForgetPassword">Send OTP</button>
                                     <p class="text-left mb-0">Don't have an Account? <a href="signup.jsp">Sign Up</a></p>
-                                    <p class="text-left mb-0">Do you already have an Account? <a href="signup.jsp">Sign In</a></p>
+                                    <p class="text-left mb-0">Do you already have an Account? <a href="signin.jsp">Sign In</a></p>
                                 </form>
                             </div>
                         </div>

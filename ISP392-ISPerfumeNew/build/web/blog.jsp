@@ -159,7 +159,7 @@
                                 <a href="MainController?action=HomeController" class="nav-item nav-link">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <div class="nav-item dropdown">
-                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
+                                        <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                             <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="btn dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
                                             <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
@@ -309,9 +309,9 @@
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
                     <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>D1 Street, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Đ. D1</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>0384767323</p>
                 </div>
                 <div class="col-lg-3 col-md-12 mb-5 pr-3 pr-xl-5">                 
                 </div>

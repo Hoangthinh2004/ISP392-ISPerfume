@@ -305,27 +305,12 @@
         <!-- Blog Posts -->
         <div class="container p-0">
             <div class="row">
-                <!-- Blog Content Start -->
-
                 <div class="col-lg-8">
                     <div class="blog-post">
                         <img src="${requestScope.BLOG_DETAIL.image}" alt="Blog Post Image" class="img-fluid">
                         <h2 class="mt-4">${requestScope.BLOG_DETAIL.title}</h2>
                         <p class="text-muted">${requestScope.BLOG_DETAIL.createDate} by <a href="#"> ${requestScope.BLOG_DETAIL.staffID}</a></p>
                         <p>${requestScope.BLOG_DETAIL.description}</p>
-
-                        <!--                            <h4>Subheading</h4>
-                                                    <p>Curabitur vitae dolor sit amet felis venenatis pharetra. </p>
-                                                    <p>Quisque vitae velit nec augue vehicula viverra id eu lorem.</p>                   
-                                                    <blockquote class="blockquote">
-                                                        <p class="mb-0">"This is a sample blockquote, to highlight a quote or a key message within the article."</p>
-                                                        <footer class="blockquote-footer">Source or Author</footer>
-                                                    </blockquote>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. .</p>
-
-                                                    <h4>Conclusion</h4>
-                                                    <p>In conclusion, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-
                         <div class="back-to-blog">
                             <a href="MainController?action=NavigateBlog" class="btn btn-primary">Back to Blog</a>
                         </div>
@@ -349,7 +334,7 @@
                                 </a>
                             </div>
                         </c:forEach>
-                    </div>              
+                    </div>
                 </div>
                 <!-- Sidebar End -->
             </div>
@@ -362,9 +347,9 @@
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
                     <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>D1 Street, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Đ. D1</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>0384767323</p>
                 </div>
                 <div class="col-lg-3 col-md-12 mb-5 pr-3 pr-xl-5">                 
                 </div>

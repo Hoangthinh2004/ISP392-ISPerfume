@@ -217,6 +217,52 @@
                                     </button>
                                 </form>
                             </div>
+                            <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">          
+                                <input type="text" class="form-control" placeholder="Search for products" name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
+                                <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.CUSTOMER_ID}">
+                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">Account</span>
+                                        </button>                                        
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
+                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
+                                            <i class="fas fa fa-user text-primary"></i>
+                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                            <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
+                                            <i class="fas fa-shopping-cart text-primary"></i>
+                                            <span class="ml-1 text-primary">Cart</span>
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </nav>
                             <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
                                 <c:choose>
                                     <c:when test="${empty sessionScope.CUSTOMER_ID}">
@@ -284,18 +330,45 @@
         </div>
         <!--Pop-up End-->
 
-
         <!-- Breadcrumb Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
                         <a class="breadcrumb-item text-dark" href="MainController?action=HomeController">Home</a>
-                        <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
-                            <c:if test="${category.categoryID == requestScope.LIST_PRODUCT[0].categoryID}">
-                                <span class="breadcrumb-item active">${category.name}</span>
-                            </c:if>
-                        </c:forEach>
+                        <c:choose>
+                            <c:when test="${requestScope.BRAND != null}">
+                                <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
+                                    <c:if test="${sessionScope.LIST_BRAND_BY_CATE!= null}">
+                                        <c:if test="${category.categoryID == requestScope.CATEID}">
+                                            <a class="breadcrumb-item text-dark" href="MainController?action=Category&Category=${category.categoryID}">${category.name}</a>
+                                            <span class="breadcrumb-item active">${sessionScope.LIST_PRODUCT[0].brandName}</span>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="${requestScope.BRA_NAME != null}">
+                                        <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
+                                            <c:if test="${category.categoryID == requestScope.CATEID}">
+                                                <a class="breadcrumb-item text-dark" href="MainController?action=Category&Category=${Category.categoryID}">${category.name}</a>
+                                                <c:if test="${category.categoryID == requestScope.CATEID}">
+                                                    <span class="breadcrumb-item text-dark">${requestScope.BRA_NAME}</span>
+                                                </c:if>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
+                                            <c:if test="${category.categoryID == sessionScope.LIST_PRODUCT[0].categoryID}">
+                                                <span class="breadcrumb-item active">${category.name}</span>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose>
                     </nav>
                 </div>
             </div>
@@ -368,7 +441,8 @@
                     <!-- Shop Sidebar End -->
 
 
-                    <!-- Shop Product Start -->               
+                    <!-- Shop Product Start -->
+                    ${requestScope.MESSAGE}
                     <div class="col-lg-9 col-md-8">
                         <div class="row pb-3">
                             <div class="col-12 pb-1">
@@ -383,7 +457,6 @@
                                                 <a class="dropdown-item" href="MainController?action=SortByPurchasing">Best Seller</a>
                                             </div>
                                         </div>
-                                      
                                     </div>
                                 </div>
                             </div>
@@ -395,7 +468,15 @@
                                         <div class="product-img position-relative overflow-hidden">
                                             <img class="img-fluid w-100" src="${Product.image}" alt="">
                                             <div class="product-action">
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                <c:choose>
+                                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                                        <a class="btn btn-outline-dark btn-square" href="MainController?action=quickAddToCart&productDetailID=${Product.productDetailID}&quantity=1"><i class="fa fa-shopping-cart"></i>
+                                                        </a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a onclick="openDeleteModal(this, event)" class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}"><i class="fa fa-search"></i></a>
                                             </div>
                                         </div>
@@ -405,7 +486,6 @@
                                             <div class="d-flex align-items-center justify-content-center mt-2">
                                                 <h5><fmt:formatNumber type="number" value="${Product.price}"/> VND</h5> 
                                             </div>
-                                           
                                         </div>
                                     </div>
                                 </div>
@@ -463,8 +543,6 @@
             </div>
         </div>
         <!-- Footer End -->
-
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
@@ -482,30 +560,32 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script>
-                    const toggleBtn = document.getElementById("toggle-btn");
-                    const descriptionContent = document.getElementById("description-content");
+                                                            const toggleBtn = document.getElementById("toggle-btn");
+                                                            const descriptionContent = document.getElementById("description-content");
 
-                    toggleBtn.addEventListener("click", function () {
-                        if (descriptionContent.classList.contains("expanded")) {
-                            descriptionContent.classList.remove("expanded");
-                            toggleBtn.classList.remove("expanded");
-                        } else {
-                            descriptionContent.classList.add("expanded");
-                            toggleBtn.classList.add("expanded");
-                        }
-                    });
-                    function openDeleteModal(button, event) {
-                        event.preventDefault();
-                        deleteButtonRef = button; 
+                                                            toggleBtn.addEventListener("click", function () {
+                                                                if (descriptionContent.classList.contains("expanded")) {
+                                                                    descriptionContent.classList.remove("expanded");
+                                                                    toggleBtn.classList.remove("expanded");
+                                                                } else {
+                                                                    descriptionContent.classList.add("expanded");
+                                                                    toggleBtn.classList.add("expanded");
+                                                                }
+                                                            });
+                                                            function openDeleteModal(button, event) {
+                                                                event.preventDefault();
+                                                                deleteButtonRef = button; // Store the reference to the delete button
 
-                        document.getElementById('deleteConfirmation').style.display = 'block';
-                        document.getElementById('modalOverlay').style.display = 'block';
-                    }
+                                                                // Show the modal
+                                                                document.getElementById('deleteConfirmation').style.display = 'block';
+                                                                document.getElementById('modalOverlay').style.display = 'block';
+                                                            }
 
-                    function cancelDelete() {
-                        document.getElementById('deleteConfirmation').style.display = 'none';
-                        document.getElementById('modalOverlay').style.display = 'none';
-                    }
+                                                            function cancelDelete() {
+                                                                // Hide the modal and overlay
+                                                                document.getElementById('deleteConfirmation').style.display = 'none';
+                                                                document.getElementById('modalOverlay').style.display = 'none';
+                                                            }
         </script>
     </body>
 </html>

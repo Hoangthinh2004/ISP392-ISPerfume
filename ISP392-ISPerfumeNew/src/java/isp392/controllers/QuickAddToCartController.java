@@ -9,9 +9,11 @@ import isp392.cart.CartDAO;
 import isp392.cart.CartDTO;
 import isp392.cart.CartDetailDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,12 +21,22 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ThinhHoang
+ * @author duyhc
  */
-public class AddToCartController extends HttpServlet {
+@WebServlet(name = "QuickAddToCartController", urlPatterns = {"/QuickAddToCartController"})
+public class QuickAddToCartController extends HttpServlet {
 
-    private static final String ERROR = "productDetail.jsp";
-    private static final String SUCCESS = "productDetail.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private static final String ERROR = "HomeController";
+    private static final String SUCCESS = "HomeController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,7 +62,6 @@ public class AddToCartController extends HttpServlet {
                     if (check) {
                         int cartSize = dao.getCartSize(customerID);
                         session.setAttribute("CART_SIZE", cartSize);
-                        request.setAttribute("MESSAGE", "Add to cart successfully");
                         url = SUCCESS;
                     } else {
                         request.setAttribute("MESSAGE", "Add to cart fail");

@@ -39,8 +39,9 @@ public class NavigateProductDetailController extends HttpServlet {
         String url = "";
         HttpSession session = request.getSession();
         Object search = session.getAttribute("CURRENT_SEARCH");
+        Object cate = session.getAttribute("CURRENT_IDS");
         Map<String, Integer> category = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-        if (search == null && category == null) {
+        if (search == null && cate == null) {
             url = HOME;
         } else if (search != null) {
             url = ERROR_SEARCH;
@@ -55,7 +56,8 @@ public class NavigateProductDetailController extends HttpServlet {
             BrandDAO brandDAO = new BrandDAO();
             ProductDetailDAO productDetailDAO = new ProductDetailDAO();
             Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            
+            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
+
             int categoryID = 0;
             int productID = Integer.parseInt(request.getParameter("productID"));
             int sizeID = Integer.parseInt(request.getParameter("sizeID"));
@@ -66,12 +68,25 @@ public class NavigateProductDetailController extends HttpServlet {
             } else {
                 categoryID = productDAO.getCategoryID(productID);
             }
-                       
+            int productDetailID = 0;
+            List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);
+            for (ProductDetailDTO product : listPriceBySize) {
+                productDetailID = product.getProductDetailID();
+            }
+
+            int customerID = 0;
+            if (CustomerIDS != null && !CustomerIDS.isEmpty()) {
+                customerID = CustomerIDS.get("customerID");
+                boolean checkExist = productDetailDAO.checkExistRecentProduct(productDetailID);
+                if (!checkExist) {
+                    productDetailDAO.addRecentProduct(productDetailID, customerID);
+                }                
+            }
             List<ViewProductDTO> sizeAvailable = sizeDAO.getAvailableSize(productID);
             if (sizeAvailable.size() > 0) {
                 session.setAttribute("AVAILABLE_SIZE", sizeAvailable);
             }
-           
+
             List<BrandDTO> brand = brandDAO.getBrandByProduct(productID);
             if (brand.size() > 0) {
                 int brandID = brand.get(0).getBrandID();
@@ -80,8 +95,6 @@ public class NavigateProductDetailController extends HttpServlet {
                 String brandName = brand.get(0).getName();
                 session.setAttribute("BRAND_BY_PRODUCT", brandName);
             }
-           
-            List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);
             if (listPriceBySize.size() > 0) {
                 session.setAttribute("PRICE_BY_SIZE", listPriceBySize);
             }
@@ -90,7 +103,7 @@ public class NavigateProductDetailController extends HttpServlet {
             if (listImage.size() > 0) {
                 session.setAttribute("LIST_IMAGE", listImage);
             }
-           
+
             List<ProductDTO> productInformation = productDAO.getProductInformation(productID);
             if (productInformation.size() > 0) {
                 session.setAttribute("PRODUCT_INFORMATION", productInformation);

@@ -131,8 +131,8 @@
                                     <input type="hidden" name="userID" value="${sessionScope.USERID}">
                                     <button type="submit" value="ChangePasswordForgot" name="action" class="btn btn-primary py-3 w-100 mb-4">Change Password</button>
                                     <p class="text-center mb-0">
-                                        <a href="signup.jsp">Continue login</a> OR
-                                        <a href="signup.jsp">Login Again</a>
+                                        <a href="signin.jsp">Continue login</a> OR
+                                        <a href="signup.jsp">Sign Up</a>
                                     </p>
                                 </div>
                             </div>

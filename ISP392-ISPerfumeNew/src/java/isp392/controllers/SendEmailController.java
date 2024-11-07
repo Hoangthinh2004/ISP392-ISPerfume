@@ -40,6 +40,8 @@ public class SendEmailController extends HttpServlet {
     private static final String FORGOT_PASSWORD_EMAIL = "ForgotPasswordEmail";
     private static final String ERROR = "signin.jsp";
     private static final String SUCCESS_FORGOT_PASSWORD_EMAIL = "ForgotPasswordController";
+    private static final String CONFIRM_EMAIL = "ConfirmEmail";
+    private static final String SUCCESS_CONFIRM_EMAIL = "AssignShipperStaffController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,6 +53,8 @@ public class SendEmailController extends HttpServlet {
                 url = createGoogleUser(request, response);
             } else if (FORGOT_PASSWORD_EMAIL.equals(action)) {
                 url = sendEmailForgotPassword(request, response);
+            } else if (CONFIRM_EMAIL.equals(action)) {
+                url = sendEmailConfirm(request, response);
             }
         } catch (Exception e) {
             log("Error at SendMailController: " + e.toString());
@@ -226,6 +230,22 @@ public class SendEmailController extends HttpServlet {
         boolean result = sendEmail(email, messageBody, subject, true);
         if (result) {
             return SUCCESS_FORGOT_PASSWORD_EMAIL;
+        } else {
+            return ERROR;
+        }
+    }
+
+    private String sendEmailConfirm(HttpServletRequest request, HttpServletResponse response) {
+        String email = request.getParameter("email");
+        String orderID = request.getParameter("orderID");
+        String subject = "SUCCESSFULLY CONFIRM - ISPerfume";
+        String messageBody = "Hi, welcome back to ISPERFUME <br><br>"
+                + "Your order has been confirmed <br><br>"
+                + "Your Order ID : " + orderID + "<br><br>"
+                + "Thank you for choosing and trusting us!";
+        boolean result = sendEmail(email, messageBody, subject, true);
+        if (result) {
+            return SUCCESS_CONFIRM_EMAIL;
         } else {
             return ERROR;
         }

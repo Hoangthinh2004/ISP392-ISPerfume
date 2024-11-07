@@ -180,8 +180,8 @@
                                     </div>
                                     <button type="submit" value="VerifyOTP" name="action" class="btn btn-primary py-3 w-100 mb-4">Reset Password</button>
                                     <p class="text-center mb-0">
-                                        <a href="">Continue login</a> OR
-                                        <a href="">Login Again</a>
+                                        <a href="signup.jsp">Sign Up</a> OR
+                                        <a href="signin.jsp">Login Again</a>
                                     </p>
                                 </div>
                             </div>

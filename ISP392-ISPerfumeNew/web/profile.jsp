@@ -249,7 +249,7 @@
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="home.jsp">Home</a>
+                        <a class="breadcrumb-item text-dark" href="HomeController">Home</a>
                         <span class="breadcrumb-item active">Profile</span>
                     </nav>
                 </div>
@@ -282,6 +282,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label  class="form-label">Username</label>
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.name}" placeholder="Enter username" name="userName">
                                     </div>
                                 </div>
@@ -289,6 +290,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm- mb-3">
                                     <label class="form-label">Email</label>
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="email" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.email}" placeholder="Enter email" name="email">
                                     </div>
                                 </div>
@@ -296,6 +298,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm- mb-3">
                                     <label class="form-label">Address</label> 
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.detailAddress}" placeholder="Enter address" name="address">
                                     </div>
                                 </div> 
@@ -303,18 +306,21 @@
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label class="form-label">Area</label> 
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.area}" placeholder="Enter area" name="area">
                                     </div>
                                 </div>  
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label for="floatingInput3" class="form-label">District</label> 
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.district}" placeholder="Enter district" name="district">
                                     </div>
                                 </div>  
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label class="form-label">Ward</label> 
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.ward}" placeholder="Enter ward" name="ward">
                                     </div>
                                 </div>  
@@ -322,6 +328,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label class="form-label">Birthday</label>
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.nameError}
                                         <input type="date" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.dayOfBirth}" placeholder="Enter birthday" name="birthday">
                                     </div>
                                 </div>
@@ -329,6 +336,7 @@
                                 <div class="col-lg-5 col-md-5 col-sm-12 mb-3">
                                     <label for="floatingInput3" class="form-label">Phone</label>
                                     <div class="input-group">
+                                        ${requestScope.UPDATE_PROFILE_MESSAGE.phoneError}
                                         <input type="text" class="form-control bg-transparent" readonly="" value="${sessionScope.CUSTOMER.phone}" placeholder="Enter phone" name="phone">
                                     </div>
                                 </div>
@@ -345,10 +353,9 @@
                                             </svg>
                                         </span>
                                     </button>
-
                                     <div class="modal fade" id="UpdateProfile" tabindex="-1" aria-labelledby="UpdateProfileLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
-                                            <form action="MainController" method="POST">
+                                            <form action="MainController" method="get">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="UpdateProfileLabel">User Information</h5>
@@ -369,7 +376,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div class="row">
                                                             <div class="col-md-6 mb-3 text-left">
                                                                 <label class="form-label ">Address</label>
@@ -424,9 +430,7 @@
                                             </form>
                                         </div>
                                     </div>
-
                                 </div> 
-
                             </div>
                         </div>
                     </div>
@@ -442,9 +446,9 @@
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
                     <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>D1 Street, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Đ. D1</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>0384767323</p>
                 </div>
                 <div class="col-lg-3 col-md-12 mb-5 pr-3 pr-xl-5">                 
                 </div>

@@ -27,7 +27,7 @@ public class SigninEmployee extends HttpServlet {
 
     private static final String ERROR = "signin.jsp";
     private static final String CUS_PAGE = "HomeController"; // Customer
-    private static final String AD_PAGE = "AD_AccountManagement.jsp"; // Admin
+    private static final String AD_PAGE = "MainController?search=&action=SearchUser"; // Admin
     private static final String MGR_PAGE = "ListDashboardController"; // Manager
     private static final String SHIPPER_PAGE = "SHIPPER_SearchOrderController";
     private static final String STAFF_PAGE = "GetAllInfoForOrder";
@@ -65,6 +65,8 @@ public class SigninEmployee extends HttpServlet {
                     session.setAttribute("LOGIN_USER", loginUser);
                     url = AD_PAGE;
                 }
+            } else {
+                request.setAttribute("ERROR_MESSAGE", "Incorrect email or password!");
             }
         } catch (Exception e) {
             log("Error at SigninEmployee: " + e.toString());

@@ -64,7 +64,7 @@
                 font-size: 18px;
                 max-width: 400px; 
                 position: fixed; 
-                top 20px; 
+                top: 20px; 
                 right: 20px;
                 z-index: 1050; 
                 border: 1px solid transparent;
@@ -337,7 +337,15 @@
                 </button>
             </div>
         </div>
-
+        <c:if test="${not empty requestScope.MESSAGE}">
+            <div class="alert alert-success alert-dismissible fade show fade-out" role="alert" id="autoDismissAlert" >
+                <i class="fa fa-check-circle me-2"></i> ${requestScope.MESSAGE}
+                <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="progress-bar-timer bg-success" id="progressBar"></div>
+            </div>
+        </c:if>
         <!--Pop-up End-->
 
 
@@ -385,7 +393,6 @@
                         <div class="col-lg-7 h-auto mb-30">
                             <div class="h-100 bg-light p-30">
                                 <h3>${product.name}</h3>
-
                                 <c:forEach var="price" items="${sessionScope.PRICE_BY_SIZE}">
                                     <input type="hidden" name="productDetailID" value="${price.productDetailID}"/>
                                     <span>Quantity in stock: ${price.stockQuantity}</span>
@@ -395,7 +402,6 @@
                                 <div class="d-flex mb-3">
                                     <strong class="text-dark mr-2 mt-1">Sizes:</strong>
                                     <c:forEach var="size" items="${sessionScope.AVAILABLE_SIZE}">
-                                        <input type="hidden" name="productID" value="${size.productID}"/>
                                         <a href="MainController?action=PriceBySize&sizeID=${size.sizeID}&productID=${size.productID}" 
                                            class="size-button ml-2 ${size.sizeID == param.sizeID ? "active" : ""}">${size.sizeName}</a>
                                     </c:forEach>
@@ -451,7 +457,6 @@
                                 <div class="nav nav-tabs mb-4">
                                     <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
                                     <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
-
                                 </div>
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="tab-pane-1">
@@ -469,8 +474,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
         </form>
         <!-- Shop Detail End -->
 
@@ -486,10 +490,16 @@
                                 <div class="product-img position-relative overflow-hidden">
                                     <img class="img-fluid w-100" src="${product.image}" alt="">
                                     <div class="product-action">
-                                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateRelatedProductDetail&productID=${product.productID}&sizeID=${product.sizeID}&categoryID=${product.categoryID}"><i class="fa fa-search"></i></a>
+                                        <c:choose>
+                                            <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                                <a class="btn btn-outline-dark btn-square" href="MainController?action=quickAddToCart&productDetailID=${product.productDetailID}&quantity=1"><i class="fa fa-shopping-cart"></i>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a onclick="openDeleteModal(this, event)" class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateRelatedProductDetail&categoryID=${product.categoryID}&productID=${product.productID}&sizeID=${product.sizeID}"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
@@ -497,7 +507,6 @@
                                     <div class="d-flex align-items-center justify-content-center mt-2">
                                         <h5><fmt:formatNumber type="number" value="${product.price}"/>  VND</h5>
                                     </div>
-                                   
                                 </div>
                             </div>
                         </c:forEach>
@@ -573,29 +582,29 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
-                                                function updateQuantity(change, event) {
-                                                    event.preventDefault();
-                                                    const quantityInput = document.getElementById('quantity-input');
-                                                    let quantity = parseInt(quantityInput.value) + change;
-                                                    if (quantity < 1) {
-                                                        quantity = 1;
+                                                    function updateQuantity(change, event) {
+                                                        event.preventDefault();
+                                                        const quantityInput = document.getElementById('quantity-input');
+                                                        let quantity = parseInt(quantityInput.value) + change;
+                                                        if (quantity < 1) {
+                                                            quantity = 1;
+                                                        }
+                                                        quantityInput.value = quantity;
                                                     }
-                                                    quantityInput.value = quantity;
-                                                }
-                                                function openDeleteModal(button, event) {
-                                                    event.preventDefault();
-                                                    deleteButtonRef = button; // Store the reference to the delete button
+                                                    function openDeleteModal(button, event) {
+                                                        event.preventDefault();
+                                                        deleteButtonRef = button; // Store the reference to the delete button
 
-                                                    // Show the modal
-                                                    document.getElementById('deleteConfirmation').style.display = 'block';
-                                                    document.getElementById('modalOverlay').style.display = 'block';
-                                                }
+                                                        // Show the modal
+                                                        document.getElementById('deleteConfirmation').style.display = 'block';
+                                                        document.getElementById('modalOverlay').style.display = 'block';
+                                                    }
 
-                                                function cancelDelete() {
-                                                    // Hide the modal and overlay
-                                                    document.getElementById('deleteConfirmation').style.display = 'none';
-                                                    document.getElementById('modalOverlay').style.display = 'none';
-                                                }
+                                                    function cancelDelete() {
+                                                        // Hide the modal and overlay
+                                                        document.getElementById('deleteConfirmation').style.display = 'none';
+                                                        document.getElementById('modalOverlay').style.display = 'none';
+                                                    }
 
                                                 document.addEventListener('DOMContentLoaded', function () {
                                                     var duration = 5000;

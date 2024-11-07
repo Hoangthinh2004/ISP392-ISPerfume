@@ -63,8 +63,8 @@
                             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                         </div>
                         <div class="ms-3">
-                            <h6 class="mb-0">Jhon Doe</h6>
-                            <span>Admin</span>
+                            <h6 class="mb-0">${sessionScope.LOGIN_USER.name}</h6>
+                            <span>Manager</span>
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
@@ -163,11 +163,9 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="fa fa-user"></i>
-                                <span class="d-none d-lg-inline-flex">Name</span>
+                                <span class="d-none d-lg-inline-flex">${sessionScope.LOGIN_USER.name}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
@@ -184,85 +182,86 @@
                                     <h6 class="mb-0">Category</h6>
                                     <a href="">Show All</a>
                                 </div>
-                                <canvas id="worldwide-sales"></canvas>
+                                <canvas id="pie-chart"></canvas>
                             </div>
                         </div>
+
                         <div class="col-sm-12 col-xl-6">
                             <div class="row g-4">
                                 <div class="col-sm-6">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                         <i class="fa fa-boxes fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Product </p>
-                                    <c:forEach var="product" items="${requestScope.ALL_PRODUCT}">
+                                        <div class="ms-3">
+                                            <p class="mb-2">Total Product </p>
+                                            <c:forEach var="product" items="${requestScope.ALL_PRODUCT}">
                                                 <h6 class="mb-0 text-end">${product.productID}</h6>
-                                                
-                                    </c:forEach>
+
+                                            </c:forEach>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
                                 <div class="col-sm-6">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                         <i class="fa fa-building fa-3x text-primary"></i>                                        
-                                <div class="ms-3">
+                                        <div class="ms-3">
                                             <p class="mb-2">Total Brand</p>
                                             <c:forEach var="brand" items="${requestScope.ALL_BRAND}">
                                                 <h6 class="mb-0 text-end">${brand.brandID}</h6>
-                                    </c:forEach>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
                                 <div class="col-sm-6">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                         <i class="fa fa-check-circle fa-3x text-primary"></i>                                        
-                                <div class="ms-3">
+                                        <div class="ms-3">
                                             <p class="mb-2">Order Completed</p>
                                             <c:forEach var="order" items="${requestScope.ALL_ORDER_COMPLETED}">
                                                 <h6 class="mb-0 text-end">${order.orderID}</h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>  
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </div>  
 
                                 <div class="col-sm-6">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                         <i class="fa fa-spinner fa-3x text-primary"></i>
-                                <div class="ms-3">
+                                        <div class="ms-3">
                                             <p class="mb-2">Order Is Processing</p>
                                             <c:forEach var="orderP" items="${requestScope.ALL_ORDER_PROCESSING}">
                                                 <h6 class="mb-0 text-end">${orderP.orderID}</h6>
-                                    </c:forEach>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="col-sm-6">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                        <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                        <div class="ms-3">
+                                            <p class="mb-2">Total Promotion</p>
+                                            <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
+                                                <h6 class="mb-0 text-end">${pro.promotionID}</h6>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="col-sm-6">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                        <i class="fa fa-dollar-sign fa-3x text-primary"></i>
+                                        <div class="ms-3">
+                                            <p class="mb-2">Total Revenue</p>
+                                            <c:forEach var="unitP" items="${requestScope.REVENUE}">
+                                                <h6 class="mb-0 text-end">
+                                                    <fmt:formatNumber type="number" value="${unitP.unitPrice}" /> VND
+                                                </h6>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </div>  
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Promotion</p>
-                                    <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
-                                                <h6 class="mb-0 text-end">${pro.promotionID}</h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>  
-                                <div class="col-sm-6">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                        <i class="fa fa-dollar-sign fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Revenue</p>
-                                    <c:forEach var="unitP" items="${requestScope.REVENUE}">
-                                                <h6 class="mb-0 text-end">
-                                            <fmt:formatNumber type="number" value="${unitP.unitPrice}" /> VND
-                                        </h6>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>  
                     </div>
                 </div>
-                                </div>
-                            </div>
                 <!-- Sale & Revenue End -->
 
 
@@ -292,7 +291,6 @@
                     </div>
                 </div>
                 <!-- Sales Chart End -->
-
 
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
@@ -330,75 +328,84 @@
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
         <script>
-            // Worldwide Sales Chart
-            var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
-            var myChart1 = new Chart(ctx1, {
-                type: "bar",
-                data: {
-                    labels: ["04", "05", "06", "07", "08", "09", "10"],
-                    datasets: [{
-                            label: "Men",
-                            data: [15, 30, 55, 65, 60, 80, 95],
-                            backgroundColor: "rgba(255, 159, 64, .7)"
-                        },
-                        {
-                            label: "Women",
-                            data: [8, 35, 40, 60, 70, 55, 75],
-                            backgroundColor: "rgba(255, 159, 64, .5)"
-                        },
-                        {
-                            label: "Unisex",
-                            data: [12, 25, 45, 55, 65, 70, 60],
-                            backgroundColor: "rgba(255, 159, 64, .3)"
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true
-                }
-            });
-// Pie Chart
-            var ctx5 = $("#pie-chart").get(0).getContext("2d");
-            var myChart5 = new Chart(ctx5, {
-                type: "pie",
-                data: {
-                    labels: ["Gucci", "Calvin Klein", "Channel", "Versace", "Christian Dior"],
-                    datasets: [{
-                            backgroundColor: [
-                                "rgba(255, 159, 64, .7)",
-                                "rgba(255, 159, 64, .6)",
-                                "rgba(255, 159, 64, .5)",
-                                "rgba(255, 159, 64, .4)",
-                                "rgba(255, 159, 64, .3)"
-                            ],
-                            data: [20, 20, 20, 20, 20]
-                        }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
+                                // Worldwide Sales Chart
+                                var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
 
-            // Doughnut Chart
-            var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
-            var myChart6 = new Chart(ctx6, {
-                type: "doughnut",
-                data: {
-                    labels: ["Confirmation", "Pickup", "Delivery", "Successfully"],
-                    datasets: [{
-                            backgroundColor: [
-                                "rgba(255, 159, 64, .8)",
-                                "rgba(255, 159, 64, .6)",
-                                "rgba(255, 159, 64, .4)",
-                                "rgba(255, 159, 64, .2)"
-                            ],
-                            data: [25, 19, 22, 34]
-                        }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
+                                // Lấy các giá trị từ requestScope và gán cho biến JavaScript
+                                const Men = ${QUANTITY_PRODUCT_BY_CATEGORYID1};
+                                const Women = ${QUANTITY_PRODUCT_BY_CATEGORYID2};
+                                const Unisex = ${QUANTITY_PRODUCT_BY_CATEGORYID3};
+                                var myChart1 = new Chart(ctx1, {
+                                    type: "bar",
+                                    data: {
+                                        labels: [""],
+                                        datasets: [{
+                                                label: "Men",
+                                                data: [Men],
+                                                backgroundColor: "rgba(255, 159, 64, .7)"
+                                            },
+                                            {
+                                                label: "Women",
+                                                data: [Women],
+                                                backgroundColor: "rgba(255, 159, 64, .5)"
+                                            },
+                                            {
+                                                label: "Unisex",
+                                                data: [Unisex],
+                                                backgroundColor: "rgba(255, 159, 64, .3)"
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        responsive: true
+                                    }
+                                });
+                                // Pie Chart
+                                var ctx5 = $("#pie-chart").get(0).getContext("2d");
+                                var myChart5 = new Chart(ctx5, {
+                                    type: "pie",
+                                    data: {
+                                        labels: ["Gucci", "Calvin Klein", "Channel", "Versace", "Christian Dior"],
+                                        datasets: [{
+                                                backgroundColor: [
+                                                    "rgba(255, 159, 64, .7)",
+                                                    "rgba(255, 159, 64, .6)",
+                                                    "rgba(255, 159, 64, .5)",
+                                                    "rgba(255, 159, 64, .4)",
+                                                    "rgba(255, 159, 64, .3)"
+                                                ],
+                                                data: [20, 20, 20, 20, 20]
+                                            }]
+                                    },
+                                    options: {
+                                        responsive: true
+                                    }
+                                });
+
+                                // Doughnut Chart
+                                var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
+                                const Confirmation = ${QUANTITY_ORDER_STATUS1};
+                                const Pickup = ${QUANTITY_ORDER_STATUS2};
+                                const Delivery = ${QUANTITY_ORDER_STATUS3};
+                                const Successfully = ${QUANTITY_ORDER_STATUS4};
+                                var myChart6 = new Chart(ctx6, {
+                                    type: "doughnut",
+                                    data: {
+                                        labels: ["Confirmation", "Pickup", "Delivery", "Successfully"],
+                                        datasets: [{
+                                                backgroundColor: [
+                                                    "rgba(255, 159, 64, .8)",
+                                                    "rgba(255, 159, 64, .6)",
+                                                    "rgba(255, 159, 64, .4)",
+                                                    "rgba(255, 159, 64, .2)"
+                                                ],
+                                                data: [Confirmation, Pickup, Delivery, Successfully]
+                                            }]
+                                    },
+                                    options: {
+                                        responsive: true
+                                    }
+                                });
         </script>
     </body>
 </html>

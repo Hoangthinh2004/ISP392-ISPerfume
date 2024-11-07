@@ -35,7 +35,7 @@ public class ApplyVoucherController extends HttpServlet {
             PromotionDAO promotionDAO = new PromotionDAO();
             Map<String, Integer> promotions = new HashMap<>();
             session.setAttribute("CUR_PROMOTION", promotions);
-
+            
             int promotionID = Integer.parseInt(request.getParameter("promotionID"));
             promotions.put("promotionID", promotionID);
             int finalPrice = 0;

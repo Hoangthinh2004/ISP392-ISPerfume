@@ -326,7 +326,6 @@
                                                 <a class="dropdown-item" href="MainController?action=SortByPurchasing">Best Seller</a>
                                             </div>
                                         </div>
-                                     
                                     </div>
                                 </div>
                             </div>
