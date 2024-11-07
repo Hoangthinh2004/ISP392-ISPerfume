@@ -29,7 +29,7 @@ public class CreateBlogManager extends HttpServlet {
 
     private static final String UPLOAD_DIRECTORY = "img";
     private static final String ERROR = "blog.jsp";
-    private static final String SUCCESS = "home.jsp";
+    private static final String SUCCESS = "ShowAllBlogManager";
     private static final int IMAGE_WIDTH = 500; 
     private static final int IMAGE_HEIGHT = 500;
 

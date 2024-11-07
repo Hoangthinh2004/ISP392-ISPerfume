@@ -89,20 +89,19 @@ public class HomeController extends HttpServlet {
                 }
             }
 
-            List<ViewProductDTO> listRecentProduct = productDAO.ListRecentProduct();
+            List<ViewProductDTO> listRecentProduct = productDAO.getListProductRecent();
             List<CategoryDTO> listCategory = categoryDAO.getListCategory();
             List<BrandDTO> listBrand = brandDAO.getListBrand();
             List<SizeDTO> listSize = sizeDAO.getListSize();
             List<ViewBrandByCateDTO> listBrandByCate = brandDAO.getBrandByCate();
             List<ViewProductDTO> listFeaturedProduct = productDAO.getListFeaturedProduct();
-
+            
             session.setAttribute("LIST_FEATURED_PRODUCT", listFeaturedProduct);
             session.setAttribute("LIST_SIZE", listSize);
             session.setAttribute("LIST_CATEGORY", listCategory);
             session.setAttribute("LIST_BRAND", listBrand);
             session.setAttribute("LIST_BRAND_BY_CATE", listBrandByCate);
-            session.setAttribute("RECENT_PRODUCT", listRecentProduct);
-
+            session.setAttribute("LIST_PRODUCT_RECENT", listRecentProduct);
             url = HOME;
         } catch (Exception e) {
             log("Error at HomeController: " + e.toString());

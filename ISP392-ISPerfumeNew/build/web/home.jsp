@@ -124,7 +124,7 @@
                                 <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <div class="nav-item dropdown">
-                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
+                                        <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                             <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
                                             <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
@@ -259,19 +259,20 @@
 
                 <div class="col-lg-4">
                     <div class="product-offer mb-30" style="height: 200px;">
-                        <img class="img-fluid" src="img/offer-1.jpg" alt="">
+                        <img class="img-fluid" src="https://i.pinimg.com/564x/0d/8a/50/0d8a50d45341a1bd66578bf76c7d5e46.jpg" alt="">
                         <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Save 20%</h6>
-                            <h3 class="text-white mb-3">Special Offer</h3>
-                            <a href="" class="btn btn-primary">Shop Now</a>
+                            <h6 class="text-white text-uppercase">Save 12% off</h6>
+                            <h3 class="text-white mb-3">Christmas Offer</h3>
+                            <a href="MainController?action=Category&CategoryID=4" class="btn btn-primary">Shop Now</a>
                         </div>
-                        <div class="product-offer mb-30" style="height: 200px;">
-                            <img class="img-fluid" src="img/offer-2.jpg" alt="">
-                            <div class="offer-text">
-                                <h6 class="text-white text-uppercase">Save 20%</h6>
-                                <h3 class="text-white mb-3">Special Offer</h3>
-                                <a href="" class="btn btn-primary">Shop Now</a>
-                            </div>
+
+                    </div>
+                    <div class="product-offer mb-30" style="height: 200px;">
+                        <img class="img-fluid" src="img/blackfriday.jpg" alt="">
+                        <div class="offer-text">
+                            <h6 class="text-white text-uppercase">Save 12% off off</h6>
+                            <h3 class="text-white mb-3">Back friday Offer</h3>
+                            <a href="MainController?action=Category&CategoryID=4" class="btn btn-primary">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -296,13 +297,14 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                             <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                            <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+                            <h5 class="font-weight-semi-bold m-0">Many Discounts</h5>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                             <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                            <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+                            <h5 class="font-weight-semi-bold m-0">Product Diversity
+                            </h5>
                         </div>
                     </div>
                 </div>
@@ -323,7 +325,6 @@
                                     </div>
                                     <div class="flex-fill pl-3">
                                         <h6>${Category.name}</h6>
-                                        <small class="text-body">100 Products</small>
                                     </div>
                                 </div>
                             </a>
@@ -335,7 +336,7 @@
 
 
             <!-- Products Start -->
-            <form action="MainController" method="POST">
+            <form action="MainController" method="POST">      
                 <div class="container-fluid pt-5 pb-3">
                     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
                     <div class="row px-xl-5">
@@ -345,7 +346,16 @@
                                     <div class="product-img position-relative overflow-hidden">
                                         <img class="img-fluid w-100" src="${product.image}" alt="">
                                         <div class="product-action">
-                                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                            <!--                                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>-->
+                                            <c:choose>
+                                                <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                                    <a class="btn btn-outline-dark btn-square" href="MainController?action=quickAddToCart&productDetailID=${product.productDetailID}&quantity=1"><i class="fa fa-shopping-cart"></i>
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a onclick="openDeleteModal(this, event)" class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             <a class="btn btn-outline-dark btn-square" href="NavigateProductDetailController?categoryID=${product.categoryID}&productID=${product.productID}&sizeID=${product.sizeID}&productDetailID=${product.productDetailID}"><i class="fa fa-search"></i></a>
                                         </div>
                                     </div>
@@ -362,26 +372,28 @@
                 </div>
             </form>
             <!-- Products End -->
+
+
             <!-- Offer Start -->
             <div class="container-fluid pt-5 pb-3">
                 <div class="row px-xl-5">
                     <div class="col-md-6">
                         <div class="product-offer mb-30" style="height: 300px;">
-                            <img class="img-fluid" src="img/offer-1.jpg" alt="">
+                            <img class="img-fluid" src="https://i.pinimg.com/564x/89/a1/56/89a156ae10ec98eec8bdbe1e3f1b844f.jpg" alt="">
                             <div class="offer-text">
-                                <h6 class="text-white text-uppercase">Save 20%</h6>
-                                <h3 class="text-white mb-3">Special Offer</h3>
-                                <a href="" class="btn btn-primary">Shop Now</a>
+                                <h6 class="text-white text-uppercase">Save 12% off</h6>
+                                <h3 class="text-white mb-3">Christmas Offer</h3>
+                                <a href="MainController?action=Category&CategoryID=4" class="btn btn-primary">Shop Now</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="product-offer mb-30" style="height: 300px;">
-                            <img class="img-fluid" src="img/offer-2.jpg" alt="">
+                            <img class="img-fluid" src="https://i.pinimg.com/564x/48/da/61/48da611996c63d4aa9c3e485c139df5a.jpg" alt="">
                             <div class="offer-text">
-                                <h6 class="text-white text-uppercase">Save 20%</h6>
-                                <h3 class="text-white mb-3">Special Offer</h3>
-                                <a href="" class="btn btn-primary">Shop Now</a>
+                                <h6 class="text-white text-uppercase">Save 20% off</h6>
+                                <h3 class="text-white mb-3">Black Friday Offer</h3>
+                                <a href="MainController?action=Category&CategoryID=4" class="btn btn-primary">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -391,36 +403,38 @@
 
 
             <!-- Products Start -->
-            <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                <form action="MainController">
-                    <div class="container-fluid pt-5 pb-3">
-                        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
-                        <div class="row px-xl-5">
-                            <c:forEach var="product" items="${sessionScope.RECENT_PRODUCT}">
-                                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                                    <div class="product-item bg-light mb-4">
-                                        <div class="product-img position-relative overflow-hidden">
-                                            <img class="img-fluid w-100" src="${product.image}" alt="">
-                                            <div class="product-action">
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href="NavigateProductDetailController?categoryID=${product.categoryID}&productID=${product.productID}&sizeID=${product.sizeID}&productDetailID=${product.productDetailID}"><i class="fa fa-search"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="text-center py-4">
-                                            <a class="h6 text-decoration-none text-truncate" href="">${product.productName} ${product.sizeName}</a>
-                                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                                <h5><fmt:formatNumber type="number" value="${product.price}"/> VND</h5> 
-                                            </div>
-                                        </div>
+            <div class="container-fluid pt-5 pb-3">
+                <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
+                <div class="row px-xl-5">
+                    <c:forEach var="product" items="${sessionScope.LIST_PRODUCT_RECENT}">
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src="${product.image}" alt="">
+                                    <div class="product-action">
+                                        <c:choose>
+                                            <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                                <a class="btn btn-outline-dark btn-square" href="MainController?action=quickAddToCart&productDetailID=${product.productDetailID}&quantity=1"><i class="fa fa-shopping-cart"></i>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a onclick="openDeleteModal(this, event)" class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        <a class="btn btn-outline-dark btn-square" href="NavigateProductDetailController?categoryID=${product.categoryID}&productID=${product.productID}&sizeID=${product.sizeID}&productDetailID=${product.productDetailID}"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
-                            </c:forEach>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="">${product.productName} ${product.sizeName}</a>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5><fmt:formatNumber type="number" value="${product.price}"/> VND</h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </c:if>
+                    </c:forEach>
+                </div>
+            </div>
             <!-- Products End -->
 
 
@@ -430,28 +444,28 @@
                     <div class="col">
                         <div class="owl-carousel vendor-carousel">
                             <div class="bg-light p-4">
-                                <img src="img/vendor-1.jpg" alt="">
+                                <img src="https://i.pinimg.com/564x/b6/91/ef/b691ef408a87507555b2c89463419efb.jpg" alt="">
                             </div>
                             <div class="bg-light p-4">
-                                <img src="img/vendor-2.jpg" alt="">
+                                <img src="https://i.pinimg.com/564x/72/f5/53/72f553b1c7a9da8e348d814e86394b0f.jpg" alt="">
                             </div>
                             <div class="bg-light p-4">
-                                <img src="img/vendor-3.jpg" alt="">
+                                <img src="https://i.pinimg.com/564x/0c/43/ea/0c43ea8adcd920ad0701ed1a0dfb21b8.jpg" alt="">
                             </div>
                             <div class="bg-light p-4">
-                                <img src="img/vendor-4.jpg" alt="">
+                                <img src="https://i.pinimg.com/564x/fd/1e/7a/fd1e7ae49f2d7bb09e70e4e79f33a64f.jpg" alt="">
                             </div>
                             <div class="bg-light p-4">
-                                <img src="img/vendor-5.jpg" alt="">
+                                <img src="https://i.pinimg.com/564x/17/49/74/174974c35a5b133aa874f6df652e38a4.jpg" alt="">
                             </div>
                             <div class="bg-light p-4">
-                                <img src="img/vendor-6.jpg" alt="">
+                                <img src="https://i.pinimg.com/564x/8e/e4/cc/8ee4ccedbb5fb39bec8c2af6c0bc5e26.jpg" alt="">
                             </div>
                             <div class="bg-light p-4">
-                                <img src="img/vendor-7.jpg" alt="">
+                                <img src="https://i.pinimg.com/564x/9d/82/b4/9d82b440f824b256da80e924917aa920.jpg" alt="">
                             </div>
                             <div class="bg-light p-4">
-                                <img src="img/vendor-8.jpg" alt="">
+                                <img src="https://i.pinimg.com/564x/66/6e/53/666e532ae90028c497988e6ce0f669ae.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -465,63 +479,15 @@
                 <div class="row px-xl-5 pt-5">
                     <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                         <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                        <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                        <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-                    </div>
-                    <div class="col-lg-8 col-md-12">
-                        <div class="row">
-                            <div class="col-md-4 mb-5">
-                                <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
-                                <div class="d-flex flex-column justify-content-start">
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                                    <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-5">
-                                <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                                <div class="d-flex flex-column justify-content-start">
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                                    <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                                    <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-5">
-                                <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                                <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-                                <form action="">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Your Email Address">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary">Sign Up</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-                                <div class="d-flex">
-                                    <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                    <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Đ. D1</p>
+                        <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
+                        <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>0384767323</p>
                     </div>
                 </div>
                 <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
                     <div class="col-md-6 px-xl-0">
                         <p class="mb-md-0 text-center text-md-left text-secondary">
-                            &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
-                            by
-                            <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
+                            <a class="text-primary" href="">ISPerfume</a>
                         </p>
                     </div>
                     <div class="col-md-6 px-xl-0 text-center text-md-right">
@@ -549,20 +515,20 @@
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
             <script>
-                    function openDeleteModal(button, event) {
-                        event.preventDefault();
-                        deleteButtonRef = button; // Store the reference to the delete button
+                                                    function openDeleteModal(button, event) {
+                                                        event.preventDefault();
+                                                        deleteButtonRef = button; // Store the reference to the delete button
 
-                        // Show the modal
-                        document.getElementById('deleteConfirmation').style.display = 'block';
-                        document.getElementById('modalOverlay').style.display = 'block';
-                    }
+                                                        // Show the modal
+                                                        document.getElementById('deleteConfirmation').style.display = 'block';
+                                                        document.getElementById('modalOverlay').style.display = 'block';
+                                                    }
 
-                    function cancelDelete() {
-                        // Hide the modal and overlay
-                        document.getElementById('deleteConfirmation').style.display = 'none';
-                        document.getElementById('modalOverlay').style.display = 'none';
-                    }
+                                                    function cancelDelete() {
+                                                        // Hide the modal and overlay
+                                                        document.getElementById('deleteConfirmation').style.display = 'none';
+                                                        document.getElementById('modalOverlay').style.display = 'none';
+                                                    }
             </script>
     </body>
 </html>

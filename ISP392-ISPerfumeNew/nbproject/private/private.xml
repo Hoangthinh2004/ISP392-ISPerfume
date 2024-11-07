@@ -611,6 +611,15 @@
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/checkOutController.java</file>
         </group>
         <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ForgetPasswordController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/SendEmailController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/STAFF_OrderManagement.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ChangePasswordController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/checkOutController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_ProductManagement.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AssignShipperStaffController.java</file>
+        </group>
+        <group>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/DeleteCartController.java</file>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CategoryController.java</file>
