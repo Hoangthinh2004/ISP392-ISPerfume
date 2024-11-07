@@ -30,23 +30,9 @@ public class CategoryController extends HttpServlet {
             throws ServletException, IOException {
         String url = ERROR;
         try {
-            int categoryID = Integer.parseInt(request.getParameter("CategoryID"));
-            int brandID = 0;
-            if (request.getParameter("brandID") == null) {
-                brandID = 0;
-            } else {
-                brandID = Integer.parseInt(request.getParameter("brandID"));
-            }
-            
             ProductDAO productDAO = new ProductDAO();
             HttpSession session = request.getSession();
-            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
-            if (ids == null) {
-                ids = new HashMap<>();
-                session.setAttribute("CURRENT_IDS", ids);
-            }
-            ids.put("categoryID", categoryID); //store current categoryID and send to Brand & Size filter controller
-
+            
             //remove current sizeID
             Map<String, Integer> sizeIDS = (Map<String, Integer>) session.getAttribute("SIZE_IDS");
             if (sizeIDS != null && !sizeIDS.isEmpty()) {
@@ -57,6 +43,12 @@ public class CategoryController extends HttpServlet {
             Map<String, Integer> brandIDS = (Map<String, Integer>) session.getAttribute("CURRENT_BRANDID");
             if (brandIDS != null && !brandIDS.isEmpty()) {
                 session.removeAttribute("CURRENT_BRANDID");
+                
+                brandIDS = new HashMap<>();
+                session.setAttribute("CURRENT_BRANDID", brandIDS);
+            } else {
+                brandIDS = new HashMap<>();
+                session.setAttribute("CURRENT_BRANDID", brandIDS);
             }
 
             //remove current search key
@@ -65,6 +57,22 @@ public class CategoryController extends HttpServlet {
                 session.removeAttribute("CURRENT_SEARCH");
             }
             
+            int categoryID = Integer.parseInt(request.getParameter("CategoryID"));
+            int brandID = 0;
+            if (request.getParameter("brandID") == null) {
+                brandID = 0;
+            } else {
+                brandID = Integer.parseInt(request.getParameter("brandID"));
+                brandIDS.put("brandID", brandID);
+            }
+            
+            Map<String, Integer> ids = (Map<String, Integer>) session.getAttribute("CURRENT_IDS");
+            if (ids == null) {
+                ids = new HashMap<>();
+                session.setAttribute("CURRENT_IDS", ids);
+            }
+            ids.put("categoryID", categoryID); //store current categoryID and send to Brand & Size filter controller
+
             if (brandID == 0) {
                 List<ViewProductDTO> listProduct = productDAO.getListProductByCategory(categoryID);
                 session.setAttribute("LIST_PRODUCT", listProduct);
@@ -72,8 +80,6 @@ public class CategoryController extends HttpServlet {
                 List<ViewProductDTO> listProduct = productDAO.filterProductByBrand(brandID, categoryID);
                 session.setAttribute("LIST_PRODUCT", listProduct);
             }
-            
-
             
             session.removeAttribute("BRAND_INFOR");
             url = SUCCESS;

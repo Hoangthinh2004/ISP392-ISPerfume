@@ -415,8 +415,6 @@
                         </div>
                     </div>
 
-                                                
-
                     <div class="col-lg-4">
                         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
                         <c:forEach var="check" items="${sessionScope.CHECK_LIST.cart.values()}" varStatus="counter">
@@ -459,6 +457,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="voucher-options mb-3">
+                                            ${requestScope.MESSAGE}
                                             <c:forEach var="promotion" items="${sessionScope.PROMOTION}">
                                                 <label class="voucher-option d-flex align-items-center border rounded p-3 mb-3">
                                                     <input type="radio" name="promotionID" value="${promotion.promotionID}" onclick="enableApplyButton()" class="d-none" />
@@ -485,11 +484,6 @@
                             </div>
                         </div>
                         <!-- Modal Popup voucher -->
-
-
-
-
-
                         <div class="bg-light p-30 mb-5 address-infor mt-5">
                             <div class="border-bottom pt-3 pb-2">
                                 <c:if test="${sessionScope.PROMOTION_DETAIL != null}">
