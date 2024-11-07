@@ -39,7 +39,9 @@ public class SendEmailController extends HttpServlet {
     private static final String REGISTER_GOOGLE_ACCCOUNT = "RegisterGoogleAccount";
     private static final String FORGOT_PASSWORD_EMAIL = "ForgotPasswordEmail";
     private static final String ERROR = "signin.jsp";
-    private static final String SUCCESS_FORGOT_PASSWORD_EMAIL="ForgotPasswordController";
+    private static final String SUCCESS_FORGOT_PASSWORD_EMAIL = "ForgotPasswordController";
+    private static final String CONFIRM_EMAIL = "ConfirmEmail";
+    private static final String SUCCESS_CONFIRM_EMAIL = "AssignShipperStaffController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,8 +51,10 @@ public class SendEmailController extends HttpServlet {
         try {
             if (REGISTER_GOOGLE_ACCCOUNT.equals(action)) {
                 url = createGoogleUser(request, response);
-            }else if(FORGOT_PASSWORD_EMAIL.equals(action)){
-                url = sendEmailForgotPassword(request,response);
+            } else if (FORGOT_PASSWORD_EMAIL.equals(action)) {
+                url = sendEmailForgotPassword(request, response);
+            } else if (CONFIRM_EMAIL.equals(action)) {
+                url = sendEmailConfirm(request, response);
             }
         } catch (Exception e) {
             log("Error at SendMailController: " + e.toString());
@@ -58,8 +62,8 @@ public class SendEmailController extends HttpServlet {
             response.sendRedirect(url);
         }
     }
-    
-     private boolean sendEmail(String to, String messageBody, String subject, boolean html) {
+
+    private boolean sendEmail(String to, String messageBody, String subject, boolean html) {
         final String FROM_EMAIL = "isperfume1803@gmail.com";
         final String PASSWORD = "rnxf gfef mbrn xjqg";
         Properties properties = new Properties();
@@ -87,14 +91,11 @@ public class SendEmailController extends HttpServlet {
             Transport.send(message);
             check = true;
         } catch (MessagingException e) {
-            log("Error at SendEmailController: "+e.toString());
+            log("Error at SendEmailController: " + e.toString());
             check = false;
         }
         return check;
     }
-
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -140,15 +141,15 @@ public class SendEmailController extends HttpServlet {
         String password = request.getParameter("password");
         String subject = "Successfully registered account by ISSPERFUME";
         String messageBody = "Hi, welcome to ISPERFUME <br><br>"
-                            +"From now on you can login with your Google account or with our account.<br><br>"
-                            +"Here is your ACCOUNT INFORMATION: <br>"
-                            +"<b>Email</b>: "+email+"<br>"
-                            +"<b>Password</b>: "+password+"<br><br>"
-                            +"Wishing you a great shopping experience !!<br>";
+                + "From now on you can login with your Google account or with our account.<br><br>"
+                + "Here is your ACCOUNT INFORMATION: <br>"
+                + "<b>Email</b>: " + email + "<br>"
+                + "<b>Password</b>: " + password + "<br><br>"
+                + "Wishing you a great shopping experience !!<br>";
         boolean result = sendEmail(email, messageBody, subject, true);
-        if(result){
+        if (result) {
             return SUCCESS_SEND_MAIL_GOOGLE_USER;
-        }else{
+        } else {
             return ERROR;
         }
     }
@@ -158,13 +159,29 @@ public class SendEmailController extends HttpServlet {
         String token = request.getParameter("token");
         String subject = "RESET PASSWORD - ISPerfume";
         String messageBody = "Hi, welcome back to ISPERFUME <br><br>"
-                            +"Please verify with OTP code <br><br>"
-                            +"Your OTP code: "+token+"<br><br>"
-                            +"Please enter your OTP code to change password!";
+                + "Please verify with OTP code <br><br>"
+                + "Your OTP code: " + token + "<br><br>"
+                + "Please enter your OTP code to change password!";
         boolean result = sendEmail(email, messageBody, subject, true);
-        if(result){
+        if (result) {
             return SUCCESS_FORGOT_PASSWORD_EMAIL;
-        }else{
+        } else {
+            return ERROR;
+        }
+    }
+
+    private String sendEmailConfirm(HttpServletRequest request, HttpServletResponse response) {
+        String email = request.getParameter("email");
+        String orderID = request.getParameter("orderID");
+        String subject = "SUCCESSFULLY CONFIRM - ISPerfume";
+        String messageBody = "Hi, welcome back to ISPERFUME <br><br>"
+                + "Your order has been confirmed <br><br>"
+                + "Your Order ID : " + orderID + "<br><br>"
+                + "Thank you for choosing and trusting us!";
+        boolean result = sendEmail(email, messageBody, subject, true);
+        if (result) {
+            return SUCCESS_CONFIRM_EMAIL;
+        } else {
             return ERROR;
         }
     }

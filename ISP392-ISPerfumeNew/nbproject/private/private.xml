@@ -3,18 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/blog/BlogDAO.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/MainController.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/blog/BlogDTO.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/ShowAllBlogManager.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/STAFF_BlogManagement.jsp</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/UpdateBlogManagerController.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_PromotionManagement.jsp</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/productDetail.jsp</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_Dashboard.jsp</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/SHIPPER_OrderManagement.jsp</file>
-        </group>
-        <group>
             <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/blog.jsp</file>
             <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/blog/BlogDAO.java</file>
             <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/WEB-INF/web.xml</file>
@@ -369,6 +357,16 @@
             <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ShowAllBlogManager.java</file>
         </group>
         <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/orderStatus.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/dashmin/js/main.js</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/brand/BrandDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product_category/ProductCategoryDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/order/OrderDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_Dashboard.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/ListDashboardController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDAO.java</file>
             <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/orderStatus.jsp</file>
         </group>
     </open-files>

@@ -212,6 +212,9 @@ public class MainController extends HttpServlet {
     private static final String CHECK_QUANTITY = "checkQuantity";
     private static final String CHECK_QUANTITY_CONTROLLER = "checkOrderQuantityController";
     
+    private static final String QUICK_ADD_TO_CART = "quickAddToCart";
+    private static final String QUICK_ADD_TO_CART_CONTROLLER = "QuickAddToCartController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -348,6 +351,8 @@ public class MainController extends HttpServlet {
                 url = APPLY_VOUCHER_CONTROLLER;
             } else if(CHECK_QUANTITY .equals(action)){
                 url = CHECK_QUANTITY_CONTROLLER;
+            } else if(QUICK_ADD_TO_CART.equals(action)){
+                url = QUICK_ADD_TO_CART_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
