@@ -18,7 +18,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -176,18 +176,48 @@
                 <!-- Sales Chart Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="row g-4">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Category</h6>
-                                    <a href="">Show All</a>
-                                </div>
-                                <canvas id="pie-chart"></canvas>
+                        <div class="col-sm-12 col-xl-12">
+                            <div class="row g-4">
+
                             </div>
                         </div>
+                    </div>
+                </div>
+                <!-- Sale & Revenue End -->
 
-                        <div class="col-sm-12 col-xl-6">
+
+                <!-- Sales Chart Start -->
+                <div class="container-fluid pt-4 px-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
                             <div class="row g-4">
+                                <!-- Total Promotion -->
+                                <div class="col-sm-6">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 h-100">
+                                        <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                        <div class="ms-3">
+                                            <p class="mb-2">Total Promotion</p>
+                                            <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
+                                                <h6 class="mb-0 text-end">${pro.promotionID}</h6>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Revenue -->
+                                <div class="col-sm-6 ">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 h-100">
+                                        <i class="fa fa-dollar-sign fa-3x text-primary"></i>
+                                        <div class="ms-3">
+                                            <p class="mb-2">Total Revenue</p>
+                                            <c:forEach var="unitP" items="${requestScope.REVENUE}">
+                                                <h6 class="mb-0 text-end">
+                                                    <fmt:formatNumber type="number" value="${unitP.unitPrice}" /> VND
+                                                </h6>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-6">
                                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                                         <i class="fa fa-boxes fa-3x text-primary"></i>
@@ -233,63 +263,32 @@
                                             </c:forEach>
                                         </div>
                                     </div>
+                                </div> 
+                                <!-- Category Chart -->
+                                <div class="col-12">
+                                    <div class="bg-light text-center rounded p-4 h-100">
+                                        <div class="d-flex align-items-center justify-content-between mb-4">
+                                            <h6 class="mb-0">Category</h6>
+                                        </div>
+                                        <canvas id="worldwide-sales"></canvas>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                        <i class="fa fa-chart-area fa-3x text-primary"></i>
-                                        <div class="ms-3">
-                                            <p class="mb-2">Total Promotion</p>
-                                            <c:forEach var="pro" items="${requestScope.ALL_PROMOTION}">
-                                                <h6 class="mb-0 text-end">${pro.promotionID}</h6>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </div>  
-                                <div class="col-sm-6">
-                                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                        <i class="fa fa-dollar-sign fa-3x text-primary"></i>
-                                        <div class="ms-3">
-                                            <p class="mb-2">Total Revenue</p>
-                                            <c:forEach var="unitP" items="${requestScope.REVENUE}">
-                                                <h6 class="mb-0 text-end">
-                                                    <fmt:formatNumber type="number" value="${unitP.unitPrice}" /> VND
-                                                </h6>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </div>  
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- Sale & Revenue End -->
-
-
-                <!-- Sales Chart Start -->
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Brands</h6>
-                                    <a href="">Show All</a>
-                                </div>
-                                <canvas id="pie-chart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-xl-6">
-                            <div class="bg-light text-center rounded p-4">
+                        <!-- Left Column - Orders Chart -->
+                        <div class="col-md-6">
+                            <div class="bg-light text-center rounded p-4 h-100">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h6 class="mb-0">Orders</h6>
-                                    <a href="">Show All</a>
                                 </div>
                                 <canvas id="doughnut-chart"></canvas>
                             </div>
                         </div>
 
                     </div>
+
                 </div>
+
                 <!-- Sales Chart End -->
 
                 <!-- Footer Start -->
@@ -331,7 +330,6 @@
                                 // Worldwide Sales Chart
                                 var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
 
-                                // Lấy các giá trị từ requestScope và gán cho biến JavaScript
                                 const Men = ${QUANTITY_PRODUCT_BY_CATEGORYID1};
                                 const Women = ${QUANTITY_PRODUCT_BY_CATEGORYID2};
                                 const Unisex = ${QUANTITY_PRODUCT_BY_CATEGORYID3};
@@ -360,27 +358,6 @@
                                         responsive: true
                                     }
                                 });
-                                // Pie Chart
-                                var ctx5 = $("#pie-chart").get(0).getContext("2d");
-                                var myChart5 = new Chart(ctx5, {
-                                    type: "pie",
-                                    data: {
-                                        labels: ["Gucci", "Calvin Klein", "Channel", "Versace", "Christian Dior"],
-                                        datasets: [{
-                                                backgroundColor: [
-                                                    "rgba(255, 159, 64, .7)",
-                                                    "rgba(255, 159, 64, .6)",
-                                                    "rgba(255, 159, 64, .5)",
-                                                    "rgba(255, 159, 64, .4)",
-                                                    "rgba(255, 159, 64, .3)"
-                                                ],
-                                                data: [20, 20, 20, 20, 20]
-                                            }]
-                                    },
-                                    options: {
-                                        responsive: true
-                                    }
-                                });
 
                                 // Doughnut Chart
                                 var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
@@ -399,7 +376,7 @@
                                                     "rgba(255, 159, 64, .4)",
                                                     "rgba(255, 159, 64, .2)"
                                                 ],
-                                                data: [Confirmation, Pickup, Delivery, Successfully]
+                                                data: [25, 19, 22, 34]
                                             }]
                                     },
                                     options: {

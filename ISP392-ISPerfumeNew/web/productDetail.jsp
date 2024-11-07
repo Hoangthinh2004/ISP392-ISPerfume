@@ -64,7 +64,7 @@
                 font-size: 18px;
                 max-width: 400px; 
                 position: fixed; 
-                top: 20px; 
+                top: 100px; 
                 right: 20px;
                 z-index: 1050; 
                 border: 1px solid transparent;
@@ -337,15 +337,7 @@
                 </button>
             </div>
         </div>
-        <c:if test="${not empty requestScope.MESSAGE}">
-            <div class="alert alert-success alert-dismissible fade show fade-out" role="alert" id="autoDismissAlert" >
-                <i class="fa fa-check-circle me-2"></i> ${requestScope.MESSAGE}
-                <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close">
-                    <i class="fa fa-times"></i>
-                </button>
-                <div class="progress-bar-timer bg-success" id="progressBar"></div>
-            </div>
-        </c:if>
+
         <!--Pop-up End-->
 
 
@@ -424,7 +416,7 @@
                                         document.querySelector('.btn-minus').addEventListener('click', function () {
                                             let input = document.getElementById('quantityInput');
                                             let currentValue = parseInt(input.value);
-                                            if (currentValue > 1) { // Không cho phép giảm xuống dưới 1
+                                            if (currentValue > 1) {
                                                 input.value = currentValue - 1;
                                             }
                                         });
@@ -523,7 +515,7 @@
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
                     <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>D1 Street, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Thu Duc, TP HoChiMinh</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
                     <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
                 </div>
@@ -593,7 +585,7 @@
                                                     }
                                                     function openDeleteModal(button, event) {
                                                         event.preventDefault();
-                                                        deleteButtonRef = button; // Store the reference to the delete button
+                                                        deleteButtonRef = button;
 
                                                         // Show the modal
                                                         document.getElementById('deleteConfirmation').style.display = 'block';
@@ -601,32 +593,31 @@
                                                     }
 
                                                     function cancelDelete() {
-                                                        // Hide the modal and overlay
                                                         document.getElementById('deleteConfirmation').style.display = 'none';
                                                         document.getElementById('modalOverlay').style.display = 'none';
                                                     }
 
-                                                document.addEventListener('DOMContentLoaded', function () {
-                                                    var duration = 5000;
-                                                    var progressBar = document.getElementById('progressBar');
-                                                    var alertElement = document.getElementById('autoDismissAlert');
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        var duration = 5000;
+                                                        var progressBar = document.getElementById('progressBar');
+                                                        var alertElement = document.getElementById('autoDismissAlert');
 
-                                                    progressBar.style.width = '100%';
+                                                        progressBar.style.width = '100%';
 
-                                                    requestAnimationFrame(function () {
+                                                        requestAnimationFrame(function () {
+                                                            setTimeout(function () {
+                                                                progressBar.style.transitionDuration = duration + 'ms';
+                                                                progressBar.style.width = '0%';
+                                                            }, 10);
+                                                        });
+
                                                         setTimeout(function () {
-                                                            progressBar.style.transitionDuration = duration + 'ms';
-                                                            progressBar.style.width = '0%';
-                                                        }, 10);
+                                                            alertElement.classList.add('hide');
+                                                            setTimeout(function () {
+                                                                alertElement.remove();
+                                                            }, 200);
+                                                        }, duration);
                                                     });
-
-                                                    setTimeout(function () {
-                                                        alertElement.classList.add('hide');
-                                                        setTimeout(function () {
-                                                            alertElement.remove();
-                                                        }, 200);
-                                                    }, duration);
-                                                });
 
         </script>
 

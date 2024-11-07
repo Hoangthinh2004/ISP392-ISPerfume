@@ -11,7 +11,7 @@
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,15 +60,8 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Management</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a href="MGR_ProductManagement.jsp" class="dropdown-item active">Product Management</a>
-                                <a href="MGR_BrandManagement.jsp" class="dropdown-item">Brand Management</a>
-                                <a href="MGR_PromotionManagement.jsp" class="dropdown-item">Promotion Management</a>
-                            </div>
-                        </div>
+                        <a href="MainController?action=ManageOrderPage" class="nav-item nav-link "><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
+                        <a href="MainController?action=ShowAllBlogManager" class="nav-item nav-link active"><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>                     
                     </div>
                 </nav>
             </div>
@@ -136,11 +129,15 @@
                                             <input type="date" class="form-control" name="createDate" required="" > 
                                         </div>
                                     </div>
-                                    <!-- Submit Button -->
-                                    <input type="hidden" name="staffID" value="3" >
-                                    <button type="submit" name="action" value="CreateBlogManager" class="btn btn-primary">CREATE</button>
-                                    <input type="hidden" name="search" value="${requestScope.SEARCH}"/>                                                                 
-
+                                    <div class="d-flex justify-content-between">
+                                        <!-- Submit Button -->
+                                        <input type="hidden" name="staffID" value="3" >
+                                        <button type="submit" name="action" value="CreateBlogManager" class="btn btn-primary">CREATE</button>
+                                        <input type="hidden" name="search" value="${requestScope.SEARCH}"/>                                                                 
+                                        <a class="btn btn-primary" href="MainController?action=ShowAllBlogManager">
+                                            Back
+                                        </a>
+                                    </div>
                                 </form>
                             </div>
                         </div>

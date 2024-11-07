@@ -98,8 +98,6 @@
         </div>
         <!-- Topbar End -->
 
-
-
         <!-- Navbar Start -->
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
@@ -116,10 +114,10 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="MainController?action=HomeController" class="nav-item nav-link active btn">Home</a>
+                                <a href="MainController?action=HomeController" class="nav-item nav-link ">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <div class="nav-item dropdown">
-                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle btn" data-toggle="dropdown">${Category.name}</a>
+                                        <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
                                             <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="btn dropdown-item ${Category == param.Category ? "active" : ""}">All ${Category.name}</a>
                                             <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
@@ -130,9 +128,9 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-                                <a href="MainController?action=NavigateBlog" class="nav-item nav-link btn">Blog</a>
+                                <a href="MainController?action=NavigateBlog" class="nav-item nav-link">Blog</a>
                                 <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link btn"> Order History</a>
+                                    <a href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}" class="nav-item nav-link active"> Order History</a>
                                 </c:if>
                             </div>
                             <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">

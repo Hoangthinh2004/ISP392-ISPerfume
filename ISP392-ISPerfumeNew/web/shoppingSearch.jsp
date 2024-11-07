@@ -11,13 +11,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>ISPERFUME | Shop</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -159,9 +159,7 @@
         </div>
         <!-- Topbar End -->
 
-
         <!-- Navbar Start -->
-
         <div class="container-fluid bg-dark mb-30">
             <div class="row px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block mt-2">
@@ -180,12 +178,12 @@
                                 <a href="MainController?action=HomeController" class="nav-item nav-link">Home</a>
                                 <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
                                     <div class="nav-item dropdown">
-                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle ${Category.categoryID == param.CategoryID ? "active": ""}" data-toggle="dropdown">${Category.name}</a>
+                                        <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="nav-link dropdown-toggle ${Category.categoryID == param.CategoryID ? "active" : ""}" data-toggle="dropdown">${Category.name}</a>
                                         <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="btn dropdown-item ${Category.categoryID == param.CategoryID && param.brandID == null?  "active": ""}">All ${Category.name}</a>
+                                            <a href="MainController?action=Category&CategoryID=${Category.categoryID}" class="btn dropdown-item  ${Category.categoryID == param.CategoryID && param.brandID == null ? "active" : ""}">All ${Category.name}</a>
                                             <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
                                                 <c:if test="${Category.categoryID == brand.categoryID}">
-                                                    <a href="MainController?action=Category&CategoryID=${Category.categoryID}&brandID=${brand.brandID}" class="dropdown-item btn ${Category.categoryID == param.CategoryID && brand.brandID == param.brandID ? "active": ""}">${brand.brandName}</a>
+                                                    <a href="MainController?action=Category&CategoryID=${Category.categoryID}&brandID=${brand.brandID}" class="dropdown-item btn ${Category.categoryID == param.CategoryID && brand.brandID == param.brandID ? "active" : ""}">${brand.brandName}</a>
                                                 </c:if>
                                             </c:forEach>
                                         </div>
@@ -349,7 +347,7 @@
                                             <div class="d-flex align-items-center justify-content-center mt-2">
                                                 <h5><fmt:formatNumber type="number" value="${Product.price}"/> VND</h5> 
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
@@ -369,7 +367,7 @@
                 <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                     <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
                     <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>D1 Street, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Thu Duc, TP HoChiMinh</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
                     <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
                 </div>
