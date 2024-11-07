@@ -493,7 +493,7 @@
                                         </div>
                                         <div class="text-center py-4">
                                             <h4>${Product.brandName}</h4>
-                                            <a class="h6 text-decoration-none text-truncate" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}">${Product.productName} ${Product.sizeName}</a>
+                                            <a class="h6 text-decoration-none text-truncate" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}">${Product.productName} ${Product.productDetailID} </a>
                                             <div class="d-flex align-items-center justify-content-center mt-2">
                                                 <h5><fmt:formatNumber type="number" value="${Product.price}"/> VND</h5> 
                                             </div>
