@@ -30,7 +30,7 @@ import net.coobird.thumbnailator.Thumbnails;
         maxFileSize = 1024 * 1024 * 10, // 10MB
         maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
-//@WebServlet(name = "CreateProductDetailManager", urlPatterns = {"/CreateProductDetailManager"})
+@WebServlet(name = "CreateProductDetailManager", urlPatterns = {"/CreateProductDetailManager"})
 public class CreateProductDetailManager extends HttpServlet {
 
     private static final String UPLOAD_DIRECTORY = "img";

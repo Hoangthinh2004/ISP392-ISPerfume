@@ -54,7 +54,7 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
                         <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
@@ -376,7 +376,7 @@
                                                     "rgba(255, 159, 64, .4)",
                                                     "rgba(255, 159, 64, .2)"
                                                 ],
-                                                data: [25, 19, 22, 34]
+                                                data: [ Confirmation , Pickup, Delivery, Successfully]
                                             }]
                                     },
                                     options: {
