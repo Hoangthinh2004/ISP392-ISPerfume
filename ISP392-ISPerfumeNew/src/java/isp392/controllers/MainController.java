@@ -217,6 +217,9 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_CHECK_OUT_ADDRESS = "UpdateCheckOutProfile";
     private static final String UPDATE_CHECK_OUT_ADDRESS_CONTROLLER = "UpdateCheckOutProfileController";
     
+    private static final String CREATE_PRODUCT_DETAIL_MANAGER = "CreateProductDetailManager1";
+    private static final String CREATE_PRODUCT_DETAIL_MANAGER_CONTROLLER = "CreateProductDetailManager";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -357,6 +360,8 @@ public class MainController extends HttpServlet {
                 url = QUICK_ADD_TO_CART_CONTROLLER;
             } else if(UPDATE_CHECK_OUT_ADDRESS.equals(action)){
                 url = UPDATE_CHECK_OUT_ADDRESS_CONTROLLER;
+            } else if(CREATE_PRODUCT_DETAIL_MANAGER.equals(action)){
+                url = CREATE_PRODUCT_DETAIL_MANAGER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

@@ -3,38 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateProductDetail.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateProduct.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_BrandManagement.jsp</file>
-            <file>file:/D:/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_CreateBrand.jsp</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/blog.jsp</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/blog/BlogDAO.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/MainController.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/blog/BlogDTO.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/UpdatePromotionController.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/UpdateBlogManagerController.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/singleBlog.jsp</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/promotion/PromotionDAO.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/NavigateBlogController.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/MGR_PromotionManagement.jsp</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/UpdateProductDetailManager.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/promotion/PromotionDTO.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/ShowAllBlogManager.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/ViewSingleBlogController.java</file>
-            <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/STAFF_BlogManagement.jsp</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/promotion/PromotionDTO.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/brand/BrandDAO.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/MGR_Dashboard.jsp</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CountAllPromotionController.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/MainController.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/promotion/PromotionDAO.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/home.jsp</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CountAllBrandController.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/order/OrderDTO.java</file>
-            <file>file:/D:/4-ISP392/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/brand/BrandDTO.java</file>
-        </group>
-        <group>
             <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/controllers/UpdateProductDetailManager.java</file>
             <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/src/java/isp392/blog/BlogDAO.java</file>
             <file>file:/D:/Document_D/GitKraken/08_10new/ISP392-ISPerfumeNew/web/WEB-INF/web.xml</file>
@@ -611,6 +579,15 @@
         </group>
         <group>
             <file>file:/D:/ISP_Project/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/shopping.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/AscendingProductByPriceController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/checkoutSuccess.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/DescendingProductByPriceController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/product/ProductDAO.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/MainController.java</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/web/viewOrderDetail.jsp</file>
+            <file>file:/C:/Games/ISP392-ISPerfume/ISP392-ISPerfumeNew/src/java/isp392/controllers/CODCheckOutController.java</file>
         </group>
     </open-files>
 </project-private>
