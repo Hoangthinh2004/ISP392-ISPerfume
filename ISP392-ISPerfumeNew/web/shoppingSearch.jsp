@@ -335,10 +335,16 @@
                                         <div class="product-img position-relative overflow-hidden">
                                             <img class="img-fluid w-100" src="${Product.image}" alt="">
                                             <div class="product-action">
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}&productDetailID=${Product.productDetailID}"><i class="fa fa-search"></i></a>
+                                                <c:choose>
+                                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                                        <a class="btn btn-outline-dark btn-square" href="MainController?action=quickAddToCart&productDetailID=${Product.productDetailID}&quantity=1"><i class="fa fa-shopping-cart"></i>
+                                                        </a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a onclick="openDeleteModal(this, event)" class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                <a class="btn btn-outline-dark btn-square" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}"><i class="fa fa-search"></i></a>
                                             </div>
                                         </div>
                                         <div class="text-center py-4">
@@ -424,17 +430,17 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script>
-                    function openDeleteModal(button, event) {
-                        event.preventDefault();
-                        deleteButtonRef = button;
-                        document.getElementById('deleteConfirmation').style.display = 'block';
-                        document.getElementById('modalOverlay').style.display = 'block';
-                    }
+                                                            function openDeleteModal(button, event) {
+                                                                event.preventDefault();
+                                                                deleteButtonRef = button;
+                                                                document.getElementById('deleteConfirmation').style.display = 'block';
+                                                                document.getElementById('modalOverlay').style.display = 'block';
+                                                            }
 
-                    function cancelDelete() {
-                        document.getElementById('deleteConfirmation').style.display = 'none';
-                        document.getElementById('modalOverlay').style.display = 'none';
-                    }
+                                                            function cancelDelete() {
+                                                                document.getElementById('deleteConfirmation').style.display = 'none';
+                                                                document.getElementById('modalOverlay').style.display = 'none';
+                                                            }
         </script>
     </body>
 </html>

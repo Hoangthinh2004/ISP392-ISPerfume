@@ -10,7 +10,6 @@ import isp392.user.CustomerViewProfileDTO;
 import isp392.user.UserDAO;
 import isp392.user.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -51,6 +50,8 @@ public class SigninEmployee extends HttpServlet {
                     if (cust != null) {
                         session.setAttribute("CUSTOMER", cust);
                         if (request.getParameter("checkOutStatus") != null) {
+                            request.setAttribute("EMAIL", email);
+                            request.setAttribute("PASSWORD", password);
                             url = "checkoutSuccess.jsp";
                         } else {
                            url = CUS_PAGE; 

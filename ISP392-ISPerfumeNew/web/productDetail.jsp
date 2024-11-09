@@ -387,7 +387,7 @@
                                 <h3>${product.name}</h3>
                                 <c:forEach var="price" items="${sessionScope.PRICE_BY_SIZE}">
                                     <input type="hidden" name="productDetailID" value="${price.productDetailID}"/>
-                                    <span>Quantity in stock: ${price.stockQuantity}</span>
+                                 
                                     <input type="hidden" name="sizeID" value="${price.sizeID}">
                                     <h3 class="font-weight-semi-bold mb-4"><fmt:formatNumber type="number" value="${price.price}"/>  VND</h3>
                                 </c:forEach>

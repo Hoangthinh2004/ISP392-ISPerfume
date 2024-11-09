@@ -182,7 +182,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="order" items="${requestScope.ORDER_LIST_STAFF}">
+                                            <c:forEach var="order" items="${requestScope.ORDER_LIST_STAFF}" varStatus="counter">
                                                 <tr>
                                                     <!--                                                staff-->
                                                     <td>
