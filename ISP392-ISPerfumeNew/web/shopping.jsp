@@ -493,7 +493,7 @@
                                         </div>
                                         <div class="text-center py-4">
                                             <h4>${Product.brandName}</h4>
-                                            <a class="h6 text-decoration-none text-truncate" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}">${Product.productName} ${Product.productDetailID} </a>
+                                            <a class="h6 text-decoration-none text-truncate" href="MainController?action=NavigateProductDetail&productID=${Product.productID}&sizeID=${Product.sizeID}">${Product.productName} ${Product.sizeName} </a>
                                             <div class="d-flex align-items-center justify-content-center mt-2">
                                                 <h5><fmt:formatNumber type="number" value="${Product.price}"/> VND</h5> 
                                             </div>
@@ -572,32 +572,6 @@
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script>
-                                                            const toggleBtn = document.getElementById("toggle-btn");
-                                                            const descriptionContent = document.getElementById("description-content");
-
-                                                            toggleBtn.addEventListener("click", function () {
-                                                                if (descriptionContent.classList.contains("expanded")) {
-                                                                    descriptionContent.classList.remove("expanded");
-                                                                    toggleBtn.classList.remove("expanded");
-                                                                } else {
-                                                                    descriptionContent.classList.add("expanded");
-                                                                    toggleBtn.classList.add("expanded");
-                                                                }
-                                                            });
-                                                            function openDeleteModal(button, event) {
-                                                                event.preventDefault();
-                                                                deleteButtonRef = button; // Store the reference to the delete button
-
-                                                                // Show the modal
-                                                                document.getElementById('deleteConfirmation').style.display = 'block';
-                                                                document.getElementById('modalOverlay').style.display = 'block';
-                                                            }
-
-                                                            function cancelDelete() {
-                                                                // Hide the modal and overlay
-                                                                document.getElementById('deleteConfirmation').style.display = 'none';
-                                                                document.getElementById('modalOverlay').style.display = 'none';
-                                                            }
                                                             document.addEventListener('DOMContentLoaded', function () {
                                                                 var duration = 5000;
                                                                 var progressBar = document.getElementById('progressBar');
@@ -619,6 +593,33 @@
                                                                     }, 200);
                                                                 }, duration);
                                                             });
+                                                            const toggleBtn = document.getElementById("toggle-btn");
+                                                            const descriptionContent = document.getElementById("description-content");
+
+                                                            toggleBtn.addEventListener("click", function () {
+                                                                if (descriptionContent.classList.contains("expanded")) {
+                                                                    descriptionContent.classList.remove("expanded");
+                                                                    toggleBtn.classList.remove("expanded");
+                                                                } else {
+                                                                    descriptionContent.classList.add("expanded");
+                                                                    toggleBtn.classList.add("expanded");
+                                                                }
+                                                            });
+                                                            function openDeleteModal(button, event) {
+                                                                event.preventDefault();
+                                                                deleteButtonRef = button;
+
+                                                                // Show the modal
+                                                                document.getElementById('deleteConfirmation').style.display = 'block';
+                                                                document.getElementById('modalOverlay').style.display = 'block';
+                                                            }
+
+                                                            function cancelDelete() {
+                                                                // Hide the modal and overlay
+                                                                document.getElementById('deleteConfirmation').style.display = 'none';
+                                                                document.getElementById('modalOverlay').style.display = 'none';
+                                                            }
+
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>

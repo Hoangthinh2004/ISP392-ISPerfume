@@ -376,7 +376,7 @@
                                                     "rgba(255, 159, 64, .4)",
                                                     "rgba(255, 159, 64, .2)"
                                                 ],
-                                                data: [25, 19, 22, 34]
+                                                data: [Confirmation, Pickup, Delivery, Successfully]
                                             }]
                                     },
                                     options: {

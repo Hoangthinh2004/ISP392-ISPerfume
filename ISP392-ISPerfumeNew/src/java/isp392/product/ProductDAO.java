@@ -564,7 +564,7 @@ public class ProductDAO {
                     String productName = rs.getString("ProName");
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
-                    listProduct.add(new ViewProductDTO(productDetailID, 0, 0, productID, 0, sizeName, brandName, productName, price, image));
+                    listProduct.add(new ViewProductDTO(0, productDetailID, price, productID, price, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {
@@ -753,7 +753,7 @@ public class ProductDAO {
                     String productName = rs.getString("ProName");
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
-                    listProduct.add(new ViewProductDTO(productDetailID, 0, 0, productID, 0, sizeName, brandName, productName, price, image));
+                    listProduct.add(new ViewProductDTO(0, productDetailID, price, productID, price, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {
@@ -855,7 +855,7 @@ public class ProductDAO {
                     String productName = rs.getString("ProName");
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
-                    listProduct.add(new ViewProductDTO(productDetailID, 0, 0, productID, 0, sizeName, brandName, productName, price, image));
+                    listProduct.add(new ViewProductDTO(0, productDetailID, price, productID, price, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {
@@ -906,7 +906,7 @@ public class ProductDAO {
                     String productName = rs.getString("ProName");
                     String image = rs.getString("Image");
                     int price = rs.getInt("Price");
-                    listProduct.add(new ViewProductDTO(productDetailID, 0, brandID, productID, 0, sizeName, brandName, productName, price, image));
+                    listProduct.add(new ViewProductDTO(0, productDetailID, brandID, productID, price, sizeName, brandName, productName, price, image));
                 }
             }
         } finally {
