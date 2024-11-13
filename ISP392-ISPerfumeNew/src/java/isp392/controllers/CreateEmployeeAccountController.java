@@ -8,7 +8,6 @@ package isp392.controllers;
 import isp392.user.UserDAO;
 import isp392.user.UserError;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,7 @@ public class CreateEmployeeAccountController extends HttpServlet {
     private static final String ERROR = "AD_CreateAccount.jsp";
     private static final String SUCCESS = "SearchUserController";
     private static final String EMAIL_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z0-9._%+-]+@gmail\\.com$";
-    private static final String NAME_REGEX = "^[a-zA-Z]+$";
+    private static final String NAME_REGEX = "^[a-zA-Z]+( [a-zA-Z]+)*$";
     private static final String PHONE_REGEX = "^(?:\\+84|0)(3[2-9]|5[6|8|9]|7[0|6|7|8|9]|8[1-9]|9[0-9])[0-9]{7}$";
     private static final String NUMBER_EMAIL_REGEX = "^\\d+@gmail.com$";
 

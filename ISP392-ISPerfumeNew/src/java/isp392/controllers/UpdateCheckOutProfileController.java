@@ -51,7 +51,6 @@ public class UpdateCheckOutProfileController extends HttpServlet {
             String area = request.getParameter("area");
             String district = request.getParameter("district");
             String ward = request.getParameter("ward");
-            Date birthday = Date.valueOf(request.getParameter("birthday"));
             String phone = request.getParameter("phone");
             //validation
             if (username.length() < 5) {
@@ -75,7 +74,7 @@ public class UpdateCheckOutProfileController extends HttpServlet {
                 checkValidation = false;
             }
             if (checkValidation) {
-                CustomerViewProfileDTO cust = new CustomerViewProfileDTO(userID, area, district, ward, address, birthday, username, email, "", phone, 0, 1);
+                CustomerViewProfileDTO cust = new CustomerViewProfileDTO(userID, area, district, ward, address, null, username, email, "", phone, 0, 1);
                 boolean check = userDao.updateCustomerProfile(cust);
                 if (check) {
                     CustomerViewProfileDTO newCust = userDao.getCustInfoByUserID(userID);

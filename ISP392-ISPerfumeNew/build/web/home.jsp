@@ -59,6 +59,62 @@
                 object-fit: cover; 
                 transition: transform 0.3s ease-in-out; 
             }
+            .btn-close {
+                background: none;
+                border: none;
+                font-size: 1.5rem; 
+                color: #6c757d; 
+                transition: color 0.2s ease;
+                position: absolute;
+                right: 15px; 
+                top: 50%;
+                transform: translateY(-50%); 
+                cursor: pointer;
+            }
+
+            .btn-close:hover {
+                color: #000;
+            }
+
+            .fade-out {
+                opacity: 1;
+                transition: opacity 0.3s ease-out;
+            }
+
+            .fade-out.hide {
+                opacity: 0;
+            }
+
+            .alert {
+                padding: 20px 30px;
+                font-size: 18px;
+                max-width: 400px; 
+                position: fixed; 
+                top: 100px; 
+                right: 20px;
+                z-index: 1050; 
+                border: 1px solid transparent;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #d4edda;
+                border-color: #c3e6cb;
+                color: #155724;
+            }
+
+            .progress-bar-timer {
+                border-radius: 24px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 8px;
+                width: 100%;
+                background-color: #28a745;
+                transition: width linear;
+            }
+
+            .alert-dismissible {
+                padding-right: 60px; 
+            }
         </style>
     </head>
     <body>
@@ -214,6 +270,15 @@
         <!-- Navbar End -->
 
         <!--Pop-up start-->
+        <c:if test="${not empty requestScope.MESSAGE}">
+            <div class="alert alert-success alert-dismissible fade show fade-out" role="alert" id="autoDismissAlert" >
+                <i class="fa fa-check-circle me-2"></i> ${requestScope.MESSAGE}
+                <button type="button" class="btn-close text-right" data-bs-dismiss="alert" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="progress-bar-timer bg-success" id="progressBar"></div>
+            </div>
+        </c:if>
         <div id="modalOverlay" class="modal-overlay" style="display: none;">
             <div id="deleteConfirmation" class="card">
                 <div class="card-content">
@@ -564,7 +629,29 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                var duration = 5000;
+                                                var progressBar = document.getElementById('progressBar');
+                                                var alertElement = document.getElementById('autoDismissAlert');
+
+                                                progressBar.style.width = '100%';
+
+                                                requestAnimationFrame(function () {
+                                                    setTimeout(function () {
+                                                        progressBar.style.transitionDuration = duration + 'ms';
+                                                        progressBar.style.width = '0%';
+                                                    }, 10);
+                                                });
+
+                                                setTimeout(function () {
+                                                    alertElement.classList.add('hide');
+                                                    setTimeout(function () {
+                                                        alertElement.remove();
+                                                    }, 200);
+                                                }, duration);
+                                            });
                                             function openDeleteModal(button, event) {
                                                 event.preventDefault();
                                                 deleteButtonRef = button;
