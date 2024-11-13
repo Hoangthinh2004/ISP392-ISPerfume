@@ -52,7 +52,7 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
+                    <a href="MainController?action=ListDashboard" class="navbar-brand mx-4 mb-3">
                         <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="MGR_Dashboard.jsp" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Dashboard</a>
+                        <a href="MainController?action=ListDashboard" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Dashboard</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Management</a>
                             <div class="dropdown-menu bg-transparent border-0">

@@ -227,7 +227,7 @@
                     </a>
                 </div>
             </div>
-            <a href="HomeController" class="btn btn-primary py-3">Continue Shopping</a>
+
         </div>
         <!-- Navbar End -->
         <div class="container-fluid mb-30">
@@ -401,7 +401,10 @@
                 </div>
             </div>
         </div>
-
+        <div class="d-flex justify-content-end mr-5">
+             <a href="HomeController" class="btn btn-primary py-3">Continue Shopping</a>
+        </div>
+       
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
             <div class="row px-xl-5 pt-5">
