@@ -11,13 +11,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>ISPERFUME | Checkout</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -32,6 +32,71 @@
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            .product-info {
+                border: 1px solid #ddd; 
+                border-radius: 5px;
+                padding: 15px; 
+            }
+
+            .total-price {
+                font-weight: bold; 
+                color: black; 
+            }
+            .address-infor{
+                border: 1px solid #ddd; 
+                border-radius: 5px;
+            }
+            .voucher-options {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .voucher-option {
+                display: flex;
+                align-items: center;
+                border: 1px solid #ddd;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+
+            .voucher-option input[type="radio"] {
+                display: none;
+            }
+
+            .voucher-option span {
+                margin-left: 5px;
+                color: #333;
+            }
+
+            .voucher-option:hover {
+                background-color: #f0f0f0; 
+                border-color: orange; 
+            }
+
+            .voucher-option input[type="radio"]:checked + span {
+                color: orange;
+                font-weight: bold;
+            }
+
+            .voucher-option input[type="radio"]:checked + span::before {
+                content: "✓ ";
+                color: orange; 
+            }
+            .btn-outline-primary:hover{
+                background-color: #f0f0f0;
+                color: orange
+            }
+            .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+                background-color: orange;
+                color: white !important;
+            }   
+
+        </style>
     </head>
     <body>
         <!-- Topbar Start -->
@@ -104,7 +169,6 @@
             <div class="row px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block mt-2">
                     <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
-                        <i class="fa fa-leaf"></i>
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
@@ -194,7 +258,7 @@
             <div class="row px-xl-5">
                 <div class="col-12">
                     <nav class="breadcrumb bg-light mb-30">
-                        <a class="breadcrumb-item text-dark" href="#">Home</a>
+                        <a class="breadcrumb-item text-dark" href="MainController?action=HomeController">Home</a>
                         <a class="breadcrumb-item text-dark" href="#">Shop</a>
                         <span class="breadcrumb-item ">Checkout</span>
                     </nav>
@@ -205,105 +269,214 @@
 
 
         <!-- Checkout Start -->
-        <div class="container-fluid">
-            <div class="row px-xl-5">
-                <div class="col-lg-8">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
-
-                    <div class="bg-light p-30 mb-5">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>Name</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.name}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.email}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Phone Number</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.phone}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>City</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.area}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>district</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.district}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Ward</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.ward}" readonly="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Detail Address</label>
-                                <input class="form-control" type="text" value="${sessionScope.CUSTOMER.detailAddress}" readonly="">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="shipto">
-                                    <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="collapse mb-5" id="shipping-address">
-                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Shipping Address</span></h5>
-                        <div class="bg-light p-30">
-                            <div class="row">
+        <form action="MainController" method="POST">
+            <div class="container-fluid">
+                <div class="row px-xl-5">
+                    <div class="col-lg-8">
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+                        <div class="bg-light p-30 mb-5 address-infor">
+                            ${requestScope.INFOR_MESSAGE}
+                            <div class="row ">
                                 <div class="col-md-6 form-group">
                                     <label>Name</label>
-                                    <input class="form-control" type="text" readonly="">
+                                    <input class="form-control bg-transparent" type="text" value="${sessionScope.CUSTOMER.name}" readonly="">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>E-mail</label>
-                                    <input class="form-control" type="text" readonly="">
+                                    <input class="form-control bg-transparent" type="text" value="${sessionScope.CUSTOMER.email}" readonly="">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Phone Number</label>
-                                    <input class="form-control" type="text" readonly="">
+                                    <input class="form-control bg-transparent" type="text" value="${sessionScope.CUSTOMER.phone}" readonly="">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>City</label>
-                                    <input class="form-control" type="text" readonly="">
+                                    <input class="form-control bg-transparent" type="text" value="${sessionScope.CUSTOMER.area}" readonly="">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label>District</label>
-                                    <input class="form-control" type="text" readonly="">
+                                    <label>district</label>
+                                    <input class="form-control bg-transparent" type="text" value="${sessionScope.CUSTOMER.district}" readonly="">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Ward</label>
-                                    <input class="form-control" type="text" readonly="">
+                                    <input class="form-control bg-transparent" type="text" value="${sessionScope.CUSTOMER.ward}" readonly="">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Detail Address</label>
-                                    <input class="form-control" type="text" readonly="">
+                                    <input class="form-control bg-transparent" type="text" value="${sessionScope.CUSTOMER.detailAddress}" readonly="">
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-12 mb-3 mt-3 text-right">
+                                    <button class="btn btn-primary bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#UpdateProfile" type="button">
+                                        <span class=" bg-transparent text-primary" style="cursor: pointer;">
+                                            <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <div class="modal fade" id="UpdateProfile" tabindex="-1" aria-labelledby="UpdateProfileLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="UpdateProfileLabel">User Information</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label">Username</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.name}" placeholder="Enter username" name="userName">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label">Email</label>
+                                                            <div class="input-group">
+                                                                <input type="email" class="form-control" value="${sessionScope.CUSTOMER.email}" placeholder="Enter email" name="email">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Address</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.detailAddress}" placeholder="Enter address" name="address">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Area</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.area}" placeholder="Enter area" name="area">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">District</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.district}" placeholder="Enter district" name="district">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Ward</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.ward}" placeholder="Enter ward" name="ward">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3 text-left">
+                                                            <label class="form-label ">Phone</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" value="${sessionScope.CUSTOMER.phone}" placeholder="Enter phone" name="phone">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="userID" value="${sessionScope.CUSTOMER.id}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" name="action" value="UpdateCheckOutProfile" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <form action="MainController">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
-                    <c:forEach var="check" items="${sessionScope.CHECK_LIST.cart.values()}">
-                        <input type="hidden" name="productDetailID" value="${check.productDetailID}"/>
-                        <c:set var="unitTotal" value="${check.price * check.totalQuantity}"/>
-                        <div class="bg-light p-30 mb-5">
-                            <img src="${check.image}" alt="" style="width: 50px;"><h6 class="mb-3">${check.productName} ${check.sizeName}      ${check.totalQuantity}          
-                                <fmt:formatNumber type="number" value="${unitTotal}"/></h6>
-                        </div>
-                    </c:forEach>                  
-                        <div class="input-group mb-30">
-                            <c:forEach var="promotion" items="${sessionScope.PROMOTION}">
-                                <input type="radio" name="promotionID" value="${promotion.promotionID}"/>${promotion.promotionName}
-                            </c:forEach>
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary" name="action" value="ApplyVoucher">Apply Voucher</button>
+                        <div class="mb-5">
+                            <h5 class="section-title position-relative text-uppercase mb-3">
+                                <span class="bg-secondary pr-3">Payment</span>
+                            </h5>
+                            <div class="bg-light p-30 address-infor">
+                                <div class="d-flex justify-content-between">
+
+                                    <label class="btn btn-outline-primary d-flex align-items-center p-3 payment-option" for="cod" style="width: 48%;">
+                                        <input type="radio" class="d-none" name="payment" value="1" id="cod" onchange="updateSelection(this)">
+                                        <img src="img/COD.png" alt="COD" style="width: 30px; height: 30px;" class="mr-2">
+                                        <span>COD</span>
+                                    </label>
+
+                                    <label class="btn btn-outline-primary d-flex align-items-center p-3 payment-option" for="zalo" style="width: 48%;">
+                                        <input type="radio" class="d-none" name="payment" value="2" id="zalo" onchange="updateSelection(this)">
+                                        <img src="img/zalopay.png" alt="Zalo Pay" style="width: 30px; height: 30px;" class="mr-2">
+                                        <span>Zalo Pay</span>
+                                    </label>
+                                </div> 
+                                <button type="submit" name="action" value="checkQuantity" class="btn btn-block btn-primary font-weight-bold py-3 mt-4" disabled="" id="placeOrderBtn">Place Order</button>
                             </div>
                         </div>
-                        <div class="bg-light p-30 mb-5">
+                    </div>
+
+                    <div class="col-lg-4">
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                        <c:forEach var="check" items="${sessionScope.CHECK_LIST.cart.values()}" varStatus="counter">
+                            <input type="hidden" name="productDetailID" value="${check.productDetailID}"/>
+                            <c:set var="unitTotal" value="${check.price * check.totalQuantity}"/>
+                            <div class="product-info bg-light p-3 mb-3 align-items-center" id="product-${counter.count}" style=" display: ${counter.count > 1 ? "none" : "flex"}">
+                                <img src="${check.image}" alt="${check.productName}" style="width: 50px; height: auto; margin-right: 15px;">
+                                <div class="product-details">
+                                    <h6 class="mb-1">${check.productName}</h6>
+                                    <p class="mb-1">Size: ${check.sizeName}</p>
+                                    <p class="mb-1">Quantity: ${check.totalQuantity}</p>
+                                    <h6 class="total-price">
+                                        <fmt:formatNumber type="number" value="${unitTotal}"/>
+                                    </h6>
+                                </div>
+                            </div>
+                        </c:forEach>      
+
+                        <div style="text-align: center; margin-top: 10px;" class="d-flex justify-content-center text-primary">
+                            <button type="button" id="viewMoreBtn" class="text-primary" onclick="toggleProducts()" 
+                                    style="border: none; background: none; outline: none; display: flex; align-items: center; gap: 5px;">
+                                View More
+                                <img id="arrowIcon" src="//theme.hstatic.net/1000340570/1000964732/14/icon-down-black.svg?v=6179" 
+                                     alt="View more" style="width: 20px; height: 20px; transition: transform 0.3s;
+                                     filter: brightness(0) saturate(100%) invert(47%) sepia(89%) saturate(5925%) hue-rotate(356deg) brightness(103%) contrast(102%);">
+                            </button>
+                        </div>
+                        <!-- Modal Popup voucher -->
+                        <div class="modal fade" id="voucherModal" tabindex="-1" role="dialog" aria-labelledby="voucherModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="voucherModalLabel">Choose a Voucher</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="voucher-options mb-3">
+                                            ${requestScope.MESSAGE}
+                                            <c:forEach var="promotion" items="${sessionScope.PROMOTION}">
+                                                <label class="voucher-option d-flex align-items-center border rounded p-3 mb-3">
+                                                    <input type="radio" name="promotionID" value="${promotion.promotionID}" onclick="enableApplyButton()" class="d-none" />
+                                                    <div class="flex-grow-1 ms-3">
+                                                        <h6 class="mb-0">${promotion.promotionName}</h6>
+                                                        <small class="text-muted">${promotion.description}</small>
+                                                        <div class="d-flex justify-content-between mt-1">
+                                                            <span class="text-primary">${promotion.discountPer}% OFF</span>
+                                                            <span class="text-secondary">${promotion.condition}</span>
+                                                        </div>
+                                                    </div>
+                                                    <i class="fa fa-check-circle fa-2x text-primary" aria-hidden="true" style="display: none;"></i>
+                                                </label>
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" name="action" value="ApplyVoucher" id="applyButton" disabled>
+                                            Apply Voucher
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Popup voucher -->
+                        <div class="bg-light p-30 mb-5 address-infor mt-5">
                             <div class="border-bottom pt-3 pb-2">
                                 <c:if test="${sessionScope.PROMOTION_DETAIL != null}">
                                     <div class="d-flex justify-content-between mb-3">
@@ -325,127 +498,127 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="mb-5">
-                            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
-                            <div class="bg-light p-30">
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" name="payment" value="1" id="paypal">
-                                        <label class="custom-control-label" for="paypal">Paypal</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" name="payment" value="2" id="directcheck">
-                                        <label class="custom-control-label" for="directcheck">Direct Check</label>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-4">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" name="payment" value="3" id="banktransfer">
-                                        <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
-                                    </div>
-                                </div>
-                                <button type="submit" name="action" value="checkQuantity" class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                            <div class="input-group-append mt-4 d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#voucherModal">
+                                    Choose Voucher
+                                </button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Checkout End -->
+        </form>
+        <!-- Checkout End -->
 
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-            </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                        <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Your Email Address">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary">Sign Up</button>
-                                </div>
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+            <div class="row px-xl-5 pt-5">
+                <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                    <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+                    <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
+                </div>
+                <div class="col-lg-3 col-md-12 mb-5 pr-3 pr-xl-5">                 
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 mb-5">
+                            <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <a class="text-secondary mb-2" href="MainController?action=HomeController"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-secondary mb-2" href="MainController?action=NavigateBlog"><i class="fa fa-angle-right mr-2"></i>Blog</a>
+                                <a class="text-secondary mb-2" href="MainController?action=SeacrhProduct&search="><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
                             </div>
-                        </form>
-                        <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-                        <div class="d-flex">
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a class="text-secondary mb-2" href="profile.jsp"><i class="fa fa-angle-right mr-2"></i>Profile</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}"><i class="fa fa-angle-right mr-2"></i>Order History</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=NavigateToCart"><i class="fa fa-angle-right mr-2"></i>My Cart</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=Sign out"><i class="fa fa-angle-right mr-2"></i>Sign out</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="text-secondary mb-2" href="signin.jsp"><i class="fa fa-angle-right mr-2"></i>Sign in</a>
+                                        <a class="text-secondary mb-2" href="signup.jsp"><i class="fa fa-angle-right mr-2"></i>Sign up</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-secondary">
-                    &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
-                    by
-                    <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
-                </p>
-            </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
+        <!-- Footer End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+        <!-- Contact Javascript File -->
+        <script src="mail/jqBootstrapValidation.min.js"></script>
+        <script src="mail/contact.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-</body>
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+                                                        let isExpanded = false;
+
+                                                        function toggleProducts() {
+                                                            const products = document.querySelectorAll('.product-info');
+
+                                                            if (!isExpanded) {
+                                                                products.forEach(product => product.style.display = 'flex');
+                                                                document.getElementById("arrowIcon").style.transform = "rotate(180deg)";
+                                                                isExpanded = true;
+                                                            } else {
+                                                                products.forEach((product, index) => product.style.display = index === 0 ? 'flex' : 'none');
+                                                                document.getElementById("arrowIcon").style.transform = "rotate(0deg)";
+                                                                isExpanded = false;
+                                                            }
+                                                        }
+
+                                                        function enableApplyButton() {
+                                                            const applyButton = document.getElementById('applyButton');
+                                                            applyButton.disabled = false;
+
+                                                            document.querySelectorAll('.voucher-option i').forEach(icon => {
+                                                                icon.style.display = 'none';
+                                                            });
+                                                            const selectedVoucher = document.querySelector('input[name="promotionID"]:checked');
+                                                            if (selectedVoucher) {
+                                                                selectedVoucher.closest('.voucher-option').querySelector('i').style.display = 'inline'; // Hiện biểu tượng tick cho voucher được chọn
+                                                            }
+                                                        }
+
+
+                                                        function updateSelection(selectedRadio) {
+                                                            document.querySelectorAll('.payment-option').forEach(option => {
+                                                                option.classList.remove('active', 'btn-primary');
+                                                                option.classList.add('btn-outline-primary');
+                                                            });
+
+                                                            selectedRadio.closest('label').classList.add('active', 'btn-primary');
+                                                            selectedRadio.closest('label').classList.remove('btn-outline-primary');
+                                                            const placeOrderBtn = document.getElementById('placeOrderBtn');
+                                                            const paymentSelected = document.querySelector('input[name="payment"]:checked');
+
+                                                            placeOrderBtn.disabled = !paymentSelected;
+                                                        }
+        </script>
+    </body>
 </html>

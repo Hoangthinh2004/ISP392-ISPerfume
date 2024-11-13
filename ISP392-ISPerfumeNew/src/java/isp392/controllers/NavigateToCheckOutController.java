@@ -13,6 +13,7 @@ import isp392.promotion.PromotionDTO;
 import isp392.user.CustomerViewProfileDTO;
 import isp392.user.UserDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,18 +41,54 @@ public class NavigateToCheckOutController extends HttpServlet {
             CartDAO cartDao = new CartDAO();
             UserDAO dao = new UserDAO();
             PromotionDAO promotionDAO = new PromotionDAO();
-            Map<String, Integer> total = new HashMap<>();
-            session.setAttribute("TOTAL_PRICE", total); 
-            
+            Map<String, Integer> total = (Map<String, Integer>) session.getAttribute("TOTAL_PRICE");
+            if (total == null || total.size() == 0) {
+                total = new HashMap<String, Integer>();
+                session.setAttribute("TOTAL_PRICE", total);
+            }
+
+            Map<String, String[]> productDetailIDS = (Map<String, String[]>) session.getAttribute("PRODUCTDETAILIDS_CHECKLIST");
+            if (productDetailIDS == null || productDetailIDS.isEmpty()) {
+                productDetailIDS = new HashMap<>();
+                session.setAttribute("PRODUCTDETAILIDS_CHECKLIST", productDetailIDS);
+            }
+
             int totalPrice = 0;
-            
             Cart listChecked = (Cart) session.getAttribute("CHECK_LIST");
             if (listChecked == null) {
                 listChecked = new Cart();
             }
             Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
             int customerID = CustomerIDS.get("customerID");
-            String[] productDetailIDs = request.getParameterValues("productDetailID");
+
+            String[] productDetailIDs = new String[0];
+            if (productDetailIDS == null || productDetailIDS.size() == 0) {
+                productDetailIDs = request.getParameterValues("productDetailID");
+                productDetailIDS.put("productDetailID", productDetailIDs);
+            } else {
+                productDetailIDs = productDetailIDS.get("productDetailID");
+            }
+
+            //Update product quantity when back from cart
+            String[] currentQuantity = request.getParameterValues("currentQuantity");
+            List<ViewCartDTO> cartList = cartDao.getProductDetailID(customerID);
+            int productDeID = 0;
+            int cartQuantity = 0;
+            if (currentQuantity != null) {
+                for (int i = 0; i < currentQuantity.length; i++) {
+                    ViewCartDTO product = cartList.get(i);
+                    productDeID = product.getProductDetailID();
+                    cartQuantity = product.getTotalQuantity();
+                    if (Integer.parseInt(currentQuantity[i]) != cartQuantity) {
+                        boolean updateNewQuantity = cartDao.updateNewQuantity(productDeID, Integer.parseInt(currentQuantity[i]));
+                        if (updateNewQuantity) {
+                            continue;
+                        }
+                    }
+                }
+            }
+
+            //get product information
             for (int i = 0; i < productDetailIDs.length; i++) {
                 List<ViewCartDTO> productInfor = cartDao.getProductInfor(Integer.parseInt(productDetailIDs[i]), customerID);
                 for (ViewCartDTO product : productInfor) {
@@ -64,16 +101,25 @@ public class NavigateToCheckOutController extends HttpServlet {
                             product.getImage(),
                             product.getTotalQuantity()
                     );
-                    totalPrice += product.getPrice()*product.getTotalQuantity();
+                    totalPrice += product.getPrice() * product.getTotalQuantity();
                     total.put("total", totalPrice);
                     listChecked.add(viewProduct);
                 }
             }
             List<CustomerViewProfileDTO> custProfile = dao.getPersonalInfor(customerID);
             List<PromotionDTO> listPromotion = promotionDAO.getListPromotion();
-            
+            List<PromotionDTO> listPromoAvailable = new ArrayList<>();
+            for (PromotionDTO promotion : listPromotion) {
+                if (totalPrice > promotion.getCondition()) {
+                    listPromoAvailable.add(promotion);
+                }
+            }
+            if (listPromoAvailable.isEmpty()) {
+                request.setAttribute("MESSAGE", "None of voucher available !");
+            }
+
             request.setAttribute("TOTAL_PRICE", totalPrice);
-            session.setAttribute("PROMOTION", listPromotion);
+            session.setAttribute("PROMOTION", listPromoAvailable);
             session.setAttribute("CHECK_LIST", listChecked);
             session.setAttribute("CUSTOMERINFOR", custProfile);
             url = CHECK_OUT_PAGE;

@@ -10,7 +10,6 @@ import isp392.user.CustomerViewProfileDTO;
 import isp392.user.UserDAO;
 import isp392.user.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -26,11 +25,11 @@ import javax.servlet.http.HttpSession;
 public class SigninEmployee extends HttpServlet {
 
     private static final String ERROR = "signin.jsp";
-    private static final String HOME_PAGE = "HomeController";
     private static final String CUS_PAGE = "HomeController"; // Customer
-    private static final String AD_PAGE = "AD_AccountManagement.jsp"; // Admin
-    private static final String MGR_PAGE = "MGR_Dashboard.jsp"; // Manager
-
+    private static final String AD_PAGE = "MainController?search=&action=SearchUser"; // Admin
+    private static final String MGR_PAGE = "ListDashboardController"; // Manager
+    private static final String SHIPPER_PAGE = "SHIPPER_SearchOrderController";
+    private static final String STAFF_PAGE = "GetAllInfoForOrder";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -40,8 +39,7 @@ public class SigninEmployee extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             Map<String, Integer> CustomerIDS = new HashMap<>();
-            session.setAttribute("CUSTOMER_ID", CustomerIDS);           
-            
+            session.setAttribute("CUSTOMER_ID", CustomerIDS);
             String email = request.getParameter("Email");
             String password = request.getParameter("Password");
             UserDTO loginUser = dao.checkLogin(email, password);           
@@ -51,17 +49,29 @@ public class SigninEmployee extends HttpServlet {
                     cust = dao.getCustInfoByUserID(loginUser.getUserID());
                     if (cust != null) {
                         session.setAttribute("CUSTOMER", cust);
-                        url = CUS_PAGE;
+                        if (request.getParameter("checkOutStatus") != null) {
+                            request.setAttribute("EMAIL", email);
+                            request.setAttribute("PASSWORD", password);
+                            url = "checkoutSuccess.jsp";
+                        } else {
+                           url = CUS_PAGE; 
+                        }
                     }
                 } else if (loginUser.getRoleID() == 2) { // shipper
-                    url = MGR_PAGE;
+                    session.setAttribute("LOGIN_USER", loginUser);
+                    url = SHIPPER_PAGE;
                 } else if (loginUser.getRoleID() == 3) { // staff
-                    url = MGR_PAGE;
+                    session.setAttribute("LOGIN_USER", loginUser);
+                    url = STAFF_PAGE;
                 } else if (loginUser.getRoleID() == 4) { // manager
+                    session.setAttribute("LOGIN_USER", loginUser);
                     url = MGR_PAGE;
                 } else if (loginUser.getRoleID() == 5) { // admin
+                    session.setAttribute("LOGIN_USER", loginUser);
                     url = AD_PAGE;
                 }
+            } else {
+                request.setAttribute("ERROR_MESSAGE", "Incorrect email or password!");
             }
         } catch (Exception e) {
             log("Error at SigninEmployee: " + e.toString());

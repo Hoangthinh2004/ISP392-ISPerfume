@@ -90,7 +90,7 @@ public class ZaloPaymentController extends HttpServlet {
                             }
                             productDetailIDParams.append("productDetailIDs=").append(id);
                         }
-                        put("redirecturl", "https://8ed5-2001-ee0-d705-c60-80f8-90f3-da7b-5ce0.ngrok-free.app/ISP392-ISPerfumeNew/chooseController?price=" + price + "&customerID=" + customerID + "&promotionID=" + promotionID + "&" + productDetailIDParams.toString());
+                        put("redirecturl", "https://e9df-2001-ee0-d704-9000-8c85-b03f-200b-d7ae.ngrok-free.app/ISP392-ISPerfumeNew/chooseController?price=" + price + "&customerID=" + customerID + "&promotionID=" + promotionID + "&" + productDetailIDParams.toString());
                     }
                 };
                 final Map<String, Object>[] item = new Map[]{
@@ -108,8 +108,8 @@ public class ZaloPaymentController extends HttpServlet {
                         put("amount", price);// số tiền
                         put("description", "ISPerfume - Payment for the order #" + random_id);
                         put("bank_code", "");
-                        put("redirect_url", "https://8ed5-2001-ee0-d705-c60-80f8-90f3-da7b-5ce0.ngrok-free.app/ISP392-ISPerfumeNew/NavigateZaloPayment");
-                        put("callback_url", "https://8ed5-2001-ee0-d705-c60-80f8-90f3-da7b-5ce0.ngrok-free.app/ISP392-ISPerfumeNew/ZaloPayCallBackController");
+                        put("redirect_url", "https://e9df-2001-ee0-d704-9000-8c85-b03f-200b-d7ae.ngrok-free.app/ISP392-ISPerfumeNew/NavigateZaloPayment");
+                        put("callback_url", "https://e9df-2001-ee0-d704-9000-8c85-b03f-200b-d7ae.ngrok-free.app/ISP392-ISPerfumeNew/ZaloPayCallBackController");
                         put("item", new JSONArray(item).toString());
                         put("embed_data", new JSONObject(embed_data).toString());
                     }

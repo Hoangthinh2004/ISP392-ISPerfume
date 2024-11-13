@@ -7,6 +7,7 @@ package isp392.controllers;
 
 import isp392.user.CustomerViewProfileDTO;
 import isp392.user.UserDAO;
+import isp392.user.UserError;
 import java.io.IOException;
 import java.sql.Date;
 import javax.servlet.ServletException;
@@ -23,15 +24,20 @@ public class UpdateUserProfile extends HttpServlet {
 
     private static final String ERROR = "profile.jsp";
     private static final String SUCCESS = "profile.jsp";
+    private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    private static final String PHONE_REGEX = "^(?:\\+84|0)(3[2-9]|5[6|8|9]|7[0|6|7|8|9]|8[1-9]|9[0-9])[0-9]{7}$";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         UserDAO userDao = new UserDAO();
         HttpSession ses = request.getSession();
+        UserError userErr = new UserError();
+        String url = ERROR;
+
         try {
             // Retrieve updated information from the form
+            boolean checkValidation = true;
             int userID = Integer.parseInt(request.getParameter("userID"));
             String username = request.getParameter("userName");
             String email = request.getParameter("email");
@@ -41,19 +47,43 @@ public class UpdateUserProfile extends HttpServlet {
             String ward = request.getParameter("ward");
             Date birthday = Date.valueOf(request.getParameter("birthday"));
             String phone = request.getParameter("phone");
-            CustomerViewProfileDTO cust = new CustomerViewProfileDTO(userID, area, district, ward, address, birthday, username, email, "", phone, 0, 1);
-            boolean check = userDao.updateCustomerProfile(cust);
-            if (check) {
-                url = SUCCESS;
-                CustomerViewProfileDTO newCust = userDao.getCustInfoByUserID(userID);
-                ses.setAttribute("CUSTOMER", newCust);
-                request.setAttribute("MESSAGE", "UPDATED SUCCESSFULLY !");
+            //validation
+            if (username.length() < 5) {
+                userErr.setNameError("User name must have more than 5 characters!");
+                checkValidation = false;
+            }
+            if (!email.matches(EMAIL_REGEX)) {
+                userErr.setEmailError("This email is invalid!");
+                checkValidation = false;
+            }
+            if (userDao.checkEmailExistedForUp(email, userID)) {
+                userErr.setEmailError("This email has already existed!");
+                checkValidation = false;
+            }
+            if (!phone.matches(PHONE_REGEX)) {
+                userErr.setPhoneError("This phone number is invalid!");
+                checkValidation = false;
+            }
+            if (userDao.checkPhoneNumExistedForUp(phone, userID)) {
+                userErr.setPhoneError("This phone number has already existed!");
+                checkValidation = false;
+            }
+            if (checkValidation) {
+                CustomerViewProfileDTO cust = new CustomerViewProfileDTO(userID, area, district, ward, address, birthday, username, email, "", phone, 0, 1);
+                boolean check = userDao.updateCustomerProfile(cust);
+                if (check) {
+                    CustomerViewProfileDTO newCust = userDao.getCustInfoByUserID(userID);
+                    ses.setAttribute("CUSTOMER", newCust);
+                    request.setAttribute("MESSAGE", "UPDATED SUCCESSFULLY !");
+                    url = SUCCESS;
+                }
+            } else {
+                request.setAttribute("UPDATE_PROFILE_MESSAGE", userErr);
             }
 
         } catch (Exception e) {
             log("Error at UpdateProfileController: " + e.toString());
         } finally {
-            // Redirect back to the profile page (or another appropriate page)
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

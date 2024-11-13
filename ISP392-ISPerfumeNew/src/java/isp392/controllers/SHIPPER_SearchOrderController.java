@@ -7,8 +7,11 @@ package isp392.controllers;
 
 import isp392.order.ShipperOrderDAO;
 import isp392.order.ShipperOrderDTO;
+import isp392.user.UserDTO;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +32,14 @@ public class SHIPPER_SearchOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int shipperID = 2;
+            HttpSession session = request.getSession();
 //            int shipperID = Integer.parseInt(request.getParameter("shipperID"));
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            int shipperID = user.getUserID();
             ShipperOrderDAO orderDao = new ShipperOrderDAO();
             List<ShipperOrderDTO> listOrder = orderDao.getListOrder(shipperID);
             //lấy list orderdetail
             if (listOrder.size() > 0) {
-                HttpSession session = request.getSession();
                 session.setAttribute("LIST_ORDER", listOrder);
                 url = SUCCESS;
             }

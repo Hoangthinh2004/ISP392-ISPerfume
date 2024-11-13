@@ -83,6 +83,7 @@ public class CreateProductManager extends HttpServlet {
                 int check = dao.addProduct(name, brandID, managerID, description, country,releaseYear, fragranceFamilies ,imagePath, status);
                 if (check != -1) {
                     boolean checkAddProCate = proCateDao.addProCate(check, categoryID);
+                    boolean checkAddProCate1 = proCateDao.addProCate(check, 4);
                     if (checkAddProCate) {
                         url = SUCCESS;
                     }

@@ -19,14 +19,20 @@ import javax.naming.NamingException;
  * @author anhng
  */
 public class ShipperOrderDAO {
-    
-     private static final String LIST_ORDER = "SELECT O.OrderID, U.Name, U.Phone, concat(O.Address, ', ' , O.Ward, ', ', O.District, ', ', O.City) as Address, O.Note, O.orderStatus from Orders O \n"
-            + "            JOIN Customer C ON C.CustomerID = O.CustomerID \n"
-            + "            JOIN Users U ON U.UserID = C.CustomerID\n"
-            + "			WHERE O.ShipperID = ? AND orderStatus >= 2";
+
+    private static final String LIST_ORDER = "SELECT O.OrderID, \n"
+            + "       U.Name, \n"
+            + "       U.Phone, \n"
+            + "       (O.Address + ', ' + O.Ward + ', ' + O.District + ', ' + O.City) AS Address, \n"
+            + "       O.Note, \n"
+            + "       O.orderStatus \n"
+            + "FROM Orders O\n"
+            + "JOIN Customer C ON C.CustomerID = O.CustomerID\n"
+            + "JOIN Users U ON U.UserID = C.CustomerID\n"
+            + "WHERE O.ShipperID = ? AND O.orderStatus >= 2";
     private static final String SHIPPER_UPDATE_STATUS_ORDER = "UPDATE Orders SET orderStatus=? WHERE OrderID=?";
     private static final String COUNT_ORDER_COMPLETED = "SELECT  COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = 4";
-    
+
     public List<ShipperOrderDTO> getListOrder(int shipperID) throws SQLException, NamingException, ClassNotFoundException {
         List<ShipperOrderDTO> listOrder = new ArrayList<>();
         Connection conn = null;

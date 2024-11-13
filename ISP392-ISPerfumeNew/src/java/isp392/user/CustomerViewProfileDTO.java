@@ -12,7 +12,8 @@ import java.sql.Date;
  * @author GIGABYTE
  */
 public class CustomerViewProfileDTO {
-    private int id; 
+
+    private int id;
     private String area;
     private String district;
     private String ward;
@@ -24,6 +25,7 @@ public class CustomerViewProfileDTO {
     private String phone;
     private int roleID;
     private int status;
+
     public CustomerViewProfileDTO() {
     }
 
@@ -137,6 +139,11 @@ public class CustomerViewProfileDTO {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    
+
+    public boolean isProfileComplete() {
+        return area != null && !area.trim().isEmpty()
+                && district != null && !district.trim().isEmpty()
+                && ward != null && !ward.trim().isEmpty()
+                && detailAddress != null && !detailAddress.trim().isEmpty();
+    }
 }

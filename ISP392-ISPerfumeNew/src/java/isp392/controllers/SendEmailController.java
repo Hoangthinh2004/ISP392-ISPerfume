@@ -39,7 +39,9 @@ public class SendEmailController extends HttpServlet {
     private static final String REGISTER_GOOGLE_ACCCOUNT = "RegisterGoogleAccount";
     private static final String FORGOT_PASSWORD_EMAIL = "ForgotPasswordEmail";
     private static final String ERROR = "signin.jsp";
-    private static final String SUCCESS_FORGOT_PASSWORD_EMAIL="ForgotPasswordController";
+    private static final String SUCCESS_FORGOT_PASSWORD_EMAIL = "ForgotPasswordController";
+    private static final String CONFIRM_EMAIL = "ConfirmEmail";
+    private static final String SUCCESS_CONFIRM_EMAIL = "AssignShipperStaffController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,8 +51,10 @@ public class SendEmailController extends HttpServlet {
         try {
             if (REGISTER_GOOGLE_ACCCOUNT.equals(action)) {
                 url = createGoogleUser(request, response);
-            }else if(FORGOT_PASSWORD_EMAIL.equals(action)){
-                url = sendEmailForgotPassword(request,response);
+            } else if (FORGOT_PASSWORD_EMAIL.equals(action)) {
+                url = sendEmailForgotPassword(request, response);
+            } else if (CONFIRM_EMAIL.equals(action)) {
+                url = sendEmailConfirm(request, response);
             }
         } catch (Exception e) {
             log("Error at SendMailController: " + e.toString());
@@ -58,8 +62,8 @@ public class SendEmailController extends HttpServlet {
             response.sendRedirect(url);
         }
     }
-    
-     private boolean sendEmail(String to, String messageBody, String subject, boolean html) {
+
+    private boolean sendEmail(String to, String messageBody, String subject, boolean html) {
         final String FROM_EMAIL = "isperfume1803@gmail.com";
         final String PASSWORD = "rnxf gfef mbrn xjqg";
         Properties properties = new Properties();
@@ -87,14 +91,11 @@ public class SendEmailController extends HttpServlet {
             Transport.send(message);
             check = true;
         } catch (MessagingException e) {
-            log("Error at SendEmailController: "+e.toString());
+            log("Error at SendEmailController: " + e.toString());
             check = false;
         }
         return check;
     }
-
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -140,15 +141,15 @@ public class SendEmailController extends HttpServlet {
         String password = request.getParameter("password");
         String subject = "Successfully registered account by ISSPERFUME";
         String messageBody = "Hi, welcome to ISPERFUME <br><br>"
-                            +"From now on you can login with your Google account or with our account.<br><br>"
-                            +"Here is your ACCOUNT INFORMATION: <br>"
-                            +"<b>Email</b>: "+email+"<br>"
-                            +"<b>Password</b>: "+password+"<br><br>"
-                            +"Wishing you a great shopping experience !!<br>";
+                + "From now on you can login with your Google account or with our account.<br><br>"
+                + "Here is your ACCOUNT INFORMATION: <br>"
+                + "<b>Email</b>: " + email + "<br>"
+                + "<b>Password</b>: " + password + "<br><br>"
+                + "Wishing you a great shopping experience !!<br>";
         boolean result = sendEmail(email, messageBody, subject, true);
-        if(result){
+        if (result) {
             return SUCCESS_SEND_MAIL_GOOGLE_USER;
-        }else{
+        } else {
             return ERROR;
         }
     }
@@ -157,14 +158,95 @@ public class SendEmailController extends HttpServlet {
         String email = request.getParameter("email");
         String token = request.getParameter("token");
         String subject = "RESET PASSWORD - ISPerfume";
-        String messageBody = "Hi, welcome back to ISPERFUME <br><br>"
-                            +"Please verify with OTP code <br><br>"
-                            +"Your OTP code: "+token+"<br><br>"
-                            +"Please enter your OTP code to change password!";
+        String messageBody
+
+                = "<!DOCTYPE html>"
+                + "<html lang='en'>"
+                + "<head>"
+                + "    <meta charset='UTF-8'>"
+                + "    <style>"
+                + "        .email-container {"
+                + "            font-family: Arial, sans-serif;"
+                + "            color: #333333;"
+                + "            max-width: 600px;"
+                + "            margin: auto;"
+                + "            padding: 20px;"
+                + "            border: 1px solid #e0e0e0;"
+                + "            background-color: #fafafa;"
+                + "            border-radius: 10px;"
+                + "        }"
+                + "        .header {"
+                + "            text-align: center;"
+                + "            color: black;"
+                + "            background-color: orange;"
+                + "            padding: 20px;"
+                + "            border-radius: 10px 10px 0 0;"
+                + "        }"
+                + "        .header h1 {"
+                + "            margin: 0;"
+                + "            font-size: 24px;"
+                + "        }"
+                + "        .body-content {"
+                + "            padding: 20px;"
+                + "            text-align: center;"
+                + "        }"
+                + "        .otp-code {"
+                + "            font-size: 24px;"
+                + "            font-weight: bold;"
+                + "            color: orange;"
+                + "            background-color: #F7FAFC;"
+                + "            padding: 10px;"
+                + "            border-radius: 8px;"
+                + "            display: inline-block;"
+                + "            margin: 20px 0;"
+                + "        }"
+                + "        .footer {"
+                + "            text-align: center;"
+                + "            font-size: 12px;"
+                + "            color: #888888;"
+                + "            padding: 20px;"
+                + "        }"
+                + "    </style>"
+                + "</head>"
+                + "<body>"
+                + "    <div class='email-container'>"
+                + "        <div class='header'>"
+                + "            <h1>Welcome to ISPERFUME</h1>"
+                + "        </div>"
+                + "        <div class='body-content'>"
+                + "            <p>Dear Customer,</p>"
+                + "            <p>Please verify your identity with the OTP code below to proceed with your password change.</p>"
+                + "            <div class='otp-code'>Your OTP: <span style='color: #2D3748;'>"+token+"</span></div>"
+                + "            <p>Enter this code on the verification page to continue.</p>"
+                + "        </div>"
+                + "        <div class='footer'>"
+                + "            <p>If you didn't request this, please ignore this email or contact our support.</p>"
+                + "            <p>&copy; 2024 ISPERFUME. All rights reserved.</p>"
+                + "        </div>"
+                + "    </div>"
+                + "</body>"
+                + "</html>";
+
         boolean result = sendEmail(email, messageBody, subject, true);
-        if(result){
+        if (result) {
             return SUCCESS_FORGOT_PASSWORD_EMAIL;
-        }else{
+        } else {
+            return ERROR;
+        }
+    }
+
+    private String sendEmailConfirm(HttpServletRequest request, HttpServletResponse response) {
+        String email = request.getParameter("email");
+        String orderID = request.getParameter("orderID");
+        String subject = "SUCCESSFULLY CONFIRM - ISPerfume";
+        String messageBody = "Hi, welcome back to ISPERFUME <br><br>"
+                + "Your order has been confirmed <br><br>"
+                + "Your Order ID : " + orderID + "<br><br>"
+                + "Thank you for choosing and trusting us!";
+        boolean result = sendEmail(email, messageBody, subject, true);
+        if (result) {
+            return SUCCESS_CONFIRM_EMAIL;
+        } else {
             return ERROR;
         }
     }

@@ -12,13 +12,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Admin | User </title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,109 +38,52 @@
 
         <!-- Template Stylesheet -->
         <link href="dashmin/css/style.css" rel="stylesheet">
+        <link href="css/stylePopup.css" rel="stylesheet">
         <style>
-            .card {
-                width: 300px;
-                height: fit-content;
-                background: rgb(255, 255, 255);
-                border-radius: 10px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 20px;
-                padding: 30px;
+            .alert-container {
                 position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.1);
-                z-index: 1001;
-            }
-            .modal-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: rgba(0, 0, 0, 0.5);
-
-                z-index: 1100;
-
-            }
-            .card-content {
-                width: 100%;
-                height: fit-content;
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-            }
-
-            .card-heading {
-                font-size: 20px;
-                font-weight: 700;
-                color: rgb(27, 27, 27);
-            }
-
-            .card-description {
-                font-weight: 100;
-                color: rgb(102, 102, 102);
-            }
-
-            .card-button-wrapper {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-            }
-
-            .card-button {
-                width: 50%;
-                height: 35px;
-                border-radius: 5px;
-                border: none;
-                cursor: pointer;
-                font-weight: 600;
-            }
-
-            .primary {
-                background-color: rgb(255, 114, 109);
-                color: white;
-            }
-
-            .primary:hover {
-                background-color: rgb(255, 73, 66);
-            }
-
-            .secondary {
-                background-color: #ddd;
-            }
-
-            .secondary:hover {
-                background-color: rgb(197, 197, 197);
-            }
-
-            .exit-button {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: none;
-                background-color: transparent;
-                position: absolute;
                 top: 20px;
                 right: 20px;
-                cursor: pointer;
+                z-index: 1050;
+                display: flex;
+                flex-direction: column;
+                gap: 10px; 
+                transition: all 0.3s ease; 
             }
 
-            .exit-button:hover svg {
-                fill: black;
+            .alert {
+                width: 250px;
+                display: flex;
+                align-items: center;
+                padding: 15px 20px;
+                font-size: 16px;
+                max-width: 500px;
+                border: 1px solid transparent;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background-color: #f8d7da;
+                border-color: #f5c6cb;
+                color: #721c24;
+                position: relative; 
+                transition: opacity 0.3s ease, transform 0.3s ease;
             }
 
-            .exit-button svg {
-                fill: rgb(175, 175, 175);
+
+            .progress-bar-timer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 5px;
+                width: 100%;
+                background-color: #721c24 !important;
+                transition: width linear;
+            }
+            .hide {
+                opacity: 0;
+                transform: translateY(-10px);
             }
         </style>
+
     </head>
 
     <body>
@@ -157,8 +100,8 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MainController?action=HomeController" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <a href="MainController?search=&action=SearchUser" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -166,12 +109,12 @@
                             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                         </div>
                         <div class="ms-3">
-                            <h6 class="mb-0">Jhon Doe</h6>
+                            <h6 class="mb-0">${sessionScope.LOGIN_USER.name}</h6>
                             <span>Admin</span>
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="#" class="nav-item nav-link active"><i class="fa fa-user me-2"></i>User Management</a>                   
+                        <a href="MainController?search=&action=SearchUser" class="nav-item nav-link active"><i class="fa fa-user me-2"></i>User Management</a>                   
                     </div>
                 </nav>
             </div>
@@ -182,7 +125,7 @@
             <div class="content">
                 <!-- Navbar Start -->
                 <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand d-flex d-lg-none me-4">
+                    <a href="AD_AccountManagement.jsp" class="navbar-brand d-flex d-lg-none me-4">
                         <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
                     </a>
                     <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -197,77 +140,75 @@
                         </button>
                     </form>
                     <div class="navbar-nav align-items-center ms-auto">
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-envelope me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Message</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all message</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-bell me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Notification</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Profile updated</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">New user added</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Password changed</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all notifications</a>
-                            </div>
-                        </div>
+                        <!--                        <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <i class="fa fa-envelope me-lg-2"></i>
+                                                        <span class="d-none d-lg-inline-flex">Message</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <div class="d-flex align-items-center">
+                                                                <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                                                <div class="ms-2">
+                                                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                                                    <small>15 minutes ago</small>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item text-center">See all message</a>
+                                                    </div>
+                                                </div>-->
+                        <!--                        <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                                        <i class="fa fa-bell me-lg-2"></i>
+                                                        <span class="d-none d-lg-inline-flex">Notification</span>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">Profile updated</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">New user added</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item">
+                                                            <h6 class="fw-normal mb-0">Password changed</h6>
+                                                            <small>15 minutes ago</small>
+                                                        </a>
+                                                        <hr class="dropdown-divider">
+                                                        <a href="#" class="dropdown-item text-center">See all notifications</a>
+                                                    </div>
+                                                </div>-->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <span class="d-none d-lg-inline-flex">John Doe</span>
+                                <span class="d-none d-lg-inline-flex">${sessionScope.LOGIN_USER.name}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
                                 <a href="MainController?action=Sign out" class="dropdown-item">Sign Out</a>
                             </div>
                         </div>
@@ -279,12 +220,12 @@
                 <div id="modalOverlay" class="modal-overlay" style="display: none;">
                     <div id="deleteConfirmation" class="card">
                         <div class="card-content">
-                            <p class="card-heading">Delete User</p>
-                            <p class="card-description">Are you sure you want to delete this user?</p>
+                            <p class="card-heading">Ban User</p>
+                            <p class="card-description">Are you sure you want to unavailable this user?</p>
                         </div>
                         <div class="card-button-wrapper">
                             <button class="card-button secondary" onclick="cancelDelete()">Cancel</button>
-                            <button class="card-button primary" onclick="proceedDelete()">Delete</button>
+                            <button class="card-button primary" onclick="proceedDelete()">Unavailable</button>
                         </div>
                         <button class="exit-button" onclick="cancelDelete()">
                             <svg height="20px" viewBox="0 0 384 512">
@@ -293,6 +234,29 @@
                         </button>
                     </div>
                 </div>
+                <div class="alert-container">
+                </div>
+                <c:if test="${not empty requestScope.UPDATE_USER_ERROR.nameError}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i> ${requestScope.UPDATE_USER_ERROR.nameError}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="progress-bar-timer bg-danger"></div>
+                    </div>
+                </c:if>
+                <c:if test="${not empty requestScope.UPDATE_USER_ERROR.emailError}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i> ${requestScope.UPDATE_USER_ERROR.emailError}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="progress-bar-timer bg-danger"></div>
+                    </div>
+                </c:if>
+                <c:if test="${not empty requestScope.UPDATE_USER_ERROR.phoneError}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i> ${requestScope.UPDATE_USER_ERROR.phoneError}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="progress-bar-timer bg-danger"></div>
+                    </div>
+                </c:if>
                 <!--Pop-up End-->
 
                 <!-- Blank Start -->
@@ -300,10 +264,9 @@
                     <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0 " style="height: auto !important;">
                         <div class="table-responsive">
                             <div class="col-sm-12 col-xl-12">
-                                <div class="bg-light rounded h-100 p-4" style=" min-height: 150px;">
+                                <div class="bg-light rounded h-100 p-4" style=" min-height: 540px;">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-4">User Management</h6>
-                                        <a href="AD_CreateAccount.jsp" class="btn btn-primary">Create New Employee Account</a>
+
                                         <div class="nav-item dropdown" style="width: 150px;">
                                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                                 <span class="d-none d-lg-inline-flex">Filter</span>
@@ -313,6 +276,7 @@
                                                 <li><a href="MainController?action=FilterByCustomer" class="dropdown-item">Customer</a></li>
                                             </ul>
                                         </div>
+                                        <a href="AD_CreateAccount.jsp"><i class="fa fa-plus me-2"></i>Create Account</a>                   
                                     </div>
                                     <c:if test="${requestScope.LIST_USER != null}">
                                         <c:if test="${!empty requestScope.LIST_USER}"> 
@@ -419,17 +383,11 @@
                                                             </c:if>
                                                         </tr>
 
-                                                    </c:forEach>
-                                                    ${requestScope.UPDATE_USER_ERROR.nameError}
-                                                    ${requestScope.UPDATE_USER_ERROR.emailError}
-                                                    ${requestScope.UPDATE_USER_ERROR.phoneError}
+                                                    </c:forEach>                                              
                                                 </tbody>
                                             </table>
                                         </c:if>
                                     </c:if>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -437,17 +395,15 @@
                 </div>
                 <!-- Blank End -->
 
-
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>
@@ -475,6 +431,32 @@
         <!-- Template Javascript -->
         <script src="dashmin/js/main.js"></script>
         <script>
+                                                                            document.addEventListener('DOMContentLoaded', function () {
+                                                                                const alerts = document.querySelectorAll('.alert');
+                                                                                const alertContainer = document.querySelector('.alert-container');
+                                                                                const duration = 7000;
+
+                                                                                alerts.forEach(alert => alertContainer.appendChild(alert));
+
+                                                                                alerts.forEach(alert => {
+                                                                                    const progressBar = alert.querySelector('.progress-bar-timer');
+                                                                                    progressBar.style.width = '100%';
+
+                                                                                    requestAnimationFrame(function () {
+                                                                                        setTimeout(function () {
+                                                                                            progressBar.style.transitionDuration = duration + 'ms';
+                                                                                            progressBar.style.width = '0%';
+                                                                                        }, 10);
+                                                                                    });
+
+                                                                                    setTimeout(() => {
+                                                                                        alert.classList.add('hide');
+                                                                                        setTimeout(() => {
+                                                                                            alert.remove();
+                                                                                        }, 200);
+                                                                                    }, duration);
+                                                                                });
+                                                                            });
                                                                             let previousValue;
                                                                             let deleteButtonRef;
                                                                             let formIDToSubmit;
@@ -495,7 +477,7 @@
 
 
                                                                             function cancelDelete() {
-                                                                                deleteButtonRef.value = previousValue; // Khôi phục giá trị ban đầu
+                                                                                deleteButtonRef.value = previousValue;
 
                                                                                 document.getElementById('deleteConfirmation').style.display = 'none';
                                                                                 document.getElementById('modalOverlay').style.display = 'none';

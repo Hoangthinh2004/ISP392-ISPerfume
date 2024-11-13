@@ -11,13 +11,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Staff | Order Detail</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,8 +53,8 @@
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="MGR_Dashboard.jsp" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <a href="" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ISPERFUME</h3>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -62,13 +62,13 @@
                             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                         </div>
                         <div class="ms-3">
-                            <h6 class="mb-0">Jhon Doe</h6>
-                            <span>Admin</span>
+                            <h6 class="mb-0">${sessionScope.LOGIN_USER.name}</h6>
+                            <span>Staff</span>
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                        <a href="" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Management</a>                     
-
+                        <a href="MainController?action=ManageOrderPage" class="nav-item nav-link active"><i class="fa fa-shipping-fast me-2"></i>Manage Order</a>                     
+                        <a href="STAFF_BlogManagement.jsp" class="nav-item nav-link "><i class="fa fa-pencil-alt me-2"></i>Manage Blog</a>                     
                     </div>
                 </nav>
             </div>
@@ -94,55 +94,14 @@
                                             </button>
                                         </form>-->
                     <div class="navbar-nav align-items-center ms-auto">
-<!--                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa fa-envelope me-lg-2"></i>
-                                <span class="d-none d-lg-inline-flex">Message</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all message</a>
-                            </div>
-                        </div>-->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <!--                        
+                        -->                        <div class="nav-item dropdown"><!--
+                            -->                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <span class="d-none d-lg-inline-flex">John Doe</span>
+                                <span class="d-none d-lg-inline-flex">${sessionScope.LOGIN_USER.name}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a /href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
-                                <!--                                <a href="#" class="dropdown-item">Log Out</a>-->
-                                <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
+                                <a href="MainController?action=Sign out" class="dropdown-item">Log Out</a>
                             </div>
                         </div>
                     </div>
@@ -150,86 +109,14 @@
                 <!-- Navbar End -->
 
                 <!-- Blank Start -->
-                <div class="container-fluid">
-                    <form action="MainController" method="get">
-                        <div class="row px-xl-5">
-                            <div class="container mb-5"> 
-                                <div class="row h-100 align-items-center justify-content-between">
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-                                        <div class="bg-light rounded p-4 my-4">
-                                            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span>Profile</span></h2>
-                                            <div class="row justify-content-around">
-                                                <div class="col-lg-5 col-md-5 col-sm-12">
-                                                    <label for="floatingInput1" class="form-label">Username</label>
-                                                    <div class="input-group">
-                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
-                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
-                                                                <input type="text" class="form-control" id="floatingInput1" value="${user.name}" readonly="">
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-5 col-md-5 col-sm-12">
-                                                    <label for="floatingInput2" class="form-label">Email</label>
-                                                    <div class="input-group">
-                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
-                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
-                                                                <input type="text" class="form-control" id="floatingInput1" value="${user.email}" readonly="">
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row justify-content-around">
-                                                <div class="col-lg-5 col-md-5 col-sm-12">
-                                                    <label for="floatingInput3" class="form-label">Address</label> 
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="floatingInput1" value="${ORDER.address}" readonly="">
-                                                    </div>
-                                                </div>  
-                                                <div class="col-lg-5 col-md-5 col-sm-12">
-                                                    <label for="floatingInput3" class="form-label">City</label> 
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="floatingInput1" value="${ORDER.city}" readonly="">
-                                                    </div>
-                                                </div>  
-                                                <div class="col-lg-5 col-md-5 col-sm-12">
-                                                    <label for="floatingInput3" class="form-label">District</label> 
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="floatingInput1" value="${ORDER.district}" readonly="">
-                                                    </div>
-                                                </div>  
-                                                <div class="col-lg-5 col-md-5 col-sm-12">
-                                                    <label for="floatingInput3" class="form-label">Ward</label> 
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="floatingInput1" value="${ORDER.ward}" readonly="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-5 col-md-5 col-sm-12">
-                                                    <label for="floatingInput3" class="form-label">Phone</label>
-                                                    <div class="input-group">
-                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
-                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
-                                                                <input type="text" class="form-control" id="floatingInput1" value="${user.phone}" readonly="">
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </div>
-                                                </div>       
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+
                 <div class="container-fluid pt-4 px-4">
                     <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0 " style="height: auto !important">
                         <div class="table-responsive">
                             <div class="col-sm-12 col-xl-12">
                                 <div class="bg-light rounded h-100 p-4">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-0">Order Management</h6>
+                                        <h6 class="mb-0">Order Detail</h6>
                                     </div>
                                     <table class="table table-hover">
                                         <thead>
@@ -283,6 +170,93 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="container-fluid">
+                    <form action="MainController" method="get">
+                        <div class="row px-xl-5">
+                            <div class="container mb-5"> 
+                                <div class="row h-100 align-items-center justify-content-between">
+                                    <div class="col-12">
+                                        <div class="bg-light rounded p-4 my-4">
+                                            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span>Customer Information</span></h2>
+                                            <!-- Username and Email -->
+                                            <div class="row mb-3">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="floatingInput1" class="form-label">Username</label>
+                                                    <div class="input-group">
+                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
+                                                                <input type="text" class="form-control bg-transparent" id="floatingInput1" value="${user.name}" readonly="">
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="floatingInput2" class="form-label">Email</label>
+                                                    <div class="input-group">
+                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
+                                                                <input type="text" class="form-control bg-transparent" id="floatingInput2" value="${user.email}" readonly="">
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Address and City -->
+                                            <div class="row mb-3">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="floatingInput3" class="form-label">Address</label> 
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control bg-transparent" id="floatingInput3" value="${ORDER.address}" readonly="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="floatingInput4" class="form-label">City</label> 
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control bg-transparent" id="floatingInput4" value="${ORDER.city}" readonly="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- District and Ward -->
+                                            <div class="row mb-3">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="floatingInput5" class="form-label">District</label> 
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control bg-transparent" id="floatingInput5" value="${ORDER.district}" readonly="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="floatingInput6" class="form-label">Ward</label> 
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control bg-transparent" id="floatingInput6" value="${ORDER.ward}" readonly="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Phone -->
+                                            <div class="row mb-3">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <label for="floatingInput7" class="form-label">Phone</label>
+                                                    <div class="input-group">
+                                                        <c:forEach var="user" items="${sessionScope.LIST_USER_STAFF}">
+                                                            <c:if test="${requestScope.ORDER.customerID == user.userID}">
+                                                                <input type="text" class="form-control bg-transparent" id="floatingInput7" value="${user.phone}" readonly="">
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 d-flex justify-content-end align-items-center mt-5">
+                                                    <a class="btn btn-primary " href="MainController?action=ManageOrderPage">
+                                                        Back
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <!-- Blank End -->
 
 
@@ -291,11 +265,10 @@
                     <div class="bg-light rounded-top p-4">
                         <div class="row">
                             <div class="col-12 col-sm-6 text-center text-sm-start">
-                                &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                                &copy; <a href="#">ISPERFUME</a>
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
                             </div>
                         </div>
                     </div>

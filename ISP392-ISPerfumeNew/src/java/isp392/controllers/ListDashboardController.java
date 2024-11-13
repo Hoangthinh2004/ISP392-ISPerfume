@@ -15,6 +15,8 @@ import isp392.order.ShipperOrderDAO;
 import isp392.order.ShipperOrderDTO;
 import isp392.product.ProductDAO;
 import isp392.product.ProductDTO;
+import isp392.product.ProductDetailDAO;
+import isp392.product_category.ProductCategoryDAO;
 import isp392.promotion.PromotionDAO;
 import isp392.promotion.PromotionDTO;
 import java.io.IOException;
@@ -44,30 +46,35 @@ public class ListDashboardController extends HttpServlet {
             ShipperOrderDAO soDao = new ShipperOrderDAO();
             OrderDAO oDao = new OrderDAO();
             OrderDetailDAO odDao = new OrderDetailDAO();
+            ProductCategoryDAO proCatDAO = new ProductCategoryDAO();
             List<PromotionDTO> listPromotion = dao.countAllPromotion();
             List<ProductDTO> listProduct = pDao.countAllProduct();
             List<BrandDTO> listBrand = bDao.countAllBrand();
             List<ShipperOrderDTO> listSOrder = soDao.countAllOrder();
             List<OrderDTO> listOrder = oDao.countAllOrderIsProcessing();
             List<OrderDetailDTO> listOrderD = odDao.totalRevenue();
-            if (listPromotion.size() > 0) {
-                if (listProduct.size() > 0) {
-                    if (listBrand.size() > 0) {
-                        if (listSOrder.size() > 0) {
-                            if (listOrder.size() > 0) {
-                                if (listOrderD.size() > 0) {
-                                    request.setAttribute("ALL_PROMOTION", listPromotion);
-                                    request.setAttribute("ALL_PRODUCT", listProduct);
-                                    request.setAttribute("ALL_BRAND", listBrand);
-                                    request.setAttribute("ALL_ORDER_COMPLETED", listSOrder);
-                                    request.setAttribute("ALL_ORDER_PROCESSING", listOrder);
-                                    request.setAttribute("REVENUE", listOrderD);
-                                    url = SUCCESS;
-                                }
-                            }
-                        }
-                    }
-                }
+            int quantityProductByCategories1 = proCatDAO.getQuantityProductByCategories(1);
+            int quantityProductByCategories2 = proCatDAO.getQuantityProductByCategories(2);
+            int quantityProductByCategories3 = proCatDAO.getQuantityProductByCategories(3);
+            int orderStatus1 = oDao.getQuantityOrderByStatusV2(1);
+            int orderStatus2 = oDao.getQuantityOrderByStatusV2(2);
+            int orderStatus3 = oDao.getQuantityOrderByStatusV2(3);
+            int orderStatus4 = oDao.getQuantityOrderByStatusV2(4);
+            if (listPromotion.size() > 0 || listProduct.size() > 0 || listBrand.size() > 0 || listSOrder.size() > 0 || listOrder.size() > 0 || listOrderD.size() > 0) {
+                request.setAttribute("ALL_PROMOTION", listPromotion);
+                request.setAttribute("ALL_PRODUCT", listProduct);
+                request.setAttribute("ALL_BRAND", listBrand);
+                request.setAttribute("ALL_ORDER_COMPLETED", listSOrder);
+                request.setAttribute("ALL_ORDER_PROCESSING", listOrder);
+                request.setAttribute("REVENUE", listOrderD);
+                request.setAttribute("QUANTITY_PRODUCT_BY_CATEGORYID1", quantityProductByCategories1);
+                request.setAttribute("QUANTITY_PRODUCT_BY_CATEGORYID2", quantityProductByCategories2);
+                request.setAttribute("QUANTITY_PRODUCT_BY_CATEGORYID3", quantityProductByCategories3);
+                request.setAttribute("QUANTITY_ORDER_STATUS1", orderStatus1);
+                request.setAttribute("QUANTITY_ORDER_STATUS2", orderStatus2);
+                request.setAttribute("QUANTITY_ORDER_STATUS3", orderStatus3);
+                request.setAttribute("QUANTITY_ORDER_STATUS4", orderStatus4);
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at ListDashboardController: " + e.toString());

@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
 public class NavigateRelatedProductDetailController extends HttpServlet {
 
     private static final String PRODUCT_DETAIL_PAGE = "productDetail.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,28 +36,33 @@ public class NavigateRelatedProductDetailController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             ProductDAO productDAO = new ProductDAO();
-            SizeDAO sizeDAO = new SizeDAO();           
+            SizeDAO sizeDAO = new SizeDAO();
             ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+            Map<String, Integer> CustomerIDS = (Map<String, Integer>) session.getAttribute("CUSTOMER_ID");
 
+            int productDetailID = 0;
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
             int productID = Integer.parseInt(request.getParameter("productID"));
             int sizeID = Integer.parseInt(request.getParameter("sizeID"));
-                       
+
+            List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);
+            for (ProductDetailDTO product : listPriceBySize) {
+                productDetailID = product.getProductDetailID();
+            }
+            if (listPriceBySize.size() > 0) {
+                session.setAttribute("PRICE_BY_SIZE", listPriceBySize);
+            }
+
             List<ViewProductDTO> sizeAvailable = sizeDAO.getAvailableSize(productID);
             if (sizeAvailable.size() > 0) {
                 session.setAttribute("AVAILABLE_SIZE", sizeAvailable);
             }
-            
-            List<ProductDetailDTO> listPriceBySize = productDetailDAO.getListPriceBySize(productID, sizeID);
-            if (listPriceBySize.size() > 0) {
-                session.setAttribute("PRICE_BY_SIZE", listPriceBySize);
-            }
-            
+
             List<ProductDetailDTO> listImage = productDetailDAO.getListImage(productID);
             if (listImage.size() > 0) {
                 session.setAttribute("LIST_IMAGE", listImage);
             }
-            
+
             List<ProductDTO> productInformation = productDAO.getProductInformation(productID);
             if (productInformation.size() > 0) {
                 session.setAttribute("PRODUCT_INFORMATION", productInformation);
@@ -69,7 +75,7 @@ public class NavigateRelatedProductDetailController extends HttpServlet {
             if (listProduct.size() > 0) {
                 session.setAttribute("SUGGEST_PRODUCT", listProduct);
             }
-            
+
             url = PRODUCT_DETAIL_PAGE;
         } catch (Exception e) {
             log("Error at NavigateRelatedProductDetailController: " + e.toString());

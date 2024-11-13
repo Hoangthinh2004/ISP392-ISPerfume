@@ -10,13 +10,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>MultiShop - Online Shop Website Template</title>
+        <title>ISPERFUME | Order History</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free HTML Templates" name="keywords">
         <meta content="Free HTML Templates" name="description">
 
         <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
+        <link href="img/fragrance.png" rel="icon">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -35,12 +35,11 @@
               rel="stylesheet">
         <link href="css/styleOrderStatus.css" rel="stylesheet">
         <style>
-            /* General Modal Styling */
             .modal-content {
                 border-radius: 10px; 
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
-                background-color: #f8f9fa; /* Light grey background */
-                padding: 20px; /* Internal padding for content */
+                background-color: #f8f9fa; 
+                padding: 20px; 
             }
 
             .modal-header {
@@ -51,15 +50,14 @@
             .modal-title {
                 font-size: 1.5rem;
                 font-weight: bold;
-                color: #343a40; /* Dark grey text */
+                color: #343a40;
             }
 
-            /* Close Button Styling */
             .btn-close {
                 background: none;
                 border: none;
                 font-size: 1.2rem;
-                color: #6c757d; /* Grey for icon */
+                color: #6c757d; 
                 transition: color 0.2s ease;
             }
 
@@ -79,17 +77,16 @@
                 color: #343a40;
             }
 
-            /* Styling for the product list */
             .product-list {
                 list-style: none; 
                 padding: 0;
-                margin-bottom: 20px; /* Spacing at the bottom */
+                margin-bottom: 20px; 
             }
 
             .product-list li {
-                margin-bottom: 15px; /* Spacing between products */
+                margin-bottom: 15px; 
                 padding-bottom: 10px;
-                border-bottom: 1px solid #e9ecef; /* Light border between products */
+                border-bottom: 1px solid #e9ecef; 
             }
 
             .product-list p {
@@ -98,45 +95,41 @@
             }
 
             .product-list p strong {
-                color: #495057; /* Medium dark grey */
+                color: #495057;
             }
 
-            /* Promotion and Total Styling */
             .promotion {
-                color: #28a745; /* Green for promotion */
+                color: #28a745; 
                 font-size: 1.1rem;
                 font-weight: bold;
             }
 
             .total {
-                color: #007bff; /* Primary blue for total */
+                color: #007bff; 
                 font-size: 1.1rem;
                 font-weight: bold;
             }
 
-            /* Modal Footer */
             .modal-footer {
-                border-top: 1px solid #e9ecef; /* Subtle border */
+                border-top: 1px solid #e9ecef; 
                 padding-top: 10px;
-                justify-content: center; /* Center the footer content */
+                justify-content: center;
             }
 
-            /* Buttons */
             .btn-secondary {
-                background-color: #6c757d; /* Bootstrap secondary color */
+                background-color: #6c757d; 
                 border: none;
                 color: white;
-                padding: 10px 20px; /* Larger padding for more clickable area */
+                padding: 10px 20px;
                 font-size: 1rem;
                 border-radius: 5px;
                 transition: background-color 0.3s ease, transform 0.3s ease;
             }
 
             .btn-secondary:hover {
-                background-color: #5a6268; /* Darker on hover */
+                background-color: #5a6268;
             }
 
-            /* Primary Button Styling */
             .btn-primary {
                 background-color: orange;
                 color: white;
@@ -157,22 +150,6 @@
                 box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
             }
 
-            /* Responsive Design */
-            @media (max-width: 576px) {
-                .modal-content {
-                    padding: 15px;
-                }
-
-                .modal-title {
-                    font-size: 1.2rem;
-                }
-
-                .modal-body p {
-                    font-size: 0.9rem;
-                }
-
-
-            }
 
         </style>
     </head>
@@ -182,16 +159,14 @@
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
-                        <a class="text-body mr-3" href="MGR_Dashboard.jsp">MANAGER</a>
-                        <a class="text-body mr-3" href="AD_AccountManagement.jsp">ADMIN</a>
-                        <a class="text-body mr-3" href="STAFF_OrderManagement.jsp">STAFF</a>
-                        <a class="text-body mr-3" href="SHIPPER_OrderManagement.jsp">SHIPPER</a>
+                        <span class="text-primary ml-3"><i class="fa fa-envelope mr-2"></i>isperfume1803@gmail.com</span>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center text-lg-right col-md-12 col-sm-12">
+                    <span class="text-primary text- ml-3 d-none d-lg-inline" ><i class="fa fa-map-marker-alt mr-2"></i>123 D1 Street, Thu Duc, HCM</span>
                     <div class="d-inline-flex align-items-center justify-content-between">  
                         <div class="col-md-8 col-sm-10 text-left d-flex d-lg-none">
-                            <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
+                            <form action="MainController" method="get" class="w-100 d-flex mb-2 mb-lg-0">
                                 <input type="text" class="form-control" placeholder="Search..." name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
                                 <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
                                     <i class="fa fa-search"></i>
@@ -242,96 +217,19 @@
         </div>
         <!-- Topbar End -->
 
-
         <!-- Navbar Start -->
-        <div class="container-fluid bg-dark mb-30">
-            <div class="row px-xl-5">
-                <div class="col-lg-3 d-none d-lg-block mt-2">
-                    <a href="MainController?action=HomeController" class="text-decoration-none d-flex justify-content-center">
-                        <i class="fa fa-leaf"></i>
+        <div class="container-fluid bg-dark text-secondary mb-4 pt-5">
+            <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex justify-content-center">
+                <div class="col-lg-4 justify-content-center text-center">
+                    <a href="HomeController" class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">IS</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Perfume</span>
                     </a>
                 </div>
-                <div class="col-lg-9 ml-auto">
-                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">                           
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="MainController?action=HomeController" class="nav-item nav-link active">Home</a>
-                                <c:forEach var="Category" items="${sessionScope.LIST_CATEGORY}">
-                                    <div class="nav-item dropdown">
-                                        <a href="MainController?action=Category&Category=${Category.categoryID}" class="nav-link dropdown-toggle" data-toggle="dropdown">${Category.name}</a>
-                                        <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                            <a href="MainController?action=Category&Category=${Category.categoryID}" class="dropdown-item">All ${Category.name}</a>
-                                            <c:forEach var="brand" items="${sessionScope.LIST_BRAND_BY_CATE}">
-                                                <c:if test="${Category.categoryID == brand.categoryID}">
-                                                    <a href="MainController?action=FilterByBrand" class="dropdown-item">${brand.brandName}</a>
-                                                </c:if>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                                <a href="blog.jsp" class="nav-item nav-link">Blog</a>
-                                <c:if test="${not empty sessionScope.CUSTOMER_ID}">
-                                    <a href="orderStatus.jsp" class="nav-item nav-link">History</a>
-                                </c:if>
-                            </div>
-                            <div class="col-md-4 col-sm-12 text-left d-none d-lg-flex">
-                                <form action="MainController" method="POST" class="w-100 d-flex mb-2 mb-lg-0">
-                                    <input type="text" class="form-control" placeholder="Search for products" name="search" style="border-radius: 20px 0 0 20px; padding: 10px;">
-                                    <button name="action" value="SeacrhProduct" type="submit" class="btn" style="border-radius: 0 20px 20px 0; background-color: orange; color: white;">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="navbar-nav ml-auto py-0 d-none d-lg-flex">                            
-                                <c:choose>
-                                    <c:when test="${empty sessionScope.CUSTOMER_ID}">
-                                        <button class="btn btn-sm d-flex align-items-center" data-toggle="dropdown">
-                                            <i class="fas fa fa-user text-primary"></i>
-                                            <span class="ml-1 text-primary">Account</span>
-                                        </button>                                        
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item btn" type="button" href="signin.jsp">Sign in</a>
-                                            <a class="dropdown-item btn" type="button" href="signup.jsp">Sign up</a>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button class="btn btn-sm align-items-center d-flex" data-toggle="dropdown">
-                                            <i class="fas fa fa-user text-primary"></i>
-                                            <span class="ml-1 text-primary">${sessionScope.CUSTOMER.name}</span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item btn" type="button" href="MainController?action=Sign out">Sign out</a>
-                                            <a class="dropdown-item btn" type="button" href="profile.jsp">Profile</a>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                                <c:choose>
-                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
-                                        <a href="MainController?action=NavigateToCart" class="btn btn-sm d-flex align-items-center ml-1">
-                                            <i class="fas fa-shopping-cart text-primary"></i>
-                                            <span class="badge text-secondary border border-secondary rounded-circle ml-1" style="padding-bottom: 2px;">${sessionScope.CART_SIZE}</span>
-                                        </a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button class="btn btn-sm d-flex align-items-center " onclick="openDeleteModal(this, event)">
-                                            <i class="fas fa-shopping-cart text-primary"></i>
-                                            <span class="ml-1 text-primary">Cart</span>
-                                        </button>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
             </div>
+
         </div>
         <!-- Navbar End -->
-
         <div class="container-fluid mb-30">
             <div class="order-status">
                 <!-- Order Status Start -->
@@ -341,7 +239,7 @@
                             <a href="#">
                                 <span class="progress-count">
                                     <i class="fa fa-hourglass-half"></i>
-                                    <span class="order-count">15</span>
+                                    <span class="order-count">${sessionScope.QUANTITY_STATUS_1}</span>
                                 </span>
                                 <span class="progress-label">Waiting for confirmation</span>
                             </a>
@@ -350,7 +248,7 @@
                             <a href="#">
                                 <span class="progress-count">
                                     <i class="fa fa-box"></i>
-                                    <span class="order-count">10</span>
+                                    <span class="order-count">${sessionScope.QUANTITY_STATUS_2}</span>
                                 </span>
                                 <span class="progress-label">Waiting for pickup</span>
                             </a>
@@ -359,7 +257,7 @@
                             <a href="#">
                                 <span class="progress-count">
                                     <i class="fa fa-truck"></i>
-                                    <span class="order-count">8</span>
+                                    <span class="order-count">${sessionScope.QUANTITY_STATUS_3}</span>
                                 </span>
                                 <span class="progress-label">Waiting for delivery</span>
                             </a>
@@ -368,13 +266,12 @@
                             <a href="#">
                                 <span class="progress-count">
                                     <i class="fa fa-clipboard-check"></i>
-                                    <span class="order-count">20</span>
+                                    <span class="order-count">${sessionScope.QUANTITY_STATUS_4}</span>
                                 </span>
                                 <span class="progress-label">Delivered successfully</span>
                             </a>
                         </li>
                     </ul>
-
                 </section>
                 <!-- Order Status End -->
             </div>
@@ -387,134 +284,171 @@
 
                     <!-- Order List Status 1 -->
                     <div class="order-list" id="order-list-1" style="display: none;">
-                        <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="order-item-image">
-                                    <img src="img/product-1.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                                <div class="order-item-details flex-grow-1 mx-3">
-                                    <h6 class="mb-1"><strong>Order #123456</strong></h6>
-                                    <p class="mb-1"><strong>Product:</strong> Product 1</p>
-                                    <p class="mb-1"><strong>Date:</strong> 2024-10-15 10:45 AM</p>
-                                    <p class="mb-1"><strong>Total:</strong> $120.50</p>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#orderDetailsModal-123456">View Details</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal for Order Details -->
-                        <div class="modal fade" id="orderDetailsModal-123456" tabindex="-1" aria-labelledby="orderDetailsLabel-123456" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="orderDetailsLabel-123456">Order #123456 Details</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                        <c:forEach var="order" items="${sessionScope.ORDER_STATUS_1}">
+                            <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="order-item-image">
+                                        <img src="https://cdn-icons-png.flaticon.com/256/4990/4990422.png" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
                                     </div>
-                                    <div class="modal-body">
-                                        <p><strong>Order ID:</strong> 123456</p>
-
-                                        <h6><strong>Products:</strong></h6>
-                                        <ul class="product-list">
-                                            <li>
-                                                <p><strong>Product Name:</strong> Product 1</p>
-                                                <p><strong>Quantity:</strong> 2</p>
-                                                <p><strong>Price:</strong> $60.25</p>
-                                            </li>
-                                            <li>
-                                                <p><strong>Product Name:</strong> Product 2</p>
-                                                <p><strong>Quantity:</strong> 1</p>
-                                                <p><strong>Price:</strong> $45.00</p>
-                                            </li>
-                                        </ul>
-
-                                        <p><strong>Shipper:</strong> Fast Shipping Inc.</p>
-                                        <p><strong>Order Date:</strong> 2024-10-15 10:45 AM</p>
-                                        <p><strong>Shipping Address:</strong> 123 Main Street, City, Country</p>
-
-                                        <!-- Add classes for specific fields -->
-                                        <p class="promotion"><strong>Promotion:</strong> 10% off (Promo Code: SAVE10)</p>
-                                        <p class="total"><strong>Total:</strong> $135.25</p>
-
-                                        <p><strong>Status:</strong> Shipped</p>
+                                    <div class="order-item-details flex-grow-1 mx-3">
+                                        <h6 class="mb-1"><strong>Order #${order.orderID}</strong></h6>
+                                        <p class="mb-1"><strong>Date:</strong> ${order.orderDate}</p>
+                                        <p class="mb-1"><strong>Recipient phone number</strong> ${order.phone}</p>
+                                        <c:forEach var="user" items="${sessionScope.LIST_USER}">
+                                            <c:if test="${order.shipperID == user.userID}">
+                                                <p class="mb-1"><strong>Shipper name: </strong> ${user.name}</p>
+                                            </c:if>
+                                        </c:forEach>
                                     </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <div class="text-right">
+                                        <form action="MainController">
+                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                            <button  type="submit" name="action" value="viewOrderDetail"class="btn btn-sm btn-primary" data-bs-toggle="modal">View Details</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
 
                     <!-- Order List Status 2 -->
                     <div class="order-list" id="order-list-2" style="display: none;">
 
-                        <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="order-item-image">
-                                    <img src="img/product-2.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                                <div class="order-item-details flex-grow-1 mx-3">
-                                    <h6 class="mb-1"><strong>Order #654321</strong></h6>
-                                    <p class="mb-1"><strong>Product:</strong> Product 2</p>
-                                    <p class="mb-1"><strong>Date:</strong> 2024-10-16 12:30 PM</p>
-                                    <p class="mb-1"><strong>Total:</strong> $150.00</p>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-sm btn-primary">View Details</button>
+                        <c:forEach var="order" items="${sessionScope.ORDER_STATUS_2}">
+                            <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="order-item-image">
+                                        <img src="https://cdn-icons-png.flaticon.com/256/17959/17959498.png" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+                                    <div class="order-item-details flex-grow-1 mx-3">
+                                        <h6 class="mb-1"><strong>Order #${order.orderID}</strong></h6>
+                                        <p class="mb-1"><strong>Date:</strong> ${order.orderDate}</p>
+                                        <p class="mb-1"><strong>Recipient phone number</strong> ${order.phone}</p>
+                                        <c:forEach var="user" items="${sessionScope.LIST_USER}">
+                                            <c:if test="${order.shipperID == user.userID}">
+                                                <p class="mb-1"><strong>Shipper name: </strong> ${user.name}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="text-right">
+                                        <form action="MainController">
+                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                            <button  type="submit" name="action" value="viewOrderDetail"class="btn btn-sm btn-primary" data-bs-toggle="modal">View Details</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
 
                     </div>
 
                     <!-- Order List Status 3 -->
                     <div class="order-list" id="order-list-3" style="display: none;">
-
-                        <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="order-item-image">
-                                    <img src="img/product-3.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                                <div class="order-item-details flex-grow-1 mx-3">
-                                    <h6 class="mb-1"><strong>Order #987654</strong></h6>
-                                    <p class="mb-1"><strong>Product:</strong> Product 3</p>
-                                    <p class="mb-1"><strong>Date:</strong> 2024-10-17 09:00 AM</p>
-                                    <p class="mb-1"><strong>Total:</strong> $75.25</p>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-sm btn-primary">View Details</button>
+                        <c:forEach var="order" items="${sessionScope.ORDER_STATUS_3}">
+                            <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="order-item-image">
+                                        <img src="https://cdn-icons-png.flaticon.com/256/14306/14306803.png" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+                                    <div class="order-item-details flex-grow-1 mx-3">
+                                        <h6 class="mb-1"><strong>Order #${order.orderID}</strong></h6>
+                                        <p class="mb-1"><strong>Date:</strong> ${order.orderDate}</p>
+                                        <p class="mb-1"><strong>Recipient phone number</strong> ${order.phone}</p>
+                                        <c:forEach var="user" items="${sessionScope.LIST_USER}">
+                                            <c:if test="${order.shipperID == user.userID}">
+                                                <p class="mb-1"><strong>Shipper name: </strong> ${user.name}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="text-right">
+                                        <form action="MainController">
+                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                            <button  type="submit" name="action" value="viewOrderDetail"class="btn btn-sm btn-primary" data-bs-toggle="modal">View Details</button>
+                                        </form>                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        </c:forEach>
                     </div>
-
                     <!-- Order List Status 4 -->
                     <div class="order-list" id="order-list-4" style="display: none;">
-                        <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div class="order-item-image">
-                                    <img src="img/product-4.jpg" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
-                                </div>
-                                <div class="order-item-details flex-grow-1 mx-3">
-                                    <h6 class="mb-1"><strong>Order #246810</strong></h6>
-                                    <p class="mb-1"><strong>Product:</strong> Product 4</p>
-                                    <p class="mb-1"><strong>Date:</strong> 2024-10-18 02:15 PM</p>
-                                    <p class="mb-1"><strong>Total:</strong> $220.75</p>
-                                </div>
-                                <div class="text-right">
-                                    <button class="btn btn-sm btn-primary">View Details</button>
+                        <c:forEach var="order" items="${sessionScope.ORDER_STATUS_4}">
+                            <div class="order-item border p-4 mb-3 d-flex flex-column bg-light">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="order-item-image">
+                                        <img src="https://cdn-icons-png.flaticon.com/256/9403/9403187.png" alt="Product Image" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;">
+                                    </div>
+                                    <div class="order-item-details flex-grow-1 mx-3">
+                                        <h6 class="mb-1"><strong>Order #${order.orderID}</strong></h6>
+                                        <p class="mb-1"><strong>Date:</strong> ${order.orderDate}</p>
+                                        <p class="mb-1"><strong>Recipient phone number</strong> ${order.phone}</p>
+                                        <c:forEach var="user" items="${sessionScope.LIST_USER}">
+                                            <c:if test="${order.shipperID == user.userID}">
+                                                <p class="mb-1"><strong>Shipper name: </strong> ${user.name}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="text-right">
+                                        <form action="MainController">
+                                            <input type="hidden" name="orderID" value="${order.orderID}">
+                                            <button  type="submit" name="action" value="viewOrderDetail"class="btn btn-sm btn-primary" data-bs-toggle="modal">View Details</button>
+                                        </form> 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
 
                 </div>
             </div>
         </div>
+        <div class="d-flex justify-content-end mr-5">
+             <a href="HomeController" class="btn btn-primary py-3">Continue Shopping</a>
+        </div>
+       
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+            <div class="row px-xl-5 pt-5">
+                <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                    <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+                    <p class="mb-4">Contact us for fast and friendly support. ISPerfume is here to help you find the perfect scent that speaks to your personality.</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Lô E2a-7, Đường D1, Thu Duc, TP HoChiMinh</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>isperfume1803@gmail.com</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 xxx xxx 000</p>
+                </div>
+                <div class="col-lg-3 col-md-12 mb-5 pr-3 pr-xl-5">                 
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 mb-5">
+                            <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <a class="text-secondary mb-2" href="MainController?action=HomeController"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                                <a class="text-secondary mb-2" href="MainController?action=NavigateBlog"><i class="fa fa-angle-right mr-2"></i>Blog</a>
+                                <a class="text-secondary mb-2" href="MainController?action=SeacrhProduct&search="><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                            <div class="d-flex flex-column justify-content-start">
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.CUSTOMER_ID}">
+                                        <a class="text-secondary mb-2" href="profile.jsp"><i class="fa fa-angle-right mr-2"></i>Profile</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=viewOrderHistory&customerID=${CUSTOMER_ID.customerID}"><i class="fa fa-angle-right mr-2"></i>Order History</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=NavigateToCart"><i class="fa fa-angle-right mr-2"></i>My Cart</a>
+                                        <a class="text-secondary mb-2" href="MainController?action=Sign out"><i class="fa fa-angle-right mr-2"></i>Sign out</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="text-secondary mb-2" href="signin.jsp"><i class="fa fa-angle-right mr-2"></i>Sign in</a>
+                                        <a class="text-secondary mb-2" href="signup.jsp"><i class="fa fa-angle-right mr-2"></i>Sign up</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -551,7 +485,6 @@
 
                         currentItem.classList.add('current-item');
 
-                        // Hiển thị danh sách đơn hàng tương ứng
                         document.querySelectorAll('.order-list').forEach(orderList => {
                             orderList.style.display = 'none';
                         });

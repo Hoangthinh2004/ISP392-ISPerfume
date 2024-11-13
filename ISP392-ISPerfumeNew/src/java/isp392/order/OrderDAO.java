@@ -20,17 +20,19 @@ import javax.naming.NamingException;
  * @author ThinhHoang
  */
 public class OrderDAO {
-    
+
     private final String ASSIGN_SHIPPER_ORDER = "UPDATE Orders SET ShipperID = ? , orderStatus = 2 WHERE OrderID = ?";
     private static final String CREATE_ORDER = "INSERT INTO Orders(CartID, StaffID, ShipperID, PromotionID, CustomerID, OrderDate, orderStatus, City, District, Ward, Address, Phone, Note) VALUES (?,?,?,?,?,getdate(),1,?,?,?,?,?,?)";
-    private static final String CREATE_ORDER_DETAIL ="INSERT INTO Order_Detail(OrderID, ProductDetailID, Quantity, UnitPrice) VALUES (?,?,?,?)";
-    private static final String UPDATE_QUANTITY = "UPDATE ProductDetail SET StockQuantity = StockQuantity-? WHERE ProductDetailID = ?";   
+    private static final String CREATE_ORDER_DETAIL = "INSERT INTO Order_Detail(OrderID, ProductDetailID, Quantity, UnitPrice) VALUES (?,?,?,?)";
+    private static final String UPDATE_QUANTITY = "UPDATE ProductDetail SET StockQuantity = StockQuantity-? WHERE ProductDetailID = ?";
     private final String GET_LIST_ORDER_STAFF = "SELECT * FROM Orders";
     private final String GET_LIST_ORDER_DETAIL_STAFF = "SELECT * FROM Order_Detail WHERE OrderID = ?";
     private final String GET_ORDER_BY_ORDERID = "SELECT * FROM Orders WHERE OrderID = ?";
     private final String GET_LIST_ORDER_BY_STATUS = "SELECT * FROM Orders WHERE CustomerID = ? AND orderStatus = ?";
     private final String COUNT_ORDER_IS_PROCESSING = "SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus BETWEEN 1 AND 3";
-    
+    private final String COUNT_ORDER_BY_STATUS = "SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = ? AND  CustomerID = ?";
+    private final String COUNT_ORDER_BY_STATUS_V2 = "SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = ?";
+
     public int createOrder(OrderDTO order) throws ClassNotFoundException, SQLException {
         int orderID = 0;
         Connection conn = null;
@@ -48,7 +50,7 @@ public class OrderDAO {
                     orderPtm.setNull(4, java.sql.Types.INTEGER);
                 } else {
                     orderPtm.setInt(4, order.getPromotionID());
-                }             
+                }
                 orderPtm.setInt(5, order.getCustomerID());
                 orderPtm.setString(6, order.getCity());
                 orderPtm.setString(7, order.getDistrict());
@@ -67,7 +69,8 @@ public class OrderDAO {
         } finally {
             if (orderPtm != null) {
                 orderPtm.close();
-            } if (orderDetailPtm != null) {
+            }
+            if (orderDetailPtm != null) {
                 orderDetailPtm.close();
             }
             if (conn != null) {
@@ -76,7 +79,7 @@ public class OrderDAO {
         }
         return orderID;
     }
-    
+
     public List<OrderDTO> getListOrderByStatus(int custID, int i) throws ClassNotFoundException, SQLException {
         List<OrderDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -84,13 +87,13 @@ public class OrderDAO {
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn!=null){
+            if (conn != null) {
 //                SELECT * FROM Orders WHERE CustomerID = ? AND orderStatus = ?
                 ptm = conn.prepareStatement(GET_LIST_ORDER_BY_STATUS);
                 ptm.setInt(1, custID);
                 ptm.setInt(2, i);
                 rs = ptm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     int orderID = rs.getInt("OrderID");
                     int cartID = rs.getInt("CartID");
                     int staffID = rs.getInt("StaffID");
@@ -109,12 +112,11 @@ public class OrderDAO {
                     list.add(order);
                 }
             }
-        }finally{
+        } finally {
             DBUtils.closeConnection3(conn, ptm, rs);
         }
         return list;
     }
-
 
     public boolean updateQuantity(int productDetailID, int quantity) throws SQLException, ClassNotFoundException {
         boolean check = false;
@@ -122,15 +124,19 @@ public class OrderDAO {
         PreparedStatement ptm = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn!=null) {
+            if (conn != null) {
                 ptm = conn.prepareStatement(UPDATE_QUANTITY);
                 ptm.setInt(1, quantity);
                 ptm.setInt(2, productDetailID);
-                check = ptm.executeUpdate()>0?true:false;
+                check = ptm.executeUpdate() > 0 ? true : false;
             }
         } finally {
-            if(ptm!=null) ptm.close();
-            if(conn!=null) conn.close();
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return check;
     }
@@ -147,31 +153,33 @@ public class OrderDAO {
                 ptm.setInt(2, productDeID);
                 ptm.setInt(3, quan);
                 ptm.setInt(4, proPrice);
-                check = ptm.executeUpdate()>0?true:false;
+                check = ptm.executeUpdate() > 0 ? true : false;
             }
         } finally {
             if (ptm != null) {
                 ptm.close();
-            }if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
         return check;
     }
+
     public boolean assignShipper(int orderID, int shipperID) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         boolean check = false;
         try {
             conn = DBUtils.getConnection();
-            if(conn!=null){
+            if (conn != null) {
 //              UPDATE Orders SET ShipperID = ? , orderStatus = 2 WHERE OrderID = ?
                 ptm = conn.prepareStatement(ASSIGN_SHIPPER_ORDER);
                 ptm.setInt(1, shipperID);
                 ptm.setInt(2, orderID);
-                check = ptm.executeUpdate()>0;
+                check = ptm.executeUpdate() > 0;
             }
-        }finally{
+        } finally {
             DBUtils.closeConnection2(conn, ptm);
         }
         return check;
@@ -192,14 +200,14 @@ public class OrderDAO {
                     int productDetailID = rs.getInt("ProductDetailID");
                     int quantity = rs.getInt("Quantity");
                     int unitPrice = rs.getInt("UnitPrice");
-                    OrderDetailDTO orderDetail = new OrderDetailDTO(orderID, productDetailID, quantity, unitPrice,"");
+                    OrderDetailDTO orderDetail = new OrderDetailDTO(orderID, productDetailID, quantity, unitPrice, "");
                     list.add(orderDetail);
                 }
             }
         } finally {
             DBUtils.closeConnection3(conn, ptm, rs);
         }
-            return list;
+        return list;
     }
 
     public OrderDTO getOrder(int orderID) throws ClassNotFoundException, SQLException {
@@ -269,9 +277,9 @@ public class OrderDAO {
         }
         return list;
     }
-    
-    public List<OrderDTO> countAllOrderIsProcessing() throws SQLException, NamingException, ClassNotFoundException{
-         List<OrderDTO> listOrder = new ArrayList<>();
+
+    public List<OrderDTO> countAllOrderIsProcessing() throws SQLException, NamingException, ClassNotFoundException {
+        List<OrderDTO> listOrder = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -297,5 +305,50 @@ public class OrderDAO {
             }
         }
         return listOrder;
+    }
+
+    public int getQuantityOrderByStatus(int custID, int i) throws SQLException, ClassNotFoundException {
+        int result = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+//                SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = ? AND  CustomerID = ?
+                ptm = conn.prepareStatement(COUNT_ORDER_BY_STATUS);
+                ptm.setInt(1, i);
+                ptm.setInt(2, custID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    result = rs.getInt("OrderID");
+                }
+            }
+        } finally {
+            DBUtils.closeConnection3(conn, ptm, rs);
+        }
+        return result;
+    }
+
+    public int getQuantityOrderByStatusV2(int i) throws ClassNotFoundException, SQLException {
+        int result = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+//            SELECT COUNT(OrderID) as OrderID FROM Orders WHERE orderStatus = ?
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_ORDER_BY_STATUS_V2);
+                ptm.setInt(1, i);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    result = rs.getInt("OrderID");
+                }
+            }
+        } finally {
+            DBUtils.closeConnection3(conn, ptm, rs);
+        }
+        return result;
     }
 }
