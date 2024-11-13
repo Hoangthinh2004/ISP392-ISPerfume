@@ -49,7 +49,7 @@ public class SizeFilterController extends HttpServlet {
             int sizeIDLength = sizeIDs.length;
             String Error = "";
             
-            if (currentBrandID == null) {
+            if (currentBrandID == null || currentBrandID.size() == 0) {
                 if (sizeIDLength == 2) {
                     sizeList.add(Integer.parseInt(sizeIDs[0]));
                     sizeList.add(Integer.parseInt(sizeIDs[1]));

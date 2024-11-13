@@ -347,7 +347,7 @@
                                 <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
                                     <c:if test="${sessionScope.LIST_BRAND_BY_CATE!= null}">
                                         <c:if test="${category.categoryID == requestScope.CATEID}">
-                                            <a class="breadcrumb-item text-dark" href="MainController?action=Category&Category=${category.categoryID}">${category.name}</a>
+                                            <span class="breadcrumb-item active">${category.name}</span>
                                             <span class="breadcrumb-item active">${sessionScope.LIST_PRODUCT[0].brandName}</span>
                                         </c:if>
                                     </c:if>
@@ -358,7 +358,7 @@
                                     <c:when test="${requestScope.BRA_NAME != null}">
                                         <c:forEach var="category" items="${sessionScope.LIST_CATEGORY}">
                                             <c:if test="${category.categoryID == requestScope.CATEID}">
-                                                <a class="breadcrumb-item text-dark" href="MainController?action=Category&Category=${Category.categoryID}">${category.name}</a>
+                                                <span class="breadcrumb-item text-dark">${category.name}</span>
                                                 <c:if test="${category.categoryID == requestScope.CATEID}">
                                                     <span class="breadcrumb-item text-dark">${requestScope.BRA_NAME}</span>
                                                 </c:if>

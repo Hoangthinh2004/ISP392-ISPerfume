@@ -68,24 +68,27 @@ public class NavigateToCheckOutController extends HttpServlet {
             } else {
                 productDetailIDs = productDetailIDS.get("productDetailID");
             }
-            
+
             //Update product quantity when back from cart
             String[] currentQuantity = request.getParameterValues("currentQuantity");
             List<ViewCartDTO> cartList = cartDao.getProductDetailID(customerID);
             int productDeID = 0;
             int cartQuantity = 0;
-            for (int i = 0; i < currentQuantity.length; i++) {
-                ViewCartDTO product = cartList.get(i);
-                productDeID = product.getProductDetailID();
-                cartQuantity = product.getTotalQuantity();
-                if (Integer.parseInt(currentQuantity[i]) != cartQuantity) {
-                    boolean updateNewQuantity = cartDao.updateNewQuantity(productDeID, Integer.parseInt(currentQuantity[i]));
-                    if (updateNewQuantity) {
-                        continue;
+            if (currentQuantity != null) {
+                for (int i = 0; i < currentQuantity.length; i++) {
+                    ViewCartDTO product = cartList.get(i);
+                    productDeID = product.getProductDetailID();
+                    cartQuantity = product.getTotalQuantity();
+                    if (Integer.parseInt(currentQuantity[i]) != cartQuantity) {
+                        boolean updateNewQuantity = cartDao.updateNewQuantity(productDeID, Integer.parseInt(currentQuantity[i]));
+                        if (updateNewQuantity) {
+                            continue;
+                        }
                     }
                 }
             }
-            
+
+            //get product information
             for (int i = 0; i < productDetailIDs.length; i++) {
                 List<ViewCartDTO> productInfor = cartDao.getProductInfor(Integer.parseInt(productDetailIDs[i]), customerID);
                 for (ViewCartDTO product : productInfor) {
@@ -114,7 +117,7 @@ public class NavigateToCheckOutController extends HttpServlet {
             if (listPromoAvailable.isEmpty()) {
                 request.setAttribute("MESSAGE", "None of voucher available !");
             }
-            
+
             request.setAttribute("TOTAL_PRICE", totalPrice);
             session.setAttribute("PROMOTION", listPromoAvailable);
             session.setAttribute("CHECK_LIST", listChecked);
